@@ -13,8 +13,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-시험용 페이지
+<script>
+	var logincheck = function(){		
+		var userid = $('input.id').val();
+		var userpw = $('input.pw').val();
+		console.log(userid + ' ' + userpw);
+		var user = {
+			"email" : userid,
+			"pw" : userpw,
+		};
+		$.ajax({
+			method : "post",
+			url : "/login/check",
+			data : user,
+			dataType : "json",
+			success : function(data){
+				console.log(data);
+				alert("성공");
+			},
+			error : function(){
+				alert("실패");
+			}
+		});
+	}
+$(document).ready(function(){
+	$(':submit').click(function(){
+		logincheck();
+	})
+});
+</script>
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+	<input type="text" class='id' placeholder="ID"><br>
+	<input type="password" class='pw' placeholder="PW"><br>
+	<button type="submit">제출</button>
+</div>
+</div>
+</div>
 
 </body>
 </html>

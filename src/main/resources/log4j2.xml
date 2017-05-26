@@ -17,10 +17,10 @@
 
 	<!-- FATAL, ERROR, WARN, INFO, DEBUG, TRACE -->
 	<Loggers>
-		<Logger name="org.springframework" level="warn" additivity="false">
+		<Logger name="org.springframework" level="info" additivity="false">
 			<AppenderRef ref="console" />
 		</Logger>
-		<Root level="info">
+		<Root level="debug">
 			<AppenderRef ref="console" />							
 		</Root>
 	</Loggers>

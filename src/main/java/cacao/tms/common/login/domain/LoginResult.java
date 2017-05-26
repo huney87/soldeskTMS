@@ -1,19 +1,20 @@
 package cacao.tms.common.login.domain;
 
-public class Login {
+public class LoginResult {
 	private String email;
-	private String pw;
+	private int loginFlag;
+	
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPw() {
-		return pw;
+	public int getLoginFlag() {
+		return loginFlag;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setLoginFlag(int loginFlag) {
+		this.loginFlag = loginFlag;
 	}
 	
 }
