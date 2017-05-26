@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout />
+		</Console>	
+			
+		<!-- <RollingFile name="file" fileName="c:/DEV/spring.web.log"
+			filePattern="c:/DEV/spring.%d{yyyy-MM-dd-HH-mm-ss}.log"
+			append="true">
+			<PatternLayout pattern="[%-5p: %d{yyyy/MM/dd HH:mm:ss}] %m%n" />
+			<Policies>				
+				<TimeBasedTriggeringPolicy interval="86400"/>
+			</Policies>
+		</RollingFile> -->
+	</Appenders>
+
+	<!-- FATAL, ERROR, WARN, INFO, DEBUG, TRACE -->
+	<Loggers>
+		<Logger name="org.springframework" level="warn" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="console" />							
+		</Root>
+	</Loggers>
+</Configuration>

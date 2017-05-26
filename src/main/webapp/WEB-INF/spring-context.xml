@@ -18,7 +18,6 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
-		
 	
 	<context:component-scan base-package="cacao.tms"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
@@ -28,60 +27,57 @@
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-
-<!-- 	<context:component-scan base-package="spring.web"></context:component-scan>
-	<mvc:annotation-driven></mvc:annotation-driven>
 	
-	IRVR 뷰의 이름으로 실제 주소와 확장자를 붙여서 찾아줌
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/"></property>
-		<property name="suffix" value=".jsp"></property>
-	</bean>
-	
-	ch02: resource
-    <mvc:resources mapping="/img/**" location="/WEB-INF/resources/img/" />
+	<!-- 리소스 준비 -->
+	<mvc:resources mapping="/img/**" location="/WEB-INF/resources/img/" />
     <mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" />
     <mvc:resources mapping="/js/**"  location="/WEB-INF/resources/js/" />
     
-    ch04: mybatis
-    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:comp/env/jdbc/hr" />
+	<!-- mybatis -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/tms" /> <!-- META 정보 context.xml에 정의되어 있음 -->
         <property name="resourceRef" value="true" />
     </bean> 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" 
-            value="classpath:spring/web/ch04/config/SqlMapConfig.xml"/>
+            value="classpath:cacao/tms/config/SqlMapConfig.xml"/>
         <property name="mapperLocations" >
             <array>
-                <value>classpath:spring/web/ch04/ex01/dao/mapper/**/*.xml</value>
-                <value>classpath:spring/web/ch04/ex02/dao/mapper/**/*.xml</value>
+                <value>classpath:cacao/tms/user/dao/mapper/**/*.xml</value>	<!-- 맵퍼 XML 위치 -->
             </array>
         </property>
     </bean> 
-    <mybatis:scan base-package="spring.web.ch04.ex01.dao.mapper" />    
-    <mybatis:scan base-package="spring.web.ch04.ex02.dao.mapper" />
-    
-    ch05: ajax
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>   
-    ch06: file upload
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-    <context:property-placeholder location="classpath:spring/web/ch06/config/upload.properties"/>  
-    <mvc:resources mapping="/upload/**" location="/upload/" />    
-    
-     ch07: @Transactional
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <mybatis:scan base-package="cacao.tms.user.dao.mapper" /> <!-- 맵퍼 인터페이스 패키지 위치 -->
+
+	<!-- Spring 과 json과의  연동 설정 -->   
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	    <property name="messageConverters">
+	    <list>    
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>text/html;charset=UTF-8</value>
+	                    <value>application/json;charset=UTF-8</value>
+	                </list>
+	            </property>
+	        </bean>            
+	    </list>
+	    </property>                        
+	</bean>
+	
+	<!-- 트랜젝션 준비 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
           <property name="dataSource" ref="dataSource" />
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager" />
-    <mybatis:scan base-package="spring.web.ch07.ex01.dao.mapper" />  
     
-    ch07 ex02
-    <aop:aspectj-autoproxy />  -->
+    <!-- AOP 준비 -->
+    <aop:aspectj-autoproxy /> 
+    
+    <!-- 파일 업로드 준비 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+    <context:property-placeholder location="classpath:cacao/tms/config/upload.properties"/>  
+    <mvc:resources mapping="/upload/**" location="/upload/" />  <!--업로드 폴더 지정 -->    
+
 </beans>
