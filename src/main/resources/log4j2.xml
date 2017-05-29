@@ -5,23 +5,25 @@
 			<PatternLayout />
 		</Console>	
 			
-		<!-- <RollingFile name="file" fileName="c:/DEV/spring.web.log"
-			filePattern="c:/DEV/spring.%d{yyyy-MM-dd-HH-mm-ss}.log"
+		<RollingFile name="file" fileName="c:/DEV/log/cacao.tms.log"
+			filePattern="c:/DEV/log/cacao.tms.%d{yyyy-MM-dd-HH-mm-ss}.log"
 			append="true">
 			<PatternLayout pattern="[%-5p: %d{yyyy/MM/dd HH:mm:ss}] %m%n" />
 			<Policies>				
 				<TimeBasedTriggeringPolicy interval="86400"/>
 			</Policies>
-		</RollingFile> -->
+		</RollingFile>
 	</Appenders>
 
 	<!-- FATAL, ERROR, WARN, INFO, DEBUG, TRACE -->
 	<Loggers>
 		<Logger name="org.springframework" level="info" additivity="false">
 			<AppenderRef ref="console" />
+			<AppenderRef ref="file" />
 		</Logger>
 		<Root level="debug">
-			<AppenderRef ref="console" />							
+			<AppenderRef ref="console" />
+			<AppenderRef ref="file" />							
 		</Root>
 	</Loggers>
 </Configuration>

@@ -16,8 +16,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	@ResponseBody
-	public LoginResult check(String email, String pw){
-		System.out.println(email + " " + pw);
+	public LoginResult check(String email, String pw){		
 		LoginResult result = new LoginResult();
 		result.setEmail(email);
 		if(serv.checkLogin(email, pw)){			
