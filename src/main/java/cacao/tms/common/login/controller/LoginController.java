@@ -34,6 +34,6 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.setAttribute("email", "");
-		return "/main";
+		return "redirect:/";
 	}
 }

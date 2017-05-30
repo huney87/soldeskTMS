@@ -368,10 +368,6 @@ var booking_popup = function(){
 }
 
 var logincheck = function(user){
-	/*var user = {
-		"email" : userid,
-		"pw" : userpw,
-	};*/
 	$.ajax({
 		method : "post",
 		url : "/login/check",
@@ -390,8 +386,6 @@ var logincheck = function(user){
 		}
 	});
 }
-
-/*도큐먼트 레디*/
 $(document).ready(function(){
 	$("[name='booking_popup'").click(function(){                
 		booking_popup();
@@ -404,42 +398,8 @@ $(document).ready(function(){
 	$('#login-form').submit(function(e){
 		e.preventDefault();
 		logincheck( $( this ).serialize() );
+		return false;
 	});
-});
-/* 이미지 없을 경우 */
-function ImgError(source){
-    source.src = "./img/noImg.png";
-    source.onerror = "";
-    return true;
-}
-</script>
-<script>
-	var logincheck = function(){		
-		var userid = $('input.id').val();
-		var userpw = $('input.pw').val();
-		console.log(userid + ' ' + userpw);
-		var user = {
-			"email" : userid,
-			"pw" : userpw,
-		};
-		$.ajax({
-			method : "post",
-			url : "/login/check",
-			data : user,
-			dataType : "json",
-			success : function(data){
-				console.log(data);
-				alert("성공");
-			},
-			error : function(){
-				alert("실패");
-			}
-		});
-	}
-$(document).ready(function(){
-	$(':submit').click(function(){
-		logincheck();
-	})
 });
 </script>
 </head>
@@ -488,20 +448,12 @@ $(document).ready(function(){
 									<li>
 										<div class="loginmodal-container" style="margin:0;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h1>로그인</h1><br>
-<<<<<<< HEAD
-											<form id="login-form">
-												<input type="text" name="email" placeholder="아이디">
-												<input type="password" name="pw" placeholder="비밀번호">
-												<input type="submit" name="login-btn" class="login loginmodal-submit" value="로그인">
-=======
-											<form>
-												<input type="text" class="id" name="id" placeholder="아이디">
+												<h1>로그인</h1><br>													
+											<form id="login-form">												
+												<input type="text" class="id" name="email" placeholder="아이디">
 												<input type="password" class="pw" name="pw" placeholder="비밀번호">
 												<input type="submit" class="login loginmodal-submit" value="로그인">
->>>>>>> 13daa669d77c8d68f59c4c1b7a85ff18639e6f17
-											</form>
-												
+											</form>												
 											<div class="login-help">
 												<a href="./sign/01.html">회원가입</a> - <a href="./finidpw/01.html">비밀번호를 잊어버리셨나요?</a>
 											</div>
