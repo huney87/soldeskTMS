@@ -19,7 +19,7 @@
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	
-	<context:component-scan base-package="cacao.tms"></context:component-scan>
+	<context:component-scan base-package="gwangjae.tms"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<!-- IRVR 뷰의 이름으로 실제 주소와 확장자를 붙여서 찾아줌 -->
@@ -42,16 +42,16 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" 
-            value="classpath:cacao/tms/config/SqlMapConfig.xml"/>
+            value="classpath:gwangjae/tms/config/SqlMapConfig.xml"/>
         <property name="mapperLocations" >
             <array>
-                <value>classpath:cacao/tms/common/login/dao/mapper/**/*.xml</value>	<!-- 맵퍼 XML 위치 -->
-                <value>classpath:cacao/tms/hall/dao/mapper/**/*.xml</value>	
+                <value>classpath:gwangjae/tms/common/login/dao/mapper/**/*.xml</value>	<!-- 맵퍼 XML 위치 -->
+                <value>classpath:gwangjae/tms/hall/dao/mapper/**/*.xml</value>	
             </array>
         </property>
     </bean> 
-    <mybatis:scan base-package="cacao.tms.common.login.dao.mapper" /> <!-- 맵퍼 인터페이스 패키지 위치 -->
-    <mybatis:scan base-package="cacao.tms.hall.dao.mapper" /> 
+    <mybatis:scan base-package="gwangjae.tms.common.login.dao.mapper" /> <!-- 맵퍼 인터페이스 패키지 위치 -->
+    <mybatis:scan base-package="gwangjae.tms.hall.dao.mapper" /> 
 
 	<!-- Spring 과 json과의  연동 설정 -->   
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -80,7 +80,7 @@
     
     <!-- 파일 업로드 준비 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-    <context:property-placeholder location="classpath:cacao/tms/config/upload.properties"/>  
+    <context:property-placeholder location="classpath:gwangjae/tms/config/upload.properties"/>  
     <mvc:resources mapping="/upload/**" location="/upload/" />  <!--업로드 폴더 지정 -->    
 
 </beans>

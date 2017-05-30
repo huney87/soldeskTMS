@@ -5,8 +5,8 @@
 			<PatternLayout />
 		</Console>	
 			
-		<RollingFile name="file" fileName="c:/DEV/log/cacao.tms.log"
-			filePattern="c:/DEV/log/cacao.tms.%d{yyyy-MM-dd-HH-mm-ss}.log"
+		<RollingFile name="file" fileName="c:/DEV/log/gwangjae.tms.log"
+			filePattern="c:/DEV/log/gwangjae.tms.%d{yyyy-MM-dd-HH-mm-ss}.log"
 			append="true">
 			<PatternLayout pattern="[%-5p: %d{yyyy/MM/dd HH:mm:ss}] %m%n" />
 			<Policies>				

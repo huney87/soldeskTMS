@@ -375,17 +375,31 @@ var logincheck = function(user){
 		dataType : "json",
 		success : function(data){
 			if(data.loginFlag == 1){
-				alert("로그인 성공");
-				window.location.reload();
+				swal({
+					title : "로그인",
+					text : "로그인 성공",
+				},
+				function(){
+					window.location.reload();
+				});
+				
 			}else {
-				alert("아이디나 비밀번호를 확인하세요.");
+				swal("아이디나 비밀번호를 확인하세요.");
 			}
 		},
 		error : function(){
-			alert("로그인 실패");
+			swal("로그인 실패");
 		}
 	});
 }
+
+/* 이미지 없을 경우 */
+function ImgError(source){
+    source.src = "/img/noImg.png";
+    source.onerror = "";
+    return true;
+}
+
 $(document).ready(function(){
 	$("[name='booking_popup'").click(function(){                
 		booking_popup();
@@ -410,7 +424,7 @@ $(document).ready(function(){
                 <div class="row">
 					<div class="col-sm-12 text-center" style="position: relative">
 					   <button type="button" class="close" id="topAdClose"><span aria-hidden="true" class="btnTopAdClose">&times;</span><span class="sr-only">Close</span></button>
-					    <img src="./img/main/topHeadAd.jpg">
+					    <img src="/img/main/topHeadAd.jpg">
 					</div>
 				</div>
 			</div>
@@ -499,15 +513,15 @@ $(document).ready(function(){
 		<div class="carousel-inner">
 
 			<div class="item active">
-				<img src="./img/main/carouselImg01.png" alt="image01" style="width: 100%;">
+				<img src="/img/main/carouselImg01.png" alt="image01" style="width: 100%;">
 			</div>
 
 			<div class="item">
-				<img src="./img/main/carouselImg02.png" alt="image02" style="width: 100%;">
+				<img src="/img/main/carouselImg02.png" alt="image02" style="width: 100%;">
 			</div>
 
 			<div class="item">
-				<img src="./img/main/carouselImg03.png" alt="image03" style="width: 100%;">
+				<img src="/img/main/carouselImg03.png" alt="image03" style="width: 100%;">
 			</div>
 
 		</div>
@@ -543,10 +557,10 @@ $(document).ready(function(){
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="./img/에어리언.jpg" onerror="ImgError(this)" />
+								<img src="/img/에어리언.jpg" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="../img/에어리언.jpg" onerror="ImgError(this)" />
+								<img class="backPost" src="/img/에어리언.jpg" onerror="ImgError(this)" />
 								<article id="movieInfo">
 									<input id="input-id" type="text" class="rating" data-size="xs" >
 									<div class="moveInfoBtn">
@@ -574,10 +588,10 @@ $(document).ready(function(){
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="./img/titanic.jpg" onerror="ImgError(this)" />
+								<img src="/img/titanic.jpg" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="../img/titanic.jpg" onerror="ImgError(this)">
+								<img class="backPost" src="/img/titanic.jpg" onerror="ImgError(this)">
 								<article id="movieInfo">
 									<input id="input-id" type="text" class="rating" data-size="xs" >
 									<div class="moveInfoBtn">
@@ -605,10 +619,10 @@ $(document).ready(function(){
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="./img/titanic.jpg" onerror="ImgError(this)" />
+								<img src="/img/titanic.jpg" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="../img/titanic.jpg" onerror="ImgError(this)">
+								<img class="backPost" src="/img/titanic.jpg" onerror="ImgError(this)">
 								<article id="movieInfo">
 									<input id="input-id" type="text" class="rating" data-size="xs" >
 									<div class="moveInfoBtn">
@@ -636,10 +650,10 @@ $(document).ready(function(){
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="./img/titanic.jpg" onerror="ImgError(this)" />
+								<img src="/img/titanic.jpg" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="../img/titanic.jpg" onerror="ImgError(this)">
+								<img class="backPost" src="/img/titanic.jpg" onerror="ImgError(this)">
 								<article id="movieInfo">
 									<input id="input-id" type="text" class="rating" data-size="xs" >
 									<div class="moveInfoBtn">
@@ -667,10 +681,10 @@ $(document).ready(function(){
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="./img/titanic.jpg" onerror="ImgError(this)" />
+								<img src="/img/titanic.jpg" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="../img/titanic.jpg" onerror="ImgError(this)">
+								<img class="backPost" src="/img/titanic.jpg" onerror="ImgError(this)">
 								<article id="movieInfo">
 									<input id="input-id" type="text" class="rating" data-size="xs" >
 									<div class="moveInfoBtn">
