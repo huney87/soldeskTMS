@@ -6,15 +6,22 @@
 <meta charset="utf-8">
 <title>티켓박스 메인</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 기본 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 모달 팝업창 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<!-- 별평점 -->
 <link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/js/star-rating.js" type="text/javascript"></script>
 <link href="/theme/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/theme/krajee-svg/theme.js"></script>
 <script src="/js/locales/kr.js"></script>
+<!-- 로그인창 -->
 <link rel="stylesheet" type="text/css" href="/css/login.css">
+<!-- 공통 -->
 <style type="text/css">
 /* 웹폰트 */
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -377,6 +384,35 @@ function ImgError(source){
     return true;
 }
 </script>
+<script>
+	var logincheck = function(){		
+		var userid = $('input.id').val();
+		var userpw = $('input.pw').val();
+		console.log(userid + ' ' + userpw);
+		var user = {
+			"email" : userid,
+			"pw" : userpw,
+		};
+		$.ajax({
+			method : "post",
+			url : "/login/check",
+			data : user,
+			dataType : "json",
+			success : function(data){
+				console.log(data);
+				alert("성공");
+			},
+			error : function(){
+				alert("실패");
+			}
+		});
+	}
+$(document).ready(function(){
+	$(':submit').click(function(){
+		logincheck();
+	})
+});
+</script>
 </head>
 <body>
 	<div class="container-fluid" data-spy="affix" data-offset-top="1" style="border-bottom:1px solid #888;">
@@ -419,10 +455,10 @@ function ImgError(source){
 										<div class="loginmodal-container" style="margin:0;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h1>로그인</h1><br>
-											<form action="main2.html">
-												<input type="text" name="#" placeholder="아이디">
-												<input type="password" name="#" placeholder="비밀번호">
-												<input type="submit" name="#" class="login loginmodal-submit" value="로그인">
+											<form>
+												<input type="text" class="id" name="id" placeholder="아이디">
+												<input type="password" class="pw" name="pw" placeholder="비밀번호">
+												<input type="submit" class="login loginmodal-submit" value="로그인">
 											</form>
 												
 											<div class="login-help">
