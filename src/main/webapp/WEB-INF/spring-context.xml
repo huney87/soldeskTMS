@@ -46,10 +46,12 @@
         <property name="mapperLocations" >
             <array>
                 <value>classpath:cacao/tms/common/login/dao/mapper/**/*.xml</value>	<!-- 맵퍼 XML 위치 -->
+                <value>classpath:cacao/tms/hall/dao/mapper/**/*.xml</value>	
             </array>
         </property>
     </bean> 
     <mybatis:scan base-package="cacao.tms.common.login.dao.mapper" /> <!-- 맵퍼 인터페이스 패키지 위치 -->
+    <mybatis:scan base-package="cacao.tms.hall.dao.mapper" /> 
 
 	<!-- Spring 과 json과의  연동 설정 -->   
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

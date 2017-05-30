@@ -4,5 +4,6 @@
 <configuration>
     <typeAliases>
         <package name="cacao.tms.common.login.domain"/>
+        <package name="cacao.tms.hall.domain"/>
     </typeAliases>
 </configuration>
