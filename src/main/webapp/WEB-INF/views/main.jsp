@@ -385,7 +385,7 @@ function ImgError(source){
                 <div class="row">
 					<div class="col-sm-12 text-center" style="position: relative">
 					   <button type="button" class="close" id="topAdClose"><span aria-hidden="true" class="btnTopAdClose">&times;</span><span class="sr-only">Close</span></button>
-					    <img src="./img/topHeadAd.jpg">
+					    <img src="./img/main/topHeadAd.jpg">
 					</div>
 				</div>
 			</div>
@@ -469,15 +469,15 @@ function ImgError(source){
 		<div class="carousel-inner">
 
 			<div class="item active">
-				<img src="./img/carouselImg01.png" alt="image01" style="width: 100%;">
+				<img src="./img/main/carouselImg01.png" alt="image01" style="width: 100%;">
 			</div>
 
 			<div class="item">
-				<img src="./img/carouselImg02.png" alt="image02" style="width: 100%;">
+				<img src="./img/main/carouselImg02.png" alt="image02" style="width: 100%;">
 			</div>
 
 			<div class="item">
-				<img src="./img/carouselImg03.png" alt="image03" style="width: 100%;">
+				<img src="./img/main/carouselImg03.png" alt="image03" style="width: 100%;">
 			</div>
 
 		</div>
