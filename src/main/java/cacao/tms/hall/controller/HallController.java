@@ -13,6 +13,7 @@ import cacao.tms.hall.domain.Seat;
 import cacao.tms.hall.service.HallService;
 
 @Controller
+@RequestMapping("/")
 public class HallController {
 	@Autowired private HallService hallService;
 	
