@@ -360,6 +360,30 @@ var booking_popup = function(){
 	'width='+sw+',height='+sh+',top='+mt+',left='+ml+'scrollbars=no, menubar=no, status=no, location=no, resizable=no');
 }
 
+var logincheck = function(user){
+	/*var user = {
+		"email" : userid,
+		"pw" : userpw,
+	};*/
+	$.ajax({
+		method : "post",
+		url : "/login/check",
+		data : user,
+		dataType : "json",
+		success : function(data){
+			if(data.loginFlag == 1){
+				alert("로그인 성공");
+				window.location.reload();
+			}else {
+				alert("아이디나 비밀번호를 확인하세요.");
+			}
+		},
+		error : function(){
+			alert("로그인 실패");
+		}
+	});
+}
+
 /*도큐먼트 레디*/
 $(document).ready(function(){
 	$("[name='booking_popup'").click(function(){                
@@ -368,7 +392,12 @@ $(document).ready(function(){
 	
 	$("#topAdClose").click(function(){
         $("#topHeadAd").hide();
-    });
+    });	
+	
+	$('#login-form').submit(function(e){
+		e.preventDefault();
+		logincheck( $( this ).serialize() );
+	});
 });
 /* 이미지 없을 경우 */
 function ImgError(source){
@@ -412,6 +441,11 @@ function ImgError(source){
 							<a href="./category/02.html" class="btn btn-default btn-lg">콘서트</a> 
 							<a href="./category/03.html" class="btn btn-default btn-lg">연극</a>
 							<div class="btn-group">
+							<%
+							if(session.getAttribute("email") != null && !session.getAttribute("email").equals("")){
+							%>
+								<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>								
+							<%}else{ %>
 								<a class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>
 								<!-- 로그인 드롭다운창 -->
 								<ul class="dropdown-menu" role="menu" style="top:48px;left:-130px;margin:0;padding:0;">
@@ -419,10 +453,10 @@ function ImgError(source){
 										<div class="loginmodal-container" style="margin:0;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h1>로그인</h1><br>
-											<form action="main2.html">
-												<input type="text" name="#" placeholder="아이디">
-												<input type="password" name="#" placeholder="비밀번호">
-												<input type="submit" name="#" class="login loginmodal-submit" value="로그인">
+											<form id="login-form">
+												<input type="text" name="email" placeholder="아이디">
+												<input type="password" name="pw" placeholder="비밀번호">
+												<input type="submit" name="login-btn" class="login loginmodal-submit" value="로그인">
 											</form>
 												
 											<div class="login-help">
@@ -431,6 +465,7 @@ function ImgError(source){
 										</div>
 									</li>
 								</ul>
+							<%} %>
 							</div>  
 						</div>
 					</div>
