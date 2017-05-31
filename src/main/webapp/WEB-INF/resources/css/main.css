@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+/* 최상단 광고창 */
+#topHeadAd {
+    text-align: center;
+    background-color: #0e8eb9; 
+    height: 96px;
+}
+#topHeadAd img{
+    margin: auto;
+    width:auto;
+    height:auto;
+    display: block;
+}
+.btnTopAdClose {
+    position:absolute; 
+    color:white;
+    top:0.5rem;
+    right:2rem;
+    padding:0 0.5rem 0.1rem 0.5rem;
+    opacity: 1.0;
+    border:1px dashed white;
+    font-size:3.8rem;
+}
+
+/* 상단 중간 메뉴 */
+.header-btn-wrap {
+    width: 100%;
+    height: 61px;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    z-index: 20;
+}
+.btn_menu_all {
+    margin-top: 18px;
+    height: 32px;
+    width: 98px;
+    font-size: 14px;
+    background-position: 0 0;
+    vertical-align: middle;
+}
+.btn_social {
+    position: absolute;
+    top: 23px;
+    left: 117px;
+}
+.btn_social a.film_society, .btn_social a.classic_society {
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    line-height: 13px;
+}
+.btn_social a {
+    height: 13px;
+}
+.btn_theater {
+    position: absolute;
+    top: 18px;
+    right: 0;
+}
+.btn_social .split {
+    margin: 0 12px;
+    border-right: 1px solid #555;
+    height: 13px;
+    vertical-align: middle;
+}
+.btn_theater .membership_link {
+    float: left;
+    margin: 12px 24px;
+}
+.btn_theater .membership_link .membership_txt {
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    line-height: 13px;
+}
+.btn_theater .membership_link>* {
+    float: left;
+    height: 13px;
+}
+.btn_theater .membership_link .split {
+    margin: 0 12px;
+    border-left: 1px solid #000;
+}
+.btn_theater button {
+    display: block;
+    float: left;
+    height: 32px;
+    width: 113px;
+    font-size: 14px;
+    background-position: 0 0;
+    vertical-align: middle;
+}
+
+
+/* 메인 슬라이드 */
+#myCarousel {
+    margin-top:-7.6rem;
+}

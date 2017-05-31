@@ -1,0 +1,244 @@
+@CHARSET "UTF-8";
+/* 웹폰트 */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+ * {
+    box-sizing: border-box;
+ }
+body {
+    font-family: 'NotoSansKR', 'Nanum Gothic', "Times New Roman", Times, sans-serif;
+}
+
+/* 상단 메뉴 */
+#top-btn-wrap{
+    background-color: #fff;
+    padding-top:0.2rem;
+}
+#nav a{
+    text-decoration: none;
+}
+/* 상단로고 */
+.topLogo {
+    display:inline-block; 
+    width:2.3rem;
+    padding:0.3rem;
+    margin:0 -0.09rem;
+    color: #fff;
+    font-size:2rem;
+    font-weight:bold;
+    text-decoration: none;
+    background-color: #555;
+}
+
+.topLogoDiv a span:HOVER {
+	text-decoration: none;
+}
+
+/* 상단 고정메뉴 */
+.affix {
+      top: 0;
+      width: 100%;
+      z-index: 999 !important;
+}
+.affix + .container-fluid {
+      padding-top: 124px;
+}
+
+/* 공연 포스트 */
+#mainContent{
+	background-color: #f2f2f2;
+	padding-bottom: 3rem;
+}
+
+.frameDiv {
+	margin: 0.5rem 0;
+	width: 100%;
+	height: 420px;
+}
+.frame {
+	float: left;
+	position: relative;
+	margin-right: 0.8rem;
+	height: 420px;
+	width: 19.13333%;
+	border: 1px solid #d9d9d9;
+	background-color:#fff;
+}
+.frame1 {
+	position: relative;
+	transform-style: preserve-3d;
+	transition: all 0.5s linear;
+	width: 100%;
+	height: 300px;
+	perspactive: 300px;
+}
+.frame1:hover {
+	transform: rotateY(180deg);
+}
+.card {
+	position: absolute;
+	backface-visibility: hidden;
+}
+.backPost {
+	opacity: 0.3;
+}
+.card img {
+	width: 100%;
+	height: auto;
+}
+.card.back {
+	background-color: #000;
+	transform: rotateY(180deg);
+}
+#movieInfo {
+	position: absolute;
+	margin: auto;
+	width: 100%;
+	top: 100px;
+	color: #eee;
+	font-size: 15px;
+	text-align: center;
+}
+.moveInfoBtn {
+	width: 100%;
+	margin-top: 25px;
+	border-top: 1px solid #888;
+	font-size: 15px;
+}
+.moveInfoBtn span {
+	font-size: 2.6rem;
+	margin-bottom:0.5rem;
+}
+.moveInfoBtn1 {
+	float: left;
+	width: 50%;
+	height: 78px;
+	padding-top: 13px;
+	background-color: #333;
+	border-right: 1px solid #222;
+}
+.moveInfoBtn1:HOVER {
+	background-color: #222;
+}
+.moveInfoBtn1 a{
+	color: #eee;
+	cursor:pointer;
+	text-decoration: none;
+}
+.moveInfoBtn2 {
+	float: left;
+	width: 50%;
+	height: 78px;
+	padding-top: 13px;
+	background-color: #333;
+	border-left: 1px solid #888;
+}
+.moveInfoBtn2:HOVER {
+	background-color: #222;
+}
+.moveInfoBtn2 a{
+	color: #eee;
+	cursor:pointer;
+	text-decoration: none;
+}
+.movieInfo2 {
+	height:4.5rem;
+	text-align: center;
+	font-size: 15px;
+	padding: 10px 0;
+	border-bottom: 1px solid #d9d9d9;
+}
+.movieInfo2 .dDay {
+	padding: 5px 25px;
+	margin-left: 10px;
+	color: white;
+	text-align: center;
+	font-size: 1.8rem;
+	background-color: #00ace6;
+	border-radius: 5px;
+}
+.movieInfo3 {
+	text-align: center;
+	font-size: 19px;
+	font-weight: bold;
+	padding: 10px;
+}
+.movieInfo3 .age {
+	padding: 3px 2px;
+	margin-right: 10px;
+	color: white;
+	text-align: center;
+	font-size: 1.4rem;
+	background-color: #00ace6;
+	border-radius: 5px;
+	font-weight: normal;
+}
+.movieInfo3Btn {
+	float: left;
+	width: 43%;
+	padding: 10px;
+	margin: 0 3.5% 0 3%;
+	font-size: 1.35rem;
+	color: #555;
+	background-color: #eee;
+	border: 1px solid #eee;
+}
+.movieInfo3Btn a{
+	color: #555;
+	cursor:pointer;
+}
+.movieInfo3Btn:HOVER {
+	color: #00ace6;
+	background-color: #fff;
+	border: 1px solid #00ace6;
+}
+.movieInfo3Btn:HOVER a{
+	color: #00ace6;
+	text-decoration: none;
+}
+.movieInfo3Txt {
+	font-size: 1.35rem;
+	color: #555;
+}
+
+/* 공통하단 */
+#footer {
+    padding:2rem;
+    background-color: #555;
+}
+#footerDiv {
+    color:#fff;
+    padding: 1rem;
+}
+#footerSocial {
+    text-decoration: none;
+    word-spacing: 20px;
+    color:#fff;
+    padding: 1rem;
+}
+#footerTheater {
+    text-decoration: none;
+    word-spacing: 20px;
+    color:#fff;
+    padding: 1rem;
+}
+#footer2 {
+    padding:2rem;
+    background-color: #222;
+}
+#footer2 .footerDiv2 {
+    padding:0.8rem 1rem;
+    color:#ccc;
+}
+
+/* 고정 탑 메뉴 */
+#MOVE_TOP_BTN{
+    color: #00ace6;
+    font-size: 5rem;
+    position: fixed; 
+    bottom: 10px; 
+    right: 10px; 
+    z-index: 100; 
+    cursor: pointer; 
+    display: block;
+}
