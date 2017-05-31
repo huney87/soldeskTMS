@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC>
 <html lang="ko">
 <head>
@@ -451,30 +452,33 @@ $(document).ready(function(){
 							<a href="./category/02.html" class="btn btn-default btn-lg">콘서트</a> 
 							<a href="./category/03.html" class="btn btn-default btn-lg">연극</a>
 							<div class="btn-group">
-							<%
-							if(session.getAttribute("email") != null && !session.getAttribute("email").equals("")){
-							%>
-								<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>								
-							<%}else{ %>
-								<a class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>
-								<!-- 로그인 드롭다운창 -->
-								<ul class="dropdown-menu" role="menu" style="top:48px;left:-130px;margin:0;padding:0;">
-									<li>
-										<div class="loginmodal-container" style="margin:0;">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h1>로그인</h1><br>													
-											<form id="login-form">												
-												<input type="text" class="id" name="email" placeholder="아이디">
-												<input type="password" class="pw" name="pw" placeholder="비밀번호">
-												<input type="submit" class="login loginmodal-submit" value="로그인">
-											</form>												
-											<div class="login-help">
-												<a href="./sign/01.html">회원가입</a> - <a href="./finidpw/01.html">비밀번호를 잊어버리셨나요?</a>
+							<!-- 로그인 / 로그아웃 표시 -->												
+							<c:choose>
+								<c:when test="${ login }">
+									<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>
+								</c:when>
+								<c:otherwise>
+									<a class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>
+									<!-- 로그인 드롭다운창 -->
+									<ul class="dropdown-menu" role="menu" style="top:48px;left:-130px;margin:0;padding:0;">
+										<li>
+											<div class="loginmodal-container" style="margin:0;">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h1>로그인</h1><br>													
+												<form id="login-form">												
+													<input type="text" class="id" name="email" placeholder="아이디">
+													<input type="password" class="pw" name="pw" placeholder="비밀번호">
+													<input type="submit" class="login loginmodal-submit" value="로그인">
+												</form>												
+												<div class="login-help">
+													<a href="./sign/01.html">회원가입</a> - <a href="./finidpw/01.html">비밀번호를 잊어버리셨나요?</a>
+												</div>
 											</div>
-										</div>
-									</li>
-								</ul>
-							<%} %>
+										</li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
+							<!-- 로그인 / 로그아웃 표시 끝 -->
 							</div>  
 						</div>
 					</div>
