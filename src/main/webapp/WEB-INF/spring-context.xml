@@ -48,13 +48,11 @@
             <array>
                 <value>classpath:gwangjae/tms/common/login/dao/mapper/**/*.xml</value>	<!-- 맵퍼 XML 위치 -->
                 <value>classpath:gwangjae/tms/hall/dao/mapper/**/*.xml</value>	
-                <value>classpath:gwangjae/tms/performance/dao/mapper/**/*.xml</value>	
             </array>
         </property>
     </bean> 
     <mybatis:scan base-package="gwangjae.tms.common.login.dao.mapper" /> <!-- 맵퍼 인터페이스 패키지 위치 -->
     <mybatis:scan base-package="gwangjae.tms.hall.dao.mapper" /> 
-    <mybatis:scan base-package="gwangjae.tms.performance.dao.mapper" /> 
 
 	<!-- Spring 과 json과의  연동 설정 -->   
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
