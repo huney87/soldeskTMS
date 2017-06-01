@@ -1,5 +1,7 @@
 package gwangjae.tms.performance.dao;
 
-public class PerformanceDao {
+import gwangjae.tms.performance.domain.Performance;
 
+public interface PerformanceDao {
+	Performance getPerCategory(int category);
 }

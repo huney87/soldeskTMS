@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="gwangjae.tms.hall.dao.mapper.PerformanceMapper">
+	<resultMap id="PerMap" type="performance">
+		<id property="per_id" column="per_id"/>
+		<result property="per_title" column="per_title"/>
+		<result property="ct_id" column="ct_id"/>
+		<result property="per_startDate" column="per_startDate"/>
+		<result property="per_endDate" column="per_endDate"/>	
+		<result property="per_image" column="per_image"/>
+		<result property="hall_id" column="hall_id"/>
+		<result property="display" column="display"/>
+	</resultMap>
+	
+	<select id="getPerCategory" resultMap="PerMap">
+		select * from performances
+		where ct_id = #{ct_id}
+	</select>
+	
+</mapper>

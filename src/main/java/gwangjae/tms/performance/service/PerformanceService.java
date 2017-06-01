@@ -1,5 +1,8 @@
 package gwangjae.tms.performance.service;
 
-public class PerformanceService {
+import gwangjae.tms.performance.domain.Performance;
 
+
+public interface PerformanceService {
+	Performance getPerCategory(int category);
 }

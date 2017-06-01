@@ -1,5 +1,7 @@
 package gwangjae.tms.performance.dao.mapper;
 
-public class PerformanceMapper {
+import gwangjae.tms.performance.domain.Performance;
 
+public interface PerformanceMapper {
+	Performance getPerCategory(int category);
 }
