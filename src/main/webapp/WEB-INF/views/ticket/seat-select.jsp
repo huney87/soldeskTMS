@@ -81,10 +81,10 @@ body{
 	display: inline-block;
 	cursor: default;
 	margin-right: 0.5rem;
-	width: 3rem;
-	height: 3rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	font-size: 1rem;	
-	line-height: 2.6rem;
+	line-height: 2.1rem;
 }
 .left-seat:hover{
 	background-color: gray;
@@ -110,110 +110,105 @@ body{
 </head>
 
 <body>
-	<script>
-		// 시트 설정부
-		var seatInit = function(){
-			/* 레이아웃 그리기 */
-			var seatLayout = [
-			[1, 1, 1, 9, 2, 2, 2, 1, 1, 9, 1, 1, 1,],
-			[1, 2, 2, 9, 1, 1, 1, 1, 1, 9, 1, 1, 1,],
-			[1, 1, 1, 9, 1, 2, 2, 1, 1, 9, 1, 1, 1,],
-			[1, 1, 1, 9, 1, 1, 1, 1, 1, 9, 1, 1, 1,],
-			[1, 1, 1, 9, 2, 2, 1, 1, 1, 9, 1, 1, 1,],
-			[1, 1, 1, 9, 1, 1, 1, 1, 1, 9, 1, 1, 1,],
-			[1, 1, 1, 9, 1, 1, 1, 1, 1, 9, 1, 1, 1,],
-			[1, 1, 1, 9, 1, 1, 1, 1, 1, 9, 1, 1, 1,],
-			[1, 1, 1, 9, 1, 1, 1, 1, 1, 9, 1, 1, 1,],
-			];
-				
-			var row = '<div class="seat-row">	</div>';
-			var seatNum = 1;
-			for(i = 0 ; i < seatLayout.length ; i++){
-				$(".seat-layout-wrapper").append( row );
-				for(j = 0 ; j < seatLayout[i].length ; j++){
-					var seatId = i + "-" + j ; 
-					var col = '<div class="seat" id="'+ seatId +'"><span class="seat-number">'+ seatNum +'</span></div>';
-					$(".seat-row:last").append ( col );
-					
-					if(seatLayout[i][j] == 9){
-						$("#"+seatId).addClass("runway");
-					}else if(seatLayout[i][j] == 1){
-						$("#"+seatId).addClass("left-seat");
-						seatNum++;
-					}else if(seatLayout[i][j] == 2){
-						$("#"+seatId).addClass("reserved-seat");
-						seatNum++;
-					}
+<script>
+	
+	// 시트 설정부
+	var seatInit = function (layout) {
+		var seatLayout = layout;
+		var selectCnt = function () {
+			var selectCnt = 0;
+			for (var i = 0; i < seatLayout.length; i++) {
+				for (j = 0; j < seatLayout[i].length; j++) {
+					if (seatLayout[i][j] == 0) selectCnt++;
 				}
-			};
-
-			var selectCnt = function(){
-				var selectCnt = 0;
-				for(var i=0;i<seatLayout.length;i++ ){
-					for(j = 0 ; j < seatLayout[i].length ; j++){
-						if(seatLayout[i][j] == 0) selectCnt++;
-					}					
-				}
-				return selectCnt;
 			}
+			return selectCnt;
+		}
+		var maxCheck = function (max) {
+			var selectNum = selectCnt();
 
-			var maxCheck = function (max){
-				var selectNum = selectCnt();
-				
-				if(selectNum >= max){
-					return true;
-				}else return false;				
-			}
-
-			/* 동작 설정 */			
-			$(".seat").click(function(){
-				/* 예매 인원을 저장하는 변수 */
-				var personNumber = parseInt( $("#tickets option:selected").text() );
-				
-				var id = $(this).attr('id').split('-');
-				var seatStat = seatLayout[id[0]][id[1]];
-				if(seatStat == 1){
-					if(maxCheck(personNumber)){
-					swal({
-						type: "error",
-						text : '예매 인원수 '+personNumber+'명을 넘게 선택하셨습니다.'
-						});
-					return false;
-					}		
-					seatLayout[id[0]][id[1]] = 0;				
-					$( this ).removeClass("left-seat").addClass("selected-seat");
-				}else if(seatStat == 0){					
-					seatLayout[id[0]][id[1]] = 1;
-					$( this ).removeClass("selected-seat").addClass("left-seat");
-				}
-				
-				sessionStorage.setItem('ticketCnt',selectCnt());
-			});
-
-			$("#tickets").change(function(){
-				$(".seat").each(function(){
-					var id = $( this ).attr('id').split('-');
-					if(seatLayout[id[0]][id[1]] == 0) seatLayout[id[0]][id[1]] = 1;
-					if( $( this ).hasClass("selected-seat")) {
-						$( this ).removeClass("selected-seat").addClass("left-seat");
-					}
-				});
-			});
+			if (selectNum >= max) {
+				return true;
+			} else return false;
 		}
 
-		var ticketsInit = function(){
-			var inputNum = 20;
-			for(var i = 1 ; i <= inputNum ; i++){
-				$("#tickets").append("<option>"+i+"</option>");
+		var row = '<div class="seat-row">	</div>';
+		var seatNum = 1;
+		for (i = 0; i < seatLayout.length; i++) {
+			$(".seat-layout-wrapper").append(row);
+			for (j = 0; j < seatLayout[i].length; j++) {
+				var seatId = i + "-" + j;
+				var col = '<div class="seat" id="' + seatId + '"><span class="seat-number">' + seatNum + '</span></div>';
+				$(".seat-row:last").append(col);
+
+				if (seatLayout[i][j] == 9) {
+					$("#" + seatId).addClass("runway");
+				} else if (seatLayout[i][j] == 1) {
+					$("#" + seatId).addClass("left-seat");
+					seatNum++;
+				} else if (seatLayout[i][j] == 2) {
+					$("#" + seatId).addClass("reserved-seat");
+					seatNum++;
+				}
 			}
 		};
 
-		// 도큐먼트 래디
-		$(document).ready(function(){
-			seatInit();
-			ticketsInit();
-		});		
-	</script>
+		/* 동작 설정 */
+		$(".seat").click(function () {
+			/* 예매 인원을 저장하는 변수 */
+			var personNumber = parseInt($("#tickets option:selected").text());
+
+			var id = $(this).attr('id').split('-');
+			var seatStat = seatLayout[id[0]][id[1]];
+			if (seatStat == 1) {
+				if (maxCheck(personNumber)) {
+					swal({
+						type: "error",
+						text: '예매 인원수 ' + personNumber + '명을 넘게 선택하셨습니다.'
+					});
+					return false;
+				}
+				seatLayout[id[0]][id[1]] = 0;
+				$(this).removeClass("left-seat").addClass("selected-seat");
+			} else if (seatStat == 0) {
+				seatLayout[id[0]][id[1]] = 1;
+				$(this).removeClass("selected-seat").addClass("left-seat");
+			}
+
+			sessionStorage.setItem('ticketCnt', selectCnt());
+		});
+
+		$("#tickets").change(function () {
+			$(".seat").each(function () {
+				var id = $(this).attr('id').split('-');
+				if (seatLayout[id[0]][id[1]] == 0) seatLayout[id[0]][id[1]] = 1;
+				if ($(this).hasClass("selected-seat")) {
+					$(this).removeClass("selected-seat").addClass("left-seat");
+				}
+			});
+		});
+	}
+
+	var ticketsInit = function () {
+		var inputNum = 20;
+		for (var i = 1; i <= inputNum; i++) {
+			$("#tickets").append("<option>" + i + "</option>");
+		}
+	};
+
+	// 도큐먼트 래디
+	$(document).ready(function () {
+		$.ajax({
+			url: '/ticket/getlayout',
+			dataType: 'json',
+			success: function (data) {
+				seatInit(data);
+			}
+		});
+
+		ticketsInit();
+	});
+</script>
 
 <div id="seat-window">
 	<div class="legend">
@@ -238,8 +233,7 @@ body{
 
 	<div class="seat-layout-wrapper">
 		
-	</div>
-	
+	</div>	
 </div>
 </body>
 </html>
