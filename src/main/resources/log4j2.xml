@@ -10,7 +10,9 @@
 			append="true">
 			<PatternLayout pattern="[%-5p: %d{yyyy/MM/dd HH:mm:ss}] %m%n" />
 			<Policies>				
-				<TimeBasedTriggeringPolicy interval="86400"/>
+				<TimeBasedTriggeringPolicy interval="600"/>
+				<!-- size 단위: Byte(default), KB, MB, or GB -->
+   				<SizeBasedTriggeringPolicy size="1024KB" />
 			</Policies>
 		</RollingFile>
 	</Appenders>

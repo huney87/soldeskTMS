@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/zabuto_calendar.min.css">
     <script src="/js/zabuto_calendar.min.js"></script>
-  
+
+    <script src="/js/ticket/ticket.js"></script>
+    
     <title>공연 예매</title>
     <style>
         html,
@@ -95,16 +98,16 @@
   
     <script type="application/javascript">
         var eventData = [{
-            "date": "2017-05-17",
+            "date": "2017-06-17",
             "badge": false
         }, {
-            "date": "2017-05-18",
+            "date": "2017-06-18",
             "badge": false
         }, {
-            "date": "2017-05-19",
+            "date": "2017-06-19",
             "badge": false
         }, {
-            "date": "2017-05-20",
+            "date": "2017-06-20",
             "badge": false
         }];
 
@@ -133,42 +136,11 @@
                     alert("날짜를 선택해주세요.");
                     return false;
                 } else {
+                    forwardForm(2);
                     return true;
-                }
-                
-            });
+                }                               
+            });            
         }
-        /* 가상 폼 제작 참고용 소스
-        $('#btn_add').click( function() { //추가
-
-            var name = $.trim($("#usr").val());
-            if(name){
-                swal({
-                    title: "회원 정보 추가",
-                    text: name+"를 추가합니다.",
-                    type: "info",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                },
-                function(){
-                    var $form = $('<form></form>');
-                    $form.attr('action', 'useradd');
-                    $form.attr('method', 'post');
-                    $form.appendTo('body');
-
-                    var usrname = $('<input type="hidden" value="'+ name +'" name="userName">');
-                    var mode = $('<input type="hidden" value="add" name="mode">');
-
-                    $form.append(usrname).append(mode);
-                    $form.submit();
-                });
-            }else{
-                sweetAlert("추가할 사용자 이름이 없습니다!","사용자를 이름을 입력하세요.","warning");
-                $('#usr').focus();
-                return false;
-            }
-        });*/
 
         $(document).ready(function() {
             initCalender();
