@@ -20,11 +20,18 @@ public class TicketingController {
 	public String mainView(HttpSession session, Model model,
 			@RequestParam("step") int step){
 		String view = "/ticket/" + String.format("%02d", step);
+		model.addAttribute("step", step);
 		return view;
 	}
 	
 	@RequestMapping("/panel")
 	public String panelView(){
 		return "/ticket/control-panel";
+	}
+	
+	@RequestMapping("/layout")
+	public String layoutView(HttpSession session, Model model){
+		
+		return "/ticket/seat-select";
 	}
 }
