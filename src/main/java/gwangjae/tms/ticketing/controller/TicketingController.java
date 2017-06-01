@@ -43,6 +43,6 @@ public class TicketingController {
 	@RequestMapping("/getlayout")
 	@ResponseBody
 	public String[][] getLayout(HttpSession session){
-		return service.drawLayout();
+		return service.drawLayout(0);
 	}
 }
