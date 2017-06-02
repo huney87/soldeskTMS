@@ -122,6 +122,7 @@ $(document).ready(function(){
 			//검정 좌석 선택시 파란색으로 변경	
 			}else if(compare==1 ){
 				value = value.slice(0,-1) + (compare*1+1);
+				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color": "blue",
@@ -130,6 +131,7 @@ $(document).ready(function(){
 			//파란 좌석 선택시 빨간색으로 변경	
 			}else if(compare==2 ){
 				value = value.slice(0,-1) + (compare*1+1);
+				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color":"red",
@@ -138,6 +140,7 @@ $(document).ready(function(){
 			//빨간 좌석 선택시 초록색으로 변경		
 			}else if(compare==3 ){
 				value = value.slice(0,-1) + (compare*1+1);
+				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color":"#BDFF12",
@@ -146,6 +149,7 @@ $(document).ready(function(){
 			//초록 좌석 선택시 없는좌석으로 변경		
 			}else if(compare==4 ){
 				value = value.slice(0,-1)+"0";
+				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color":"gray",
@@ -184,34 +188,36 @@ $(document).ready(function(){
 	    });	    	    	
 	});
 	
-	// 좌석 셋팅값 DB 저장 
+	// 좌석 셋팅값 DB 저장 ///////////////ajax///////ajax////////ajax//////////
     $("#addSeats").on("click", function(){
     	var seatValue = [];
     	
     	$(".seats").each(function(){
     		seatValue.push( $( this ).attr('value') );        	     	
     	});
+    	
+    	var seats={"seats":seatValue}
+    	
+    	
  		console.log(seatValue);
     	if($("#row").val()) {
     		$.ajax({
-                url: "addSeats",
-                data:{
-                	"seats":seatValue  
-                },
+                url: "/seller/addSeats",
+                data: seats,
                 success:function(result){
-                    if(result) msg.text("추가 성공");
-                    else msg.text("추가 실패");
+                    if(result) $("#msg").text("추가 성공");
+                    else $("#msg").text("추가 실패");
                 },
                 error:function(a, b, errMsg){
-                    msg.text("추가 실패: " + errMsg);                
+                	$("#msg").text("추가 실패: " + errMsg);                
                 },
                 complete:function(){
-                    modal.modal('show');                    
+                	$("#resultModal").modal('show');                    
                 }
             });   		
     	}else {
-            msg.text("오류");
-            modal.modal('show');
+            $("#msg").text("오류");
+            $("#resultModal").modal('show');
         }  
    }); 
 	

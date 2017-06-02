@@ -8,6 +8,7 @@ import gwangjae.tms.performance.service.PerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -20,21 +21,22 @@ public class PerformanceController {
         return "seller/sellerMain";
     }
 	
-	@RequestMapping("/add")
+	@RequestMapping("/perAdd")
     public String perAdd(){
         return "seller/sellerPerAdd";
     }
 	
-	@RequestMapping("getSeats")
+	@RequestMapping("/getSeats")
     @ResponseBody
 	public List<SeatInfo> getSeats(String title){
 		return performanceService.getSeats(title);
 	}
 	
-	@RequestMapping("addSeats")
+	@RequestMapping("/addSeats")
     @ResponseBody
-    public int addSeats(String[] seats){
-		return performanceService.addSeats(seats);
+    public int addSeats(
+    		@RequestParam(value="seats[]") List<String> seats){
+		return performanceService.addSeats(seats.toArray(new String[seats.size()]));
 	}
 	
 }

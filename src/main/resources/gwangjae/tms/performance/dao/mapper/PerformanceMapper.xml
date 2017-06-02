@@ -11,11 +11,11 @@
 	</resultMap>
 
 	<select id="getSeats" resultMap="PerMap">
-		select * from seatinfo;
+		select * from seatinfo
 	</select>
 
-	<insert id="addSeat" parameterType="string">
+	<insert id="addSeat" parameterType="int">
 		insert into seatinfo(sinfo_id,perf_id,s_id,sinfo_grade,sinfo_price)
-		values(sinfo_id_seq.nextval,#{seat},1,1,1000); 
+		values(sinfo_id_seq.nextval, #{seat},1,1,1000)
 	</insert>
 </mapper>

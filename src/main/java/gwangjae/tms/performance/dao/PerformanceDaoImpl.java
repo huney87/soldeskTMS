@@ -17,7 +17,7 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return performanceMapper.getSeats(title);
 	}
 	
-	public int addSeat(String seat){
+	public int addSeat(int seat){
 		return performanceMapper.addSeat(seat);
 	}
 }

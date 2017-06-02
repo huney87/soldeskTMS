@@ -19,9 +19,9 @@ public class PerformanceServiceImpl implements PerformanceService {
 	 public int addSeats(String[] seats){
 		 int check=0;// 좌석이 몇개 들어갔는지 확인을 위한 변수
 		 for(String seat:seats){
-			 performanceDao.addSeat(seat);
+			 performanceDao.addSeat(Integer.parseInt(seat));
 			 check++;
-		 }
+		 }System.out.println(check);
 			return check;
 	}
 }
