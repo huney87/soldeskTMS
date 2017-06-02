@@ -5,6 +5,7 @@
 <html lang="ko">
 
 <head>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -116,7 +117,6 @@
 		}
 		/*시트 레이아웃 끝*/
 	</style>
-
 </head>
 
 <body>
@@ -145,9 +145,11 @@
 				if (selectCnt() >= max) {
 					return true;
 				} else return false;
-			}
 
-			var row = '<div class="seat-row">	</div>';			
+			}
+		};
+
+    var row = '<div class="seat-row">	</div>';			
 			for (i = 0; i < seatLayout.length; i++) {
 				$(".seat-layout-wrapper").append(row);
 				for (j = 0; j < seatLayout[i].length; j++) {
@@ -223,15 +225,24 @@
 						$(this).removeClass("selected-seat").addClass("left-seat");
 					}
 				});
+
 			});
+		});
+	}
+
+	var ticketsInit = function () {
+		var inputNum = 20;
+		for (var i = 1; i <= inputNum; i++) {
+			$("#tickets").append("<option>" + i + "</option>");
 		}
+	};
 
 		var ticketsInit = function () {
 			var inputNum = 20;
 			for (var i = 1; i <= inputNum; i++) {
 				$("#tickets").append("<option>" + i + "</option>");
 			}
-		};
+		});
 
 		// 도큐먼트 래디
 		$(document).ready(function () {
@@ -272,6 +283,7 @@
 
 		</div>
 	</div>
+
 </body>
 
 </html>

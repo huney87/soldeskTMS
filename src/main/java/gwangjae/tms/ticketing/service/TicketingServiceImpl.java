@@ -1,6 +1,7 @@
 package gwangjae.tms.ticketing.service;
 
 import java.sql.Date;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +18,7 @@ public class TicketingServiceImpl implements TicketingService {
 	@Override
 	public String[][] drawLayout(int hall_id) {
 		String[][] layout = new String[10][];
+
 		Random rng = new Random(System.currentTimeMillis());
 		
 		int counter = 1;

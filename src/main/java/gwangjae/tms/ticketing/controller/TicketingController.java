@@ -47,7 +47,7 @@ public class TicketingController {
 	public String[][] getLayout(HttpSession session){
 		return service.drawLayout(0);
 	}
-	
+
 	@RequestMapping("/getskd")
 	@ResponseBody
 	public Date[] getSkd(HttpSession session){
