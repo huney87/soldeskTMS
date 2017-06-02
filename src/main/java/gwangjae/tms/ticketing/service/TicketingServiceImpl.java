@@ -1,6 +1,9 @@
 package gwangjae.tms.ticketing.service;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
@@ -14,10 +17,26 @@ public class TicketingServiceImpl implements TicketingService {
 	@Override
 	public String[][] drawLayout(int hall_id) {
 		String[][] layout = new String[10][];
+		Random rng = new Random(System.currentTimeMillis());
+		
+		int counter = 1;
 		for(int i=0;i < layout.length;i++){
-			layout[i] = new String[20];
-			for(int j=0;j<layout[i].length;j++){
-				layout[i][j] = String.valueOf((int)(Math.random()*2));
+			layout[i] = new String[15];
+			for(int j=0;j<layout[i].length;j++){				
+				
+				List<String> codes = new LinkedList<>();
+				codes.add(String.format("%04d",i*100 + (j+1))); // seat_id
+				codes.add(String.format("%03d",counter)); // seat_number
+				if(j%5 == 0){
+					codes.add(String.valueOf(0));
+				}else {
+					codes.add(String.valueOf(1)); // seat_type
+					counter++;
+				}
+				codes.add(String.valueOf(rng.nextInt(2))); // state 
+				
+				String seatCode = String.join("-", codes);
+				layout[i][j] = seatCode;
 			}
 		}
 		return layout;
