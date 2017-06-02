@@ -6,5 +6,6 @@
         <package name="gwangjae.tms.common.login.domain"/>
         <package name="gwangjae.tms.hall.domain"/>
         <package name="gwangjae.tms.performance.domain"/>
+        <package name="gwangjae.tms.category.domain"/>
     </typeAliases>
 </configuration>
