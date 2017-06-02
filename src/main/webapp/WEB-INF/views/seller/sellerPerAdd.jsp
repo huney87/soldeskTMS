@@ -101,7 +101,7 @@ $(document).ready(function(){
 						seatNum = i+""+j;
 					}
 					
-					seat = '<div class="new-seat" id="'+seatNum+'">'+seatNum+ '<input type="hidden" class="seat-value" name="'+ seatNum +'" value="'+seatNum+"1"+'"></div>';
+					seat = '<div class="new-seat" id="'+seatNum+'">'+seatNum+ '<input type="hidden" class="seat-value seats" name="'+ seatNum +'" value="'+seatNum+"1"+'"></div>';
 					$(".row-seat:last").append( seat );																		
 			}
 		}
@@ -183,6 +183,39 @@ $(document).ready(function(){
 	    	}
 	    });	    	    	
 	});
+	
+	// 좌석 셋팅값 DB 저장 
+    $("#addSeats").on("click", function(){
+    	var seatValue = [];
+    	
+    	$(".seats").each(function(){
+    		seatValue.push( $( this ).attr('value') );        	     	
+    	});
+ 		console.log(seatValue);
+    	if($("#row").val()) {
+    		$.ajax({
+                url: "addSeats",
+                data:{
+                	"seats":seatValue  
+                },
+                success:function(result){
+                    if(result) msg.text("추가 성공");
+                    else msg.text("추가 실패");
+                },
+                error:function(a, b, errMsg){
+                    msg.text("추가 실패: " + errMsg);                
+                },
+                complete:function(){
+                    modal.modal('show');                    
+                }
+            });   		
+    	}else {
+            msg.text("오류");
+            modal.modal('show');
+        }  
+   }); 
+	
+	
 
 	});/*메뉴 버튼: 공연등록 종료*/
 </script>
@@ -302,7 +335,8 @@ button{
                     </span>
                     <button type="button" id="check" class="btn btn-default btn-sm" style="background-color:white; color:black;">입력</button>
                     <button type="reset" id="reset" class="btn btn-danger btn-sm" style="background-color:#4d4dff; color:white;">리셋</button>
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" id ="button1" >좌석 선택완료</button>
+                    <button type="button" id="addSeats" class="btn btn-danger btn-sm" style="background-color:#4d4dff; color:white;">좌석 완료(테스트용)</button>
+                    <!-- <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" id ="button1" >좌석 선택완료</button> -->
                 </div> 
                 <div class="col-sm-8">
                     <div class="layout" id="shell"></div>
@@ -334,5 +368,19 @@ button{
         </div>     
 	</div>
 </div>
+<!-- 결과 확인을 위한 모달 -->
+<div class="modal fade" id="resultModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title" id="msg"></h4>
+            </div>            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

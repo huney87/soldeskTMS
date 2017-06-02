@@ -59,7 +59,7 @@ body{
 <ul class="nav nav-pills nav-stacked menu">
 	<h3>판매자 페이지</h3><br><br><br><br>
 	<li id="menu1"><a href="sellerMain.jsp">&nbsp;</a></li>
-	<li id="menu2"><a href="sellerPerAdd.jsp">&nbsp;</a></li>
+	<li id="menu2"><a href="seller/add">&nbsp;</a></li>
 	<li id="menu3"><a href="sellerMain.jsp">&nbsp;</a></li>
 </ul>
 <ul class="nav nav-pills nav-stacked menuName">

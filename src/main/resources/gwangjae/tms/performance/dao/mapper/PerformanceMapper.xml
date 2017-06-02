@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="gwangjae.tms.performance.dao.mapper.PerformanceMapper">
+	<resultMap id="PerMap" type="seatInfo">
+		<id property="seatInfoId" column="sinfo_id"/>
+		<result property="perId" column="perf_id"/>
+		<result property="seatId" column="s_id"/>
+		<result property="grade" column="sinfo_grade"/>
+		<result property="price" column="sinfo_price"/>	
+	</resultMap>
+
+	<select id="getSeats" resultMap="PerMap">
+		select * from seatinfo;
+	</select>
+
+	<insert id="addSeat" parameterType="string">
+		insert into seatinfo(sinfo_id,perf_id,s_id,sinfo_grade,sinfo_price)
+		values(sinfo_id_seq.nextval,#{seat},1,1,1000); 
+	</insert>
+</mapper>
