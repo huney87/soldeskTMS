@@ -1,45 +1,42 @@
 package gwangjae.tms.performance.domain;
 
 public class Round {
-	private int round_id;
-	private String act_info;
-	private int round_time;
-	private int per_id;
+	private int roundId;
+	private String actInfo;
+	private int roundTime;
+	private int perId;
 	
 	public Round(){}
 
-	public int getRound_id() {
-		return round_id;
+	public int getRoundId() {
+		return roundId;
 	}
 
-	public void setRound_id(int round_id) {
-		this.round_id = round_id;
+	public void setRoundId(int roundId) {
+		this.roundId = roundId;
 	}
 
-	public String getAct_info() {
-		return act_info;
+	public String getActInfo() {
+		return actInfo;
 	}
 
-	public void setAct_info(String act_info) {
-		this.act_info = act_info;
+	public void setActInfo(String actInfo) {
+		this.actInfo = actInfo;
 	}
 
-	public int getRound_time() {
-		return round_time;
+	public int getRoundTime() {
+		return roundTime;
 	}
 
-	public void setRound_time(int round_time) {
-		this.round_time = round_time;
+	public void setRoundTime(int roundTime) {
+		this.roundTime = roundTime;
 	}
 
-	public int getPer_id() {
-		return per_id;
+	public int getPerId() {
+		return perId;
 	}
 
-	public void setPer_id(int per_id) {
-		this.per_id = per_id;
+	public void setPerId(int perId) {
+		this.perId = perId;
 	}
-	
-	
-
 }

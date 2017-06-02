@@ -21,12 +21,16 @@ public class HallController {
     public String main(){
         return "seller/hallMain";
     }
-	
+	//회관 추가 화면
 	@RequestMapping("/cenAdd")
     public String centerAdd(){
         return "seller/centerAdd";
     }
-	
+	//공연장 추가 화면
+	@RequestMapping("/hallAdd")
+    public String hallAdd(){
+        return "seller/hallAdd";
+    }
 	
 	//회관 목록
 	@RequestMapping("/getCenters")
@@ -43,8 +47,8 @@ public class HallController {
 	//회관 추가
 	@RequestMapping("/addCenter")
     @ResponseBody
-	public int addCenter(String Center_name){
-		return hallService.addCenter(Center_name);
+	public int addCenter(Center center){
+		return hallService.addCenter(center);
 	}
 	//회관 삭제
 	@RequestMapping("/delCenter")

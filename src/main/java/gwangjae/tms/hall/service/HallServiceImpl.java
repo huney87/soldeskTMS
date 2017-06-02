@@ -23,8 +23,8 @@ public class HallServiceImpl implements HallService{
 		return hallDao.getCenter(Center_name);
 	}
 	//회관 추가
-	public int addCenter(String Center_name){
-		return hallDao.addCenter(Center_name);
+	public int addCenter(Center center){
+		return hallDao.addCenter(center);
 	}
 	//회관 삭제
 	public int delCenter(String Center_name){

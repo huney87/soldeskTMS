@@ -1,62 +1,60 @@
 package gwangjae.tms.hall.domain;
 
 public class Center {
-	private int center_id;
-	private int location_id;
-	private String location_name;
-	private int center_post;
-	private String center_address;
-	private int center_phone;
+	private int centerId;
+	private int locationId;
+	private String centerName;
+	private int centerPost;
+	private String centerAddress;
+	private int centerPhone;
 	
 	public Center(){}
 
-	public int getCenter_id() {
-		return center_id;
+	public int getCenterId() {
+		return centerId;
 	}
 
-	public void setCenter_id(int center_id) {
-		this.center_id = center_id;
+	public void setCenterId(int centerId) {
+		this.centerId = centerId;
 	}
 
-	public int getLocation_id() {
-		return location_id;
+	public int getLocationId() {
+		return locationId;
 	}
 
-	public void setLocation_id(int location_id) {
-		this.location_id = location_id;
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
 	}
 
-	public String getLocation_name() {
-		return location_name;
+	public String getCenterName() {
+		return centerName;
 	}
 
-	public void setLocation_name(String location_name) {
-		this.location_name = location_name;
+	public void setCenterName(String centerName) {
+		this.centerName = centerName;
 	}
 
-	public int getCenter_post() {
-		return center_post;
+	public int getCenterPost() {
+		return centerPost;
 	}
 
-	public void setCenter_post(int center_post) {
-		this.center_post = center_post;
+	public void setCenterPost(int centerPost) {
+		this.centerPost = centerPost;
 	}
 
-	public String getCenter_address() {
-		return center_address;
+	public String getCenterAddress() {
+		return centerAddress;
 	}
 
-	public void setCenter_address(String center_address) {
-		this.center_address = center_address;
+	public void setCenterAddress(String centerAddress) {
+		this.centerAddress = centerAddress;
 	}
 
-	public int getCenter_phone() {
-		return center_phone;
+	public int getCenterPhone() {
+		return centerPhone;
 	}
 
-	public void setCenter_phone(int center_phone) {
-		this.center_phone = center_phone;
+	public void setCenterPhone(int centerPhone) {
+		this.centerPhone = centerPhone;
 	}
-	
-	
 }

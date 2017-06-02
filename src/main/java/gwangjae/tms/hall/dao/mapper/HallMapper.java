@@ -9,7 +9,7 @@ import java.util.List;
 public interface HallMapper {
 	List<Center> getCenters();  		//회관 목록
 	Hall getCenter(String Center_name); //회관 하나 찾기
-	int addCenter(String Center_name);  //회관 추가
+	int addCenter(Center center);  //회관 추가
 	int delCenter(String Center_name);	//회관 삭제
 	int modCenter(String Center_name);	//회관 수정
 	

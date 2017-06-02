@@ -2,24 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="gwangjae.tms.hall.dao.mapper.HallMapper">
-	<resultMap id="HallMap" type="hall">
-		<id property="hall_id" column="hall_id"/>
-		<result property="hall_name" column="hall_name"/>
-		<result property="hall_row" column="hall_row"/>
-		<result property="hall_col" column="hall_col"/>
-		<result property="center_id" column="center_id"/>	
+	<resultMap id="CenterMap" type="center">
+		<id property="centerId" column="center_id"/>
+		<result property="centerName" column="center_name"/>
+		<result property="centerPost" column="center_post"/>
+		<result property="centerAddress" column="center_address"/>
+		<result property="centerPhone" column="center_phone"/>	
 	</resultMap>
 
-	<select id="getHalls" resultMap="HallMap">
+	<select id="getHalls" resultMap="CenterMap">
 		
 	</select>
 	
-	<select id="getHall" parameterType="String" resultMap="HallMap">
+	<select id="getCenter" parameterType="String" resultMap="CenterMap">
 		
 	</select>
 	
-	<insert id="addHall" parameterType="string">
-		
+	<insert id="addCenter" parameterType="Center">
+		insert into centers(ctr_id,loc_id,ctr_name,ctr_postcode,ctr_address,ctr_phone)
+		values(ctr_id_seq.nextval,#{locationId},#{centerName},#{centerPost},#{centerAddress},#{centerPhone})
 	</insert>
 	
 	<update id="modHall" parameterType="hall">

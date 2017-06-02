@@ -1,63 +1,60 @@
 package gwangjae.tms.hall.domain;
 
 public class Seat {
-	private int seat_id;
-	private int seat_row;
-	private int seat_col;
-	private int seat_type;
-	private int hall_id;
-	private int seat_number;
+	private int seatId;
+	private int seatRow;
+	private int seatCol;
+	private int seatType;
+	private int hallId;
+	private int seatNumber;
 	
 	public Seat(){}
 
-	public int getSeat_id() {
-		return seat_id;
+	public int getSeatId() {
+		return seatId;
 	}
 
-	public void setSeat_id(int seat_id) {
-		this.seat_id = seat_id;
+	public void setSeatId(int seatId) {
+		this.seatId = seatId;
 	}
 
-	public int getSeat_row() {
-		return seat_row;
+	public int getSeatRow() {
+		return seatRow;
 	}
 
-	public void setSeat_row(int seat_row) {
-		this.seat_row = seat_row;
+	public void setSeatRow(int seatRow) {
+		this.seatRow = seatRow;
 	}
 
-	public int getSeat_col() {
-		return seat_col;
+	public int getSeatCol() {
+		return seatCol;
 	}
 
-	public void setSeat_col(int seat_col) {
-		this.seat_col = seat_col;
+	public void setSeatCol(int seatCol) {
+		this.seatCol = seatCol;
 	}
 
-	public int getSeat_type() {
-		return seat_type;
+	public int getSeatType() {
+		return seatType;
 	}
 
-	public void setSeat_type(int seat_type) {
-		this.seat_type = seat_type;
+	public void setSeatType(int seatType) {
+		this.seatType = seatType;
 	}
 
-	public int getHall_id() {
-		return hall_id;
+	public int getHallId() {
+		return hallId;
 	}
 
-	public void setHall_id(int hall_id) {
-		this.hall_id = hall_id;
+	public void setHallId(int hallId) {
+		this.hallId = hallId;
 	}
 
-	public int getSeat_number() {
-		return seat_number;
+	public int getSeatNumber() {
+		return seatNumber;
 	}
 
-	public void setSeat_number(int seat_number) {
-		this.seat_number = seat_number;
+	public void setSeatNumber(int seatNumber) {
+		this.seatNumber = seatNumber;
 	}
-	
-	
-
 }

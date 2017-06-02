@@ -10,6 +10,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style>
+body{
+    background:gray;
+} 
 h4{
 	color:white;
 }
@@ -33,13 +36,13 @@ h4{
 		  <h3>공연장 관리</h3>
 		</div>
 		<div class="col-sm-2">
-			<a href="hallManage/cenAdd" class="btn btn-md btn-default mainBtn" id="search">회관 등록</a>
+			<a href="/hallManage/cenAdd" class="btn btn-md btn-default mainBtn" id="search">회관 등록</a>
 		</div>
 		<div class="col-sm-8">			
 		<input type="text" id="searchHall" placeholder="공연장 이름 작성">
 		<button type="button" class="btn btn-md btn-default mainBtn" id="search">공연장 검색</button>
 		<button type="button" class="btn btn-md btn-default mainBtn" id="searchAll">전체검색</button>
-		<button type="button" class="btn btn-md btn-default mainBtn" id="resistHall">공연장 등록</button>
+		<a href="/hallManage/hallAdd" class="btn btn-md btn-default mainBtn" id="resistHall">공연장 등록</a>
 		</div>			
 	</div>
 </div>

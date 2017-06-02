@@ -23,8 +23,8 @@ public class HallDaoImpl implements HallDao{
 		return hallMapper.getCenter(Center_name);
 	}
 	//회관 추가
-	public int addCenter(String Center_name){
-		return hallMapper.addCenter(Center_name);
+	public int addCenter(Center center){
+		return hallMapper.addCenter(center);
 	}
 	//회관 삭제
 	public int delCenter(String Center_name){
