@@ -1,6 +1,7 @@
 package gwangjae.tms.ticketing.service;
 
 import java.sql.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class TicketingServiceImpl implements TicketingService {
 		for(int i=0;i < layout.length;i++){
 			layout[i] = new String[20];
 			for(int j=0;j<layout[i].length;j++){
-				layout[i][j] = "1";
+				layout[i][j] = String.valueOf((int)(Math.random()*2));
 			}
 		}
 		return layout;
@@ -28,8 +29,21 @@ public class TicketingServiceImpl implements TicketingService {
 	 */
 	@Override
 	public Date[] getPerfSkd(int perf_id) {
-		// TODO Auto-generated method stub
-		return null;
+		Date[] result ;
+		/*  
+		 * 테스트코드 시작 (오늘부터 5일간의 일정을 반환함)
+		 */
+		result = new Date[5];
+		
+		long now = System.currentTimeMillis() ;
+		long oneday = TimeUnit.DAYS.toMillis(1) ;
+		for(int i = 0 ; i < 5 ; i++ ){			
+			result[i] = new Date(now + oneday*i);
+		}
+		/*
+		 * 테스트코드 끝
+		 */
+		return result;
 	}
 
 }

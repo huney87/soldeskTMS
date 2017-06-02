@@ -141,7 +141,7 @@ body{
 				var col = '<div class="seat" id="' + seatId + '"><span class="seat-number">' + seatNum + '</span></div>';
 				$(".seat-row:last").append(col);
 
-				if (seatLayout[i][j] == 9) {
+				if (seatLayout[i][j] == 0) {
 					$("#" + seatId).addClass("runway");
 				} else if (seatLayout[i][j] == 1) {
 					$("#" + seatId).addClass("left-seat");
