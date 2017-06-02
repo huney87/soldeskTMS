@@ -2,6 +2,8 @@ package gwangjae.tms.ticketing.controller;
 
 import gwangjae.tms.ticketing.service.TicketingService;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +46,11 @@ public class TicketingController {
 	@ResponseBody
 	public String[][] getLayout(HttpSession session){
 		return service.drawLayout(0);
+	}
+
+	@RequestMapping("/getskd")
+	@ResponseBody
+	public Date[] getSkd(HttpSession session){
+		return service.getPerfSkd(0);
 	}
 }
