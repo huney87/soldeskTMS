@@ -7,11 +7,12 @@ import gwangjae.tms.hall.domain.Seat;
 import java.util.List;
 
 public interface HallMapper {
-	List<Center> getCenters();  		//회관 목록
-	List<Center> getCenter(String Center_name); //회관 하나 찾기
-	int addCenter(Center center);  //회관 추가
-	int delCenter(String Center_name);	//회관 삭제
-	int modCenter(String Center_name);	//회관 수정
+	List<Center> getCenters();  					//회관 목록
+	List<Center> getCenter(String Center_name); 	//회관 하나 찾기
+	List<Center> centerOfArea(int locId); 			//지역번호로 회관검색
+	int addCenter(Center center);  					//회관 추가
+	int delCenter(String Center_name);				//회관 삭제
+	int modCenter(String Center_name);				//회관 수정
 	
 	List<Hall> getHalls();      	//공연장 목록
 	Hall getHall(String hall_name); //상영관 하나 찾기

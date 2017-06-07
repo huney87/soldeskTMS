@@ -20,6 +20,11 @@
 		where ctr_name Like '%'||#{value}||'%'
 	</select>
 	
+	<select id="centerOfArea" parameterType="int" resultMap="CenterMap">
+		select * from centers
+		where loc_id=#{value}
+	</select>
+	
 	<insert id="addCenter" parameterType="Center">
 		insert into centers(ctr_id,loc_id,ctr_name,ctr_postcode,ctr_address,ctr_phone)
 		values(ctr_id_seq.nextval,#{locationId},#{centerName,jdbcType=VARCHAR},#{centerPost},#{centerAddress},#{centerPhone})

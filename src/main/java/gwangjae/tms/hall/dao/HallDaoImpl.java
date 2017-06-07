@@ -22,6 +22,10 @@ public class HallDaoImpl implements HallDao{
 	public List<Center> getCenter(String Center_name){
 		return hallMapper.getCenter(Center_name);
 	}
+	//지역번호로 회관검색
+	public List<Center> centerOfArea(int locId){
+		return hallMapper.centerOfArea(locId);
+	}
 	//회관 추가
 	public int addCenter(Center center){
 		return hallMapper.addCenter(center);

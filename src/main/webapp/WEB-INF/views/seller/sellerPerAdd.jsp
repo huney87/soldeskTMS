@@ -22,10 +22,22 @@ $(document).ready(function(){
 		var choice = $("#locals :selected").val();
 		var span = $('<span>공연장: </span>');
 		var localOption = $('<select id="stage"></select>');
-		var southSeoul = $('<option value="1">서울놀이마당</option><option value="2">영등포아트홀</option>'); 
-		var northSeoul = $('<option value="1">동숭아트홀</option><option value="2">디큐브아트홀</option><option value="3">국립극장</option>'); 
-		var southArea = $('<option value="1">성남아트홀</option><option value="2">인천문화예술회관</option>'); 
-		var northArea = $('<option value="1">아람누리</option><option value="2">북한강야외공연장</option>'); 
+		
+		if(choice) {
+    		$.ajax({
+                url: "/hallManage/getCenter",
+                data:{Center_name:searchName},
+                success:function(center){
+                	$(center).each(function(idx, ctr){        
+                        option2 = $("<option value='"+ctr.centerId+"'>"+ctr.centerName+"</option>");
+                        $("#choice").append(option2);
+                    });                  
+    	        }
+    		});
+    	}
+		
+		
+		
 		
 		switch(choice){
 		case "1": $("#localDetail").append(span.append(localOption.append(southSeoul))); break;

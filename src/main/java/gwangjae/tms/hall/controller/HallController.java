@@ -32,17 +32,24 @@ public class HallController {
         return "seller/hallAdd";
     }
 	///////////////////////////////////////////////////////////
-	//회관 목록n
+	//회관 목록
 	@RequestMapping("/getCenters")
     @ResponseBody
 	public List<Center> getCenters(){
 		return hallService.getCenters();
 	}
-	//회관 하나 찾기
+	//회관 하나 찾기(완료)
 	@RequestMapping("/getCenter")
     @ResponseBody
 	public List<Center> getCenter(String Center_name){
 		List<Center> result = hallService.getCenter(Center_name);
+		return result;
+	}
+	//지역번호로 회관찾기
+	@RequestMapping("/centerOfArea")
+	@ResponseBody
+	public List<Center> centerOfArea(int locId){
+		List<Center> result = hallService.centerOfArea(locId);
 		return result;
 	}
 	//회관 추가(완료)
@@ -77,7 +84,7 @@ public class HallController {
 	public Hall getHall(String hall_name){
 		return hallService.getHall(hall_name);	
 	}
-	//공연장 추가
+	//공연장 추가(완료)
 	@RequestMapping("/addHall")
     @ResponseBody
 	public int addHall(Hall hall){

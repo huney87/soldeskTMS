@@ -22,10 +22,15 @@ public class HallServiceImpl implements HallService{
 	public List<Center> getCenter(String Center_name){
 		return hallDao.getCenter(Center_name);
 	}
+	//지역번호로 회관목록 보기
+	public List<Center> centerOfArea(int locId){
+		return hallDao.centerOfArea(locId);
+	}
 	//회관 추가
 	public int addCenter(Center center){
 		return hallDao.addCenter(center);
 	}
+	
 	//회관 삭제
 	public int delCenter(String Center_name){
 		return hallDao.delCenter(Center_name);
