@@ -41,9 +41,10 @@ $(function() {
     <div class="row content">
         <!--사이드 네비바-->
         <div class="col-sm-2 sidenav">
-            <jsp:include page="sellerNav.jsp"/>
+            <jsp:include page="mainNav.jsp"/>
         </div>
-        <div class="col-sm-10"></div>
+        <div class="col-sm-10">
+        </div>
 	</div>
 </div>
 </body>

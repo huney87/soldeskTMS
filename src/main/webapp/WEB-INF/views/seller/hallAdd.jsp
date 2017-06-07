@@ -10,6 +10,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>
+// 사이드 네비  
+$(function() {
+    //메인메뉴 1
+    $('#menu11').hover(
+	    function () {
+	    $('#menu1 > a').stop().animate({'marginLeft':'-2rem'},200);},
+	    function () {
+	    $('#menu1 > a').stop().animate({'marginLeft':'-24rem'},200);
+    });
+    //메인메뉴2
+    $('#menu22').hover(
+	    function () {
+	    $('#menu2 > a').stop().animate({'marginLeft':'-2rem'},200);},
+	    function () {
+	    $('#menu2 > a').stop().animate({'marginLeft':'-24rem'},200);
+    });
+    //메뉴3
+    $('#menu33').hover(
+	    function () {
+	    $('#menu3 > a').stop().animate({'marginLeft':'-2rem'},200);},
+	    function () {
+	    $('#menu3 > a').stop().animate({'marginLeft':'-24rem'},200);
+    });
+});
+
 var resistBtn = function() {
 	var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
     var msg = $("#msg");            // 결과 메세지
@@ -111,7 +136,7 @@ $(document).ready(
     <div class="row content">
         <!--사이드 네비바-->
         <div class="col-sm-2 sidenav">
-            <jsp:include page="sellerNav.jsp"/>
+            <jsp:include page="mainNav.jsp"/>
         </div>
         <div class="col-sm-10">
         	<jsp:include page="hallNav.jsp"/>

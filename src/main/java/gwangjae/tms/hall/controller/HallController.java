@@ -45,7 +45,7 @@ public class HallController {
 		List<Center> result = hallService.getCenter(Center_name);
 		return result;
 	}
-	//지역번호로 회관찾기
+	//지역번호로 회관찾기(완료)
 	@RequestMapping("/centerOfArea")
 	@ResponseBody
 	public List<Center> centerOfArea(int locId){

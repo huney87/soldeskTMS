@@ -20,31 +20,23 @@ $(document).ready(function(){
 	$("#locals").on("change", function(){
 		$("#localDetail").empty();
 		var choice = $("#locals :selected").val();
-		var span = $('<span>공연장: </span>');
+		var span = $('<span style="color:white;">공연장: </span>');
 		var localOption = $('<select id="stage"></select>');
 		
-		if(choice) {
+		if(choice) {	
     		$.ajax({
-                url: "/hallManage/getCenter",
-                data:{Center_name:searchName},
+                url: "/hallManage/centerOfArea",
+                data:{locId:choice},
                 success:function(center){
                 	$(center).each(function(idx, ctr){        
-                        option2 = $("<option value='"+ctr.centerId+"'>"+ctr.centerName+"</option>");
-                        $("#choice").append(option2);
+                        option = $("<option value='"+ctr.centerId+"'>"+ctr.centerName+"</option>");
+                        localOption.append(option);
                     });                  
     	        }
     		});
+    		$("#localDetail").append(span.append(localOption));
     	}
-		
-		
-		
-		
-		switch(choice){
-		case "1": $("#localDetail").append(span.append(localOption.append(southSeoul))); break;
-		case "2": $("#localDetail").append(span.append(localOption.append(northSeoul))); break;
-		case "3": $("#localDetail").append(span.append(localOption.append(southArea)));  break;
-		case "4": $("#localDetail").append(span.append(localOption.append(northArea)));  break;
-		}
+
 		//공연장 선택완료시 시간관련 네비바가 나타남
 		$("#stage").on("change", function(){
 			$("#nav2").empty();
@@ -307,7 +299,7 @@ button{
 	height:5rem; 
 	padding:1rem;
 	margin:0.5rem;
-	color:white;
+	color:black;
 	border: 0.1rem solid #4d4dff;
 }
 select, input{
@@ -327,14 +319,16 @@ button{
     <div class="row content">
         <!--사이드 네비바-->
         <div class="col-sm-2 sidenav">
-            <jsp:include page="sellerNav.jsp"/>
+            <jsp:include page="mainNav.jsp"/>
         </div>
+        <!-- 메인출력화면 -->
         <div class="col-sm-10">
+        	<jsp:include page="perNav.jsp"/>
 			<div class="row">
                 <div class="col-lg-12" id="nav1">
                     <div>
                         <span>
-                            <select id="locals" style="margin-right:3rem;">
+                            <select id="locals" style="margin-right:3rem; color:black;">
                                 <option>지역선택</option><option value="1">서울남부</option>
                                 <option value="2">서울북부</option>
                                 <option value="3">경기남부</option>
@@ -347,9 +341,9 @@ button{
                 <div class="col-lg-12" id="nav2"></div>
                 <div class="col-lg-12" id="nav3">
                     <span>
-			                    제목:<input type="text" id="title" name="title" placeholder="제목" required>
-			                    가로:<input type="number" name="row" id="row" placeholder="max18" min="1" max="18" required>
-			                    세로:<input type="number" name="col" id="col" placeholder="max18" min="1" max="18" required>
+			                    제목:<input type="text" id="title" placeholder="제목" required>
+			                    가로:<input type="number" id="row" placeholder="max18" min="1" max="18" required>
+			                    세로:<input type="number" id="col" placeholder="max18" min="1" max="18" required>
                     </span>
                     <button type="button" id="check" class="btn btn-default btn-sm" style="background-color:white; color:black;">입력</button>
                     <button type="reset" id="reset" class="btn btn-danger btn-sm" style="background-color:#4d4dff; color:white;">리셋</button>
