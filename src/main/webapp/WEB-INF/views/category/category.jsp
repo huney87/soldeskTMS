@@ -395,15 +395,23 @@ var booking_popup = function(){
 	'width='+sw+',height='+sh+',top='+mt+',left='+ml+'scrollbars=no, menubar=no, status=no, location=no, resizable=no');
 }
 
+var searchResult = function(){
+	$("[name='cate'").click(function{
+		$.ajax{
+			url: "/category",
+			data: category,
+			success:function(category){
+				$(data).
+			}
+		}
+	})
+}
+
 /*도큐먼트 레디*/
 $(document).ready(function(){
 	$("[name='booking_popup'").click(function(){                
 		booking_popup();
 	});
-	
-	$("[name='cate'").click(function(){
-		
-	})
 	
 	$("#topAdClose").click(function(){
         $("#topHeadAd").hide();

@@ -38,10 +38,12 @@
 		<result property="centerAddress" column="ctr_address"/>
 		<result property="centerPhone" column="ctr_phone"/>
 	</resultMap>
+	
 	<select id="getSearchResult" resultMap="perMap">
 		select a.*, b.h_name, c.gen_id 
 		from performances a
-		left join halls b and categotries c and centers d
+		left join halls b and categotries c
+		outer join centers d
 		<!-- 장르별 검색 -->
 		c.gen_id = #{gen_id}
 		<choose>
