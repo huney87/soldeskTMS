@@ -10,7 +10,7 @@
 		<result property="per_endDate" column="perf_enddate"/>
 		<result property="per_image" column="perf_image"/>
 		<result property="display" column="perf_display"/>
-		<association property="hall_id" column="HallMap"/>
+		<association property="hall_id" column="hallMap"/>
 		<association property="ct_id" resultMap="cateMap"/>	
 	</resultMap>
 	
@@ -22,7 +22,7 @@
 		<result property="cat_use" column="cat_use"/>
 	</resultMap>
 	
-	<resultMap id="HallMap" type="hall">
+	<resultMap id="hallMap" type="hall">
 		<id property="hallId" column="h_id"/>
 		<result property="hallName" column="h_name"/>
 		<result property="hallRow" column="h_row"/>
@@ -31,9 +31,25 @@
 	</resultMap>
 	
 	<select id="getSearchResult" resultMap="perMap">
-		select a.*, b.h_name c.gen_id
+		select a.*, b.h_name, c.gen_id 
 		from performances a
 		left join halls b and categotries c
+		<!-- 장르별 검색 -->
 		c.gen_id = #{gen_id}
+		<choose>
+			<!-- 날짜별 검색 -->
+			<when test="perf_enddate != null and perf_startdate != null">
+				between a.perf_startdate = #{per_startDate}
+				to a.perf_enddate = #{per_endDate} 
+			</when>
+			<!-- 지역별 검색 -->
+			<when test="loc_id != null">
+				and c.loc_id = #{loc_id}
+			</when>
+			<!-- 장르 내부 통합검색 -->
+			<otherwise>
+				and a.perf_title = #{per_title} or h_name = #{hallName}
+			</otherwise>
+		</choose>
 	</select>
 </mapper>
