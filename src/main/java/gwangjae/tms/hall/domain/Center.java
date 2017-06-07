@@ -34,11 +34,11 @@ public class Center {
 		this.centerName = centerName;
 	}
 
-	public int getCenterPost() {
+	public String getCenterPost() {
 		return centerPost;
 	}
 
-	public void setCenterPost(int centerPost) {
+	public void setCenterPost(String centerPost) {
 		this.centerPost = centerPost;
 	}
 
@@ -50,11 +50,11 @@ public class Center {
 		this.centerAddress = centerAddress;
 	}
 
-	public int getCenterPhone() {
+	public String getCenterPhone() {
 		return centerPhone;
 	}
 
-	public void setCenterPhone(int centerPhone) {
+	public void setCenterPhone(String centerPhone) {
 		this.centerPhone = centerPhone;
 	}
 }
