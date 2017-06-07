@@ -4,9 +4,9 @@ public class Center {
 	private int centerId;
 	private int locationId;
 	private String centerName;
-	private int centerPost;
+	private String centerPost;
 	private String centerAddress;
-	private int centerPhone;
+	private String centerPhone;
 	
 	public Center(){}
 
