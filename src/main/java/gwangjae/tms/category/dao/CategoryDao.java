@@ -1,5 +1,9 @@
 package gwangjae.tms.category.dao;
 
-public class CategoryDao {
+import gwangjae.tms.performance.domain.Performance;
 
+import java.util.List;
+
+public interface CategoryDao {
+	List<Performance> getSearchResult();
 }

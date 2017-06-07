@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="gwangjae.tms.**.dao.mapper.**">
+<mapper namespace="gwangjae.tms.category.dao.mapper.CategoryMapper">
+
 	<resultMap id="perMap"	type="performance">		
 		<id property="per_id" column="perf_id"/>
 		<result property="per_title" column="perf_title"/>
@@ -9,7 +10,7 @@
 		<result property="per_endDate" column="perf_enddate"/>
 		<result property="per_image" column="perf_image"/>
 		<result property="display" column="perf_display"/>
-		<assocation property="hall_id" column="HallMap"/>
+		<association property="hall_id" column="HallMap"/>
 		<association property="ct_id" resultMap="cateMap"/>	
 	</resultMap>
 	
@@ -22,14 +23,14 @@
 	</resultMap>
 	
 	<resultMap id="HallMap" type="hall">
-		<id property="hall_id" column="h_id"/>
-		<result property="hall_name" column="h_name"/>
-		<result property="hall_row" column="h_row"/>
-		<result property="hall_col" column="h_col"/>
-		<result property="center_id" column="ctr_id"/>	
+		<id property="hallId" column="h_id"/>
+		<result property="hallName" column="h_name"/>
+		<result property="hallRow" column="h_row"/>
+		<result property="hallCol" column="h_col"/>
+		<result property="centerId" column="ctr_id"/>	
 	</resultMap>
 	
-	<select id="getSeachResult" resultMap="perMap">
+	<select id="getSearchResult" resultMap="perMap">
 		select a.*, b.h_name c.gen_id
 		from performances a
 		left join halls b and categotries c
