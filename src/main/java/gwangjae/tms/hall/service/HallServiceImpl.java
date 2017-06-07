@@ -19,7 +19,7 @@ public class HallServiceImpl implements HallService{
 		return hallDao.getCenters();
 	}
 	//회관 하나 찾기
-	public Hall getCenter(String Center_name){
+	public List<Center> getCenter(String Center_name){
 		return hallDao.getCenter(Center_name);
 	}
 	//회관 추가
@@ -45,8 +45,8 @@ public class HallServiceImpl implements HallService{
 		return hallDao.getHall(hall_name);	
 	}
 	//상영관 추가
-	public int addHall(String hall_name){
-		return hallDao.addHall(hall_name);
+	public int addHall(Hall hall){
+		return hallDao.addHall(hall);
 	}
 	//상영관 삭제
 	public int delHall(String hall_name){

@@ -35,14 +35,14 @@ h4{
 		<div class="col-sm-2" style="color:white;">
 		  <h3>공연장 관리</h3>
 		</div>
-		<div class="col-sm-2">
+		<div class="col-sm-3">		
 			<a href="/hallManage/cenAdd" class="btn btn-md btn-default mainBtn" id="search">회관 등록</a>
+			<a href="/hallManage/hallAdd" class="btn btn-md btn-default mainBtn" id="resistHall">공연장 등록</a>
 		</div>
-		<div class="col-sm-8">			
-		<input type="text" id="searchHall" placeholder="공연장 이름 작성">
-		<button type="button" class="btn btn-md btn-default mainBtn" id="search">공연장 검색</button>
-		<button type="button" class="btn btn-md btn-default mainBtn" id="searchAll">전체검색</button>
-		<a href="/hallManage/hallAdd" class="btn btn-md btn-default mainBtn" id="resistHall">공연장 등록</a>
+		<div class="col-sm-7">			
+			<input type="text" id="searchHall" placeholder="공연장 이름 작성">
+			<button type="button" class="btn btn-md btn-default mainBtn" id="search">공연장 검색</button>
+			<button type="button" class="btn btn-md btn-default mainBtn" id="searchAll">전체검색</button>	
 		</div>			
 	</div>
 </div>

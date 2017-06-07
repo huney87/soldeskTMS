@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface HallDao {
 	List<Center> getCenters();  		//회관 목록
-	Hall getCenter(String Center_name); //회관 하나 찾기
-	int addCenter(Center center);  //회관 추가
+	List<Center> getCenter(String Center_name); //회관 하나 찾기
+	int addCenter(Center center);  		//회관 추가
 	int delCenter(String Center_name);	//회관 삭제
 	int modCenter(String Center_name);	//회관 수정
 	
 	List<Hall> getHalls();      		//공연장 목록
 	Hall getHall(String hall_name); 	//상영관 하나 찾기
-	int addHall(String hall_name); 	 	//상영관 추가
+	int addHall(Hall hall); 	 	//상영관 추가
 	int delHall(String hall_name);		//상영관 삭제
 	int modHall(String hall_name);		//상영관 수정
 	

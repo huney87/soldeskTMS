@@ -29,6 +29,7 @@
 	text-align: center;
 }
 #resistForm td{
+	text-align:left;
 	color:black;
 	width: 40rem;
 	padding: 1.5rem;
@@ -56,21 +57,26 @@ var resistBtn = function() {
     
     //완료시
 	$("#resist").on("click", function() {
-		if($("#centerName").val()) {
+		name=$("#centerName").val();
+		localID= $("#locationId").val();
+		postCode = $("#postNumber").val();
+		postAll = $("#address1").val() + $("#address2").val();
+		phone = $("#phone").val();
+		
+		if(name) {
     		$.ajax({
                 url: "/hallManage/addCenter",
                 data:{
-                	centerName:$("#centerName").val(),
-                	locationId:$("#locationId").val(),
-                	centerPost:$("#postNum").val(),
-                	centerAddress:$("#postDetail").val(),
-                	centerPhone:$("#phone").val()
+                	centerName:name,
+                	locationId:localID,
+                	centerPost:postCode,
+                	centerAddress:postAll,
+                	centerPhone:phone
                 	},  
            	
                 success:function(result){
                     if(result) msg.text("추가 성공");
                     else msg.text("추가 실패");
-                    $("#getUsers").trigger("click");
                 },
                 error:function(a, b, errMsg){
                     msg.text("추가 실패: " + errMsg);                
@@ -80,7 +86,7 @@ var resistBtn = function() {
                 }
             });   		
     	}else {
-            msg.text("회원 이름을 입력하세요.");
+            msg.text("빈칸을 전부 작성해 주십시오.");
             modal.modal('show');
         }
 		
@@ -122,19 +128,28 @@ $(document).ready(
 												  </td>
 							</tr>
 							<tr>
-								<th>주 소</th><td><button type="button" class="btn btn-md btn-default" id="address">검색</button></td>
+								<th>주 소</th><td><button type="button" class="btn btn-md btn-default" id="postcodify_search_button">주소검색</button></td>
 							</tr>
 							<tr>
-								<th>우편 번호</th><td><input type="number" id="postNum"></td>
+								<th>우편 번호</th><td><input type="text" name="postCode" class="postcodify_postcode5 form-control" id="postNumber" value="" placeholder="주소검색 버튼을 누르세요." style="width:auto;" readonly/></td>
 							</tr>
 							<tr>
-								<th>상세 주소</th><td><input type="text" id="postDetail"></td>
+								<th>주소</th><td><input type="text" id="address1" name="address1" class="postcodify_address form-control" value="" required readonly/></td>
 							</tr>
+							<tr>
+								<th>상세 주소</th><td><input type="text" id="address2" name="address2" class="postcodify_details form-control" value="" placeholder="상세주소를 입력하세요." style=""required /></td>
+							</tr>
+							
 							<tr>
 								<th>전화 번호</th><td><input type="number" placeholder="- 제외 번호입력" id="phone"></td>
 							</tr>																									
 					</table>
 					<button type="button" class="btn btn-md btn-default" id="resist">등록</button>
+					<!-- jQuery와 Postcodify를 로딩한다 -->
+					<script src="http://d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+			
+					<!-- "우편번호찾기" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
+					<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>			
 				</div>
 			</div>
         </div>

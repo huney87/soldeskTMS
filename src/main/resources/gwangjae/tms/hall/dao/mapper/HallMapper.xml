@@ -3,11 +3,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="gwangjae.tms.hall.dao.mapper.HallMapper">
 	<resultMap id="CenterMap" type="center">
-		<id property="centerId" column="center_id"/>
-		<result property="centerName" column="center_name"/>
-		<result property="centerPost" column="center_post"/>
-		<result property="centerAddress" column="center_address"/>
-		<result property="centerPhone" column="center_phone"/>	
+		<id property="centerId" column="ctr_id"/>
+		<result property="locationId" column="loc_id"/>
+		<result property="centerName" column="ctr_name"/>
+		<result property="centerPost" column="ctr_postcode"/>
+		<result property="centerAddress" column="ctr_address"/>
+		<result property="centerPhone" column="ctr_phone"/>	
 	</resultMap>
 
 	<select id="getHalls" resultMap="CenterMap">
@@ -15,12 +16,18 @@
 	</select>
 	
 	<select id="getCenter" parameterType="String" resultMap="CenterMap">
-		
+		select * from centers
+		where ctr_name Like '%'||#{value}||'%'
 	</select>
 	
 	<insert id="addCenter" parameterType="Center">
 		insert into centers(ctr_id,loc_id,ctr_name,ctr_postcode,ctr_address,ctr_phone)
-		values(ctr_id_seq.nextval,#{locationId},#{centerName},#{centerPost},#{centerAddress},#{centerPhone})
+		values(ctr_id_seq.nextval,#{locationId},#{centerName,jdbcType=VARCHAR},#{centerPost},#{centerAddress},#{centerPhone})
+	</insert>
+	
+	<insert id="addHall" parameterType="Hall">
+		insert into halls(h_id,h_name,h_row,h_col,ctr_id)
+		values(h_id_seq.nextval,#{hallName,jdbcType=VARCHAR},#{hallRow},#{hallCol},#{centerId})
 	</insert>
 	
 	<update id="modHall" parameterType="hall">

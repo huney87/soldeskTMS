@@ -31,8 +31,8 @@ public class HallController {
     public String hallAdd(){
         return "seller/hallAdd";
     }
-	
-	//회관 목록
+	///////////////////////////////////////////////////////////
+	//회관 목록n
 	@RequestMapping("/getCenters")
     @ResponseBody
 	public List<Center> getCenters(){
@@ -41,10 +41,11 @@ public class HallController {
 	//회관 하나 찾기
 	@RequestMapping("/getCenter")
     @ResponseBody
-	public Hall getCenter(String Center_name){
-		return hallService.getCenter(Center_name);
+	public List<Center> getCenter(String Center_name){
+		List<Center> result = hallService.getCenter(Center_name);
+		return result;
 	}
-	//회관 추가
+	//회관 추가(완료)
 	@RequestMapping("/addCenter")
     @ResponseBody
 	public int addCenter(Center center){
@@ -70,25 +71,25 @@ public class HallController {
 	public List<Hall> getHalls(){
 		return hallService.getHalls();
 	}
-	//상영관 하나 찾기
+	//공연장 하나 찾기
 	@RequestMapping("/getHall")
     @ResponseBody
 	public Hall getHall(String hall_name){
 		return hallService.getHall(hall_name);	
 	}
-	//상영관 추가
+	//공연장 추가
 	@RequestMapping("/addHall")
     @ResponseBody
-	public int addHall(String hall_name){
-		return hallService.addHall(hall_name);
+	public int addHall(Hall hall){
+		return hallService.addHall(hall);
 	}
-	//상영관 삭제
+	//공연장 삭제
 	@RequestMapping("/delHall")
     @ResponseBody
 	public int delHall(String hall_name){
 		return hallService.delHall(hall_name);
 	}
-	//상영관 수정
+	//공연장 수정
 	@RequestMapping("/modHall")
     @ResponseBody
 	public int modHall(String hall_name){
@@ -97,7 +98,7 @@ public class HallController {
 	
 	
 //////////////////////////////////////////////////////////////////	
-	//상영관별 좌석 목록
+	//공연장별 좌석 목록
 	@RequestMapping("/getSeats")
     @ResponseBody
 	public List<Seat> getSeats(int hall_name){
