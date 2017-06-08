@@ -27,7 +27,7 @@
 		<result property="hallName" column="h_name"/>
 		<result property="hallRow" column="h_row"/>
 		<result property="hallCol" column="h_col"/>
-		<result property="centerId" column="ctr_id"/>	
+		<association property="centerId" column="centerMap"/>	
 	</resultMap>
 	
 	<resultMap id="centerMap" type="center">
@@ -40,17 +40,20 @@
 	</resultMap>
 	
 	<select id="getSearchResult" resultMap="perMap">
-		select a.*, b.h_name, c.gen_id 
+		select a.*, b.h_name, c.gen_id ,d.ctr_name
 		from performances a
-		left join halls b and categotries c
-		outer join centers d
+		inner join halls b
+		on a.h_id = b.h_id
+		inner join categories c
+		on a.cat_id = c.cat_id
+		cross join centers d
 		<!-- 장르별 검색 -->
 		c.gen_id = #{gen_id}
-		<choose>
+ 		<choose>
 			<!-- 날짜별 검색 -->
 			<when test="perf_enddate != null and perf_startdate != null">
 				between a.perf_startdate = #{per_startDate}
-				to a.perf_enddate = #{per_endDate} 
+				and a.perf_enddate = #{per_endDate} 
 			</when>
 			<!-- 지역별 검색 -->
 			<when test="loc_id != null">
