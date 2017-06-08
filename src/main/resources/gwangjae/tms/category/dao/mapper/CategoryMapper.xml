@@ -56,7 +56,7 @@
 				and a.perf_enddate = #{per_endDate} 
 			</when>
 			<!-- 지역별 검색 -->
-			<when test="loc_id != null">
+			<when test="loc_id != 0">
 				and c.loc_id = #{loc_id}
 			</when>
 			<!-- 장르 내부 통합검색 단어검색 -->
