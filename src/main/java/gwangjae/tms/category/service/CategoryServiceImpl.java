@@ -42,8 +42,8 @@ public class CategoryServiceImpl implements CategoryService{
 		hall.setHallName(search);
 		cen.setCenterName(search);
 		if((perf.getPer_title() != null && !perf.getPer_title().equals(""))
-				&& (hall.getHallName() != null && !hall.getHallName().equals(""))
-				&& (cen.getCenterName() != null && !cen.getCenterName().equals(""))){
+				|| (hall.getHallName() != null && !hall.getHallName().equals(""))
+				|| (cen.getCenterName() != null && !cen.getCenterName().equals(""))){
 			dao.getSearchResult();
 		}
 		return dao.getSearchResult();
