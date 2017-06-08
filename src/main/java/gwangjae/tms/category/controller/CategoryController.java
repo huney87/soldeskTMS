@@ -14,26 +14,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CategoryController {
 	@Autowired private CategoryService service;
 	
-	@RequestMapping("/category")
+	@RequestMapping("/category")	//장르별 검색(버튼)
 	@ResponseBody
-	public String searchPerformances(HttpServletRequest request){
-		int genre = Integer.parseInt(request.getParameter("button"));	//버튼 값 1.뮤지컬, 2.콘서트, 3.공연
+	public String searchPerformances(int genre){
 		service.searchPerfomances(genre);
 		return "/category";
 	}
 	
-	@RequestMapping("/Local")
+	@RequestMapping("/Local")	//지역별검색
 	@ResponseBody
-	public String searchPerfLocal(HttpServletRequest request){
-		int localNum = Integer.parseInt(request.getParameter("local"));
+	public String searchPerfLocal(int localNum){
 		service.searchPerfLocal(localNum);
 		return "/category";
 	}
 	
-	@RequestMapping("/totalSearch")
+	@RequestMapping("/totalSearch")	//통합 검색
 	@ResponseBody
-	public String searchTotalSearch(HttpServletRequest request){
-		String searchResult = request.getParameter("search");
+	public String searchTotalSearch(String searchResult){
 		service.searchTotalSearch(searchResult);
 		return "/category";
 	}

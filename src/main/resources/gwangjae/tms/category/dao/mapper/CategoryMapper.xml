@@ -61,8 +61,8 @@
 			</when>
 			<!-- 장르 내부 통합검색 단어검색 -->
 			<otherwise>
-				and a.perf_title = #{per_title} or h_name = #{hallName}
-				or d.ctr_name = #{centerName}
+				and a.perf_title like '%#{per_title}%' or h_name like '%#{hallName}%'
+				or d.ctr_name like '%#{centerName}%'
 			</otherwise>
 		</choose>
 	</select>
