@@ -25,4 +25,14 @@ public class MainController {
 		}
 		return "/main";
 	}
+	
+	@RequestMapping("category2")
+	public String category2View(){
+		return "/category/category2";
+	}
+	
+	@RequestMapping("detail")
+	public String detailView(){
+		return "/detail/detail";
+	}
 }

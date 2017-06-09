@@ -396,7 +396,7 @@ var booking_popup = function(){
 }
 
 var searchResult = function(){
-	$("[name='cate'").click(function{
+	$("[name='cate'").click(function(){
 		$.ajax{
 			url: "/category",
 			data: category,
@@ -405,7 +405,7 @@ var searchResult = function(){
 			}
 		}
 	})
-}
+};
 
 /*도큐먼트 레디*/
 $(document).ready(function(){
@@ -417,6 +417,8 @@ $(document).ready(function(){
         $("#topHeadAd").hide();
     });
 });
+
+/* 이미지 없을 경우 */
 function ImgError(source){
     source.src = "../img/noImg.png";
     source.onerror = "";

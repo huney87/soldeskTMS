@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+/* 공연정보 */
+.title p{
+	font-weight: bold;
+}
+/* 예매창 고정 */
+#sideMenu{
+	padding:10px;
+}
+#sideMenu.affix{
+	top: 50px;
+	width: 400px;
+	background-color:#fff;
+	z-index: 900 !important;
+}

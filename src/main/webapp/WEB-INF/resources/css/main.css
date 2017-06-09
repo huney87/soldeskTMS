@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 /* 최상단 광고창 */
 #topHeadAd {
+	display:block;
     text-align: center;
     background-color: #0e8eb9; 
     height: 96px;
@@ -42,7 +43,7 @@
 .btn_social {
     position: absolute;
     top: 23px;
-    left: 117px;
+    left: 137px;
 }
 .btn_social a.film_society, .btn_social a.classic_society {
     font-weight: bold;
@@ -52,12 +53,12 @@
     line-height: 13px;
 }
 .btn_social a {
-    height: 13px;
+    height: 23px;
 }
 .btn_theater {
     position: absolute;
     top: 18px;
-    right: 0;
+    right: 1.5rem;
 }
 .btn_social .split {
     margin: 0 12px;
@@ -94,8 +95,14 @@
     vertical-align: middle;
 }
 
-
 /* 메인 슬라이드 */
 #myCarousel {
-    margin-top:-7.6rem;
+    margin-top:-11.6rem;
+}
+
+/* 공연 배경 */
+#mainContent{
+	background-color: #f2f2f2;
+	padding-top:1.5rem;
+	padding-bottom: 3rem;
 }

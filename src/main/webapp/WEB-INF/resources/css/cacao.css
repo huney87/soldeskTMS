@@ -45,8 +45,9 @@ body {
 }
 
 /* 공연 포스트 */
-#mainContent{
-	background-color: #f2f2f2;
+#categoryContent{
+	background-color: #fff;
+	padding-top:1.5rem;
 	padding-bottom: 3rem;
 }
 
