@@ -1,0 +1,19 @@
+package gwangjae.tms.admin.dao;
+
+import java.util.List;
+
+import gwangjae.tms.admin.dao.mapper.AdminMapper;
+import gwangjae.tms.user.domain.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class AdminDaoImpl implements AdminDao{
+	@Autowired private AdminMapper adminMapper;
+
+	@Override
+	public List<User> getUsers() {
+		return adminMapper.getUsers();
+	}
+}
