@@ -15,68 +15,28 @@ $(document).ready(function(){
 	$("#reset").click(function(){
 		$('.new-seat').remove();
 	});
-
-    // 지역 선택시 나타나는 세부 선택창
+	
+	//지역 선택시 나타나는 세부 선택창
 	$("#locals").on("change", function(){
 		$("#localDetail").empty();
 		var choice = $("#locals :selected").val();
-		var span = $('<span style="color:white;">공연장: </span>');
-		var localOption = $('<select id="stage"></select>');
+		var span = $("<span style='color:white;'>공연장: </span>");
+		var localOption = $("<select id='stage'></select>");
 		
 		if(choice) {	
-    		$.ajax({
-                url: "/hallManage/centerOfArea",
-                data:{locId:choice},
-                success:function(center){
-                	$(center).each(function(idx, ctr){        
-                        option = $("<option value='"+ctr.centerId+"'>"+ctr.centerName+"</option>");
-                        localOption.append(option);
-                    });                  
-    	        }
-    		});
-    		$("#localDetail").append(span.append(localOption));
-    	}
-
-		//공연장 선택완료시 시간관련 네비바가 나타남
-		$("#stage").on("change", function(){
-			$("#nav2").empty();
-			var timeMain = '날짜 선택 : <input type="date" id="date-input">'
-								+'<button type="button" id="addTime" class="btn btn-default btn-sm" style="background-color:black; color:white;">시간추가</button>'
-								+'<button type="button" id="rstTime" class="btn btn-danger btn-sm" style="background-color:#4d4dff; color:white;">시간리셋</button>'
-								+'<span id="timesNav">&nbsp;&nbsp;&nbsp;</span>';
-			$("#nav2").css({
-				"background-color":"#1a1a1a",
-				"height":"5rem",
-				"padding":"1rem",	
-				"margin":"0.5rem",
-				"color":"white",
-				"border":"0.1rem solid #4d4dff"
+			$.ajax({
+	            url: "/hallManage/centerOfArea",
+	            data:{locId:choice},
+	            success:function(center){
+	            	$(center).each(function(idx, ctr){        
+	                    option = $("<option value='"+ctr.centerId+"'>"+ctr.centerName+"</option>");
+	                    localOption.append(option);
+	                });                  
+		        }
 			});
-			$("#nav2").append(timeMain);
-			
-			//시간추가 선택시
-			var cnt = 1;
-			$("#addTime").on("click", function(){				
-				if(cnt>5){
-					cnt = 1;
-					alert('최대 5회차 까지 입니다.')
-				}else{
-					var times = $('<label>'+cnt+'차:<input type="time" name="'+$("#title").val()+'" id="timeSlot'+cnt+'">&nbsp;&nbsp;</label>');
-					$("#timesNav").append(times);
-					cnt=cnt+1;
-				}
-			});
-			
-			//시간리셋 선택시
-			$("#rstTime").on("click", function(){
-				$("#timesNav").empty();
-				cnt=1;
-			});
-			
-		});
-	
+			$("#localDetail").append(span.append(localOption));
+		}
 	});
-    
     //좌석 생성파트///////////////////////////////////////////////////////
 	var row;
 	var col;
@@ -200,10 +160,8 @@ $(document).ready(function(){
     		seatValue.push( $( this ).attr('value') );        	     	
     	});
     	
-    	var seats={"seats":seatValue}
-    	
-    	
- 		console.log(seatValue);
+    	var seats={"seats":seatValue};
+
     	if($("#row").val()) {
     		$.ajax({
                 url: "/seller/addSeats",
@@ -218,16 +176,17 @@ $(document).ready(function(){
                 complete:function(){
                 	$("#resultModal").modal('show');                    
                 }
-            });   		
+            });
+    		
+    		
+    		
     	}else {
             $("#msg").text("오류");
             $("#resultModal").modal('show');
         }  
    }); 
-	
-	
 
-	});/*메뉴 버튼: 공연등록 종료*/
+});/*document 종료*/
 </script>
 <style>
 #shell {
@@ -302,7 +261,7 @@ button{
 	color:black;
 	border: 0.1rem solid #4d4dff;
 }
-select, input{
+select, input, option{
 	color:black;
     margin-right:2rem;
 }
@@ -386,7 +345,7 @@ button{
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title" id="msg"></h4>
+              <h4 class="modal-title" id="msg" style="color:black;"></h4>
             </div>            
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

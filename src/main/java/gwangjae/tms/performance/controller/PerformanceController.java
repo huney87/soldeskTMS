@@ -1,9 +1,10 @@
 package gwangjae.tms.performance.controller;
 
-import java.util.List;
-
+import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.performance.service.PerformanceService;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,5 +49,22 @@ public class PerformanceController {
     		@RequestParam(value="seats[]") List<String> seats){
 		return performanceService.addSeats(seats.toArray(new String[seats.size()]));
 	}
+	
+	//공연 검색하기(검색어로)
+	@RequestMapping("/getPer")
+    @ResponseBody
+    public List<Performance> getPer(String per_name){
+    		List<Performance> result = performanceService.getPer(per_name);
+		return result;
+	}
+	
+	//공연 회차정보 등록
+		@RequestMapping("/addPerDetail")
+	    @ResponseBody
+	    public int addPerDetail(Performance performance){
+			return performanceService.addPerDetail(performance);
+		}
+	
+	
 	
 }

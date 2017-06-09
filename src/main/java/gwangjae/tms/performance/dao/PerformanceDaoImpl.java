@@ -3,6 +3,7 @@ package gwangjae.tms.performance.dao;
 import java.util.List;
 
 import gwangjae.tms.performance.dao.mapper.PerformanceMapper;
+import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,14 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	
 	public int addSeat(int seat){
 		return performanceMapper.addSeat(seat);
+	}
+	
+	public List<Performance> getPer(String per_name){
+		return performanceMapper.getPer(per_name);
+	}
+	
+	public int addPerDetail(Performance performance){
+		return performanceMapper.addPerDetail(performance);
 	}
 }
 

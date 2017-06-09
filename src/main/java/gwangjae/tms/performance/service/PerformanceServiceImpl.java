@@ -1,6 +1,7 @@
 package gwangjae.tms.performance.service;
 
 import gwangjae.tms.performance.dao.PerformanceDao;
+import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
 
 import java.util.List;
@@ -24,4 +25,12 @@ public class PerformanceServiceImpl implements PerformanceService {
 		 }System.out.println(check);
 			return check;
 	}
+	 
+	 public List<Performance> getPer(String per_name){
+		 return performanceDao.getPer(per_name);
+	 }
+	 
+	 public int addPerDetail(Performance performance){
+			return performanceDao.addPerDetail(performance);
+		}
 }

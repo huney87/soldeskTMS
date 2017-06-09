@@ -35,7 +35,7 @@ $(function() {
     });
 });
 
-var resistBtn = function() {
+	var resistBtn = function() {
 	var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
     var msg = $("#msg");            // 결과 메세지
     
@@ -181,7 +181,7 @@ $(document).ready(
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" id="msg"></h4>
+        <h4 class="modal-title" id="msg" style="color:black;"></h4>
       </div>            
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
