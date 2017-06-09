@@ -15,4 +15,12 @@
 	<select id="getUsers" resultMap="AdminMap">
 		select * from users
 	</select>
+	
+	<select id="getUser" parameterType="int" resultMap="AdminMap" resultType="User">
+		select * from users where user_id=#{user_id}
+	</select>
+
+	<delete id="delUsers" parameterType="int">
+		delete users where user_id=#{user_id}
+	</delete>
 </mapper>

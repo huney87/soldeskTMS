@@ -24,4 +24,16 @@ public class AdminController {
 	public List<User> listUsers(){
 		return adminService.getUsers();
 	}
+	
+	@RequestMapping("admin/getUser")
+	@ResponseBody
+	public User getUser(int user_id){
+		return adminService.getUser(user_id);
+	}
+	
+	@RequestMapping("admin/delete")
+	@ResponseBody
+	public int delUsers(int user_id){
+		return adminService.delUsers(user_id);
+	}
 }

@@ -16,4 +16,15 @@ public class AdminDaoImpl implements AdminDao{
 	public List<User> getUsers() {
 		return adminMapper.getUsers();
 	}
+
+	@Override
+	public User getUser(int user_id) {
+		return adminMapper.getUser(user_id);
+	}
+	
+	@Override
+	public int delUsers(int user_id) {
+		return adminMapper.delUsers(user_id);
+	}
+
 }

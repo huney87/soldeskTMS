@@ -16,4 +16,15 @@ public class AdminServiceImpl implements AdminService{
 	public List<User> getUsers() {
 		return adminDao.getUsers();
 	}
+
+	@Override
+	public User getUser(int user_id) {
+		return adminDao.getUser(user_id);
+	}
+	
+	@Override
+	public int delUsers(int user_id) {
+		return adminDao.delUsers(user_id);
+	}
+
 }
