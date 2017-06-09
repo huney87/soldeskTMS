@@ -3,6 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script type="text/javascript">
+var eventData = [
+    {"date":"2017-05-17","badge":false,"title":"Example 1"},
+    {"date":"2017-05-29","badge":true,"title":"Example 2"}
+];
+
 var booking_popup = function(){
 	var popup_url = "/ticket";
 	var popup_name = "예매하기";
@@ -65,6 +70,51 @@ $(document).ready(function(){
 		logincheck( $( this ).serialize() );
 		return false;
 	});
+	
+	$(".question").click(function(e){
+ 		e.preventDefault();
+ 		$('#answer'+$(this).attr('data-prod-answer')).toggle();   
+ 	});
+ 	
+ 	//글자수 제한
+ 	var showChar = 150; 
+    var ellipsestext = "...";
+     
+     $('.more').each(function() {
+         var content = $(this).html();
+  
+         if(content.length > showChar) {
+             var c = content.substr(0, showChar);
+             var h = content.substr(showChar, content.length - showChar);
+             var html = c + '<span class="moreellipses">' + ellipsestext+ 
+             '&nbsp;</span><span class="morecontent"><span>';
+  
+             $(this).html(html);
+         }
+     });
+     
+     function myDateFunction(id, fromModal) {
+         $("#date-popover").hide();
+         if (fromModal) {
+             $("#" + id + "_modal").modal("hide");
+         }
+         var date = $("#" + id).data("date");
+         var hasEvent = $("#" + id).data("hasEvent");
+         if (hasEvent && !fromModal) {
+             return false;
+         }
+         $("#date-popover-content").html('You clicked on date ' + date);
+         $("#date-popover").show();
+         return true;
+     }
+     
+     $("#my-calendar").zabuto_calendar({
+     	language: "kr",
+	  	data: eventData,
+        action: function () {
+            return myDateFunction(this.id, false);
+       	},
+	 });
 });
 </script>
 </head>

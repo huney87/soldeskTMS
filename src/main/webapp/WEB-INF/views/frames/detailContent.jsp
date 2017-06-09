@@ -1,7 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		
+<script type="application/javascript">
+	var eventData = [
+        {"date":"2017-06-17","badge":false,"title":"Example 1"},
+        {"date":"2017-06-29","badge":true,"title":"Example 2"}
+    ];
+	
+	function myDateFunction(id, fromModal) {
+        $("#date-popover").hide();
+        if (fromModal) {
+            $("#" + id + "_modal").modal("hide");
+        }
+        var date = $("#" + id).data("date");
+        var hasEvent = $("#" + id).data("hasEvent");
+        if (hasEvent && !fromModal) {
+            return false;
+        }
+        $("#date-popover-content").html('You clicked on date ' + date);
+        $("#date-popover").show();
+        return true;
+    }
+</script>		
 	<!-- 공연들 -->
 	<div class="container-fluid" id="categoryContent">
 		<div class="container" id="container">
@@ -63,7 +83,7 @@
 					    		</div>
 							</div>
 					  	</div>
-					  	<div id="menu2" class="tab-pane fade in active"> <!-- 메뉴2 -->
+					  	<div id="menu2" class="tab-pane fade"> <!-- 메뉴2 -->
 					  		<div class = "well well-sm"><h3>출연진</h3>
 							  		<p style="margin-top:20px">옥주현, 박은태, 박선우, 이상현, 김민수, 김나윤(김희원), 유리아, 김현진, 송영미.</p>
 							</div>

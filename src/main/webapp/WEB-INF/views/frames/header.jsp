@@ -19,6 +19,9 @@
 <link href="/theme/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/theme/krajee-svg/theme.js"></script>
 <script src="/js/locales/kr.js"></script>
+<!-- 달력 -->
+<script src="/js/zabuto_calendar.min.js" type="text/javascript"></script>
+<link href="/css/zabuto_calendar.min.css" rel="stylesheet" type="text/css" />
 <!-- 로그인 창 -->
 <link rel="stylesheet" type="text/css" href="/css/login.css">
 <!-- 공통 -->
