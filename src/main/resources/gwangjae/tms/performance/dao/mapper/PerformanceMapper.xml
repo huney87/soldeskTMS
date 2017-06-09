@@ -14,6 +14,16 @@
 		<id property="per_id" column="perf_id"/>
 		<result property="per_title" column="perf_title"/>
 	</resultMap>
+	
+	<resultMap id="HallMap" type="hall">
+		<id property="hallId" column="h_id"/>
+		<result property="hallName" column="h_name"/>
+	</resultMap>
+	
+	<resultMap id="layoutMap" type="hall">
+		<id property="hallRow" column="h_row"/>
+		<result property="hallCol" column="h_col"/>
+	</resultMap>
 
 	<select id="getSeats" resultMap="SeatMap">
 		select * from seatinfo
@@ -22,6 +32,11 @@
 	<insert id="addSeat" parameterType="int">
 		insert into seatinfo(sinfo_id,perf_id,s_id,sinfo_grade,sinfo_price)
 		values(sinfo_id_seq.nextval, #{seat},1,1,1000)
+	</insert>
+	
+	<insert id="addPerInfo" parameterType="performance">
+		insert into performances(perf_id,ctr_id,cat_id,perf_title,perf_image,perf_display)
+		values(peft_id_seq.nextval,#{hall_id},#{ct_id},#{per_title},'test.jpg',1)
 	</insert>
 	
 	<update id="addPerDetail" parameterType="performance">
@@ -33,6 +48,16 @@
 	<select id="getPer" resultMap ="PerMap">
 		select perf_id,perf_title from performances
 		where perf_title Like '%'||#{value}||'%'
+	</select>
+	
+	<select id="getHalls" parameterType="int" resultMap ="HallMap">
+		select h_id,h_name from halls
+		where ctr_id = #{value}
+	</select>
+	
+	<select id="getLayout" parameterType="int" resultMap ="layoutMap">
+		select h_row,h_col from halls
+		where h_id = #{value}
 	</select>
 	
 	

@@ -45,8 +45,7 @@ public class PerformanceController {
 	//좌석 추가하기
 	@RequestMapping("/addSeats")
     @ResponseBody
-    public int addSeats(
-    		@RequestParam(value="seats[]") List<String> seats){
+    public int addSeats(@RequestParam(value="seats[]") List<String> seats){
 		return performanceService.addSeats(seats.toArray(new String[seats.size()]));
 	}
 	
@@ -58,12 +57,34 @@ public class PerformanceController {
 		return result;
 	}
 	
+	//공연장 리스트 불러오기
+	@RequestMapping("/getHalls")
+	@ResponseBody
+	public List<Performance> getHalls(int centerId){
+		List<Performance> result = performanceService.getHalls(centerId);
+		return result;
+	}
+	
 	//공연 회차정보 등록
-		@RequestMapping("/addPerDetail")
-	    @ResponseBody
-	    public int addPerDetail(Performance performance){
-			return performanceService.addPerDetail(performance);
-		}
+	@RequestMapping("/addPerInfo")
+    @ResponseBody
+    public int addPerInfo(Performance performance){
+		return performanceService.addPerInfo(performance);
+	}
+	
+	//공연 회차정보 등록
+	@RequestMapping("/addPerDetail")
+    @ResponseBody
+    public int addPerDetail(Performance performance){
+		return performanceService.addPerDetail(performance);
+	}
+	
+	//좌석 레이아웃 불러오기
+	@RequestMapping("/getLayout")
+    @ResponseBody
+    public int getLayout(int hallId){
+		return performanceService.getLayout(hallId);
+	}
 	
 	
 	

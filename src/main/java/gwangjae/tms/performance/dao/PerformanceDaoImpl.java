@@ -26,8 +26,20 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return performanceMapper.getPer(per_name);
 	}
 	
+	public int addPerInfo(Performance performance){
+		return performanceMapper.addPerInfo(performance);
+	}
+	
 	public int addPerDetail(Performance performance){
 		return performanceMapper.addPerDetail(performance);
+	}
+	
+	public List<Performance> getHalls(int centerId){
+		return performanceMapper.getHalls(centerId);
+	}
+	
+	public int getLayout(int hallId){
+		return performanceMapper.getLayout(hallId);
 	}
 }
 

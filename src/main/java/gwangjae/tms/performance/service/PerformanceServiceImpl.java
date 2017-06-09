@@ -30,7 +30,17 @@ public class PerformanceServiceImpl implements PerformanceService {
 		 return performanceDao.getPer(per_name);
 	 }
 	 
+	 public int addPerInfo(Performance performance){
+		 return performanceDao.addPerInfo(performance);
+	 }
+	 
 	 public int addPerDetail(Performance performance){
 			return performanceDao.addPerDetail(performance);
-		}
+	}
+	 public List<Performance> getHalls(int centerId){
+			return performanceDao.getHalls(centerId);
+	}
+	public int getLayout(int hallId){
+			return performanceDao.getLayout(hallId);
+	}
 }

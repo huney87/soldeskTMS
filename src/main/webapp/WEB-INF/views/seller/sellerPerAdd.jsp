@@ -20,8 +20,10 @@ $(document).ready(function(){
 	$("#locals").on("change", function(){
 		$("#localDetail").empty();
 		var choice = $("#locals :selected").val();
-		var span = $("<span style='color:white;'>공연장: </span>");
-		var localOption = $("<select id='stage'></select>");
+		var span1 = $("<span style='color:white;'>회관: </span>");
+		var localOption = $("<select id='center' style='color:black;'></select>");
+		var optionBase = $("<option>회관선택</option>");
+		localOption.append(optionBase);
 		
 		if(choice) {	
 			$.ajax({
@@ -34,8 +36,47 @@ $(document).ready(function(){
 	                });                  
 		        }
 			});
-			$("#localDetail").append(span.append(localOption));
+			$("#localDetail").append(span1.append(localOption));
 		}
+		// 회관 선택시 공연장 목록 나타내기
+		$("#center").on("change", function(){
+			$("#hallSelect").empty();
+			var choice2 = $("#center").val();
+			var span2 = $("<span style='color:white;'>공연장: </span>");
+			var stageOption = $("<select id='stage' style='color:black;'></select>");
+			var optionBase2 = $("<option>공연장 선택</option>");
+			stageOption.append(optionBase2);
+		
+			if(choice2) {	
+				$.ajax({
+		            url: "/seller/getHalls",
+		            data:{centerId:choice2},
+		            success:function(halls){
+		            	$(halls).each(function(idx, hall){
+		                    option = $("<option value='"+hall.hallId+"'>"+hall.hallName+"</option>");
+		                    stageOption.append(option);
+		                });	
+			        }
+				});
+				$("#hallSelect").append(span2.append(stageOption));
+			}
+			//공연장 선택시 좌석 레이아웃 가져오기
+			$("#stage").on("change", function(){
+				var choice3 = $("#stage").val();
+				if(choice3) {	
+					$.ajax({
+			            url: "/seller/getLayout",
+			            data:{hallId:choice3},
+			            success:function(hall){
+			            	$("#row").val(hall.hallRow);	
+			            	$("#col").val(hall.hallCow);	
+				        }
+					});
+				}
+			
+			});
+		});
+		
 	});
     //좌석 생성파트///////////////////////////////////////////////////////
 	var row;
@@ -152,7 +193,7 @@ $(document).ready(function(){
 	    });	    	    	
 	});
 	
-	// 좌석 셋팅값 DB 저장 ///////////////ajax///////ajax////////ajax//////////
+	// 좌석 셋팅값 DB 저장 ///공연정보 같이 저장됨///////ajax///////ajax////////ajax//////////
     $("#addSeats").on("click", function(){
     	var seatValue = [];
     	
@@ -161,14 +202,42 @@ $(document).ready(function(){
     	});
     	
     	var seats={"seats":seatValue};
+    	var title=$("#title").val();
+    	var stage=$("#stage").val();
+    	var category=$("#genre").val();
 
     	if($("#row").val()) {
     		$.ajax({
                 url: "/seller/addSeats",
                 data: seats,
                 success:function(result){
-                    if(result) $("#msg").text("추가 성공");
-                    else $("#msg").text("추가 실패");
+                    if(result) $("#msg").text("좌석 추가 성공");
+                    else $("#msg").text("좌석 추가 실패");
+                },
+                error:function(a, b, errMsg){
+                	$("#msg").text("추가 실패: " + errMsg);                
+                },
+                complete:function(){
+                	$("#resultModal").modal('show');                    
+                }
+            });		
+    	}else {
+            $("#msg").text("오류");
+            $("#resultModal").modal('show');
+        }
+    	
+    	if(stage){
+    		console.log(stage);
+    		$.ajax({
+                url: "/seller/addPerInfo",
+                data: {
+                	per_title:title,
+                	hall_id:stage,
+                	ct_id:category
+                },
+                success:function(result){
+                    if(result) $("#msg").text("공연 추가 성공");
+                    else $("#msg").text("공연 추가 실패");
                 },
                 error:function(a, b, errMsg){
                 	$("#msg").text("추가 실패: " + errMsg);                
@@ -177,13 +246,10 @@ $(document).ready(function(){
                 	$("#resultModal").modal('show');                    
                 }
             });
-    		
-    		
-    		
     	}else {
             $("#msg").text("오류");
             $("#resultModal").modal('show');
-        }  
+        }
    }); 
 
 });/*document 종료*/
@@ -241,7 +307,7 @@ $(document).ready(function(){
 button{
 	background-color:black;
 }
-#sel{
+#sel,#title{
 	color:black;
 }
 #searchTable{
@@ -258,7 +324,7 @@ button{
 	height:5rem; 
 	padding:1rem;
 	margin:0.5rem;
-	color:black;
+	color:white;
 	border: 0.1rem solid #4d4dff;
 }
 select, input, option{
@@ -270,6 +336,7 @@ button{
 }
 #row, #col{
     width:7rem;
+    color:black;
 }
 </style>
 </head>
@@ -294,15 +361,22 @@ button{
                                 <option value="4">경기북부</option>
                             </select>
                             <span id="localDetail"></span>   
+                            <span id="hallSelect"></span>   
                         </span>
                     </div>
                 </div>
                 <div class="col-lg-12" id="nav2"></div>
                 <div class="col-lg-12" id="nav3">
                     <span>
-			                    제목:<input type="text" id="title" placeholder="제목" required>
-			                    가로:<input type="number" id="row" placeholder="max18" min="1" max="18" required>
-			                    세로:<input type="number" id="col" placeholder="max18" min="1" max="18" required>
+			                 제목:<input type="text" id="title" placeholder="제목" required>
+					 장르 :<select id="genre" style="color:black;">
+							<option>장르 선택</option>
+							<option value="1">뮤지컬</option>
+							<option value="2">콘서트</option>
+							<option value="3">연극</option>
+						</select>      
+			                 가로:<input type="number" id="row" placeholder="row" readonly>
+			                 세로:<input type="number" id="col" placeholder="col" readonly>
                     </span>
                     <button type="button" id="check" class="btn btn-default btn-sm" style="background-color:white; color:black;">입력</button>
                     <button type="reset" id="reset" class="btn btn-danger btn-sm" style="background-color:#4d4dff; color:white;">리셋</button>
