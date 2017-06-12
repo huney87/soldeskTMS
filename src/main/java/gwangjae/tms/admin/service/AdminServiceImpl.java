@@ -18,8 +18,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public User getUser(int user_id) {
-		return adminDao.getUser(user_id);
+	public User getUser(String user_name) {
+		return adminDao.getUser(user_name);
 	}
 	
 	@Override

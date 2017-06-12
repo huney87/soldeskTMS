@@ -18,8 +18,8 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public User getUser(int user_id) {
-		return adminMapper.getUser(user_id);
+	public User getUser(String user_name) {
+		return adminMapper.getUser(user_name);
 	}
 	
 	@Override

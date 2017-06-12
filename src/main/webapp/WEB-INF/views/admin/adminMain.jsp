@@ -15,41 +15,63 @@ $(function() {
 	regBtns();
 });
 
-var showUser = function(user){
-    $(":input[name='name']").val($(user).data("user_name"));
-}
- 
 var regBtns=function(){
 	var modal = $("#resultModal");
     var msg = $("#msg");  
 	var userList=$("#userList");
 	var tr;
+	var type;
+	var date;
 	
-	var chkName = function(){ // 회원 이름 입력 여부    
-	   if($(":input[name='name']").val()) return true;
-	   else {
-	       		msg.text("회원 이름을 입력하세요.");
-	       		modal.modal("show");
-	     	}
-	  	}
 	userList.empty();
 	
 	$.ajax({
 		url:"admin/listUsers",
 		success:function(users){
 			$(users).each(function(idx, user){
+				if(user.user_type==1) type="판매자";
+				else if(user.user_type==2) type="회원";
+				date=user.birth.toString();
 				tr=$("<tr></tr>");
-				td=$("<td><input type='radio' name='user_id' value='"+user.user_id+"' onClick='showUser(this)'/>"
+				td=$("<td><input type='radio' name='user_id' value='"+user.user_id+"'/>"
 						+user.user_id+"</td><td>"
 						+user.user_name+"</td><td>"
 						+user.user_email+"</td><td>"
 						+user.user_address+"</td><td>"
-						+user.birth+"</td><td>"
-						+user.user_type+"</td>");
+						+date+"</td><td>"
+						+type+"</td>");
 				userList.append(tr.append(td));
 				td.find("input").data("user_name",user.user_name);
 			});
 		}
+	});
+	
+	$("#searchBtn").bind("click",function(){
+		if($(":input[name='name']").val()) {
+			var name=$(":input[name='name']").val();
+			userList.empty();
+			$.ajax({
+				url:"admin/getUser",
+				data:{user_name:name},
+				success:function(user){
+					tr=$("<tr></tr>");
+					td=$("<td><input type='radio' name='user_id' value='"+user.user_id+"'/>"
+							+user.user_id+"</td><td>"
+							+user.user_name+"</td><td>"
+							+user.user_email+"</td><td>"
+							+user.user_address+"</td><td>"
+							+user.birth+"</td><td>"
+							+user.user_type+"</td>");
+					userList.append(tr.append(td));
+				},
+				error:function(a,b,errMsg){
+					msg.text("검색 실패: "+errMsg);
+				}
+			});
+		}else {
+            msg.text("회원 이름을 입력하세요.");
+            modal.modal("show");
+        }
 	});
 	
 	$("#delBtn").bind("click",function(){
@@ -84,6 +106,9 @@ var regBtns=function(){
      <div class="form-group">
        <input type="text" class="form-control" name="name" placeholder="name" >
      </div>
+    <button type="button" class="btn btn-default" id="searchBtn">
+       <span class="glyphicon glyphicon-search"></span> 검색
+    </button>
 	<button type="button" class="btn btn-default" id="delBtn">
        <span class="glyphicon glyphicon-remove"></span> 삭제
     </button>

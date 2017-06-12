@@ -8,6 +8,7 @@ import gwangjae.tms.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -27,8 +28,8 @@ public class AdminController {
 	
 	@RequestMapping("admin/getUser")
 	@ResponseBody
-	public User getUser(int user_id){
-		return adminService.getUser(user_id);
+	public User getUser(String user_name){
+		return adminService.getUser(user_name);
 	}
 	
 	@RequestMapping("admin/delete")

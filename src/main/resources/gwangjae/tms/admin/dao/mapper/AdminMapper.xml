@@ -8,16 +8,16 @@
 		<result property="user_email" column="user_email"/>
 		<result property="user_address" column="user_address"/>
 		<result property="user_phone" column="user_phone"/>
-		<result property="birth" column="user_birthdat"/>
+		<result property="birth" column="user_birthday"/>
 		<result property="user_type" column="user_type"/>
 	</resultMap>
 	
 	<select id="getUsers" resultMap="AdminMap">
-		select * from users
+		select * from users order by user_id
 	</select>
 	
-	<select id="getUser" parameterType="int" resultMap="AdminMap" resultType="User">
-		select * from users where user_id=#{user_id}
+	<select id="getUser" parameterType="String" resultMap="AdminMap" resultType="User">
+		select * from users where user_name=#{user_name}
 	</select>
 
 	<delete id="delUsers" parameterType="int">
