@@ -446,9 +446,9 @@ function ImgError(source){
 					</div>
 					<div class="col-sm-9">
 						<div class="btn-group btn-group-justified" id="nav">
-							<a href="#" class="btn btn-default btn-lg" name="cate" id="musical">뮤지컬</a> 
-							<a href="#" class="btn btn-default btn-lg" name="cate" id="concert">콘서트</a> 
-							<a href="#" class="btn btn-default btn-lg" name="cate" id="shows">연극</a>
+							<a href="#" class="btn btn-default btn-lg" id="musical">뮤지컬</a> 
+							<a href="#" class="btn btn-default btn-lg" id="concert">콘서트</a> 
+							<a href="#" class="btn btn-default btn-lg" id="shows">연극</a>
 							<div class="btn-group">
 								<a href="./01.html" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>
 								<!-- 로그인 드롭다운창 -->

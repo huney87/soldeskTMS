@@ -2,8 +2,6 @@ package gwangjae.tms.category.controller;
 
 import gwangjae.tms.category.service.CategoryService;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,20 +16,6 @@ public class CategoryController {
 	@ResponseBody
 	public String searchPerformances(int genre){
 		service.searchPerfomances(genre);
-		return "/category";
-	}
-	
-	@RequestMapping("/Local")	//지역별검색
-	@ResponseBody
-	public String searchPerfLocal(int localNum){
-		service.searchPerfLocal(localNum);
-		return "/category";
-	}
-	
-	@RequestMapping("/totalSearch")	//통합 검색
-	@ResponseBody
-	public String searchTotalSearch(String searchResult){
-		service.searchTotalSearch(searchResult);
 		return "/category";
 	}
 }
