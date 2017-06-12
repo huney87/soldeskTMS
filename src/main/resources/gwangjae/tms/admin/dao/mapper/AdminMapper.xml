@@ -16,11 +16,11 @@
 		select * from users order by user_id
 	</select>
 	
-	<select id="getUser" parameterType="String" resultMap="AdminMap" resultType="User">
-		select * from users where user_name=#{user_name}
+	<select id="searchUser" parameterType="String" resultMap="AdminMap">
+		select * from users where user_name=#{userName}
 	</select>
 
 	<delete id="delUsers" parameterType="int">
-		delete users where user_id=#{user_id}
+		delete users where user_id=#{userId}
 	</delete>
 </mapper>

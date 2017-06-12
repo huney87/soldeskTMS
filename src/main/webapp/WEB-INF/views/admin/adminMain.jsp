@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>관리자 페이지</title>
@@ -82,18 +82,25 @@ var regBtns=function(){
 			var name=$(":input[name='name']").val();
 			userList.empty();
 			$.ajax({
-				url:"admin/getUser",
+				url:"admin/searchUser",
 				data:{userName:name},
-				success:function(user){
-					tr=$("<tr></tr>");
-					td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-							+user.userId+"</td><td>"
-							+user.userName+"</td><td>"
-							+user.userEmail+"</td><td>"
-							+user.userAddress+"</td><td>"
-							+user.userBirthday+"</td><td>"
-							+user.userType+"</td>");
-					userList.append(tr.append(td));
+				success:function(users){
+					$(users).each(function(idx, user){
+						if(user.userType==1) type="판매자";
+						else if(user.userType==2) type="회원";
+						else type="관리자";
+						date=user.userBirthday.toString();
+						tr=$("<tr></tr>");
+						td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+								+user.userId+"</td><td>"
+								+user.userName+"</td><td>"
+								+user.userEmail+"</td><td>"
+								+user.userAddress+"</td><td>"
+								+date+"</td><td>"
+								+type+"</td>");
+						userList.append(tr.append(td));
+						td.find("input").data("userName",user.userName);
+					});
 				},
 				error:function(a,b,errMsg){
 					msg.text("검색 실패: "+errMsg);
@@ -114,7 +121,6 @@ var regBtns=function(){
 				success:function(result){
 					if(result) msg.text("삭제 성공했습니다.");
 					else msg.text("삭제 실패했습니다.");
-					
 				},
 				error:function(a,b,errMsg){
 					msg.text("삭제 실패: "+errMsg);
@@ -128,6 +134,30 @@ var regBtns=function(){
 			modal.modal("show");
 		}
 	});
+	
+	$("allBtn").bind("click",function(){
+		$.ajax({
+			url:"admin/listUsers",
+			success:function(users){
+				$(users).each(function(idx, user){
+					if(user.userType==1) type="판매자";
+					else if(user.userType==2) type="회원";
+					else type="관리자";
+					date=user.userBirthday.toString();
+					tr=$("<tr></tr>");
+					td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+							+user.userId+"</td><td>"
+							+user.userName+"</td><td>"
+							+user.userEmail+"</td><td>"
+							+user.userAddress+"</td><td>"
+							+date+"</td><td>"
+							+type+"</td>");
+					userList.append(tr.append(td));
+					td.find("input").data("userName",user.userName);
+				});
+			}
+		});
+	});
 }
 </script>
 </head>
@@ -140,11 +170,11 @@ var regBtns=function(){
         <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">관리자</a>
+                    <a href="/admin">관리자</a>
                 </li>
-                <li><a href="#">회원관리</a></li>
-                <li><a href="#">로그아웃</a></li>
-                <li><a href="#">쇼핑몰</a></li>
+                <li><a href="/admin">회원관리</a></li>
+                <li><a href="/login/logout">로그아웃</a></li>
+                <li><a href="/">쇼핑몰</a></li>
             </ul>
         </nav>
         <!-- /#sidebar-wrapper -->
@@ -163,18 +193,27 @@ var regBtns=function(){
     						<h3>회원관리</h3>   
     					</div>
     		
-	<div class="row">
-		<form class=form-inline>
-			<div class="form-group">
-				<input type="text" class="form-control" name="name" placeholder="검색"/>
-			</div>
-			<div class="form-group">
-				<button type="button" class="btn btn-default" id="searchBtn">검색</button>
-			</div>
-			<div class="form-group">
-				<button type="button" class="btn btn-default" id="delBtn">회원삭제</button>
-			</div>
-		</form>
+		<div class="row">
+			<form class=form-inline>
+				<div class="form-group">
+					<input type="text" class="form-control" name="name" placeholder="검색"/>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-default" id="searchBtn">검색</button>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-default" id="delBtn">회원삭제</button>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-default" id="allBtn">전체 조회</button>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-default" id="sellerBtn">판매자 조회</button>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-default" id="userBtn">회원 조회</button>
+				</div>
+			</form>
 		<table class="table table-hover"style="margin-top:100px">
 			<thead>
           		<tr>

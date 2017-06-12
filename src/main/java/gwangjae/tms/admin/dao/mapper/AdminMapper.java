@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface AdminMapper {
 	public List<User> getUsers();
-	public User getUser(String user_name);
-	public int delUsers(int user_id);
+	public List<User> searchUser(String userName);
+	public int delUsers(int userId);
 }

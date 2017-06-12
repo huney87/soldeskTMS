@@ -18,13 +18,13 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public User getUser(String user_name) {
-		return adminMapper.getUser(user_name);
+	public List<User> searchUser(String userName) {
+		return adminMapper.searchUser(userName);
 	}
 	
 	@Override
-	public int delUsers(int user_id) {
-		return adminMapper.delUsers(user_id);
+	public int delUsers(int userId) {
+		return adminMapper.delUsers(userId);
 	}
 
 }

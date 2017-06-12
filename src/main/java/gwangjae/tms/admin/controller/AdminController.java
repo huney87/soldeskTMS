@@ -26,15 +26,15 @@ public class AdminController {
 		return adminService.getUsers();
 	}
 	
-	@RequestMapping("admin/getUser")
+	@RequestMapping("admin/searchUser")
 	@ResponseBody
-	public User getUser(String user_name){
-		return adminService.getUser(user_name);
+	public List<User> searchUser(String userName){
+		return adminService.searchUser(userName);
 	}
 	
 	@RequestMapping("admin/delete")
 	@ResponseBody
-	public int delUsers(int user_id){
-		return adminService.delUsers(user_id);
+	public int delUsers(int userId){
+		return adminService.delUsers(userId);
 	}
 }

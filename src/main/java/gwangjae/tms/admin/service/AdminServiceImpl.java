@@ -18,13 +18,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public User getUser(String user_name) {
-		return adminDao.getUser(user_name);
+	public List<User> searchUser(String userName) {
+		return adminDao.searchUser(userName);
 	}
 	
 	@Override
-	public int delUsers(int user_id) {
-		return adminDao.delUsers(user_id);
+	public int delUsers(int userId) {
+		return adminDao.delUsers(userId);
 	}
 
 }
