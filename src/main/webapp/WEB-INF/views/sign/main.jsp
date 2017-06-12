@@ -16,6 +16,27 @@ $(document).ready(function() {
 	var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
     var msg = $("#msg");            // 결과 메세지
 	
+    $("#idOverLap").on("click", function(){
+    	var userEmail = $("#str_email01").val() + "@" + $("#str_email02").val();
+    	
+    	console.log(userEmail);
+    	
+    	$.ajax({
+			method: "post",
+			url: "/user/check",
+			data: userEmail,
+			dataType: "json",
+			success: function (data) {
+				console.log(data);
+				alert("중복입니다.");
+			},
+			error: function () {
+				alert("사용 가능합니다.");
+			}
+		});
+    });
+    
+    // 회원가입
 	$("#userAdd").on("click", function(){
 		var userType = $(':radio[name="userTypeRadio"]:checked').val();	// 회원 가입 타입(판매자 - 1 , 사용자 - 2)
 		var userEmail = $("#str_email01").val() + "@" + $("#str_email02").val();
@@ -35,7 +56,6 @@ $(document).ready(function() {
 		console.log(userAddress);
 		console.log(userPhone);
 		
-		// 회원가입 등록 sql 연동
 		$.ajax({
             url: "/user/addUser",
             data:{	// 메소드가 실행한 데이터를 넘겨준다!
@@ -484,11 +504,11 @@ body {
 				    			<option value="nate.com">nate.com</option>
 				    			<option value="gmail.com">gmail.com</option>
 				 			</select>
-				 			<button type="submit" class="btn btn-info">중복확인</button>
+				 			<button type="button" id="idOverLap" class="btn btn-info">중복확인</button>
 				 		</div>
 			 		</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="user_psw1">비밀번호:</label>
+						<label class="control-label col-sm-2" for="psw">비밀번호:</label>
 		 				<div class="col-sm-8"> 
 							<input type="password" class="form-control" id="user_psw1" name="psw" placeholder="비밀번호">
 						</div>
@@ -499,7 +519,7 @@ body {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="user_psw2">비밀번호 확인:</label>
+						<label class="control-label col-sm-2" for="psw">비밀번호 확인:</label>
 						<div class="col-sm-8"> 
 							<input type="password" class="form-control" id="user_psw2" name="psw2" placeholder="비밀번호 확인">
 						</div>
@@ -643,20 +663,22 @@ body {
  				}
 			});	
 		});	
-	
+		
 		$(function(){
-			$('#psw').keyup(function(){
+			// 비밀번호 6~14 자리수 인지 화면 표시
+			$('#user_psw1').keyup(function(){
 				$('#check').hide();
 				$('font[name=check]').text('');
-				if(($('#psw').val().length < 6 || $('#psw').val().length > 14) && $('#psw').val().length != 0) {
+				if(($('#user_psw1').val().length < 6 || $('#user_psw1').val().length > 14) && $('#user_psw1').val().length != 0) {
 					$('#check').show();
 					$('font[name=check]').html("Password가 잘못되었습니다.6~14자만 입력하세요.");			  
 				}
-			}); 
-			$('#psw2').keyup(function(){
-				if($('#psw').val().length != 0 || $('#psw2').val().length != 0){
+			});
+			// 비밀번호 와 비밀번호 확인이 같은지 확인
+			$('#user_psw2').keyup(function(){
+				if($('#user_psw1').val().length != 0 || $('#user_psw2').val().length != 0){
 					$('#check').show();
-		 	  		if($('#psw').val()!=$('#psw2').val()){
+		 	  		if($('#user_psw1').val()!=$('#user_psw2').val()){
 		 	  			
 		 	   			$('font[name=check]').text('');
 		 	   			$('font[name=check]').html("두 글자가 다릅니다.");
@@ -668,19 +690,19 @@ body {
 	 	 	});
 		});
 	</script>
-<!-- 결과값 모달 -->
-<div class="modal fade" id="resultModal">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
-           <h4 class="modal-title" id="msg" style="color:black;"></h4>
-         </div>            
-         <div class="modal-footer">
-           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         </div>
-       </div>
-     </div>
-</div>
+	<!-- 결과값 모달 -->
+	<div class="modal fade" id="resultModal">
+	     <div class="modal-dialog">
+	       <div class="modal-content">
+	         <div class="modal-header">
+	           <button type="button" class="close" data-dismiss="modal">&times;</button>
+	           <h4 class="modal-title" id="msg" style="color:black;"></h4>
+	         </div>            
+	         <div class="modal-footer">
+	           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	         </div>
+	       </div>
+	     </div>
+	</div>
 </body>
 </html>
