@@ -3,13 +3,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="gwangjae.tms.admin.dao.mapper.AdminMapper">
 	<resultMap id="AdminMap" type="User">
-		<id property="user_id" column="user_id"/>
-		<result property="user_name" column="user_name"/>
-		<result property="user_email" column="user_email"/>
-		<result property="user_address" column="user_address"/>
-		<result property="user_phone" column="user_phone"/>
-		<result property="birth" column="user_birthday"/>
-		<result property="user_type" column="user_type"/>
+		<id property="userId" column="user_id"/>
+		<result property="userName" column="user_name"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="userAddress" column="user_address"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="userBirthday" column="user_birthday"/>
+		<result property="userType" column="user_type"/>
 	</resultMap>
 	
 	<select id="getUsers" resultMap="AdminMap">

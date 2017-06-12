@@ -10,7 +10,37 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="/css/adminmenu.css" media="all" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
+$(document).ready(function () {
+	  var trigger = $('.hamburger'),
+	      overlay = $('.overlay'),
+	     isClosed = false;
+
+	    trigger.click(function () {
+	      hamburger_cross();      
+	    });
+
+	    function hamburger_cross() {
+
+	      if (isClosed == true) {          
+	        overlay.hide();
+	        trigger.removeClass('is-open');
+	        trigger.addClass('is-closed');
+	        isClosed = false;
+	      } else {   
+	        overlay.show();
+	        trigger.removeClass('is-closed');
+	        trigger.addClass('is-open');
+	        isClosed = true;
+	      }
+	  }
+	  
+	  $('[data-toggle="offcanvas"]').click(function () {
+	        $('#wrapper').toggleClass('toggled');
+	  });  
+	});
+	
 $(function() {
 	regBtns();
 });
@@ -29,19 +59,20 @@ var regBtns=function(){
 		url:"admin/listUsers",
 		success:function(users){
 			$(users).each(function(idx, user){
-				if(user.user_type==1) type="판매자";
-				else if(user.user_type==2) type="회원";
-				date=user.birth.toString();
+				if(user.userType==1) type="판매자";
+				else if(user.userType==2) type="회원";
+				else type="관리자";
+				date=user.userBirthday.toString();
 				tr=$("<tr></tr>");
-				td=$("<td><input type='radio' name='user_id' value='"+user.user_id+"'/>"
-						+user.user_id+"</td><td>"
-						+user.user_name+"</td><td>"
-						+user.user_email+"</td><td>"
-						+user.user_address+"</td><td>"
+				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+						+user.userId+"</td><td>"
+						+user.userName+"</td><td>"
+						+user.userEmail+"</td><td>"
+						+user.userAddress+"</td><td>"
 						+date+"</td><td>"
 						+type+"</td>");
 				userList.append(tr.append(td));
-				td.find("input").data("user_name",user.user_name);
+				td.find("input").data("userName",user.userName);
 			});
 		}
 	});
@@ -52,16 +83,16 @@ var regBtns=function(){
 			userList.empty();
 			$.ajax({
 				url:"admin/getUser",
-				data:{user_name:name},
+				data:{userName:name},
 				success:function(user){
 					tr=$("<tr></tr>");
-					td=$("<td><input type='radio' name='user_id' value='"+user.user_id+"'/>"
-							+user.user_id+"</td><td>"
-							+user.user_name+"</td><td>"
-							+user.user_email+"</td><td>"
-							+user.user_address+"</td><td>"
-							+user.birth+"</td><td>"
-							+user.user_type+"</td>");
+					td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+							+user.userId+"</td><td>"
+							+user.userName+"</td><td>"
+							+user.userEmail+"</td><td>"
+							+user.userAddress+"</td><td>"
+							+user.userBirthday+"</td><td>"
+							+user.userType+"</td>");
 					userList.append(tr.append(td));
 				},
 				error:function(a,b,errMsg){
@@ -79,7 +110,7 @@ var regBtns=function(){
 		if(user.size()){
 			$.ajax({
 				url:"admin/delete",
-				data:{user_id:user.val()},
+				data:{userId:user.val()},
 				success:function(result){
 					if(result) msg.text("삭제 성공했습니다.");
 					else msg.text("삭제 실패했습니다.");
@@ -102,19 +133,66 @@ var regBtns=function(){
 </head>
 <body>
 <div class="container">
-   <form>
-     <div class="form-group">
-       <input type="text" class="form-control" name="name" placeholder="name" >
-     </div>
-    <button type="button" class="btn btn-default" id="searchBtn">
-       <span class="glyphicon glyphicon-search"></span> 검색
-    </button>
-	<button type="button" class="btn btn-default" id="delBtn">
-       <span class="glyphicon glyphicon-remove"></span> 삭제
-    </button>
-    </form>
-    
-    <div class="modal fade" id="resultModal">
+    <div id="wrapper">
+        <div class="overlay"></div>
+		
+		<!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">관리자</a>
+                </li>
+                <li><a href="#">회원관리</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">쇼핑몰</a></li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+        
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+    			<span class="hamb-middle"></span>
+				<span class="hamb-bottom"></span>
+            </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="jumbotron">
+    						<h3>회원관리</h3>   
+    					</div>
+    		
+	<div class="row">
+		<form class=form-inline>
+			<div class="form-group">
+				<input type="text" class="form-control" name="name" placeholder="검색"/>
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn btn-default" id="searchBtn">검색</button>
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn btn-default" id="delBtn">회원삭제</button>
+			</div>
+		</form>
+		<table class="table table-hover"style="margin-top:100px">
+			<thead>
+          		<tr>
+            		<th>번호</th>
+            		<th>이름</th>
+            		<th>이메일</th>
+            		<th>주소</th>
+            		<th>생년월일</th>
+            		<th>회원유형</th>
+          		</tr>
+        	</thead>
+			<tbody id="userList">
+				
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="modal fade" id="resultModal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -129,24 +207,14 @@ var regBtns=function(){
       </div>
     </div>
     
-    <div class="container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>이름</th>
-            <th>이메일</th>
-            <th>주소</th>
-            <th>생년월일</th>
-            <th>회원유형</th>
-            <th>
-          </tr>
-        </thead>
-        <tbody id="userList">
- 
-        </tbody>
-      </table>
-    </div>
+   </div>
 </div>
+</div>
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
 </body>
 </html>
