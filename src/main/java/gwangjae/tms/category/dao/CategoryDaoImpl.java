@@ -13,7 +13,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	@Autowired private CategoryMapper category;
 	
 	@Override
-	public List<Performance> getSearchResult(){
-		return category.getSearchResult();
+	public List<Performance> getSearchResult(int genre){
+		return category.getSearchResult(genre);
 	}
 }

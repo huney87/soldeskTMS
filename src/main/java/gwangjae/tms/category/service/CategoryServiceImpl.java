@@ -14,9 +14,7 @@ public class CategoryServiceImpl implements CategoryService{
 	@Autowired private CategoryDao dao;
 	
 	@Override
-	public List<Performance> searchPerfomances(int genre){
-		Category cate = new Category();
-		cate.setGen_id(genre);
-		return dao.getSearchResult();
+	public List<Performance> getSearchResult(int genre){
+		return dao.getSearchResult(genre);
 	}
 }
