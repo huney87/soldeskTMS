@@ -31,13 +31,9 @@
 	</resultMap>
 	
 	<select id="getSearchResult" resultMap="perMap">
-		select a.*, b.h_name, c.gen_id
-		from performances a
-		inner join halls b
-		on a.h_id = b.h_id
-		inner join categories c
-		on a.cat_id = c.cat_id
+		select p.*, h.h_name, g.gen_id
+		from performances p, halls h, categories g
 		<!-- 장르별 검색 1: 뮤지컬, 2: 콘서트, 3: 연극 -->
-		where c.gen_id = #{gen_id}
+		where g.gen_id = #{gen_id}
 	</select>
 </mapper>
