@@ -1,5 +1,7 @@
 package gwangjae.tms.user.dao.mapper;
 
-public interface UserMapper {
+import gwangjae.tms.user.domain.User;
 
+public interface UserMapper {
+	public int addUser(User user);
 }

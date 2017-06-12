@@ -11,7 +11,7 @@ public class User {
 	private int user_phone;
 	private String user_email;
 	private int user_type; // 관리자, 판매자, 소비자로 구분. (0,1,2)
-	
+		
 	public User(){}
 
 	public int getUser_id() {

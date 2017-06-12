@@ -1,5 +1,7 @@
 package gwangjae.tms.user.dao;
 
-public interface UserDao {
+import gwangjae.tms.user.domain.User;
 
+public interface UserDao {
+	public int addUser(User user);
 }

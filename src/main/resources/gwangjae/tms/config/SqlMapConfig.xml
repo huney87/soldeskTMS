@@ -8,5 +8,6 @@
         <package name="gwangjae.tms.hall.domain"/>
         <package name="gwangjae.tms.performance.domain"/>
         <package name="gwangjae.tms.category.domain"/>
+        <package name="gwangjae.tms.user.domain"/>
     </typeAliases>
 </configuration>
