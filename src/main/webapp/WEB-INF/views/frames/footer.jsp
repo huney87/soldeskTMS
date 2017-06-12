@@ -38,9 +38,9 @@
 	            </div>
 	            <div class="col-sm-8">
                     <div class="row">
-		                <div class="row footerDiv2">
+		                <!-- <div class="row footerDiv2">
 		                   회사소개 | 채용정보 | 제휴/광고/부대사업 문의 | 이용약관 | 개인정보 처리방침 | 고객센터
-		                </div>
+		                </div> -->
 		                <div class="row footerDiv2">
 			                        서울특별시 종로구 관철동 종로12길 15 / T : 02-6901-7022<br>
 							대표자명 윤광재 | 개인정보보호 책임자 개발지원실 실장 유강현<br>
