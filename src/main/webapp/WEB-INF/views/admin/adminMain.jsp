@@ -7,15 +7,7 @@
 <title>관리자 페이지</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<link href="/css/adminmenu.css" media="all" rel="stylesheet" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<jsp:include page="/WEB-INF/views/frames/adminHeader.jsp" flush="false"/>
 <script type="text/javascript">
 $(document).ready(function () {
 	  var trigger = $('.hamburger'),
@@ -51,8 +43,6 @@ $(function() {
 });
 
 var regBtns=function(){
-	var modal = $("#resultModal");
-    var msg = $("#msg");  
 	var userList=$("#userList");
 	var tr;
 	var type;
@@ -133,11 +123,11 @@ var regBtns=function(){
 						url:"admin/delete",
 						data:{userId:user.val()},
 						success:function(result){
-							if(result) msg.text("삭제 성공했습니다.");
-							else msg.text("삭제 실패했습니다.");
+							if(result) return true;
+							else swal("삭제 실패: "+errMsg);
 						},
 						error:function(a,b,errMsg){
-							msg.text("삭제 실패: "+errMsg);
+							swal("삭제 실패: "+errMsg);
 						},
 						complete:function(){
 							swal({
@@ -156,28 +146,97 @@ var regBtns=function(){
 		}
 	});
 	
-	$("allBtn").bind("click",function(){
-		$.ajax({
-			url:"admin/listUsers",
-			success:function(users){
-				$(users).each(function(idx, user){
-					if(user.userType==1) type="판매자";
-					else if(user.userType==2) type="회원";
-					else type="관리자";
-					date=user.userBirthday.toString();
-					tr=$("<tr></tr>");
-					td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-							+user.userId+"</td><td>"
-							+user.userName+"</td><td>"
-							+user.userEmail+"</td><td>"
-							+user.userAddress+"</td><td>"
-							+date+"</td><td>"
-							+type+"</td>");
-					userList.append(tr.append(td));
-					td.find("input").data("userName",user.userName);
-				});
-			}
-		});
+	$("#allBtn").bind("click",function(){
+		var userList = $("#userList");  // 회원목록
+        var tr;
+        var input;
+        var etc;
+        
+        userList.empty();
+        
+        $.ajax({
+    		url:"admin/listUsers",
+    		success:function(users){
+    			$(users).each(function(idx, user){
+    				if(user.userType==1) type="판매자";
+    				else if(user.userType==2) type="회원";
+    				else type="관리자";
+    				date=user.userBirthday.toString();
+    				tr=$("<tr></tr>");
+    				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+    						+user.userId+"</td><td>"
+    						+user.userName+"</td><td>"
+    						+user.userEmail+"</td><td>"
+    						+user.userAddress+"</td><td>"
+    						+date+"</td><td>"
+    						+type+"</td>");
+    				userList.append(tr.append(td));
+    				td.find("input").data("userName",user.userName);
+    			});
+    		}
+    	});  
+	});
+	
+	$("#sellerBtn").bind("click",function(){
+		var userList = $("#userList");  // 회원목록
+        var tr;
+        var input;
+        var etc;
+        
+        userList.empty();
+        
+        $.ajax({
+            url:"admin/listUsers",
+            success:function(users){
+    			$(users).each(function(idx, user){
+    				if(user.userType==1) {
+    				type="판매자";
+    				date=user.userBirthday.toString();
+    				tr=$("<tr></tr>");
+    				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+    						+user.userId+"</td><td>"
+    						+user.userName+"</td><td>"
+    						+user.userEmail+"</td><td>"
+    						+user.userAddress+"</td><td>"
+    						+date+"</td><td>"
+    						+type+"</td>");
+    				userList.append(tr.append(td));
+    				td.find("input").data("userName",user.userName);
+    				}else{ }
+    			});
+    		}
+        });   
+	});
+	
+	$("#userBtn").bind("click",function(){
+		var userList = $("#userList");  // 회원목록
+        var tr;
+        var input;
+        var etc;
+        
+        userList.empty();
+        
+        $.ajax({
+            url:"admin/listUsers",
+            success:function(users){
+    			$(users).each(function(idx, user){
+    				if(user.userType==2) {
+    				type="회원";
+    				date=user.userBirthday.toString();
+    				tr=$("<tr></tr>");
+    				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+    						+user.userId+"</td><td>"
+    						+user.userName+"</td><td>"
+    						+user.userEmail+"</td><td>"
+    						+user.userAddress+"</td><td>"
+    						+date+"</td><td>"
+    						+type+"</td>");
+    				userList.append(tr.append(td));
+    				td.find("input").data("userName",user.userName);
+    				}else{ }
+    			});
+    		}
+        });   
 	});
 }
 </script>
@@ -251,22 +310,6 @@ var regBtns=function(){
 			</tbody>
 		</table>
 	</div>
-	
-	<div class="modal fade" id="resultModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" onClick="">&times;</button>
-              <h4 class="modal-title" id="msg"></h4>
-            </div>            
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onClick="history.go(0)">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
    </div>
 </div>
 </div>
@@ -275,6 +318,6 @@ var regBtns=function(){
 
 </div>
 <!-- /#wrapper -->
-
+</div>
 </body>
 </html>
