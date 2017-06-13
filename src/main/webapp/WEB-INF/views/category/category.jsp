@@ -9,12 +9,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="../star/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-<script src="../star/js/star-rating.js" type="text/javascript"></script>
-<link href="../star/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
-<script src="../star/themes/krajee-svg/theme.js"></script>
-<script src="../star/js/locales/kr.js"></script>
-<link rel="stylesheet" type="text/css" href="../login.css">
+<link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/js/star-rating.js" type="text/javascript"></script>
+<link href="/theme/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/theme/krajee-svg/theme.js"></script>
+<script src="/js/locales/kr.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
 <style type="text/css">
 /* 웹폰트 */
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -522,13 +522,44 @@ $(document).ready(function(){
 			success:function(category){
 				musical();
 			}
-		});
-		
+		});	
 	});
-	
 });
 	var musical = function(){
-			var div1=$("<div class='frame1'></div>");
+		var category = '<div class="frame1">'
+						+'<div class="card">'
+						+'<img src="./img/에어리언.jpg" onerror="ImgError(this)" />'
+						+'</div>'
+						+'<div class="card back">'
+						+'<img class="backPost" src="../img/에어리언.jpg" onerror="ImgError(this)" />'
+						+'<article id="movieInfo">'
+						+'<div class="moveInfoBtn">'
+						+'<div class="moveInfoBtn1">'
+						+'<a href="/detail"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>'
+						+'</div>'
+						+'<div class="moveInfoBtn2">'
+						+'<a name="booking_popup"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>'
+						+'</div>'
+						+'</div>'
+						+'</article>'
+						+'</div>'
+						+'</div>'
+						+'<div class="movieInfo2">'
+						+'<div style="float:left;width:35%">평점 4.5</div>' 
+						+'<div style="display:inline;width:65%">'
+						+'<input id="input-2" name="input-name" type="number" class="rating rating-loading" min=0 max=5 step=0.1 value=4.5 data-size="xs" data-show-clear="false" data-show-caption="false" data-rtl="false" data-readonly="true">'
+						+'</div>'
+						+'<div class="movieInfo3">'
+						+'<p>'
+						+'<span class="age">12</span> 공연 1'
+						+'</p>'
+						+'<div class="movieInfo3Txt">공연장</div>'
+						+'</div>'
+						+'</div>';
+			$("#cate").append(category);
+			
+			
+			/* var div1=$("<div class='frame1'></div>");
 			var div2=$("<div class='card'></div>");
 			var div3=$("<div class='card back'></div>");
 			var div4=$("<div class='moveInfoBtn'></div>");
@@ -552,10 +583,9 @@ $(document).ready(function(){
 			var span3=$("<p> <span class='age'>12</span> 공연1 </p>");
 		
 			
-		$("#cate").append(div1.append(div2.append(img1))
-				+div3.append(img2+art1.append(div4.append(div5.append(a1)+div6.append(a2))))
+		$("#cate").append(div1.append(div2.append(img1)).append(div3.append(img2+art1.append(div4.append(div5.append(a1)+div6.append(a2)))))
 				+div7.append(div8+div9.append(input))
-				+div10.append(span3)+div11);
+				+div10.append(span3)+div11); */
 		};	
 </script>
 		<div class="row">
