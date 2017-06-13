@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <style>
-body{
-    background:gray;
-} 
 h4{
 	color:white;
 }
@@ -27,7 +24,6 @@ h4{
 	padding: 1rem;
 	background-color: #1a1a1a;
 	border: 0.1rem solid #4d4dff;
-	text-align: center;
 	align:center;
 }
 #hallTable{
@@ -45,14 +41,14 @@ h4{
 
 <script>
 var hallList = function() {
-	var divMain = $("<div class='col-sm-12' id='mainContent'>"
-					+"<table id='hallTable' class='table'>"
+	var divMain = $("<div class='col-sm-12' >"
+					+"<div class='container' id='mainContent'><table id='hallTable' class='table'>"
 					+"<thead id='tHead'>"
 					+"<tr><th>공연장명</th><th>가로좌석</th><th>세로좌석</th><th>소속 회관</th></tr>"
 					+"</thead>"
 					+"<tbody id='hallList'></tbody>"
 					+"</table>"
-					+"</div>");
+					+"</div></div>");
 	
 	$("#search").on("click", function(){
 		$("#contents").empty();
@@ -97,8 +93,6 @@ var hallList = function() {
 $(document).ready(function() {
 	hallList();
 });
-
-
 </script>
 
 <div class="row">

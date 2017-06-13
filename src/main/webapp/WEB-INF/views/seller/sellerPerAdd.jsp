@@ -108,7 +108,7 @@ $(document).ready(function(){
 						seatNum = i+""+j;
 					}
 					
-					seat = '<div class="new-seat" id="'+seatNum+'">'+seatNum+ '<input type="hidden" class="seat-value seats" name="'+ seatNum +'" value="'+seatNum+"1"+'"></div>';
+					seat = '<div class="new-seat" id="'+seatNum+'">'+cnt+ '<input type="hidden" class="seat-value seats" name="'+ seatNum +'" value="'+seatNum+"1"+'"></div>';
 					$(".row-seat:last").append( seat );																		
 			}
 		}
