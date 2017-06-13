@@ -44,9 +44,7 @@ $(function() {
 
 var regBtns=function(){
 	var userList=$("#userList");
-	var tr;
 	var type;
-	var date;
 	
 	userList.empty();
 	
@@ -55,22 +53,27 @@ var regBtns=function(){
 		success:function(users){
 			$(users).each(function(idx, user){
 				if(user.userType==1) type="판매자";
-				else if(user.userType==2) type="회원";
-				else type="관리자";
-				date=user.userBirthday.toString();
-				tr=$("<tr></tr>");
-				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-						+user.userId+"</td><td>"
-						+user.userName+"</td><td>"
-						+user.userEmail+"</td><td>"
-						+user.userAddress+"</td><td>"
-						+date+"</td><td>"
-						+type+"</td>");
-				userList.append(tr.append(td));
-				td.find("input").data("userName",user.userName);
+				else type="회원";
+				printUser(user);
 			});
 		}
 	});
+	
+	var printUser=function(user){
+		var date;
+		
+		date=user.userBirthday.toString();
+		tr=$("<tr></tr>");
+		td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
+				+user.userId+"</td><td>"
+				+user.userName+"</td><td>"
+				+user.userEmail+"</td><td>"
+				+user.userAddress+"</td><td>"
+				+date+"</td><td>"
+				+type+"</td>");
+		userList.append(tr.append(td));
+		td.find("input").data("userName",user.userName);
+	}
 	
 	$("#searchBtn").bind("click",function(){
 		if($(":input[name='name']").val()) {
@@ -84,17 +87,7 @@ var regBtns=function(){
 						if(user.userType==1) type="판매자";
 						else if(user.userType==2) type="회원";
 						else type="관리자";
-						date=user.userBirthday.toString();
-						tr=$("<tr></tr>");
-						td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-								+user.userId+"</td><td>"
-								+user.userName+"</td><td>"
-								+user.userEmail+"</td><td>"
-								+user.userAddress+"</td><td>"
-								+date+"</td><td>"
-								+type+"</td>");
-						userList.append(tr.append(td));
-						td.find("input").data("userName",user.userName);
+						printUser(user);
 					});
 				},
 				error:function(a,b,errMsg){
@@ -147,42 +140,13 @@ var regBtns=function(){
 	});
 	
 	$("#allBtn").bind("click",function(){
-		var userList = $("#userList");  // 회원목록
-        var tr;
-        var input;
-        var etc;
-        
-        userList.empty();
-        
-        $.ajax({
-    		url:"admin/listUsers",
-    		success:function(users){
-    			$(users).each(function(idx, user){
-    				if(user.userType==1) type="판매자";
-    				else if(user.userType==2) type="회원";
-    				else type="관리자";
-    				date=user.userBirthday.toString();
-    				tr=$("<tr></tr>");
-    				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-    						+user.userId+"</td><td>"
-    						+user.userName+"</td><td>"
-    						+user.userEmail+"</td><td>"
-    						+user.userAddress+"</td><td>"
-    						+date+"</td><td>"
-    						+type+"</td>");
-    				userList.append(tr.append(td));
-    				td.find("input").data("userName",user.userName);
-    			});
-    		}
-    	});  
+		window.location.reload();
 	});
 	
 	$("#sellerBtn").bind("click",function(){
+		$(":input[name='name']").val()=="";
 		var userList = $("#userList");  // 회원목록
-        var tr;
-        var input;
-        var etc;
-        
+
         userList.empty();
         
         $.ajax({
@@ -190,29 +154,16 @@ var regBtns=function(){
             success:function(users){
     			$(users).each(function(idx, user){
     				if(user.userType==1) {
-    				type="판매자";
-    				date=user.userBirthday.toString();
-    				tr=$("<tr></tr>");
-    				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-    						+user.userId+"</td><td>"
-    						+user.userName+"</td><td>"
-    						+user.userEmail+"</td><td>"
-    						+user.userAddress+"</td><td>"
-    						+date+"</td><td>"
-    						+type+"</td>");
-    				userList.append(tr.append(td));
-    				td.find("input").data("userName",user.userName);
-    				}else{ }
+    					printUser(user);
+    				}
     			});
     		}
         });   
 	});
 	
 	$("#userBtn").bind("click",function(){
+		$(":input[name='name']").val()=="";
 		var userList = $("#userList");  // 회원목록
-        var tr;
-        var input;
-        var etc;
         
         userList.empty();
         
@@ -222,18 +173,8 @@ var regBtns=function(){
     			$(users).each(function(idx, user){
     				if(user.userType==2) {
     				type="회원";
-    				date=user.userBirthday.toString();
-    				tr=$("<tr></tr>");
-    				td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-    						+user.userId+"</td><td>"
-    						+user.userName+"</td><td>"
-    						+user.userEmail+"</td><td>"
-    						+user.userAddress+"</td><td>"
-    						+date+"</td><td>"
-    						+type+"</td>");
-    				userList.append(tr.append(td));
-    				td.find("input").data("userName",user.userName);
-    				}else{ }
+    				printUser(user);
+    				}
     			});
     		}
         });   
@@ -274,26 +215,16 @@ var regBtns=function(){
     					</div>
     		
 		<div class="row">
-			<form class=form-inline>
-				<div class="form-group">
+				<div class="form-inline">
 					<input type="text" class="form-control" name="name" placeholder="검색"/>
-				</div>
-				<div class="form-group">
-					<button type="button" class="btn btn-default" id="searchBtn">검색</button>
-				</div>
-				<div class="form-group">
-					<button type="button" class="btn btn-default" id="delBtn">회원삭제</button>
-				</div>
-				<div class="form-group">
+					<button type="button" class="btn btn-info" id="searchBtn">검색</button>
+				<div class="btn-group">
 					<button type="button" class="btn btn-default" id="allBtn">전체 조회</button>
-				</div>
-				<div class="form-group">
 					<button type="button" class="btn btn-default" id="sellerBtn">판매자 조회</button>
-				</div>
-				<div class="form-group">
 					<button type="button" class="btn btn-default" id="userBtn">회원 조회</button>
 				</div>
-			</form>
+					<button type="button" class="btn btn-danger" id="delBtn">회원삭제</button>
+				</div>
 		<table class="table table-hover"style="margin-top:100px">
 			<thead>
           		<tr>

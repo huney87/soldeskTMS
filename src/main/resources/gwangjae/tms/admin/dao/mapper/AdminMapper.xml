@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	<select id="getUsers" resultMap="AdminMap">
-		select * from users order by user_id
+		select * from users where user_type in(1,2) order by user_id
 	</select>
 	
 	<select id="searchUser" parameterType="String" resultMap="AdminMap">
