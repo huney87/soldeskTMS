@@ -488,8 +488,8 @@ function ImgError(source){
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="btn-group btn-group-justified">
-			  		<a href="../mypage/mypage1.html" class="btn btn-primary mypageBtn"><span class="glyphicon glyphicon-user"></span><br>개인정보수정</a>
-			  		<a href="../mypage/mypage2.html" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-check"></span><br>예매확인/취소</a>
+			  		<a href="/mypage" class="btn btn-primary mypageBtn"><span class="glyphicon glyphicon-user"></span><br>개인정보수정</a>
+			  		<a href="/mypage/mypage2" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-check"></span><br>예매확인/취소</a>
 			  		<a href="../mypage/mypage3.html" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-erase"></span><br>관람내역</a>
 			  		<a href="../mypage/mypage4.html" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-remove-sign"></span><br>회원탈퇴</a>
 				</div>

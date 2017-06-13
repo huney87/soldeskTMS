@@ -4,12 +4,9 @@ import java.sql.Date;
 
 public class Reservation {
 	private int reservationId;
-	private int userNo;
-	private int hallNo;
-	private int performanceId;
-	private int roundId;
-	private Date roundDate;
-	private int roundState;
+	private Date reserveDate;
+	private String perfTitle;
+	private String hallName;
 	
 	public int getReservationId() {
 		return reservationId;
@@ -17,40 +14,22 @@ public class Reservation {
 	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
-	public int getUserNo() {
-		return userNo;
+	public Date getReserveDate() {
+		return reserveDate;
 	}
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
+	public void setReserveDate(Date reserveDate) {
+		this.reserveDate = reserveDate;
 	}
-	public int getHallNo() {
-		return hallNo;
+	public String getPerfTitle() {
+		return perfTitle;
 	}
-	public void setHallNo(int hallNo) {
-		this.hallNo = hallNo;
+	public void setPerfTitle(String perfTitle) {
+		this.perfTitle = perfTitle;
 	}
-	public int getRoundId() {
-		return roundId;
+	public String getHallName() {
+		return hallName;
 	}
-	public void setRoundId(int roundId) {
-		this.roundId = roundId;
-	}
-	public int getPerformanceId() {
-		return performanceId;
-	}
-	public void setPerformanceId(int performanceId) {
-		this.performanceId = performanceId;
-	}
-	public Date getRoundDate() {
-		return roundDate;
-	}
-	public void setRoundDate(Date roundDate) {
-		this.roundDate = roundDate;
-	}
-	public int getRoundState() {
-		return roundState;
-	}
-	public void setRoundState(int roundState) {
-		this.roundState = roundState;
+	public void setHallName(String hallName) {
+		this.hallName = hallName;
 	}
 }

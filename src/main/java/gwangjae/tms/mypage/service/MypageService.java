@@ -5,6 +5,5 @@ import gwangjae.tms.mypage.domain.Reservation;
 import java.util.List;
 
 public interface MypageService {
-	List<Reservation> reserveInfo();
-	int reserveCancel(int delId); 
+	List<Reservation> getReservations();
 }

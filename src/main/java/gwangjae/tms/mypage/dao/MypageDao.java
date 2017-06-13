@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface MypageDao {
 	List<Reservation> getReservations();
-	int delReservation(int delId);
 }

@@ -5,17 +5,14 @@ import gwangjae.tms.mypage.domain.Reservation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MypageServiceImpl implements MypageService{
-	private MypageDao dao;
-	
-	public List<Reservation> reserveInfo(){
+	@Autowired private MypageDao dao;
+
+	public List<Reservation> getReservations() {
 		return dao.getReservations();
-	}
-	
-	public int reserveCancel(int delId){
-		return dao.delReservation(delId);
 	}
 }

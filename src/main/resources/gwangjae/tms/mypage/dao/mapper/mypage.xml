@@ -2,5 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="gwangjae.tms.mypage.dao.mapper.MypageMapper">
+	<resultMap id="ReservMap" type="Reservation">
+		<id property="reservationId" column="r_id"/>
+		<result property="reserveDate" column="r_date"/>
+		<result property="perfTitle" column="perf_title"/>
+		<result property="hallName" column="h_name"/>
+	</resultMap>
 	
+	<select id="getResevations" resultMap="ReservMap">
+		select r_id,r_date,perf_title,h_name from reserves r join users u 
+		on (r.user_id=u.user_id)
+		join PERFORMANCES p
+		on (r.perf_id=p.perf_id)
+		join halls h
+		on (r.H_ID=h.h_id)
+	</select>
 </mapper>
