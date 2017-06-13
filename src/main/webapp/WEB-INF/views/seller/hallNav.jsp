@@ -65,7 +65,7 @@ var hallList = function() {
             data:{perf_id:searchName},
             success:function(halls){
             	$(halls).each(function(idx, hall){
-                    tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>hall.hallName</td><td>hall.hallRow</td><td>hall.hallCol</td><td>hall.centerName</td></tr>");
+                    tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerId+"</td></tr>");
                     $("#hallList").append(tr);
                 });	
 	        }
@@ -81,7 +81,7 @@ var hallList = function() {
             url: "/seller/getHalls",
             success:function(halls){
             	$(halls).each(function(idx, hall){
-                    tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>hall.hallName</td><td>hall.hallRow</td><td>hall.hallCol</td><td>hall.centerName</td></tr>");
+                    tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerId+"</td></tr>");
                     $("#hallList").append(tr);
                 });	
 	        }
