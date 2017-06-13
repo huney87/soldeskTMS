@@ -17,17 +17,20 @@ $(document).ready(function() {
     //아이디 중복 확인
     $("#idOverLap").on("click", function(){
     	var userEmail = $("#str_email01").val() + "@" + $("#str_email02").val();
+    	
+    	console.log(userEmail);    	
 
     	$.ajax({
     	    url: "/user/checkUserEmail",
     	    data: {userEmail : userEmail},
     	    success : function(email) {
-	   	    	if(email.userEmail) {
+    	    	console.log(email.userEmail);  
+    	    	if(email.userEmail) {
     	    		alert("중복 되어 있습니다.");
     	    		$("#str_email01").val("");
     	    		$("#str_email02").val("");
     	    	}
-    	    	else alert("사용가능합니다..");    	     	    	       		    	       		
+    	    	else alert("사용가능합니다.");    	     	    	       		    	       		
     	    },
     	    error: function(){
     	    	alert("확인해보세요.");
@@ -71,76 +74,15 @@ $(document).ready(function() {
                     msg.text("추가 실패: " + errMsg);                
                 },
                 complete:function(){
-                    modal.modal('show');                    
+                	/* $("#resultModal").modal('show'); */
+                	alert("회원가입완료.");   
+                    /* modal.modal('show'); */                	
                 }        
         });
 	});	
 });
 </script>
-<script type="text/javascript">
-		//이메일 입력방식 선택
-		$('#selectEmail').change(function(){
-			$("#selectEmail option:selected").each(function () {
-     
- 				if($(this).val()== '1'){ //직접입력일 경우
-      				$("#str_email02").val('');                //값 초기화
-      				$("#str_email02").attr("readonly",false); //활성화
- 				}else{ //직접입력이 아닐경우
-      				$("#str_email02").val($(this).text());    //선택값 입력
-      				$("#str_email02").attr("readonly",true);  //비활성화
- 				}
-			});	
-		});	
-		
-		//비밀번호 확인 - 보안코딩 기법 적용
-		$(function(){			
-			//비밀번호 조건 - 영어 대소문자 숫자 함께 사용, 6~14자리 까지
-			var isValidPw = function(pw){
-				var pattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,14}$/;
-			    return pattern.test(pw);
-			};
-			
-			// 비밀번호 조건확인 화면 출력
-			$('#user_psw1').keyup(function(){
-				$('#check').hide();
-				$('font[name=check]').text('');
-				var pw = $("input[name=psw]").val();
-		        
-			    if(isValidPw(pw)){
-			    	$.ajax({
-			        	method: "post",
-			            data: {"pw":pw},
-			            success: function(){
-			            	$('#check').show();
-							$('font[name=check]').html("사용 가능합니다.");
-			            },
-			            error: function(){
-			            	$('#check').show();
-							$('font[name=check]').html("Password가 잘못되었습니다.6~14자만 입력하세요.");
-			            }
-			        });
-			    }else{
-			    	$('#check').show();
-					$('font[name=check]').html("Password가 잘못되었습니다.6~14자만 입력하세요.");
-			    }
-			});					
-			
-			// 비밀번호 와 비밀번호 확인이 같은지 확인
-			$('#user_psw2').keyup(function(){
-				if($('#user_psw1').val().length != 0 || $('#user_psw2').val().length != 0){
-					$('#check').show();
-		 	  		if($('#user_psw1').val()!=$('#user_psw2').val()){
-		 	  			
-		 	   			$('font[name=check]').text('');
-		 	   			$('font[name=check]').html("두 글자가 다릅니다.");
-		 	  		}else{
-		 	   			$('font[name=check]').text('');
-		 	   			$('font[name=check]').html("암호 확인 되었습니다.");
-		 	  		}
-				}
-	 	 	});			
-		});
-</script>
+
 
 <style type="text/css">
 /* 웹폰트 */
@@ -706,7 +648,83 @@ body {
 	    });
 	});
 	</script>
-
+<script type="text/javascript">
+		//이메일 입력방식 선택
+		$('#selectEmail').change(function(){
+			$("#selectEmail option:selected").each(function () {
+     
+ 				if($(this).val()== '1'){ //직접입력일 경우
+      				$("#str_email02").val('');                //값 초기화
+      				$("#str_email02").attr("readonly",false); //활성화
+ 				}else{ //직접입력이 아닐경우
+      				$("#str_email02").val($(this).text());    //선택값 입력
+      				$("#str_email02").attr("readonly",true);  //비활성화
+ 				}
+			});	
+		});	
+		
+		//비밀번호 확인 - 보안코딩 기법 적용
+		$(function(){			
+			//비밀번호 조건 - 영어 대소문자 숫자 함께 사용, 6~14자리 까지
+			var isValidPw = function(pw){
+				var pattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,14}$/;
+			    return pattern.test(pw);
+			};
+			
+			// 비밀번호 조건확인 화면 출력
+			$('#user_psw1').keyup(function(){
+				$('#check').hide();
+				$('font[name=check]').text('');
+				var pw = $("input[name=psw]").val();
+		        
+			    if(isValidPw(pw)){
+			    	$.ajax({
+			        	method: "post",
+			            data: {"pw":pw},
+			            success: function(){
+			            	$('#check').show();
+							$('font[name=check]').html("사용 가능합니다.");
+			            },
+			            error: function(){
+			            	$('#check').show();
+							$('font[name=check]').html("Password가 잘못되었습니다. 영문, 숫자 혼용 6~14자만 입력하세요.");
+			            }
+			        });
+			    }else{
+			    	$('#check').show();
+					$('font[name=check]').html("Password가 잘못되었습니다. 영문, 숫자 혼용  6~14자만 입력하세요.");
+			    }
+			});		
+		
+			/* 
+			$(function(){
+			// 비밀번호 6~14 자리수 인지 화면 표시
+				$('#user_psw1').keyup(function(){
+					$('#check').hide();
+					$('font[name=check]').text('');
+					if(($('#user_psw1').val().length < 6 || $('#user_psw1').val().length > 14) && $('#user_psw1').val().length != 0) {
+						$('#check').show();
+						$('font[name=check]').html("Password가 잘못되었습니다.6~14자만 입력하세요.");			  
+				}
+			});				
+			 */
+			
+			// 비밀번호 와 비밀번호 확인이 같은지 확인
+			$('#user_psw2').keyup(function(){
+				if($('#user_psw1').val().length != 0 || $('#user_psw2').val().length != 0){
+					$('#check').show();
+		 	  		if($('#user_psw1').val()!=$('#user_psw2').val()){
+		 	  			
+		 	   			$('font[name=check]').text('');
+		 	   			$('font[name=check]').html("두 글자가 다릅니다.");
+		 	  		}else{
+		 	   			$('font[name=check]').text('');
+		 	   			$('font[name=check]').html("암호 확인 되었습니다.");
+		 	  		}
+				}
+	 	 	});			
+		});
+</script>
 	<!-- 결과값 모달 -->
 	<div class="modal fade" id="resultModal">
 	     <div class="modal-dialog">
