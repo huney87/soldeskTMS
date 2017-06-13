@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="gwangjae.tms.category.dao.mapper.LocationMapper">
+<mapper namespace="gwangjae.tms.location.dao.mapper.LocationMapper">
 	
 	<select id="selectLocationList" resultType="map">
-		SELECT LOC_ID AS locationId, #번호
-			LOC_NAME AS locationName, #이름
-			LOC_DETAIL AS locationDetail #설명
+		SELECT LOC_ID AS locationId,
+			LOC_NAME AS locationName,
+			LOC_DETAIL AS locationDetail
 		FROM LOCATIONS
 	</select>
 	
 	<select id="selectLocation" parameterType="map" resultType="gwangjae.tms.location.domain.Location">
-		SELECT LOC_ID AS locationId, #번호
-			LOC_NAME AS locationName, #이름
-			LOC_DETAIL AS locationDetail #설명
+		SELECT LOC_ID AS locationId,
+			LOC_NAME AS locationName,
+			LOC_DETAIL AS locationDetail
 		FROM LOCATIONS
 		WHERE LOC_ID = #{locationId}
 	</select>
