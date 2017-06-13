@@ -11,6 +11,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link href="/css/adminmenu.css" media="all" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
 	  var trigger = $('.hamburger'),
@@ -107,31 +112,47 @@ var regBtns=function(){
 				}
 			});
 		}else {
-            msg.text("회원 이름을 입력하세요.");
-            modal.modal("show");
+			sweetAlert("검색 실패", "검색할 회원을 입력해 주세요!", "error");
         }
 	});
 	
 	$("#delBtn").bind("click",function(){
 		var user=$(":checked");
 		if(user.size()){
-			$.ajax({
-				url:"admin/delete",
-				data:{userId:user.val()},
-				success:function(result){
-					if(result) msg.text("삭제 성공했습니다.");
-					else msg.text("삭제 실패했습니다.");
+			swal({
+				  title: "정말로 삭제하시겠습니까?",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "삭제",
+				  cancelButtonText: "취소",
+				  closeOnConfirm: false
 				},
-				error:function(a,b,errMsg){
-					msg.text("삭제 실패: "+errMsg);
-				},
-				complete:function(){
-					modal.modal("show");
-				}
-			});
+				function(){
+					$.ajax({
+						url:"admin/delete",
+						data:{userId:user.val()},
+						success:function(result){
+							if(result) msg.text("삭제 성공했습니다.");
+							else msg.text("삭제 실패했습니다.");
+						},
+						error:function(a,b,errMsg){
+							msg.text("삭제 실패: "+errMsg);
+						},
+						complete:function(){
+							swal({
+								title: "삭제 성공",
+								text: "회원을 삭제했습니다",
+								type: "success"
+							},
+							function(){
+								window.location.reload();
+							});
+						}
+					});
+				});
 		}else{
-			msg.text("삭제할 회원을 선택해 주세요.");
-			modal.modal("show");
+			sweetAlert("삭제 실패", "삭제할 회원을 선택해 주세요!", "error");
 		}
 	});
 	
@@ -235,7 +256,7 @@ var regBtns=function(){
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" onClick="history.go(0)">&times;</button>
+              <button type="button" class="close" data-dismiss="modal" onClick="">&times;</button>
               <h4 class="modal-title" id="msg"></h4>
             </div>            
             <div class="modal-footer">
