@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="gwangjae.tms.ticketing.dao.mapper.TicketingMapper">
+	<resultMap type="TicketSeatInfo" id="sinfoMap">
+		<id property="sinfoId" column="sinfo_id"/>
+		<result property="sId" column="s_id"/>
+		<result property="perfId" column="perf_id"/>
+		<result property="sinfoGrade" column="sinfo_grade"/>
+		<result property="sinfoPrice" column="sinfo_price"/>
+		<result property="hId" column="h_id"/>
+		<result property="sRow" column="s_row"/>
+		<result property="sCol" column="s_col"/>
+		<result property="sNumber" column="s_number"/>
+		<result property="sType" column="s_type"/>
+	</resultMap>
+	
+	<select id="getAllSeatInfo" parameterType="int" resultMap="sinfoMap">
+		SELECT * 
+		FROM SEATINFO si, SEATS s
+		WHERE si.S_ID = s.S_ID AND si.PERF_ID = #{value}
+		ORDER BY si.SINFO_ID, s.S_ROW, s.S_COL
+	</select>
+	
+	<select id="getPerfSkdList" parameterType="int" resultType="java.sql.date">
+		SELECT rnd.RND_DATE
+		FROM round rnd, performances perf
+		WHERE rnd.PERF_ID = perf.PERF_ID AND perf.PERF_ID = #{value}
+	</select>
+</mapper>
