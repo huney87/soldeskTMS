@@ -73,9 +73,6 @@
 	        }, 100);
 	        return false;
 	    });
-	    
-	    $("#input-id").rating({'size':'xs'});
-	    $('#sideMenu').affix({offset: {top: 10} });
 	});
 	</script>
 </body>

@@ -61,6 +61,10 @@ $(document).ready(function(){
         $("#topHeadAd").hide();
     });	
 	
+	$("#btnSign").click(function(){
+		window.location.assign("/user");
+    });	
+	
 	$('#login-form').submit(function(e){
 		e.preventDefault();
 		logincheck( $( this ).serialize() );
@@ -96,6 +100,9 @@ $(document).ready(function(){
             return myDateFunction(this.id, false);
        	},
 	 });
+     
+     $('#input-2').rating({'size':'xs'});
+     $('#sideMenu').affix({offset: {top: 10} });
 });
 </script>
 </head>
@@ -136,7 +143,7 @@ $(document).ready(function(){
 							<div class="btn-group">
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
-								<c:when test="${ login }">
+								<c:when test="${login}">
 									<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>
 								</c:when>
 								<c:otherwise>
@@ -183,10 +190,17 @@ $(document).ready(function(){
 				
 				<div class="col-sm-6">
 					<div class="btn_theater">
-					    <span class="membership_link">
+					    <!-- <span class="membership_link">
 					        <a class="membership_txt" title="회원가입 바로가기" href="../sign/01.html">회원가입</a>
-					    </span>
-					    <button type="button" class="btn btn-info btn-xs" name="booking_popup">빠른예매</button>
+					    </span> -->
+				 	<c:choose>
+						<c:when test="${login}">
+					    <button type="button" class="btn btn-info btn-xs" id="btnSign">마이페이지</button>
+					    </c:when>
+						<c:otherwise>
+						<button type="button" class="btn btn-info btn-xs" id="btnSign">회원가입</button>
+						</c:otherwise>
+					</c:choose>
 					</div>
 				</div>
             </div>

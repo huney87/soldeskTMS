@@ -1,13 +1,3 @@
-/*!
- * bootstrap-star-rating v4.0.2
- * http://plugins.krajee.com/star-rating
- *
- * Author: Kartik Visweswaran
- * Copyright: 2013 - 2017, Kartik Visweswaran, Krajee.com
- *
- * Licensed under the BSD 3-Clause
- * https://github.com/kartik-v/bootstrap-star-rating/blob/master/LICENSE.md
- */
 (function (factory) {
     "use strict";
     //noinspection JSUnresolvedVariable
