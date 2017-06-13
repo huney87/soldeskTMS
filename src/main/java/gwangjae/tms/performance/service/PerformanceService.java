@@ -1,5 +1,6 @@
 package gwangjae.tms.performance.service;
 
+import gwangjae.tms.hall.domain.Hall;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
 
@@ -12,5 +13,5 @@ public interface PerformanceService {
 	public int addPerInfo(Performance performance);
 	public int addPerDetail(Performance performance);
 	public List<Performance> getHalls(int centerId);
-	public int getLayout(int hallId);
+	public Hall getLayout(int hallId);
 }

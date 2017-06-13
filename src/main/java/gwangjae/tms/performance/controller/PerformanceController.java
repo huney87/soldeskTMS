@@ -1,5 +1,6 @@
 package gwangjae.tms.performance.controller;
 
+import gwangjae.tms.hall.domain.Hall;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.performance.service.PerformanceService;
@@ -88,7 +89,7 @@ public class PerformanceController {
 	//좌석 레이아웃 불러오기
 	@RequestMapping("/getLayout")
     @ResponseBody
-    public int getLayout(int hallId){
+    public Hall getLayout(int hallId){
 		return performanceService.getLayout(hallId);
 	}
 	

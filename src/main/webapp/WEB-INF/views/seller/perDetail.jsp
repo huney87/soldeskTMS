@@ -42,7 +42,7 @@ $(document).ready(function(){
 			cnt = 1;
 			alert('최대 5회차 까지 입니다.')
 		}else{
-			var times = $('<label>'+cnt+'차:<input type="time" id="timeSlot'+cnt+'">&nbsp;&nbsp;</label>');
+			var times = $('<label>'+cnt+'차:<input type="time" class="timeSlot" id="timeSlot'+cnt+'">&nbsp;&nbsp;</label>');
 			$("#timesNav").append(times);
 			cnt=cnt+1;
 		}
@@ -54,7 +54,7 @@ $(document).ready(function(){
 		cnt=1;
 	});
 	
-	//최종완료버튼( DB 등록)
+	//최종완료버튼( DB 등록) 현재 기간만 등록되고, 회차에 대한 정보는 저장되지 않음.
 	$("#roundResist").on("click", function(){
 		var sDate = $("#sDate").val()+"";
 		var eDate = $("#eDate").val()+"";
@@ -116,7 +116,9 @@ color:black;
 input{
 color:black;
 }
-
+.timeSlot{
+	color:black;
+}
 </style>
 </head>
 <body>

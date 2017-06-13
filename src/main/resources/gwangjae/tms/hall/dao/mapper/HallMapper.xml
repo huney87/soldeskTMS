@@ -20,7 +20,7 @@
 	</resultMap>
 
 	<select id="getHalls" resultMap="HallMap">
-		select * from halls
+		select * from halls order by ctr_id
 	</select>
 	
 	<select id="searchHalls" parameterType="String" resultMap="HallMap">

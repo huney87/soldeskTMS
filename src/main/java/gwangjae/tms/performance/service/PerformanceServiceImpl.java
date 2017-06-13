@@ -1,5 +1,6 @@
 package gwangjae.tms.performance.service;
 
+import gwangjae.tms.hall.domain.Hall;
 import gwangjae.tms.performance.dao.PerformanceDao;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
@@ -40,7 +41,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 	 public List<Performance> getHalls(int centerId){
 			return performanceDao.getHalls(centerId);
 	}
-	public int getLayout(int hallId){
+	public Hall getLayout(int hallId){
 			return performanceDao.getLayout(hallId);
 	}
 }

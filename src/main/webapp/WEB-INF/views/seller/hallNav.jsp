@@ -31,7 +31,8 @@ h4{
 	align:center;
 }
 #hallTable{
-	padding: 0.5rem;
+	margin: 1rem;
+	padding: 1rem;
 	width: 50rem;
 	color: white;
 	border: 0.1rem solid #4d4dff;
@@ -44,8 +45,8 @@ h4{
 
 <script>
 var hallList = function() {
-	var divMain = $("<div class='col-sm-12' id='mainContent' align='center'>"
-					+"<table id='hallTable'>"
+	var divMain = $("<div class='col-sm-12' id='mainContent'>"
+					+"<table id='hallTable' class='table'>"
 					+"<thead id='tHead'>"
 					+"<tr><th>공연장명</th><th>가로좌석</th><th>세로좌석</th><th>소속 회관</th></tr>"
 					+"</thead>"
@@ -57,13 +58,15 @@ var hallList = function() {
 		$("#contents").empty();
 		$("#contents").append(divMain);
 		$("#resistArea").hide();
+		$("#hallList").empty();
 		
 		var searchName = $("#searchHall").val();
 		
 		$.ajax({
-            url: "/seller/searchHalls",
-            data:{perf_id:searchName},
+            url: "/hallManage/searchHalls",
+            data:{hall_name:searchName},
             success:function(halls){
+            	console.log(halls);
             	$(halls).each(function(idx, hall){
                     tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerId+"</td></tr>");
                     $("#hallList").append(tr);
@@ -76,9 +79,10 @@ var hallList = function() {
 		$("#contents").empty();
 		$("#contents").append(divMain);
 		$("#resistArea").hide();
+		$("#hallList").empty();
 		
 		$.ajax({
-            url: "/seller/getHalls",
+            url: "/hallManage/getHalls",
             success:function(halls){
             	$(halls).each(function(idx, hall){
                     tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerId+"</td></tr>");

@@ -73,11 +73,12 @@ public class HallController {
 	}
 //////////////////////////////////////////////////////////////////	
 	
-	//공연장 목록
+	//공연장 목록(완료)
 	@RequestMapping("/getHalls")
     @ResponseBody
 	public List<Hall> getHalls(){
-		return hallService.getHalls();
+		List<Hall> result = hallService.getHalls();
+		return result;
 	}
 	//공연장 하나 찾기
 	@RequestMapping("/getHall")
@@ -85,11 +86,12 @@ public class HallController {
 	public Hall getHall(String hall_name){
 		return hallService.getHall(hall_name);	
 	}
-	//공연장 검색하기
+	//공연장 검색하기(완료)
 	@RequestMapping("/searchHalls")
 	@ResponseBody
 	public List<Hall> searchHalls(String hall_name){
-		return hallService.searchHalls(hall_name);	
+		List<Hall> result = hallService.searchHalls(hall_name);
+		return result;
 	}
 	//공연장 추가(완료)
 	@RequestMapping("/addHall")

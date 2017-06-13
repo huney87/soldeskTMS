@@ -1,10 +1,11 @@
 package gwangjae.tms.performance.dao;
 
-import java.util.List;
-
+import gwangjae.tms.hall.domain.Hall;
 import gwangjae.tms.performance.dao.mapper.PerformanceMapper;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,7 +39,7 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return performanceMapper.getHalls(centerId);
 	}
 	
-	public int getLayout(int hallId){
+	public Hall getLayout(int hallId){
 		return performanceMapper.getLayout(hallId);
 	}
 }

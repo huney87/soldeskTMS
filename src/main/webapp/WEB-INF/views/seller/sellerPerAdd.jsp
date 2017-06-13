@@ -63,13 +63,15 @@ $(document).ready(function(){
 			//공연장 선택시 좌석 레이아웃 가져오기
 			$("#stage").on("change", function(){
 				var choice3 = $("#stage").val();
+				console.log(choice3);
 				if(choice3) {	
 					$.ajax({
 			            url: "/seller/getLayout",
 			            data:{hallId:choice3},
 			            success:function(hall){
+			            	console.log(hall);
 			            	$("#row").val(hall.hallRow);	
-			            	$("#col").val(hall.hallCow);	
+			            	$("#col").val(hall.hallCol);	
 				        }
 					});
 				}
@@ -127,7 +129,6 @@ $(document).ready(function(){
 			//검정 좌석 선택시 파란색으로 변경	
 			}else if(compare==1 ){
 				value = value.slice(0,-1) + (compare*1+1);
-				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color": "blue",
@@ -136,7 +137,6 @@ $(document).ready(function(){
 			//파란 좌석 선택시 빨간색으로 변경	
 			}else if(compare==2 ){
 				value = value.slice(0,-1) + (compare*1+1);
-				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color":"red",
@@ -145,7 +145,6 @@ $(document).ready(function(){
 			//빨간 좌석 선택시 초록색으로 변경		
 			}else if(compare==3 ){
 				value = value.slice(0,-1) + (compare*1+1);
-				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color":"#BDFF12",
@@ -154,7 +153,6 @@ $(document).ready(function(){
 			//초록 좌석 선택시 없는좌석으로 변경		
 			}else if(compare==4 ){
 				value = value.slice(0,-1)+"0";
-				console.log(value);
 				$(this).find(".seat-value").val(value);
 				$( this ).css({
 						"background-color":"gray",
@@ -205,7 +203,8 @@ $(document).ready(function(){
     	var title=$("#title").val();
     	var stage=$("#stage").val();
     	var category=$("#genre").val();
-
+		
+    	// 현재 seat를 단순하게 db에 저장하기 때문에 배열로 넘겨줘야함. (차후 수정)
     	if($("#row").val()) {
     		$.ajax({
                 url: "/seller/addSeats",
@@ -227,7 +226,6 @@ $(document).ready(function(){
         }
     	
     	if(stage){
-    		console.log(stage);
     		$.ajax({
                 url: "/seller/addPerInfo",
                 data: {
