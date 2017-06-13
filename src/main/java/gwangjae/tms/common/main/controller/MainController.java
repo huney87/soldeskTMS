@@ -38,7 +38,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("detail")
-	public String detailView(){
+	public String detailView(Model model, HttpSession session){
+		/*널이 아니며 빈 문자열이 아니면 로그인 되어있는것*/  
+		if(session.getAttribute("email") != null && !session.getAttribute("email").equals("")){
+			model.addAttribute("login", true);
+		}else{
+			model.addAttribute("login", false);
+		}
 		return "/detail/detail";
 	}
 }
