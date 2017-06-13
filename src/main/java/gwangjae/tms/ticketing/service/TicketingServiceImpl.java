@@ -1,16 +1,20 @@
 package gwangjae.tms.ticketing.service;
 
-import java.sql.Date;
+import gwangjae.tms.ticketing.dao.TicketingDao;
+import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TicketingServiceImpl implements TicketingService {
+	@Autowired TicketingDao ticketDao;
+	
 	/*
 	 * 좌석 레이아웃 2차원 배열 출력
 	 * @see gwangjae.tms.ticketing.service.TicketingService#drawLayout()
@@ -49,22 +53,25 @@ public class TicketingServiceImpl implements TicketingService {
 	 * @see gwangjae.tms.ticketing.service.TicketingService#getPerfSkd()
 	 */
 	@Override
-	public Date[] getPerfSkd(int perf_id) {
-		Date[] result ;
-		/*  
-		 * 테스트코드 시작 (오늘부터 5일간의 일정을 반환함)
-		 */
-		result = new Date[5];
-		
-		long now = System.currentTimeMillis() ;
-		long oneday = TimeUnit.DAYS.toMillis(1) ;
-		for(int i = 0 ; i < 5 ; i++ ){			
-			result[i] = new Date(now + oneday*i);
-		}
-		/*
-		 * 테스트코드 끝
-		 */
+	public Date[] getPerfSkd(int perf_id) {		
+		List<Date> listDate = ticketDao.getPerfSkdList(perf_id);
+		Date[] result = listDate.toArray(new Date[listDate.size()]);
 		return result;
+	}
+
+	@Override
+	public TicketSeatInfo[][] getSquareSeatLayout(int perfId) {
+		List<TicketSeatInfo> resultSeats = ticketDao.getAllSeatInfo(perfId);
+		int maxRow = 0, maxCol = 0;
+		for(TicketSeatInfo itr : resultSeats){
+			if(itr.getsRow() > maxRow)maxRow = itr.getsRow();
+			if(itr.getsCol() > maxCol)maxCol = itr.getsCol();
+		}
+		TicketSeatInfo[][] squareSeats = new TicketSeatInfo[maxRow][maxCol];
+		for(TicketSeatInfo itr : resultSeats){
+			squareSeats[itr.getsRow()-1][itr.getsCol()-1] = itr;
+		}
+		return squareSeats;
 	}
 
 }

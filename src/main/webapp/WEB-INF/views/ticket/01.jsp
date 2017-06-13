@@ -139,6 +139,9 @@
         $(document).ready(function() {
             $.ajax({
                 url: '/ticket/getskd',
+                data : {
+                	"performance_id" : 1,
+                },
                 dataType: 'json',
                 success : function(data) {
                     initCalender(data);

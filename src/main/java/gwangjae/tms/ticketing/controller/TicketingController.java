@@ -1,8 +1,10 @@
 package gwangjae.tms.ticketing.controller;
 
+import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 import gwangjae.tms.ticketing.service.TicketingService;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -50,7 +52,15 @@ public class TicketingController {
 
 	@RequestMapping("/getskd")
 	@ResponseBody
-	public Date[] getSkd(HttpSession session){
-		return service.getPerfSkd(0);
+	public Date[] getSkd(HttpSession session,
+			@RequestParam("performance_id") int perfId){
+		return service.getPerfSkd(perfId);
+	}
+	
+	@RequestMapping("/getseatinfo")
+	@ResponseBody
+	public TicketSeatInfo[][] getSeatInfo(
+			@RequestParam("performance_id") int perfId){
+		return service.getSquareSeatLayout(perfId);
 	}
 }

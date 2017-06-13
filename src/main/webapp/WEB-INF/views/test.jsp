@@ -38,10 +38,29 @@
 					}
 				});
 			}
+			
+			var seatinfo = function(perfid){
+				$.ajax({
+					method:"post",
+					url: "/ticket/getseatinfo",
+					data: {
+						"performance_id" : perfid, 
+					},
+					dataType : "json",
+					success : function (seatinfo) {
+						console.log(seatinfo);
+						alert("시트성공");
+					}
+				});
+			}
 			$(document).ready(function () {
 				$('.login').submit(function () {
 					logincheck();
-				})
+				});
+				
+				$('.seatinfo').click(function () {
+					seatinfo(1);
+				});
 			});
 		</script>
 		<div class="container">
@@ -59,6 +78,8 @@
 
 						<button type="submit">티켓시험</button>
 					</form>
+					<br>
+					<button class="seatinfo">시트시험</button>
 
 				</div>
 			</div>
