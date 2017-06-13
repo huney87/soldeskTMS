@@ -153,7 +153,7 @@ $(document).ready(function(){
 													<input type="submit" class="login loginmodal-submit" value="로그인">
 												</form>												
 												<div class="login-help">
-													<a href="./sign/01.html">회원가입</a> - <a href="./finidpw/01.html">비밀번호를 잊어버리셨나요?</a>
+													<a href="/user">회원가입</a> - <a href="./finidpw/01.html">비밀번호를 잊어버리셨나요?</a>
 												</div>
 											</div>
 										</li>
