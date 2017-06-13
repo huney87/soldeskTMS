@@ -55,7 +55,7 @@
         </div>
     </div>
     <div id="MOVE_TOP_BTN">
-    <span class="glyphicon glyphicon-circle-arrow-up" title="맨위로"></span>
+    	<span class="glyphicon glyphicon-circle-arrow-up" title="맨위로"></span>
     </div>
 	<script>
 	$(function() {

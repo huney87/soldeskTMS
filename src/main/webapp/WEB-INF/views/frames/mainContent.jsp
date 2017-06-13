@@ -59,10 +59,10 @@
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="./img/에어리언.jpg" onerror="ImgError(this)" />
+								<img src="/img/noImg.png" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="../img/에어리언.jpg" onerror="ImgError(this)" />
+								<img class="backPost" src="/img/noImg.png" onerror="ImgError(this)" />
 								<article id="movieInfo">
 									<div class="moveInfoBtn">
 										<div class="moveInfoBtn1">
