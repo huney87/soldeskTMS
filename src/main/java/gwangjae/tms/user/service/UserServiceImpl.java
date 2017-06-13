@@ -10,7 +10,13 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 	@Autowired private UserDao userDao;
 	
+	@Override
 	public int addUser(User user){
 		return userDao.addUser(user);
+	}
+	
+	@Override
+	public User checkUserEmail(User userEmail){
+		return userDao.checkUserEmail(userEmail);
 	}
 }

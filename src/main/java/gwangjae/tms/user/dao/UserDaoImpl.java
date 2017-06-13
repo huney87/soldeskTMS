@@ -13,4 +13,8 @@ public class UserDaoImpl implements UserDao {
 	public int addUser(User user){
 		return userMapper.addUser(user);
 	}
+	
+	public User checkUserEmail(User userEmail){
+		return userMapper.checkUserEmail(userEmail);
+	};
 }
