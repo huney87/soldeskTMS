@@ -514,12 +514,12 @@ function ImgError(source){
 $(document).ready(function(){
 	$("#musical").click(function(){
 		var cateList = $("#cate");
-		
+		var select;
 		cateList.empty();
 		
 		$.ajax({
 			url:"/category",
-			success:function(category){
+			success:function(select){
 				musical();
 			}
 		});	
