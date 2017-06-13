@@ -22,7 +22,7 @@
 		ORDER BY si.SINFO_ID, s.S_ROW, s.S_COL
 	</select>
 	
-	<select id="getPerfSkdList" parameterType="int" resultType="java.sql.date">
+	<select id="getPerfSkdList" parameterType="int" resultType="date">
 		SELECT rnd.RND_DATE
 		FROM round rnd, performances perf
 		WHERE rnd.PERF_ID = perf.PERF_ID AND perf.PERF_ID = #{value}
