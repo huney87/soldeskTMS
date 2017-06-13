@@ -36,8 +36,8 @@ h4{
 		  <h3>공연 관리</h3>
 		</div>
 		<div class="col-sm-3">		
-			<a href="/seller/perAdd" class="btn btn-md btn-default mainBtn" id="search">공연 등록</a>
-			<a href="/seller/perDetail" class="btn btn-md btn-default mainBtn" id="resistHall">공연 세부사항 등록</a>
+			<a href="/seller/perAdd" class="btn btn-sm btn-default mainBtn" id="search">공연 등록</a>
+			<a href="/seller/perDetail" class="btn btn-sm btn-default mainBtn" id="resistHall">공연 세부사항 등록</a>
 		</div>
 		<div class="col-sm-7">			
 			<input type="text" id="searchHall" placeholder="공연 이름">

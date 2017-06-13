@@ -24,6 +24,12 @@ public class PerformanceController {
     }
 	
 	//공연 추가 화면
+	@RequestMapping("/perMain")
+    public String perMain(){
+        return "seller/perMain";
+    }
+	
+	//공연 추가 화면
 	@RequestMapping("/perAdd")
     public String perAdd(){
         return "seller/sellerPerAdd";

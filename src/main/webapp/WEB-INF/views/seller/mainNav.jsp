@@ -59,8 +59,8 @@ body{
 <ul class="nav nav-pills nav-stacked menu">
 	<h3>판매자 페이지</h3><br><br><br><br>
 	<li id="menu1"><a href="/hallManage">&nbsp;</a></li>
-	<li id="menu2"><a href="/seller/perAdd">&nbsp;</a></li>
-	<li id="menu3"><a href="sellerMain.jsp">&nbsp;</a></li>
+	<li id="menu2"><a href="/seller/main">&nbsp;</a></li>
+	<li id="menu3"><a href="/seller">&nbsp;</a></li>
 </ul>
 <ul class="nav nav-pills nav-stacked menuName">
 	<br><br><br><br><br><br><br><br>
