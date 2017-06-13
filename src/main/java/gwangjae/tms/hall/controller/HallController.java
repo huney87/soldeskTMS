@@ -31,6 +31,7 @@ public class HallController {
     public String hallAdd(){
         return "seller/hallAdd";
     }
+	
 	///////////////////////////////////////////////////////////
 	//회관 목록
 	@RequestMapping("/getCenters")
@@ -83,6 +84,12 @@ public class HallController {
     @ResponseBody
 	public Hall getHall(String hall_name){
 		return hallService.getHall(hall_name);	
+	}
+	//공연장 검색하기
+	@RequestMapping("/searchHalls")
+	@ResponseBody
+	public List<Hall> searchHalls(String hall_name){
+		return hallService.searchHalls(hall_name);	
 	}
 	//공연장 추가(완료)
 	@RequestMapping("/addHall")

@@ -15,6 +15,7 @@ public interface HallMapper {
 	int modCenter(String Center_name);				//회관 수정
 	
 	List<Hall> getHalls();      	//공연장 목록
+	public List<Hall> searchHalls(String hall_name); //공연장 검색하기
 	Hall getHall(String hall_name); //상영관 하나 찾기
 	int addHall(Hall hall);  //상영관 추가
 	int delHall(String hall_name);	//상영관 삭제

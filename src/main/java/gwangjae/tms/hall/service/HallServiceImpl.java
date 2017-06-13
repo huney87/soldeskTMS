@@ -45,6 +45,10 @@ public class HallServiceImpl implements HallService{
 	public List<Hall> getHalls(){
 		return hallDao.getHalls();
 	}
+	//공연장 검색 하기
+	public List<Hall> searchHalls(String hall_name){
+		return hallDao.searchHalls(hall_name);	
+	}
 	//상영관 하나 찾기
 	public Hall getHall(String hall_name){
 		return hallDao.getHall(hall_name);	

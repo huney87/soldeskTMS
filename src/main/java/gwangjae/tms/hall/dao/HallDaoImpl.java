@@ -44,6 +44,10 @@ public class HallDaoImpl implements HallDao{
 	public List<Hall> getHalls(){
 		return hallMapper.getHalls();
 	}
+	//공연장 검색 하기
+	public List<Hall> searchHalls(String hall_name){
+		return hallMapper.searchHalls(hall_name);	
+	}
 	//상영관 하나 찾기
 	public Hall getHall(String hall_name){
 		return hallMapper.getHall(hall_name);	

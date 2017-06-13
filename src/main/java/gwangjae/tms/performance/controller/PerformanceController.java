@@ -23,7 +23,7 @@ public class PerformanceController {
         return "seller/sellerMain";
     }
 	
-	//공연 추가 화면
+	//공연 탭 메인
 	@RequestMapping("/perMain")
     public String perMain(){
         return "seller/perMain";

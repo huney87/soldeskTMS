@@ -10,9 +10,22 @@
 		<result property="centerAddress" column="ctr_address"/>
 		<result property="centerPhone" column="ctr_phone"/>	
 	</resultMap>
+	
+	<resultMap id="HallMap" type="Hall">
+		<id property="hallId" column="h_id"/>
+		<result property="hallName" column="h_name"/>
+		<result property="hallRow" column="h_row"/>
+		<result property="hallCol" column="h_col"/>
+		<result property="centerId" column="ctr_id"/>
+	</resultMap>
 
-	<select id="getHalls" resultMap="CenterMap">
-		
+	<select id="getHalls" resultMap="HallMap">
+		select * from halls
+	</select>
+	
+	<select id="searchHalls" parameterType="String" resultMap="HallMap">
+		select * from halls
+		where h_name like '%'||#{value}||'%'
 	</select>
 	
 	<select id="getCenter" parameterType="String" resultMap="CenterMap">
