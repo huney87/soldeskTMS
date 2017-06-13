@@ -9,5 +9,6 @@
         <package name="gwangjae.tms.performance.domain"/>
         <package name="gwangjae.tms.category.domain"/>
         <package name="gwangjae.tms.user.domain"/>
+        <package name="gwangjae.tms.location.domain"/>
     </typeAliases>
 </configuration>

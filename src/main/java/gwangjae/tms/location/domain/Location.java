@@ -1,4 +1,4 @@
-package gwangjae.tms.category.domain;
+package gwangjae.tms.location.domain;
 
 public class Location {
 	private int locationId;

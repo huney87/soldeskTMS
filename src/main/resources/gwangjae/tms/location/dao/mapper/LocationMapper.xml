@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="gwangjae.tms.category.dao.mapper.LocationMapper">
+	
+	<select id="selectLocationList" resultType="map">
+		SELECT LOC_ID AS locationId, #번호
+			LOC_NAME AS locationName, #이름
+			LOC_DETAIL AS locationDetail #설명
+		FROM LOCATIONS
+	</select>
+	
+	<select id="selectLocation" parameterType="map" resultType="gwangjae.tms.location.domain.Location">
+		SELECT LOC_ID AS locationId, #번호
+			LOC_NAME AS locationName, #이름
+			LOC_DETAIL AS locationDetail #설명
+		FROM LOCATIONS
+		WHERE LOC_ID = #{locationId}
+	</select>
+	
+	<insert id="insertLocation" parameterType="map">
+    	INSERT INTO LOCATIONS
+    	(
+    		LOC_ID,
+    		LOC_NAME, 
+    		LOC_DETAIL
+    	)
+    	values 
+    	(
+    		user_no_seq.NEXTVAL, 
+    		#{locationName}, 
+    		#{locationDetail}
+    	)
+    </insert>
+    
+    <update id="updateLocation" parameterType="map">
+    	UPDATE LOCATIONS
+    	LOC_NAME = #{locationName},
+    	LOC_DETAIL = #{locationDetail}
+    	WHERE LOC_ID = #{locationId}
+    </update>
+    
+    <delete id="delectLocation" parameterType="map">
+    	DELETE
+    	FROM LOCATIONS
+    	WHERE LOC_ID = #{locationId}
+    </delete>
+</mapper>
