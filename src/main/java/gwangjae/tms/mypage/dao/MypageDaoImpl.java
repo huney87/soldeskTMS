@@ -5,7 +5,9 @@ import gwangjae.tms.mypage.domain.Reservation;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class MypageDaoImpl implements MypageDao{
 	private MypageMapper mapper;
 	

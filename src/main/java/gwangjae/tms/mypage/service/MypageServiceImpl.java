@@ -5,7 +5,9 @@ import gwangjae.tms.mypage.domain.Reservation;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class MypageServiceImpl implements MypageService{
 	private MypageDao dao;
 	
