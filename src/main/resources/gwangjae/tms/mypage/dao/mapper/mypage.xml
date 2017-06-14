@@ -9,7 +9,7 @@
 		<result property="hallName" column="h_name"/>
 	</resultMap>
 	
-	<select id="getResevations" resultMap="ReservMap">
+	<select id="getReserve" resultMap="ReservMap">
 		select r_id,r_date,perf_title,h_name from reserves r join users u 
 		on (r.user_id=u.user_id)
 		join PERFORMANCES p
@@ -17,4 +17,8 @@
 		join halls h
 		on (r.H_ID=h.h_id)
 	</select>
+	
+	<delete id="deleteReserve" parameterType="int">
+		delete from reserves where r_id=#{r_id}
+	</delete>
 </mapper>

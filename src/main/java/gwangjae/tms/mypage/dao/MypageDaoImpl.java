@@ -13,8 +13,13 @@ public class MypageDaoImpl implements MypageDao{
 	@Autowired private MypageMapper mapper;
 
 	@Override
-	public List<Reservation> getReservations() {
-		return mapper.getResevations();
+	public List<Reservation> getReserve() {
+		return mapper.getReserve();
+	}
+
+	@Override
+	public int deleteReserve(int reserveId) {
+		return mapper.deleteReserve(reserveId);
 	}
 	
 }

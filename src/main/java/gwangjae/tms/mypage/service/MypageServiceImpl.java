@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 public class MypageServiceImpl implements MypageService{
 	@Autowired private MypageDao dao;
 
-	public List<Reservation> getReservations() {
-		return dao.getReservations();
+	public List<Reservation> getReserve() {
+		return dao.getReserve();
+	}
+
+	public int deleteReserve(int reserveId) {
+		return dao.deleteReserve(reserveId);
 	}
 }

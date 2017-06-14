@@ -39,8 +39,12 @@ public class MypageController {
 	@RequestMapping("/reservelist")
 	@ResponseBody
 	public List<Reservation> getReservations(){
-		return mypageService.getReservations();
+		return mypageService.getReserve();
 	} 
 	
-	
+	@RequestMapping("/reserveDelete")
+	@ResponseBody
+	public int deleteReserve(int reserveId){
+		return mypageService.deleteReserve(reserveId);
+	}
 }

@@ -5,5 +5,6 @@ import gwangjae.tms.mypage.domain.Reservation;
 import java.util.List;
 
 public interface MypageMapper {
-	List<Reservation> getResevations();
+	public List<Reservation> getReserve();
+	public int deleteReserve(int reserveId);
 }
