@@ -224,7 +224,7 @@ $(document).ready(function(){
             $("#msg").text("오류");
             $("#resultModal").modal('show');
         }
-    	
+    	// 공연정보 넘겨주는부분
     	if(stage){
     		$.ajax({
                 url: "/seller/addPerInfo",
