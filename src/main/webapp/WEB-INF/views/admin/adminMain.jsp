@@ -54,13 +54,14 @@ var regBtns=function(){
 			$(users).each(function(idx, user){
 				if(user.userType==1) type="판매자";
 				else type="회원";
-				printUser(user);
+				printUser(user,type);
 			});
 		}
 	});
 	
-	var printUser=function(user){
+	var printUser=function(user,type){
 		var date;
+		var type;
 		
 		date=user.userBirthday.toString();
 		tr=$("<tr></tr>");
@@ -146,7 +147,7 @@ var regBtns=function(){
 	$("#sellerBtn").bind("click",function(){
 		$(":input[name='name']").val()=="";
 		var userList = $("#userList");  // 회원목록
-
+		
         userList.empty();
         
         $.ajax({
@@ -154,7 +155,8 @@ var regBtns=function(){
             success:function(users){
     			$(users).each(function(idx, user){
     				if(user.userType==1) {
-    					printUser(user);
+    					type="판매자";
+    					printUser(user,type);
     				}
     			});
     		}
@@ -164,7 +166,7 @@ var regBtns=function(){
 	$("#userBtn").bind("click",function(){
 		$(":input[name='name']").val()=="";
 		var userList = $("#userList");  // 회원목록
-        
+		
         userList.empty();
         
         $.ajax({
@@ -173,7 +175,7 @@ var regBtns=function(){
     			$(users).each(function(idx, user){
     				if(user.userType==2) {
     				type="회원";
-    				printUser(user);
+    				printUser(user,type);
     				}
     			});
     		}
