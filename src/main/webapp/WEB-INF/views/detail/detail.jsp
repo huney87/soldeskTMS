@@ -21,6 +21,6 @@ $("#my-calendar").zabuto_calendar({
 
 <jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
 
-<jsp:include page="/WEB-INF/views/frames/detailContent.jsp" flush="false"/>
+<jsp:include page="/WEB-INF/views/detail/detailContent.jsp" flush="false"/>
 
 <jsp:include page="/WEB-INF/views/frames/footer.jsp" flush="false"/>

@@ -5,7 +5,13 @@
 <jsp:include page="/WEB-INF/views/frames/header.jsp" flush="false"/>
 
 <title>티켓박스-회원가입</title>
+<!-- 날짜 입력 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css" rel="stylesheet" /> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
+
 <link href="/css/menu.css" media="all" rel="stylesheet" type="text/css" />
+
 <style>
 #middle-menu {
 	display: none;
@@ -48,7 +54,7 @@ $(document).ready(function() {
 		var userEmail = $("#str_email01").val() + "@" + $("#str_email02").val();
 		var userPw = $("#user_psw1").val();
 		var userName = $("#name").val();
-		var userBirthday = $("#user_year").val() + "-" + $("#user_month").val() + "-" + $("#user_day").val();
+		var userBirthday = $("#user_birthday").val();
 		var userPost = $("#postNumber").val();
 		var userAddress = $("#address1").val() + $("#address2").val();
 		var userPhone = $("#phone01").val() + $("#phone02").val() + $("#phone03").val();
@@ -155,7 +161,10 @@ $(document).ready(function() {
 					</div>
 					<div class="form-group">
 		    			<label class="control-label col-sm-2">생일:</label>
-		    			<div class="col-sm-2"> 
+		    			<div class="col-sm-8"> 
+		     				<input type="text" class="form-control" name="user_birthday" id="user_birthday" placeholder="이곳을 클릭하여 생일입력하세요." readonly style="cursor:pointer;">
+		     			</div>
+		    			<!-- <div class="col-sm-2"> 
 		     				<input type="number" class="form-control" id="user_year" placeholder="년">
 		     			</div>
 		     			<div class="col-sm-2"> 
@@ -163,7 +172,7 @@ $(document).ready(function() {
 		     			</div>
 		     			<div class="col-sm-2"> 
 		     				<input type="number" class="form-control" id="user_day" placeholder="일">
-		     			</div>   					
+		     			</div> -->   					
 		  			</div>
 					<div class="form-inline">
 						<label class="control-label col-sm-2" for="postCode">우편번호:</label>
@@ -199,7 +208,7 @@ $(document).ready(function() {
 		</div>
 	</div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		//이메일 입력방식 선택
 		$('#selectEmail').change(function(){
 			$("#selectEmail option:selected").each(function () {
@@ -248,7 +257,7 @@ $(document).ready(function() {
 			});		
 		
 			/* 
-			$(function(){
+			//$(function(){
 			// 비밀번호 6~14 자리수 인지 화면 표시
 				$('#user_psw1').keyup(function(){
 					$('#check').hide();
@@ -273,9 +282,17 @@ $(document).ready(function() {
 		 	   			$('font[name=check]').html("암호 확인 되었습니다.");
 		 	  		}
 				}
-	 	 	});			
+	 	 	});
+			 
+			// 선언한 TextBox에 DateTimePicker 위젯을 적용한다. 
+			$('#user_birthday').datetimepicker({
+				language : 'ko', // 화면에 출력될 언어를 한국어로 설정한다. 
+				pickTime : false, // 사용자로부터 시간 선택을 허용하려면 true를 설정하거나 pickTime 옵션을 생략한다. 
+				defalutDate : new Date() // 기본값으로 오늘 날짜를 입력한다. 기본값을 해제하려면 defaultDate 옵션을 생략한다. 
+			});
 		});
-</script>
+	</script>
+	
 	<!-- 결과값 모달 -->
 	<div class="modal fade" id="resultModal">
 	     <div class="modal-dialog">
