@@ -194,10 +194,10 @@ $(document).ready(function(){
 					<c:choose>
 						<c:when test="${login}">
 					    <span class="membership_link">
-					        <a class="membership_txt" title="관리자 바로가기" href="/admin">회원가입</a>
+					        <a class="membership_txt" title="관리자 바로가기" href="/admin">관리자</a>
 					    </span>
 				 		<span class="membership_link">
-					        <a class="membership_txt" title="판매자 바로가기" href="/seller">회원가입</a>
+					        <a class="membership_txt" title="판매자 바로가기" href="/seller">판매자</a>
 					    </span>
 					    <button type="button" class="btn btn-info btn-xs" id="btnSign">마이페이지</button>
 					    </c:when>
