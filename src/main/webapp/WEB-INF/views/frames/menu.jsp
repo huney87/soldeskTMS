@@ -157,7 +157,7 @@ $(document).ready(function(){
 							<div class="btn-group">
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
-								<c:when test="${login}">
+								<c:when test="${user_type >= 1}">
 									<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>
 								</c:when>
 								<c:otherwise>
