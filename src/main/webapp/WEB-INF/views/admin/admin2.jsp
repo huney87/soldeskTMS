@@ -143,44 +143,6 @@ var regBtns=function(){
 	$("#allBtn").bind("click",function(){
 		window.location.reload();
 	});
-	
-	$("#sellerBtn").bind("click",function(){
-		$(":input[name='name']").val()=="";
-		var userList = $("#userList");  // 회원목록
-		
-        userList.empty();
-        
-        $.ajax({
-            url:"admin/listUsers",
-            success:function(users){
-    			$(users).each(function(idx, user){
-    				if(user.userType==1) {
-    					type="판매자";
-    					printUser(user,type);
-    				}
-    			});
-    		}
-        });   
-	});
-	
-	$("#userBtn").bind("click",function(){
-		$(":input[name='name']").val()=="";
-		var userList = $("#userList");  // 회원목록
-		
-        userList.empty();
-        
-        $.ajax({
-            url:"admin/listUsers",
-            success:function(users){
-    			$(users).each(function(idx, user){
-    				if(user.userType==2) {
-    				type="회원";
-    				printUser(user,type);
-    				}
-    			});
-    		}
-        });   
-	});
 }
 </script>
 </head>
@@ -196,6 +158,7 @@ var regBtns=function(){
                     <a href="/admin">관리자</a>
                 </li>
                 <li><a href="/admin">회원관리</a></li>
+                <li><a href="/admin/admin2">공연관리</a></li>
                 <li><a href="/login/logout">로그아웃</a></li>
                 <li><a href="/">쇼핑몰</a></li>
             </ul>
@@ -213,29 +176,25 @@ var regBtns=function(){
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1">
                         <div class="jumbotron">
-    						<h3>회원관리</h3>   
+    						<h3>공연관리</h3>   
     					</div>
     		
 		<div class="row">
 				<div class="form-inline">
 					<input type="text" class="form-control" name="name" placeholder="검색"/>
 					<button type="button" class="btn btn-info" id="searchBtn">검색</button>
-				<div class="btn-group">
-					<button type="button" class="btn btn-default" id="allBtn">전체 조회</button>
-					<button type="button" class="btn btn-default" id="sellerBtn">판매자 조회</button>
-					<button type="button" class="btn btn-default" id="userBtn">회원 조회</button>
-				</div>
-					<button type="button" class="btn btn-danger" id="delBtn">회원삭제</button>
+					<button type="button" class="btn btn-default" id="delBtn">전체 조회</button>
 				</div>
 		<table class="table table-hover"style="margin-top:100px">
 			<thead>
           		<tr>
-            		<th>번호</th>
-            		<th>이름</th>
-            		<th>이메일</th>
-            		<th>주소</th>
-            		<th>생년월일</th>
-            		<th>회원유형</th>
+          			<th>포스터 이미지</th>
+            		<th>공연명</th>
+            		<th>시작일</th>
+            		<th>마감일</th>
+            		<th>장르</th>
+            		<th>총 티켓 판매수</th>
+            		<th>게시</th>
           		</tr>
         	</thead>
 			<tbody id="userList">

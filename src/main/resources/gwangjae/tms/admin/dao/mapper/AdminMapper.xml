@@ -12,6 +12,14 @@
 		<result property="userType" column="user_type"/>
 	</resultMap>
 	
+	<resultMap id="performMap" type="AdminPerformance">
+		<id property="perfTitle" column="perf_title"/>
+		<result property="perfStartDate" column="perf_startdate"/>
+		<result property="perfEndDate" column="perf_enddate"/>
+		<result property="perfImage" column="perf_Image"/>
+		<result property="perfDisplay" column="perf_display"/>
+	</resultMap>
+	
 	<select id="getUsers" resultMap="AdminMap">
 		select * from users where user_type in(1,2) order by user_id
 	</select>
@@ -23,4 +31,13 @@
 	<delete id="delUsers" parameterType="int">
 		delete users where user_id=#{userId}
 	</delete>
+	
+	<select id="getPerform" resultMap="performMap">
+		select perf_title,perf_title,perf_startdate,perf_enddate,perf_image,perf_display,
+		count(SEATINFO.PERF_ID) count
+		from performances join SEATINFO
+		on performances.PERF_ID=SEATINFO.PERF_ID 
+		group by performances.perf_title,performances.perf_title,performances.perf_startdate,
+		performances.perf_enddate,performances.perf_image,performances.perf_display,SEATINFO.PERF_ID
+    </select>
 </mapper>

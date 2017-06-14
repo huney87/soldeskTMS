@@ -12,5 +12,6 @@
         <package name="gwangjae.tms.location.domain"/>
         <package name="gwangjae.tms.mypage.domain"/>
         <package name="gwangjae.tms.ticketing.domain"/>
+        <package name="gwangjae.tms.admin.domain"/>
     </typeAliases>
 </configuration>

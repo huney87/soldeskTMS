@@ -12,27 +12,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 	@Autowired private AdminService adminService;
 	
-	@RequestMapping("/admin")
+	@RequestMapping
 	public String main(){
-		return "admin/adminMain";
+		return "admin/admin1";
 	}
 	
-	@RequestMapping("admin/listUsers")
+	@RequestMapping("/admin2")
+	public String admin2(){
+		return "admin/admin2";
+	} 
+	
+	@RequestMapping("/listUsers")
 	@ResponseBody
 	public List<User> listUsers(){
 		return adminService.getUsers();
 	}
 	
-	@RequestMapping("admin/searchUser")
+	@RequestMapping("/searchUser")
 	@ResponseBody
 	public List<User> searchUser(String userName){
 		return adminService.searchUser(userName);
 	}
 	
-	@RequestMapping("admin/delete")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public int delUsers(int userId){
 		return adminService.delUsers(userId);
