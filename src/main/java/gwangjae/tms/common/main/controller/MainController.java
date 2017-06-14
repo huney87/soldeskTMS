@@ -23,6 +23,10 @@ public class MainController {
 		}else{
 			model.addAttribute("login", false);
 		}
+		if(session.getAttribute("user_type") != null && !session.getAttribute("user_type").equals("")){
+			Object user_type = session.getAttribute("user_type");
+			model.addAttribute("user_type", user_type);
+		}
 		return "/main";
 	}
 	

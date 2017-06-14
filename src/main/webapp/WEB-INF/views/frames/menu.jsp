@@ -63,7 +63,20 @@ $(document).ready(function(){
     });	
 	
 	$("#btnSign").click(function(){
-		window.location.assign("/user");
+	<c:choose>
+		<c:when test="${user_type == 1}">
+			window.location.assign("/admin");
+	    </c:when>
+	    <c:when test="${user_type == 2}">
+	    	window.location.assign("/seller");
+	    </c:when>
+	    <c:when test="${user_type == 3}">
+	    	window.location.assign("/mypage");
+	    </c:when>
+		<c:otherwise>
+			window.location.assign("/user");
+		</c:otherwise>
+	</c:choose>		
     });	
 	
 	$('#login-form').submit(function(e){
@@ -191,14 +204,17 @@ $(document).ready(function(){
 				
 				<div class="col-sm-6">
 					<div class="btn_theater">
-					<c:choose>
-						<c:when test="${login}">
-					    <span class="membership_link">
+					<!-- <span class="membership_link">
 					        <a class="membership_txt" title="관리자 바로가기" href="/admin">관리자</a>
-					    </span>
-				 		<span class="membership_link">
-					        <a class="membership_txt" title="판매자 바로가기" href="/seller">판매자</a>
-					    </span>
+					    </span> -->
+					<c:choose>
+						<c:when test="${user_type == 1}">
+					    <button type="button" class="btn btn-info btn-xs" id="btnSign">관리자</button>
+					    </c:when>
+					    <c:when test="${user_type == 2}">
+				 		<button type="button" class="btn btn-info btn-xs" id="btnSign">판매자</button>
+					    </c:when>
+					    <c:when test="${user_type == 3}">
 					    <button type="button" class="btn btn-info btn-xs" id="btnSign">마이페이지</button>
 					    </c:when>
 						<c:otherwise>

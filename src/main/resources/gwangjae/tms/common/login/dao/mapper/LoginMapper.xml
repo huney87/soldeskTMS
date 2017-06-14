@@ -8,7 +8,7 @@
     </resultMap>
     
     <select id="loginCheck" parameterType="Login" resultType="int">
-    	SELECT count(*) 
+    	SELECT count(*) + sum(user_type) count
     	FROM users
     	WHERE (user_email = #{email} and user_pw = #{pw})
     </select>

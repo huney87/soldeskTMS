@@ -11,14 +11,15 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired LoginDao dao;
 
 	@Override
-	public boolean checkLogin(String email, String pw) {
+	public int checkLogin(String email, String pw) {
 		Login user = new Login();
 		user.setEmail(email);
 		user.setPw(pw);
 		int result = dao.getUserCnt(user);
 		
-		if( result > 0) return true;
-		else return false;
+		/*if( result > 0) return true;
+		else return false;*/
+		return result;
 	}
 
 }

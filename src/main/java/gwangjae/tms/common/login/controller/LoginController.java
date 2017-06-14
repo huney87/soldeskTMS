@@ -22,9 +22,11 @@ public class LoginController {
 		LoginResult result = new LoginResult();
 		result.setEmail(email);
 		
-		if(serv.checkLogin(email, pw)){			
+		if(serv.checkLogin(email, pw) >= 1){
+			int idx = serv.checkLogin(email, pw);
 			result.setLoginFlag(1);
 			session.setAttribute("email", email);
+			session.setAttribute("user_type", idx);
 		}else {
 			result.setLoginFlag(0);
 		}		
@@ -33,7 +35,7 @@ public class LoginController {
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
-		session.setAttribute("email", "");
+		session.invalidate();
 		return "redirect:/";
 	}
 }
