@@ -65,16 +65,16 @@ $(document).ready(function(){
 	$("#btnSign").click(function(){
 	<c:choose>
 		<c:when test="${user_type == 1}">
-			window.location.assign("/admin");
+			location.href='/admin';
 	    </c:when>
 	    <c:when test="${user_type == 2}">
-	    	window.location.assign("/seller");
+	    	location.href='/seller';
 	    </c:when>
 	    <c:when test="${user_type == 3}">
-	    	window.location.assign("/mypage");
+	    	location.href='/mypage';
 	    </c:when>
 		<c:otherwise>
-			window.location.assign("/user");
+			location.href='/user';
 		</c:otherwise>
 	</c:choose>		
     });	
@@ -106,14 +106,6 @@ $(document).ready(function(){
              $(this).html(html);
          }
      });
-     
-     $("#my-calendar").zabuto_calendar({
-     	language: "kr",
-	  	data: eventData,
-        action: function () {
-            return myDateFunction(this.id, false);
-       	},
-	 });
      
      $('#input-2').rating({'size':'xs'});
      $('#sideMenu').affix({offset: {top: 10} });

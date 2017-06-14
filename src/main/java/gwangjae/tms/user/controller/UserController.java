@@ -22,7 +22,7 @@ public class UserController {
 		return "sign/main";
 	}
 	
-	@RequestMapping("/addUser")
+	@RequestMapping(value="/addUser",method=RequestMethod.POST)
 	@ResponseBody
 	public int addUser(User user){
 		return userService.addUser(user);

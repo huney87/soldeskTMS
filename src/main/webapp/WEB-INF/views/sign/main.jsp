@@ -39,92 +39,7 @@ $(document).ready(function() {
 		});    	
     	
     });   
-    
-    
-    var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
-    var msg = $("#msg");            // 결과 메세지
-    // 회원가입 버튼 클릭
-    
-	$("#userAdd").on("submit", function(e){		
-		e.preventDefault();
-		
-		var userType = $(':radio[name="userTypeRadio"]:checked').val();	// 회원 가입 타입(판매자 - 1 , 사용자 - 2)
-		var userEmail = $("#str_email01").val() + "@" + $("#str_email02").val();
-		var userPw = $("#user_psw1").val();
-		var userName = $("#name").val();
-		var userBirthday = $("#user_year").val() + "-" + $("#user_month").val() + "-" + $("#user_day").val();
-		var userPost = $("#postNumber").val();
-		var userAddress = $("#address1").val() + $("#address2").val();
-		var userPhone = $("#phone01").val() + $("#phone02").val() + $("#phone03").val();
-		
-		//회원가입 처리
-		$.ajax({
-            url: "/user/addUser",
-            data:{	// 메소드가 실행한 데이터를 넘겨준다!
-            	// 도메인 컬럼 : 명시된 변수명
-            	userType : userType,
-            	userEmail : userEmail,
-            	userPw : userPw,
-            	userName : userName,
-            	userBirthday : userBirthday,
-            	userPost : userPost,
-            	userAddress : userAddress,
-            	userPhone : userPhone,            	
-            	},  
-            	success:function(result){
-                    if(result) msg.text("추가 성공");
-                    else msg.text("추가 실패");
-                },
-                error:function(a, b, errMsg){
-                    msg.text("추가 실패: " + errMsg);                
-                },
-                complete:function(){
-                	//$("#resultModal").modal('show');
-                	alert("회원가입완료.");
-                	window.location.assign("/");
-                    //modal.modal('show');                	
-                }        
-        });
-		
-		return false;
-	});
-    
-    
-    
-    /* 
-    var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
-    var msg = $("#msg");            // 결과 메세지
-    var addUserCheck = function(adduser){
-    	$.ajax({    		
-    		url : "/user/addUser",
-    		data : adduser,    		
-    		dataType : "json",
-    		success : function(data){
-    			if(data) msg.text("추가 성공");
-                else msg.text("추가 실패");
-    		},
-    		error:function(a, b, errMsg){
-                msg.text("추가 실패: " + errMsg);                
-            },
-            complete:function(){
-            	//$("#resultModal").modal('show');
-            	alert("회원가입완료.");
-            	window.location.assign("/");
-                //modal.modal('show');                	
-            }        
-    	});
-    }    
-    
- 	// submit 기능이 로그인 체크기능으로 변환?? 로그인 체크 확인 해서 수정해서 진행해보자. 버튼 기능이니 로그인기능 확인
-	// 데이터를 객체화 시켜서 넘겨주기 위해 serialize()를 사용한것이다.
-	$('#userAdd').submit(function(e){
-        e.preventDefault();
-        addUserCheck( $( this ).serialize() );
-        return false;
-    }); 	
- 	 */
- 	
-    /* 
+
     var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
     var msg = $("#msg");            // 결과 메세지
     // 회원가입 버튼 클릭
@@ -138,9 +53,19 @@ $(document).ready(function() {
 		var userAddress = $("#address1").val() + $("#address2").val();
 		var userPhone = $("#phone01").val() + $("#phone02").val() + $("#phone03").val();
 		
+		if(!userType){
+			alert("회원유형을 선택하세요.");
+			return false;
+		}
+		if(!userPw){
+			alert("비밀번호를 입력하세요.");
+			return false;
+		}
+		
 		//회원가입 처리
 		$.ajax({
             url: "/user/addUser",
+            type:"post",
             data:{	// 메소드가 실행한 데이터를 넘겨준다!
             	// 도메인 컬럼 : 명시된 변수명
             	userType : userType,
@@ -167,7 +92,6 @@ $(document).ready(function() {
                 }        
         });		
 	});	
-     */
 });
 </script>
 
@@ -179,7 +103,7 @@ $(document).ready(function() {
 				<div class="page-header">
 		    		<h1><span class="glyphicon glyphicon-user"></span> 회원가입</h1>      
 		  		</div>
-				<form class="form-horizontal" >
+				<form class="form-horizontal" id="frmUserAdd">
 					<div class="form-group">
 						<div class="col-sm-offset-4">
 							<div class="col-sm-4">
@@ -267,7 +191,7 @@ $(document).ready(function() {
 	  			
 			 		<div class="form-group" style="margin-top:50px"> 
 						<div class="col-sm-offset-2 col-sm-8 text-right">
-							<button type="submit" class="btn btn-primary btn-lg" id="userAdd">회원가입</button>
+							<button type="button" class="btn btn-primary btn-lg" id="userAdd">회원가입</button>
 						</div>
 					</div>
 				</form>
