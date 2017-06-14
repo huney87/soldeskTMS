@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="searchUser" parameterType="String" resultMap="AdminMap">
-		select * from users where user_name=#{userName}
+		select * from users where user_name like '%'||#{userName}||'%'
 	</select>
 
 	<delete id="delUsers" parameterType="int">
