@@ -18,7 +18,8 @@
 		<result property="perfEndDate" column="perf_enddate"/>
 		<result property="perfImage" column="perf_Image"/>
 		<result property="perfDisplay" column="perf_display"/>
-		<result property="perfcountTicket" column="count(SEATINFO.PERF_ID)"/>
+		<result property="perfCat" column="cat_id"/>
+		<result property="perfcountTicket" column="count"/>
 	</resultMap>
 	
 	<select id="getUsers" resultMap="AdminMap">
@@ -34,11 +35,13 @@
 	</delete>
 	
 	<select id="getPerform" resultMap="performMap">
-		select perf_title,perf_title,perf_startdate,perf_enddate,perf_image,perf_display,
-		count(SEATINFO.PERF_ID) count
-		from performances join SEATINFO
-		on performances.PERF_ID=SEATINFO.PERF_ID 
-		group by performances.perf_title,performances.perf_title,performances.perf_startdate,
-		performances.perf_enddate,performances.perf_image,performances.perf_display,SEATINFO.PERF_ID
+		select perf_title,cat_id,perf_startdate,perf_enddate,perf_image,perf_display,
+		count(s.PERF_ID) count
+		from performances p join SEATINFO s
+		on p.PERF_ID=s.PERF_ID
+		join RESERVES r
+		on s.PERF_ID=r.PERF_ID 
+		group by perf_title,perf_title,perf_startdate,cat_id,
+		perf_enddate,perf_image,perf_display,s.PERF_ID
     </select>
 </mapper>

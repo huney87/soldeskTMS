@@ -44,7 +44,7 @@ public class AdminController {
 		return adminService.delUsers(userId);
 	}
 	
-	@RequestMapping("/listPerform")
+	@RequestMapping("/admin2/listPerform")
 	@ResponseBody
 	public List<AdminPerformance> listPerform(){
 		return adminService.getPerform();

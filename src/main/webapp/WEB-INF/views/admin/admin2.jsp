@@ -44,21 +44,32 @@ $(function() {
 
 var regBtns=function(){
 	var performanceList=$("#performanceList");
+	var display;
+	var value;
 	
 	performanceList.empty();
 	
 	$.ajax({
-		url:"6admin/listPerform",
+		url:"admin2/listPerform",
 		success:function(performs){
 			$(performs).each(function(idx, perform){
-				printUser(perform);
+				if(perform.perfDisplay==1) value="게시 취소";
+				else value="게시";
+				printUser(perform,value);
 			});
 		}
 	});
 	
-	var printUser=function(perform){
+	var printUser=function(perform,value){
 		tr=$("<tr></tr>");
-		td=$("<td>"+perform.perfTitle+"</td>");
+		td=$("<td>"+perform.perfImage+"</td><td>"
+				+perform.perfTitle+"</td><td>"
+				+perform.perfStartDate+"</td><td>"
+				+perform.perfEndDate+"</td><td>"
+				+perform.perfCat+"</td><td>"
+				+perform.perfcountTicket+"</td><td>"+
+				"<button type='button' class='btn btn-danger' value='"+perform.perfDisplay+"'>"+value+"</button>"
+				);
 		performanceList.append(tr.append(td));
 	}
 }
