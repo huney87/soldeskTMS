@@ -512,26 +512,28 @@ function ImgError(source){
 		</div> -->
 <script>
 $(document).ready(function(){
-	$("#musical").click(function(){
+	
+	var regBtns=function(){
+		var musical=$("#musical");
+		var concert=$("#concert");
+		var shows=$("#shows");
 		var cateList = $("#cate");
-		var select;
-		cateList.empty();
 		
+		var perId;
+		
+		cateList.empty();
+
 		$.ajax({
 			url:"/category",
+			data:"performance",
 			success:function(select){
-				musical();
-			}
-		});	
-	});
-});
-	var musical = function(){
-		var category = '<div class="frame1">'
+				$(select).each(function(idx, performance, hall){
+					var category = '<div class="frame1">'
 						+'<div class="card">'
-						+'<img src="./img/에어리언.jpg" onerror="ImgError(this)" />'
+						+'<img src="'+performance.per_image'" onerror="ImgError(this)" />'
 						+'</div>'
 						+'<div class="card back">'
-						+'<img class="backPost" src="../img/에어리언.jpg" onerror="ImgError(this)" />'
+						+'<img class="backPost" src="'+performance.per_image'" onerror="ImgError(this)" />'
 						+'<article id="movieInfo">'
 						+'<div class="moveInfoBtn">'
 						+'<div class="moveInfoBtn1">'
@@ -551,12 +553,20 @@ $(document).ready(function(){
 						+'</div>'
 						+'<div class="movieInfo3">'
 						+'<p>'
-						+'<span class="age">12</span> 공연 1'
+						+'<span class="age">12</span>'+performance.per_title''
 						+'</p>'
-						+'<div class="movieInfo3Txt">공연장</div>'
+						+'<div class="movieInfo3Txt">'hall.hallName'</div>'
 						+'</div>'
 						+'</div>';
 			$("#cate").append(category);
+				});
+		
+			}
+		});
+	};
+});
+	var musical = function(){
+		
 			
 			
 			/* var div1=$("<div class='frame1'></div>");
