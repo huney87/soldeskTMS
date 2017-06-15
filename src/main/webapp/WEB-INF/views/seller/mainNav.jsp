@@ -81,11 +81,11 @@ $(function() {
 	<h3>판매자 페이지</h3><br><br><br><br>
 	<li id="menu1"><a href="/hallManage">&nbsp;</a></li>
 	<li id="menu2"><a href="/seller/perMain">&nbsp;</a></li>
-	<li id="menu3"><a href="/seller">&nbsp;</a></li>
+	<li id="menu3"><a href="/">&nbsp;</a></li>
 </ul>
 <ul class="nav nav-pills nav-stacked menuName">
 	<br><br><br><br><br><br><br><br>
 	<li id="menu11"><h4>공연장관리</h4></li>
 	<li id="menu22"><h4>공연관리</h4></li>
-	<li id="menu33"><h4>Q&A답변</h4></li>
+	<li id="menu33"><h4>메인으로 이동</h4></li>
 </ul>

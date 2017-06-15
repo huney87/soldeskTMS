@@ -41,7 +41,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 	 public List<Performance> getHalls(int centerId){
 			return performanceDao.getHalls(centerId);
 	}
-	public Hall getLayout(int hallId){
-			return performanceDao.getLayout(hallId);
+	public Hall getLayout(int per_id){
+			return performanceDao.getLayout(per_id);
 	}
 }

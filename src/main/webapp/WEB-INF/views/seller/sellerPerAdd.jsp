@@ -10,7 +10,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>
-$(document).ready(function(){	
+$(document).ready(function(){
+	var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
+    var msg = $("#msg");            // 결과 메세지
+	
 	// 클릭시 반응(리셋)
 	$("#reset").click(function(){
 		$('.new-seat').remove();
@@ -203,6 +206,7 @@ $(document).ready(function(){
     	var title=$("#title").val();
     	var stage=$("#stage").val();
     	var category=$("#genre").val();
+    	var seatInfo={ "seat":seatValue, "per_title":title, }
 		
     	// 현재 seat를 단순하게 db에 저장하기 때문에 배열로 넘겨줘야함. (차후 수정)
     	if($("#row").val()) {
@@ -413,17 +417,17 @@ button{
 </div>
 <!-- 결과 확인을 위한 모달 -->
 <div class="modal fade" id="resultModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title" id="msg" style="color:black;"></h4>
-            </div>            
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="msg" style="color:black;"></h4>
+      </div>            
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

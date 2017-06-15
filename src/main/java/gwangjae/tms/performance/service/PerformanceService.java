@@ -13,5 +13,5 @@ public interface PerformanceService {
 	public int addPerInfo(Performance performance);
 	public int addPerDetail(Performance performance);
 	public List<Performance> getHalls(int centerId);
-	public Hall getLayout(int hallId);
+	public Hall getLayout(int per_id);
 }

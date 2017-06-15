@@ -35,14 +35,14 @@ h4{
 		<div class="col-sm-2" style="color:white;">
 		  <h3>공연 관리</h3>
 		</div>
-		<div class="col-sm-3">		
-			<a href="/seller/perAdd" class="btn btn-sm btn-default mainBtn" id="search">공연 등록</a>
-			<a href="/seller/perDetail" class="btn btn-sm btn-default mainBtn" id="resistHall">공연 세부사항 등록</a>
+		<div class="col-sm-5">		
+			<a href="/seller/perAdd1" class="btn btn-sm btn-default mainBtn" id="search">공연 등록1</a>
+			<a href="/seller/perAdd2" class="btn btn-sm btn-default mainBtn" id="search">공연 등록2</a>
+			<a href="/seller/perAdd3" class="btn btn-sm btn-default mainBtn" id="resistHall">공연 세부사항 등록</a>
 		</div>
-		<div class="col-sm-7">			
+		<div class="col-sm-5">			
 			<input type="text" id="searchHall" placeholder="공연 이름">
 			<button type="button" class="btn btn-md btn-default mainBtn" id="search">공연 검색</button>
-			<button type="button" class="btn btn-md btn-default mainBtn" id="searchAll">전체검색</button>	
 		</div>			
 	</div>
 </div>

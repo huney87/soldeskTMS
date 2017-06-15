@@ -30,15 +30,21 @@ public class PerformanceController {
         return "seller/perMain";
     }
 	
+	//공연 등록1 (기본정보 등록화면)
+	@RequestMapping("/perAdd1")
+	public String perAdd1(){
+		return "seller/perAdd1";
+	}
+	
 	//공연 추가 화면
-	@RequestMapping("/perAdd")
-    public String perAdd(){
-        return "seller/sellerPerAdd";
+	@RequestMapping("/perAdd2")
+    public String perAdd2(){
+        return "seller/perAdd2";
     }
 	//공연 상세정보 등록 화면
-	@RequestMapping("/perDetail")
-	public String perDetail(){
-		return "seller/perDetail";
+	@RequestMapping("/perAdd3")
+	public String perAdd3(){
+		return "seller/perAdd3";
 	}
 	
 	///////////////////////////////////////////////
@@ -89,8 +95,8 @@ public class PerformanceController {
 	//좌석 레이아웃 불러오기
 	@RequestMapping("/getLayout")
     @ResponseBody
-    public Hall getLayout(int hallId){
-		return performanceService.getLayout(hallId);
+    public Hall getLayout(int per_id){
+		return performanceService.getLayout(per_id);
 	}
 	
 	
