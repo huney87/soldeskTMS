@@ -51,22 +51,128 @@ $(document).ready(function() {
     // 회원가입 버튼 클릭
 	$("#userAdd").on("click", function(){
 		var userType = $(':radio[name="userTypeRadio"]:checked').val();	// 회원 가입 타입(판매자 - 1 , 사용자 - 2)
-		var userEmail = $("#str_email01").val() + "@" + $("#str_email02").val();
+		var userEmail01 = $("#str_email01").val();	// 이메일 아이디
+		var userEmail02 = $("#str_email02").val();	// 이메일 사이트
+		var userEmail = userEmail01 + "@" + userEmail02;
 		var userPw = $("#user_psw1").val();
+		var userPwCheck = $("#user_psw2").val();
 		var userName = $("#name").val();
 		var userBirthday = $("#user_birthday").val();
 		var userPost = $("#postNumber").val();
-		var userAddress = $("#address1").val() + $("#address2").val();
+		var userAddressDt = $("#address2").val();	//회원 상세주소만
+		var userAddress = $("#address1").val() + $("#address2").val();	// 회원 주소 + 상세주소 더한것
 		var userPhone = $("#phone01").val() + $("#phone02").val() + $("#phone03").val();
+				
+		if(!userType){	//회원 가입 타입 미선택시 경고 창
+			swal({
+				  title: "회원유형을 선택하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}
 		
-		if(!userType){
-			alert("회원유형을 선택하세요.");
+		if(!userEmail01){	//이메일 아이디 미 입력시 경고창
+			swal({
+				  title: "이메일 아이디를 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
 			return false;
 		}
-		if(!userPw){
-			alert("비밀번호를 입력하세요.");
+		
+		if(!userEmail02){	//이메일 싸이트 미입력시 경고창
+			swal({
+				  title: "이메일 홈페이지를 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
 			return false;
 		}
+		
+		if(!userPw){	//비밀번호 미입력시 경고창
+			swal({
+				  title: "비밀번호를 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}	
+		
+		if(!userPwCheck){	//비밀번호 확인 미입력시 경고창
+			swal({
+				  title: "비밀번호를 확인 하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}	
+		
+		if(!userName){	//회원 이름 미입력시 경고창
+			swal({
+				  title: "이름을 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}
+		
+		if(!userBirthday){	//회원 생일 미입력시 경고창
+			swal({
+				  title: "생일을 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}
+		
+		if(!userPost){	//회원 우편번호 미 입력시 경고창
+			swal({
+				  title: "우편번호를 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}
+		
+		if(!userAddress2){	//회원 상세주소 미입력시 경고창
+			swal({
+				  title: "상세주소를 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}
+		
+		if(!userPhone){	//	회원 휴대폰 번호 미입력시 경고창
+			swal({
+				  title: "휴대폰 번호를 입력하세요.",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "확인",				  
+			});			
+			return false;
+		}
+		
 		
 		//회원가입 처리
 		$.ajax({
@@ -160,22 +266,14 @@ $(document).ready(function() {
 						</div>
 					</div>
 					<div class="form-group">
-		    			<label class="control-label col-sm-2">생일:</label>
-		    			<div class="col-sm-8"> 
-		     				<input type="text" class="form-control" name="user_birthday" id="user_birthday" placeholder="이곳을 클릭하여 생일입력하세요." readonly style="cursor:pointer;">
-		     			</div>
-		    			<!-- <div class="col-sm-2"> 
-		     				<input type="number" class="form-control" id="user_year" placeholder="년">
-		     			</div>
-		     			<div class="col-sm-2"> 
-		     				<input type="number" class="form-control" id="user_month" placeholder="월">
-		     			</div>
-		     			<div class="col-sm-2"> 
-		     				<input type="number" class="form-control" id="user_day" placeholder="일">
-		     			</div> -->   					
+                        <label class="control-label col-sm-2">생일:</label>
+                        <div class="col-sm-8"> 
+                             <input type="date" class="form-control" required>
+                        </div>					 					
 		  			</div>
-					<div class="form-inline">
-						<label class="control-label col-sm-2" for="postCode">우편번호:</label>
+		  			
+		  			<div class="form-inline" style="margin-bottom:1rem;">
+                        <label class="control-label col-sm-2" for="postCode">우편번호:</label>					
 						<input type="text" name="postCode" class="postcodify_postcode5 form-control" id="postNumber" value="" placeholder="우편번호 버튼을 누르세요." style="margin-left:7px" readonly/>
 						<button type="button" id="postcodify_search_button" class="btn btn-info">우편번호찾기</button>
 						<input type="text" id="address1" class="postcodify_address form-control" value="" style="margin-left:20px; width:32%" required readonly/>
@@ -193,9 +291,9 @@ $(document).ready(function() {
 					</div>
 					<div class="form-inline">
 		  				<label class="control-label col-sm-2">휴대폰:</label>
-		  				<input type="number" id="phone01" class="form-control" style="width:10%;margin-left:5px"/>&nbsp;-
-		  				<input type="number" id="phone02" class="form-control" style="width:15%"/>&nbsp;-
-		  				<input type="number" id="phone03" class="form-control" style="width:15%"/>
+		  				<input type="number" id="phone01" class="form-control" min="0"	max="999" 	style="width:10%;margin-left:5px"/>&nbsp;-
+		  				<input type="number" id="phone02" class="form-control" min="0"	max="999" 	style="width:15%"/>&nbsp;-
+		  				<input type="number" id="phone03" class="form-control" min="0"	max="9999"	style="width:15%"/>
 		  			</div>
 	  			
 			 		<div class="form-group" style="margin-top:50px"> 
