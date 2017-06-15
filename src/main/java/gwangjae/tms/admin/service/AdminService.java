@@ -12,4 +12,5 @@ public interface AdminService {
 	
 	List<AdminPerformance> getPerform();
 	List<AdminPerformance> searchPerform(String perfTitle);
+	boolean changeDisplay(AdminPerformance perform);
 }

@@ -12,4 +12,5 @@ public interface AdminMapper {
 	
 	public List<AdminPerformance> getPerform();
 	public List<AdminPerformance> searchPerform(String perfTitle);
+	public int changeDisplay(AdminPerformance perform);
 }

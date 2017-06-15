@@ -12,4 +12,5 @@ public interface AdminDao {
 	
 	List<AdminPerformance> getPerform();
 	List<AdminPerformance> searchPerform(String perfTitle);
+	int changeDisplay(AdminPerformance perform);
 }

@@ -13,7 +13,8 @@
 	</resultMap>
 	
 	<resultMap id="performMap" type="AdminPerformance">
-		<id property="perfTitle" column="perf_title"/>
+		<id property="perfId" column="perf_id"/>
+		<result property="perfTitle" column="perf_title"/>
 		<result property="perfStartDate" column="perf_startdate"/>
 		<result property="perfEndDate" column="perf_enddate"/>
 		<result property="perfImage" column="perf_Image"/>
@@ -35,8 +36,8 @@
 	</delete>
 	
 	<sql id="selectPerform">
-		select perf_title,cat_id,perf_startdate,perf_enddate,perf_image,perf_display,
-		count(s.PERF_ID) count
+		select p.perf_id,perf_title,cat_id,perf_startdate,
+		perf_enddate,perf_image,perf_display,count(s.PERF_ID) count
 		from performances p join SEATINFO s
 		on p.PERF_ID=s.PERF_ID
 		join RESERVES r
@@ -44,7 +45,7 @@
 	</sql>
 	<sql id="selectPerform2">
 		group by perf_title,perf_title,perf_startdate,cat_id,
-		perf_enddate,perf_image,perf_display,s.PERF_ID
+		perf_enddate,perf_image,perf_display,s.PERF_ID,p.perf_id
 	</sql>
 	
 	<select id="getPerform" resultMap="performMap">
@@ -57,4 +58,8 @@
 		where perf_title like '%'||#{perf_title}||'%'
 		<include refid="selectPerform2"/>
 	</select>
+	
+	<update id="changeDisplay" parameterType="AdminPerformance">
+		update performances set perf_display=#{perfDisplay} where perf_id=#{perfId}
+	</update>
 </mapper>

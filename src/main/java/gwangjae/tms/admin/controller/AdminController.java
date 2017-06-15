@@ -55,4 +55,10 @@ public class AdminController {
 	public List<AdminPerformance> searchPerform(String perfTitle){
 		return adminService.searchPerform(perfTitle);
 	}
+	
+	@RequestMapping("/admin2/changeDisplay")
+	@ResponseBody
+	public boolean changeDisplay(AdminPerformance perform){
+		return adminService.changeDisplay(perform);
+	}
 }

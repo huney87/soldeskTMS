@@ -38,4 +38,9 @@ public class AdminDaoImpl implements AdminDao{
 		return adminMapper.searchPerform(perfTitle);
 	}
 
+	@Override
+	public int changeDisplay(AdminPerformance perform) {
+		return adminMapper.changeDisplay(perform);
+	}
+
 }

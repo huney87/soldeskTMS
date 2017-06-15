@@ -3,6 +3,7 @@ package gwangjae.tms.admin.domain;
 import java.sql.Date;
 
 public class AdminPerformance {
+	private int perfId;
 	private String perfTitle;
 	private Date perfStartDate;
 	private Date perfEndDate;
@@ -11,6 +12,12 @@ public class AdminPerformance {
 	private int perfDisplay;
 	private int perfcountTicket;
 	
+	public int getPerfId() {
+		return perfId;
+	}
+	public void setPerfId(int perfId) {
+		this.perfId = perfId;
+	}
 	public String getPerfTitle() {
 		return perfTitle;
 	}
@@ -35,6 +42,12 @@ public class AdminPerformance {
 	public void setPerfImage(String perfImage) {
 		this.perfImage = perfImage;
 	}
+	public int getPerfCat() {
+		return perfCat;
+	}
+	public void setPerfCat(int perfCat) {
+		this.perfCat = perfCat;
+	}
 	public int getPerfDisplay() {
 		return perfDisplay;
 	}
@@ -47,10 +60,5 @@ public class AdminPerformance {
 	public void setPerfcountTicket(int perfcountTicket) {
 		this.perfcountTicket = perfcountTicket;
 	}
-	public int getPerfCat() {
-		return perfCat;
-	}
-	public void setPerfCat(int perfCat) {
-		this.perfCat = perfCat;
-	}
+
 }

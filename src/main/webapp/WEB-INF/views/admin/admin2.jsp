@@ -82,7 +82,7 @@ var regBtns=function(){
 			sweetAlert("검색 실패", "검색할 회원을 입력해 주세요!", "error");
         }
 	});
-	
+    
 	$("#allBtn").bind("click",function(){
 		window.location.reload();
 	});
@@ -95,10 +95,29 @@ var regBtns=function(){
 				+perform.perfEndDate+"</td><td>"
 				+perform.perfCat+"</td><td>"
 				+perform.perfcountTicket+"</td><td>"+
-				"<button type='button' class='btn btn-danger' value='"+perform.perfDisplay+"'>"+value+"</button>"
+				"<button type='button' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(this)'>"+value+"</button>"
+				+"<input type='hidden' name='hidden' value='"+perform.perfDisplay+"'/>"
 				);
 		performanceList.append(tr.append(td));
 	}
+}
+
+var changeDisplay=function(perform){
+	var swap=$(":input[name='hidden']").val();
+	 $.ajax({
+         url:"admin2/changeDisplay",            
+         data:{perfId:perform.value, perfDisplay:Number(!swap)},
+         success:function(result){
+             if(result) swal("수정 성공");
+             else swal("수정 실패");
+         },
+         error:function(a, b, errMsg){                
+        	 swal("수정 실패: " + errMsg);                
+         },
+         complete:function(){
+        	 swal("성공했다!!!!!!!!!!!!!!!!!!!!!!!!");                    
+         }
+     });
 }
 </script>
 </head>
@@ -148,7 +167,7 @@ var regBtns=function(){
             		<th>공연명</th>
             		<th>시작일</th>
             		<th>마감일</th>
-            		<th>장르</th>
+            		<th>분류</th>
             		<th>총 티켓 판매수</th>
             		<th>게시</th>
           		</tr>

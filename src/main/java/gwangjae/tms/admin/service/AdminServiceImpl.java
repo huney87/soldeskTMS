@@ -38,4 +38,9 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.searchPerform(perfTitle);
 	}
 
+	@Override
+	public boolean changeDisplay(AdminPerformance perform) {
+		return adminDao.changeDisplay(perform)>0;
+	}
+
 }
