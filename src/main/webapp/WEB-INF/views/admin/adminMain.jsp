@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/frames/adminHeader.jsp" flush="false"/>
 <style type="text/css">
 	@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
-	p { font-size: 95px; text-align: center;}
+	p { font-size: 135px; text-align: center;}
 	.jg { font-family: 'Jeju Gothic'; }
 </style>
 <script type="text/javascript">

@@ -38,6 +38,7 @@ $(function() {
 
 var deleteReserve = function(reserve){
    	var reservationId=$(reserve).data("reservationId");
+   	var reserve=$(reserve);
 		swal({
 			  title: "예매를 취소 하시겠습니까?",
 			  type: "warning",
@@ -99,15 +100,7 @@ var deleteReserve = function(reserve){
 					      </tr>
 					    </thead>
 					    <tbody id="reserveList">
-					      <tr>
-					        <td><p>A00001</p></td>
-					        <td><a href="../detail/01.html">뮤지컬 <지킬 앤 하이드></a></td>
-					        <td><p>블루스퀘어 삼성전자 홀</p></td>
-					        <td><p>17.05.31</p></td>
-					        <td>
-					        	<a href="#" class="btn btn-danger" role="submit">취소</a>
-					        </td>
-					      </tr>
+
 						</tbody>
 					</table>
 				</form>
