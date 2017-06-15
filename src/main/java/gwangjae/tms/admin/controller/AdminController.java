@@ -18,6 +18,11 @@ public class AdminController {
 	
 	@RequestMapping
 	public String main(){
+		return "admin/adminMain";
+	}
+	
+	@RequestMapping("/admin1")
+	public String admin1(){
 		return "admin/admin1";
 	}
 	
@@ -44,19 +49,19 @@ public class AdminController {
 		return adminService.delUsers(userId);
 	}
 	
-	@RequestMapping("/admin2/listPerform")
+	@RequestMapping("/listPerform")
 	@ResponseBody
 	public List<AdminPerformance> listPerform(){
 		return adminService.getPerform();
 	}
 	
-	@RequestMapping("/admin2/searchPerform")
+	@RequestMapping("/searchPerform")
 	@ResponseBody
 	public List<AdminPerformance> searchPerform(String perfTitle){
 		return adminService.searchPerform(perfTitle);
 	}
 	
-	@RequestMapping("/admin2/changeDisplay")
+	@RequestMapping("/changeDisplay")
 	@ResponseBody
 	public boolean changeDisplay(AdminPerformance perform){
 		return adminService.changeDisplay(perform);

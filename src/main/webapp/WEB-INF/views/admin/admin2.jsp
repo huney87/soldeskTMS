@@ -50,10 +50,10 @@ var regBtns=function(){
 	performanceList.empty();
 	
 	$.ajax({
-		url:"admin2/listPerform",
+		url:"/admin/listPerform",
 		success:function(performs){
 			$(performs).each(function(idx, perform){
-				if(perform.perfDisplay==1) value="게시 취소";
+				if(perform.perfDisplay==1) value="중지";
 				else value="게시";
 				printPerform(perform,value);
 			});
@@ -65,7 +65,7 @@ var regBtns=function(){
 			var name=$(":input[name='name']").val();
 			performanceList.empty();
 			$.ajax({
-				url:"admin2/searchPerform",
+				url:"/admin/searchPerform",
 				data:{perfTitle:name},
 				success:function(performs){
 					$(performs).each(function(idx, perform){
@@ -79,7 +79,7 @@ var regBtns=function(){
 				}
 			});
 		}else {
-			sweetAlert("검색 실패", "검색할 회원을 입력해 주세요!", "error");
+			sweetAlert("검색 실패", "검색할 공연을 입력해 주세요!", "error");
         }
 	});
     
@@ -104,18 +104,38 @@ var regBtns=function(){
 
 var changeDisplay=function(perform){
 	var swap=$(":input[name='hidden']").val();
+	if(swap==1) swap=0;
+	else swap=1;
 	 $.ajax({
-         url:"admin2/changeDisplay",            
-         data:{perfId:perform.value, perfDisplay:Number(!swap)},
+         url:"/admin/changeDisplay",            
+         data:{perfId:perform.value, perfDisplay:swap},
          success:function(result){
-             if(result) swal("수정 성공");
-             else swal("수정 실패");
+             if(result) swal("공연 게시 성공");
+             else swal("공연 게시 실패");
          },
          error:function(a, b, errMsg){                
-        	 swal("수정 실패: " + errMsg);                
+        	 swal("공연 게시 실패: " + errMsg);                
          },
          complete:function(){
-        	 swal("성공했다!!!!!!!!!!!!!!!!!!!!!!!!");                    
+        	 if(swap==1){
+        	 	swal({
+					title: "공연 게시",
+					text: "공연을 게시하였습니다",
+					type: "success"
+			 	},
+			 	function(){
+					window.location.reload();
+			 	});
+        	 }else{
+        		 swal({
+ 					title: "공연 중지",
+ 					text: "공연 게시를 중단 하였습니다",
+ 					type: "success"
+ 			 	},
+ 			 	function(){
+ 					window.location.reload();
+ 			 	});
+        	 }
          }
      });
 }
@@ -132,7 +152,7 @@ var changeDisplay=function(perform){
                 <li class="sidebar-brand">
                     <a href="/admin">관리자</a>
                 </li>
-                <li><a href="/admin">회원관리</a></li>
+                <li><a href="/admin/admin1">회원관리</a></li>
                 <li><a href="/admin/admin2">공연관리</a></li>
                 <li><a href="/login/logout">로그아웃</a></li>
                 <li><a href="/">쇼핑몰</a></li>

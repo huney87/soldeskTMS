@@ -195,7 +195,7 @@ var regBtns=function(){
                 <li class="sidebar-brand">
                     <a href="/admin">관리자</a>
                 </li>
-                <li><a href="/admin">회원관리</a></li>
+                <li><a href="/admin/admin1">회원관리</a></li>
                 <li><a href="/admin/admin2">공연관리</a></li>
                 <li><a href="/login/logout">로그아웃</a></li>
                 <li><a href="/">쇼핑몰</a></li>
