@@ -1,11 +1,14 @@
 package gwangjae.tms.admin.dao;
 
+import gwangjae.tms.admin.domain.AdminPerformance;
 import gwangjae.tms.user.domain.User;
 
 import java.util.List;
 
 public interface AdminDao {
-	public List<User> getUsers();
-	public List<User> searchUser(String userName);
-	public int delUsers(int userId);
+	List<User> getUsers();
+	List<User> searchUser(String userName);
+	int delUsers(int userId);
+	
+	List<AdminPerformance> getPerform();
 }

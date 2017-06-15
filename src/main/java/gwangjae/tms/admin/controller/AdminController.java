@@ -2,13 +2,13 @@ package gwangjae.tms.admin.controller;
 
 import java.util.List;
 
+import gwangjae.tms.admin.domain.AdminPerformance;
 import gwangjae.tms.admin.service.AdminService;
 import gwangjae.tms.user.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -42,5 +42,11 @@ public class AdminController {
 	@ResponseBody
 	public int delUsers(int userId){
 		return adminService.delUsers(userId);
+	}
+	
+	@RequestMapping("/listPerform")
+	@ResponseBody
+	public List<AdminPerformance> listPerform(){
+		return adminService.getPerform();
 	}
 }

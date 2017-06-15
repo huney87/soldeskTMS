@@ -43,106 +43,24 @@ $(function() {
 });
 
 var regBtns=function(){
-	var userList=$("#userList");
-	var type;
+	var performanceList=$("#performanceList");
 	
-	userList.empty();
+	performanceList.empty();
 	
 	$.ajax({
-		url:"admin/listUsers",
-		success:function(users){
-			$(users).each(function(idx, user){
-				if(user.userType==1) type="판매자";
-				else type="회원";
-				printUser(user,type);
+		url:"6admin/listPerform",
+		success:function(performs){
+			$(performs).each(function(idx, perform){
+				printUser(perform);
 			});
 		}
 	});
 	
-	var printUser=function(user,type){
-		var date;
-		var type;
-		
-		date=user.userBirthday.toString();
+	var printUser=function(perform){
 		tr=$("<tr></tr>");
-		td=$("<td><input type='radio' name='user_id' value='"+user.userId+"'/>"
-				+user.userId+"</td><td>"
-				+user.userName+"</td><td>"
-				+user.userEmail+"</td><td>"
-				+user.userAddress+"</td><td>"
-				+date+"</td><td>"
-				+type+"</td>");
-		userList.append(tr.append(td));
-		td.find("input").data("userName",user.userName);
+		td=$("<td>"+perform.perfTitle+"</td>");
+		performanceList.append(tr.append(td));
 	}
-	
-	$("#searchBtn").bind("click",function(){
-		if($(":input[name='name']").val()) {
-			var name=$(":input[name='name']").val();
-			userList.empty();
-			$.ajax({
-				url:"admin/searchUser",
-				data:{userName:name},
-				success:function(users){
-					$(users).each(function(idx, user){
-						if(user.userType==1) type="판매자";
-						else if(user.userType==2) type="회원";
-						else type="관리자";
-						printUser(user);
-					});
-				},
-				error:function(a,b,errMsg){
-					msg.text("검색 실패: "+errMsg);
-				}
-			});
-		}else {
-			sweetAlert("검색 실패", "검색할 회원을 입력해 주세요!", "error");
-        }
-	});
-	
-	$("#delBtn").bind("click",function(){
-		var user=$(":checked");
-		if(user.size()){
-			swal({
-				  title: "정말로 삭제하시겠습니까?",
-				  type: "warning",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "삭제",
-				  cancelButtonText: "취소",
-				  closeOnConfirm: false
-				},
-				function(){
-					$.ajax({
-						url:"admin/delete",
-						data:{userId:user.val()},
-						success:function(result){
-							if(result) return true;
-							else swal("삭제 실패: "+errMsg);
-						},
-						error:function(a,b,errMsg){
-							swal("삭제 실패: "+errMsg);
-						},
-						complete:function(){
-							swal({
-								title: "삭제 성공",
-								text: "회원을 삭제했습니다",
-								type: "success"
-							},
-							function(){
-								window.location.reload();
-							});
-						}
-					});
-				});
-		}else{
-			sweetAlert("삭제 실패", "삭제할 회원을 선택해 주세요!", "error");
-		}
-	});
-	
-	$("#allBtn").bind("click",function(){
-		window.location.reload();
-	});
 }
 </script>
 </head>
@@ -197,7 +115,7 @@ var regBtns=function(){
             		<th>게시</th>
           		</tr>
         	</thead>
-			<tbody id="userList">
+			<tbody id="performanceList">
 				
 			</tbody>
 		</table>

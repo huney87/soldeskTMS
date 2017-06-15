@@ -8,6 +8,7 @@ public class AdminPerformance {
 	private Date perfEndDate;
 	private String perfImage;
 	private int perfDisplay;
+	private int perfcountTicket;
 	
 	public String getPerfTitle() {
 		return perfTitle;
@@ -38,5 +39,11 @@ public class AdminPerformance {
 	}
 	public void setPerfDisplay(int perfDisplay) {
 		this.perfDisplay = perfDisplay;
+	}
+	public int getPerfcountTicket() {
+		return perfcountTicket;
+	}
+	public void setPerfcountTicket(int perfcountTicket) {
+		this.perfcountTicket = perfcountTicket;
 	}
 }

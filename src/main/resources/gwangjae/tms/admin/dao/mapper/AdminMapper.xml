@@ -18,6 +18,7 @@
 		<result property="perfEndDate" column="perf_enddate"/>
 		<result property="perfImage" column="perf_Image"/>
 		<result property="perfDisplay" column="perf_display"/>
+		<result property="perfcountTicket" column="count(SEATINFO.PERF_ID)"/>
 	</resultMap>
 	
 	<select id="getUsers" resultMap="AdminMap">

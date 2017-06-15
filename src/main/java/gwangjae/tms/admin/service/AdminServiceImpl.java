@@ -3,6 +3,7 @@ package gwangjae.tms.admin.service;
 import java.util.List;
 
 import gwangjae.tms.admin.dao.AdminDao;
+import gwangjae.tms.admin.domain.AdminPerformance;
 import gwangjae.tms.user.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int delUsers(int userId) {
 		return adminDao.delUsers(userId);
+	}
+
+	@Override
+	public List<AdminPerformance> getPerform() {
+		return adminDao.getPerform();
 	}
 
 }
