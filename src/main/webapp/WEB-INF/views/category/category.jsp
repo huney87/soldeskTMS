@@ -527,7 +527,7 @@ $(document).ready(function(){
 			url:"/category",
 			data: performance,
 			success:function(select){
-				$(select).each(function(idx, hall){
+				$(select).each(function(idx, data){
 					var category = '<div class="frame1">'
 						+'<div class="card">'
 						+'<img src="'+data.per_image+'" onerror="ImgError(this)" />'
@@ -560,7 +560,9 @@ $(document).ready(function(){
 						+'</div>';
 					$("#cate").append(category);
 				});
-		
+			},
+			error:function(a,b,errMsg){
+				alert("검색 실패:" +errMsg);
 			}
 		});
 	};
@@ -593,7 +595,7 @@ $(document).ready(function(){
 		$("#cate").append(div1.append(div2.append(img1)).append(div3.append(img2+art1.append(div4.append(div5.append(a1)+div6.append(a2)))))
 				+div7.append(div8+div9.append(input))
 				+div10.append(span3)+div11); */
-		};	
+
 </script>
 		<div class="row">
 			<div class="col-md-12 frameDiv">
