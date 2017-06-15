@@ -11,4 +11,5 @@ public interface AdminDao {
 	int delUsers(int userId);
 	
 	List<AdminPerformance> getPerform();
+	List<AdminPerformance> searchPerform(String perfTitle);
 }

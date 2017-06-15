@@ -55,12 +55,39 @@ var regBtns=function(){
 			$(performs).each(function(idx, perform){
 				if(perform.perfDisplay==1) value="게시 취소";
 				else value="게시";
-				printUser(perform,value);
+				printPerform(perform,value);
 			});
 		}
 	});
 	
-	var printUser=function(perform,value){
+	$("#searchBtn").bind("click",function(){
+		if($(":input[name='name']").val()) {
+			var name=$(":input[name='name']").val();
+			performanceList.empty();
+			$.ajax({
+				url:"admin2/searchPerform",
+				data:{perfTitle:name},
+				success:function(performs){
+					$(performs).each(function(idx, perform){
+						if(perform.perfDisplay==1) value="게시 취소";
+						else value="게시";
+						printPerform(perform,value);
+					});
+				},
+				error:function(a,b,errMsg){
+					sweetAlert("검색 실패: "+errMsg);
+				}
+			});
+		}else {
+			sweetAlert("검색 실패", "검색할 회원을 입력해 주세요!", "error");
+        }
+	});
+	
+	$("#allBtn").bind("click",function(){
+		window.location.reload();
+	});
+	
+	var printPerform=function(perform,value){
 		tr=$("<tr></tr>");
 		td=$("<td>"+perform.perfImage+"</td><td>"
 				+perform.perfTitle+"</td><td>"
@@ -112,7 +139,7 @@ var regBtns=function(){
 				<div class="form-inline">
 					<input type="text" class="form-control" name="name" placeholder="검색"/>
 					<button type="button" class="btn btn-info" id="searchBtn">검색</button>
-					<button type="button" class="btn btn-default" id="delBtn">전체 조회</button>
+					<button type="button" class="btn btn-default" id="allBtn">전체 조회</button>
 				</div>
 		<table class="table table-hover"style="margin-top:100px">
 			<thead>

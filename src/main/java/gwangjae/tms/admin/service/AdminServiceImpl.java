@@ -33,4 +33,9 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.getPerform();
 	}
 
+	@Override
+	public List<AdminPerformance> searchPerform(String perfTitle) {
+		return adminDao.searchPerform(perfTitle);
+	}
+
 }

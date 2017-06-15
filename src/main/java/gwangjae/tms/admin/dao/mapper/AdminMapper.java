@@ -11,4 +11,5 @@ public interface AdminMapper {
 	public int delUsers(int userId);
 	
 	public List<AdminPerformance> getPerform();
+	public List<AdminPerformance> searchPerform(String perfTitle);
 }

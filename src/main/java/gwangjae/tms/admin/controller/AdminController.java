@@ -49,4 +49,10 @@ public class AdminController {
 	public List<AdminPerformance> listPerform(){
 		return adminService.getPerform();
 	}
+	
+	@RequestMapping("/admin2/searchPerform")
+	@ResponseBody
+	public List<AdminPerformance> searchPerform(String perfTitle){
+		return adminService.searchPerform(perfTitle);
+	}
 }

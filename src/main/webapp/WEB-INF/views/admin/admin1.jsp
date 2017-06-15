@@ -92,7 +92,7 @@ var regBtns=function(){
 					});
 				},
 				error:function(a,b,errMsg){
-					msg.text("검색 실패: "+errMsg);
+					sweetAlert("검색 실패: "+errMsg);
 				}
 			});
 		}else {
