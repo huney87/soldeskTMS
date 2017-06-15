@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="gwangjae.tms.category.dao.mapper.CategoryMapper">
 
-	<resultMap id="perMap"	type="performance">		
+	<resultMap id="perMap"	type="Performance">		
 		<id property="per_id" column="perf_id"/>
 		<result property="per_title" column="perf_title"/>
 		<result property="per_startDate" column="perf_startdate"/>
@@ -14,7 +14,7 @@
 		<association property="ct_id" resultMap="cateMap"/>	
 	</resultMap>
 	
-	<resultMap id="cateMap" type="category">
+	<resultMap id="cateMap" type="Category">
 		<id property="cat_id" column="cat_id"/>
 		<result property="gen_id" column="gen_id"/>
 		<result property="loc_id" column="loc_id"/>
@@ -22,7 +22,7 @@
 		<result property="cat_use" column="cat_use"/>
 	</resultMap>
 	
-	<resultMap id="hallMap" type="hall">
+	<resultMap id="hallMap" type="Hall">
 		<id property="hallId" column="h_id"/>
 		<result property="hallName" column="h_name"/>
 		<result property="hallRow" column="h_row"/>

@@ -522,18 +522,18 @@ $(document).ready(function(){
 		var perId;
 		
 		cateList.empty();
-
+		
 		$.ajax({
 			url:"/category",
-			data:"performance",
+			data: performance,
 			success:function(select){
-				$(select).each(function(idx, performance, hall){
+				$(select).each(function(idx, hall){
 					var category = '<div class="frame1">'
 						+'<div class="card">'
-						+'<img src="'+performance.per_image'" onerror="ImgError(this)" />'
+						+'<img src="'+data.per_image+'" onerror="ImgError(this)" />'
 						+'</div>'
 						+'<div class="card back">'
-						+'<img class="backPost" src="'+performance.per_image'" onerror="ImgError(this)" />'
+						+'<img class="backPost" src="'+data.per_image+'" onerror="ImgError(this)" />'
 						+'<article id="movieInfo">'
 						+'<div class="moveInfoBtn">'
 						+'<div class="moveInfoBtn1">'
@@ -553,21 +553,18 @@ $(document).ready(function(){
 						+'</div>'
 						+'<div class="movieInfo3">'
 						+'<p>'
-						+'<span class="age">12</span>'+performance.per_title''
+						+'<span class="age">12</span>'+data.per_title+''
 						+'</p>'
-						+'<div class="movieInfo3Txt">'hall.hallName'</div>'
+						+'<div class="movieInfo3Txt">'+hall.hallName+'</div>'
 						+'</div>'
 						+'</div>';
-			$("#cate").append(category);
+					$("#cate").append(category);
 				});
 		
 			}
 		});
 	};
-});
-	var musical = function(){
-		
-			
+});			
 			
 			/* var div1=$("<div class='frame1'></div>");
 			var div2=$("<div class='card'></div>");
