@@ -19,7 +19,9 @@ public class MainController {
 	public String mainView(Model model, HttpSession session){
 		/*널이 아니며 빈 문자열이 아니면 로그인 되어있는것*/  
 		if(session.getAttribute("email") != null && !session.getAttribute("email").equals("")){
+			Object email = session.getAttribute("email");
 			model.addAttribute("login", true);
+			model.addAttribute("email", email);
 		}else{
 			model.addAttribute("login", false);
 		}
