@@ -151,7 +151,7 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		if(!userAddress2){	//회원 상세주소 미입력시 경고창
+		if(!userAddressDt){	//회원 상세주소 미입력시 경고창
 			swal({
 				  title: "상세주소를 입력하세요.",
 				  type: "warning",

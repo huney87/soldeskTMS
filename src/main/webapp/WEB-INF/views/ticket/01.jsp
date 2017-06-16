@@ -98,8 +98,23 @@
   
     <script type="application/javascript">        
 
-        var initCalender = function( data ) {        	          
-            var eventData = [];         
+        var initCalender = function( data ) {       
+        	
+        	var eventData = [{
+                "date": "2017-06-17",
+                "badge": false
+            }, {
+                "date": "2017-06-18",
+                "badge": false
+            }, {
+                "date": "2017-06-19",
+                "badge": false
+            }, {
+                "date": "2017-06-20",
+                "badge": false
+            }];
+        	
+            //var eventData = [];         
             for( i = 0 ; i < data.length ; i++ ){
             	var skddate = {"date": data[i]};
                 eventData.push(skddate);
