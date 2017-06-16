@@ -29,9 +29,9 @@
 		select * from seatinfo
 	</select>
 
-	<insert id="addSeat" parameterType="int">
-		insert into seatinfo(sinfo_id,perf_id,s_id,sinfo_grade,sinfo_price)
-		values(sinfo_id_seq.nextval, #{seat},1,1,1000)
+	<insert id="addSeat" parameterType="Seat">
+		insert into seats(s_id, s_row, s_col,s_type,perf_id,s_number)
+		values(s_id_seq.nextval, #{seatRow},#{seatCol},#{seatType},#{per_id},#{seatNumber})
 	</insert>
 	
 	<insert id="addPerInfo" parameterType="performance">
@@ -61,5 +61,8 @@
 		in(select h_id from performances where perf_id=#{value})
 	</select>
 	
+	<select id="maxGrade" parameterType="int" resultType ="int">
+		select MAX(s_type) from seats where perf_id = #{value}
+	</select>
 	
 </mapper>

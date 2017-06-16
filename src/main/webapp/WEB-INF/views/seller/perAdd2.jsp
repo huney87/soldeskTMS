@@ -220,30 +220,24 @@ $(document).ready(function(){
     		seatValue.push( $( this ).attr('value') );        	     	
     	});
     	
-    	var seats={"seats":seatValue};
-    	var title=$("#title").val();
-    	var seatInfo={ "seat":seatValue, "per_title":title}
+    	var perId=$("#perf").val();
+    	var seatInfo={ "seats":seatValue, "perId":perId}
 		
-    	// 현재 seat를 단순하게 db에 저장하기 때문에 배열로 넘겨줘야함. (차후 수정)
     	if($("#row").val()) {
     		$.ajax({
                 url: "/seller/addSeats",
                 data: seatInfo,
                 success:function(result){
-                    if(result) $("#msg").text("좌석 추가 성공");
-                    else $("#msg").text("좌석 추가 실패");
+                	alert("좌석 등록완료! 마지막단계로 이동합니다.");
+                	window.location.assign("/seller/perAdd3");
                 },
                 error:function(a, b, errMsg){
-                	$("#msg").text("추가 실패: " + errMsg);                
-                },
-                complete:function(){
-                	alert("좌석 등록완료! 마지막단계로 이동합니다.");
-                	window.location.assign("/seller/perAdd3");                    
+                	$("#msg").text("추가 실패: " + errMsg);
+                	$("#resultModal").modal('show');
                 }
             });		
     	}else {
-            $("#msg").text("오류");
-            $("#resultModal").modal('show');
+            $("#msg").text("오류");       
         }
     	
    });

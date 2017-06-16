@@ -1,6 +1,7 @@
 package gwangjae.tms.performance.dao;
 
 import gwangjae.tms.hall.domain.Hall;
+import gwangjae.tms.hall.domain.Seat;
 import gwangjae.tms.performance.dao.mapper.PerformanceMapper;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
@@ -19,7 +20,7 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return performanceMapper.getSeats(title);
 	}
 	
-	public int addSeat(int seat){
+	public int addSeat(Seat seat){
 		return performanceMapper.addSeat(seat);
 	}
 	
@@ -41,6 +42,10 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	
 	public Hall getLayout(int hallId){
 		return performanceMapper.getLayout(hallId);
+	}
+	
+	public int maxGrade(int per_id){
+		return performanceMapper.maxGrade(per_id);
 	}
 }
 

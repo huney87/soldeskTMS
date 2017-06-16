@@ -4,12 +4,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>좌석 등급 등록</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>
+var resistBtn = function() {
+	// 좌석값 입력후 등록시 오른쪽에 결과창 확인 및 데이터 저장.
+    $("#creatGrade").on("click", function(){  	
+    	$("#resultPrice").empty();
+    	var gradeCnt = $(".gPrice").length/2;
+    	var result = $("<button type='button' id='creatGrade' class='btn btn-danger btn-sm'>등록</button>");
+    	
+    	for(var i=1;i<=gradeCnt;i++){
+    		var div = $('<span id="gradeResult'+i+'" class="box">&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+    		var grade = '#'+'grade'+i;
+    		var price = '#'+'price'+i;
+    		var text = $('<span>&nbsp;&nbsp;'+$(grade).val()+'석&nbsp;&nbsp;'+$(price).val()+'원</span><br>');
+    		$("#resultPrice").append(div).append(text);
+    	}
+    	$("#resultPrice").append(result);
+    });
+}
+
+var choiceBtn = function() {
+	$("#sel").on("change", function(){
+		$("#grades").empty();
+		tmpCnt = $("#sel").val();
+		for(i=1;i<=tmpCnt;i++){
+	    	var sheetDiv = $("<div></div>");
+	 	    var gradeName = $("<label>"+i+".등급 이름: <input type='text' class='gPrice' id='grade"+i+"'></label>");
+	 	    var gradePrice = $("<label> 가격: <input type='number' min='0' class='gPrice' id='price"+i+"'>원</label>"); 
+	    	$("#grades").append(sheetDiv.append(gradeName).append(gradePrice));
+		}
+	});	
+}
+
 $(document).ready(function(){
 	var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
     var msg = $("#msg");            // 결과 메세지
@@ -32,48 +63,64 @@ $(document).ready(function(){
                     });                  
     	        }
     		});
-    	}
-    	
-    	//좌석 등급 생성
-    	$("#choice").on("change", function(){
-    		$("#grades").empty();
-    		
-    		var choice = $("#sel :selected").val();    
-    	    var result = $('<button type="button" id="creatGrade" class="btn btn-danger btn-sm ">등록</button>'); 
-    	    
-    	     for(var i=0;i<choice;i++){
-    	    	var sheetDiv = $('<div></div>');
-    	 	    var gradeName = $('<label>등급 이름: <input type="text" class="write" id="grade'+i+'"></label>');
-    	 	    var gradePrice = $('<label>가격: <input type="number" min="0" class="write" id="price'+i+'">원</label>'); 
-    	    	$("#grades").append(sheetDiv.append(gradeName).append(gradePrice));
-    	    }
-    	    $("#grades").append(result);
-    	    
-    	    
-    	    $("#creatGrade").on("click", function(){
-    	    	$("#resultPrice").empty();
-    	    	
-    	    	for(var i=0;i<choice;i++){
-    	    		var div = $('<span id="gradeResult'+(i+1)+'" class="box">&nbsp;&nbsp;&nbsp;&nbsp;</span>');
-    	    		var grade = '#'+'grade'+i;
-    	    		var price = '#'+'price'+i;
-    	    		var text = $('<span>&nbsp;&nbsp;'+$(grade).val()+'석&nbsp;&nbsp;'+$(price).val()+'원</span><br>')
-    	    		$("#resultPrice").append(div).append(text);
-    	    	}
-    	    });	    	    	
-    	});
-    	
-    	
-    	
-    	
+    	}else{
+    		$("#msg").text("공연 이름을 입력해주십시오!");
+			$("#resultModal").modal('show');
+    	}	
     });
+    
+    
+   	//좌석 등급 생성(등록된 좌석이 있을경우 등록된 수만큼 칸 생성, 없을경우 선택해서 신규생성)
+   	$("#choice").on("change", function(){
+   		var gradeCnt=0;
+   		$("#grades").empty();  		
+   		var perId=$("#choice").val();
+   	    var result = $("<button type='button' id='creatGrade' class='btn btn-danger btn-sm'>등록</button>");
+   	    
+	   	 $.ajax({  		
+		         url: "/seller/maxGrade",
+		         data:{per_id:perId},
+		         success:function(grade){
+		         	if(grade){gradeCnt=grade;}	
+				   	     for(i=1;i<=gradeCnt;i++){
+				   	    	var sheetDiv = $("<div></div>");
+				   	 	    var gradeName = $("<label>"+i+".등급 이름: <input type='text' class='gPrice' id='grade"+i+"'></label>");
+				   	 	    var gradePrice = $("<label> 가격: <input type='number' min='0' class='gPrice' id='price"+i+"'>원</label>"); 
+				   	    	$("#grades").append(sheetDiv.append(gradeName).append(gradePrice));
+		         		}
+			   	     $("#grades").append(result);
+			   		 resistBtn();// 완료버튼 활성화 기능.   	  
+		         },
+		         error:function(a, b, errMsg){
+		        	 alert("좌석 등록 정보가 없습니다! 신규 등록을 시작합니다.");
+		        	 $("#gradeMenu").empty();
+					var span = $("<span></span>");
+	        		var select = $("<select id='sel'></select>");
+	                var baseOption = $("<option>좌석등급 선택</option>");
+	                select.append(baseOption);
+	                
+	                for(i=1;i<5;i++){
+	                	var option = $("<option value='"+i+"'>좌석등급 "+i+"개</option>");
+	                	select.append(option);
+	                }
+	                $("#gradeMenu").append(span.append(select));
+	                choiceBtn();// 메뉴선택시 좌석 생성 기능.
+	                resistBtn();// 완료버튼 활성화 기능. 
+		         }  	   	    
+	  		}); 
+   	});
 
+    
+   	
+   	
+//////////////////////////////////////////////////////////////////////////////////////   	
 	//시간추가 선택시
 	var cnt = 1;
 	$("#addTime").on("click", function(){				
 		if(cnt>5){
 			cnt = 1;
-			alert('최대 5회차 까지 입니다.')
+			alert('최대 5회차 까지 입니다.');
+			$("#timesNav").empty();
 		}else{
 			var times = $('<label>'+cnt+'차:<input type="time" class="timeSlot" id="timeSlot'+cnt+'">&nbsp;&nbsp;</label>');
 			$("#timesNav").append(times);
@@ -94,12 +141,9 @@ $(document).ready(function(){
 		var timeSlot2 = $("#timeSlot1").val();
 		var timeSlot3 = $("#timeSlot1").val();
 		var timeSlot4 = $("#timeSlot1").val();
-		var timeSlot5 = $("#timeSlot1").val();
-		
-		
+		var timeSlot5 = $("#timeSlot1").val();		
 	});	
-	
-	
+		
 });
 </script>
 <style>
@@ -128,6 +172,39 @@ color:black;
 .timeSlot{
 	color:black;
 }
+/* 하단 정보입력창 속성 */
+#step1, #step2{
+	background-color:#1a1a1a;
+	height:45rem;
+	border:0.1rem solid #4d4dff;
+	color:white;
+}
+#searchPer,#rstTime{
+	margin-right:3rem;
+}
+#sel,.gPrice{
+	color:black;
+	text-align:right;
+	width:12rem;
+}
+label{
+	margin:1rem;
+}
+.box{
+	width:3rem;
+	height:3rem;
+	margin:1rem;
+	padding:1rem;
+	display:inline-block;
+}
+#gradeResult1{ background-color:black; border:gray solid 0.1rem;
+}
+#gradeResult2{ background-color:blue;
+}
+#gradeResult3{ background-color:red;
+}
+#gradeResult4{ background-color:#BDFF12;
+}
 </style>
 </head>
 <body>
@@ -144,40 +221,34 @@ color:black;
         			<span>
         				공연 찾기:<input type="text" id="perName">
         						<button type="button" class="btn btn-sm btn-default" id="searchPer">검색</button>	
-        				&nbsp;&nbsp;&nbsp;검색 결과 선택: <select id="choice"></select>
+        				검색 결과 선택: <select id="choice"></select>
         			</span>
         		</div>
         		<div class="col-sm-12" id="roundNav">
         			<button type="button" id="addTime" class="btn btn-default btn-sm">시간추가</button>
 					<button type="button" id="rstTime" class="btn btn-danger btn-sm">시간리셋</button>
-					<span id="timesNav">&nbsp;&nbsp;&nbsp;</span>
-				</div>
-				<div style="text-align:center;">
+					<span id="timesNav"></span>
 					<button type="button" id="roundResist" class="btn btn-md btn-danger">회차 등록</button>
 				</div>
-				<div class="col-sm-4" style="background-color:#1a1a1a; height:60rem; border:0.1rem solid #4d4dff; color:white">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-5" id="step1">
                     <h5>좌석 등급은 최대 4개까지 선택 가능합니다.</h5>
-                    <div>
-                        <span>좌석 등급 갯수:</span>
-                        <select id="sel">
-                            <option value="1">좌석등급 1개</option>
-                            <option value="2">좌석등급 2개</option>
-                            <option value="3">좌석등급 3개</option>
-                            <option value="4">좌석등급 4개</option>
-                        </select>
-                    </div>
+                    <div id="gradeMenu"></div>
                     <hr style="border:0.1rem solid #4d4dff;">
                     <div>
                         <h3>공연 좌석 등록</h3>
                         <p>좌석 등급 이름은 대소문자를 구분하지 않습니다.</p>
                         <div id="grades"></div>
-                    </div>
-                    <hr style="border:0.1rem solid #4d4dff;">
-                    <div>
-                        <h3>공연 좌석 등급별 가격</h3>
+                    </div>                                      
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-3" id="step2">
+                	<div style="text-align:center;">
+                        <h3>공연 좌석 등록 결과 확인</h3>
                         <div id="resultPrice"></div>
                     </div>
                 </div>
+                <div class="col-sm-1"></div>
         	</div>
         </div>
 	</div>

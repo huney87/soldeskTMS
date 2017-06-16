@@ -58,8 +58,9 @@ public class PerformanceController {
 	//좌석 추가하기
 	@RequestMapping("/addSeats")
     @ResponseBody
-    public int addSeats(@RequestParam(value="seats[]") List<String> seats){
-		return performanceService.addSeats(seats.toArray(new String[seats.size()]));
+    public int addSeats(@RequestParam(value="seats[]") List<String> seats,
+    		@RequestParam(value="perId") int perId){
+		return performanceService.addSeats(seats.toArray(new String[seats.size()]), perId);
 	}
 	
 	//공연 검색하기(검색어로)
@@ -99,6 +100,11 @@ public class PerformanceController {
 		return performanceService.getLayout(per_id);
 	}
 	
-	
+	//최대 등급가져오기
+	@RequestMapping("/maxGrade")
+    @ResponseBody
+    public int maxGrade(int per_id){
+		return performanceService.maxGrade(per_id);
+	}
 	
 }
