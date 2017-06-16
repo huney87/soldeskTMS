@@ -47,6 +47,12 @@ $(function(){
 	});
 });
 </script>
+
+<!-- jQuery와 Postcodify를 로딩한다 -->
+<script src="http://d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
+<!-- "우편번호찾기" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
@@ -92,6 +98,7 @@ $(function(){
 					        <td><input type="text" name="postCode" class="postcodify_postcode5 form-control" value="" placeholder="우편번호 버튼을 누르세요." readonly/>
 							<input type="text" name="address1" class="postcodify_address form-control" value="" required readonly/>
 							<button type="button" id="postcodify_search_button" class="btn btn-default">우편번호찾기</button></td>
+							
 					      </tr>
 					      <tr>
 					      	<th><label for="detailPost">상세주소</label></th>
