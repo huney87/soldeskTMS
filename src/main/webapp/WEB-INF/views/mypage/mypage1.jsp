@@ -14,7 +14,7 @@
 }
 </style>
 <script type="text/javascript">
-$(function(){
+$(document).ready(function(){
 	$("#udpUser").bind("click",function(){
 		var pw = $("#pw").val();
 		var name = $("#name").val();
@@ -34,8 +34,7 @@ $(function(){
 				userPhone : phone,
 			},
 			success:function(result){
-				if(result) msg.text("수정 완료");
-				else msg.text("수정 실패");
+
 			},
 			error:function(a,b,errMsg){
 				msg.text("수정 실패"+errMsg);
@@ -120,7 +119,7 @@ $(function(){
 						  <a class="btn btn-danger btn-block btn-lg" id="cancel" role="submit"> 취 소 </a>
 					  </div>
 					  <div class="col-sm-3 text-center">
-						  <a class="btn btn-primary btn-block btn-lg" id="updUser" role="submit"> 수 정 </a>
+						  <button type="button" class="btn btn-primary btn-block btn-lg" id="updUser"> 수 정 </button>
 					  </div>
 				  </div>
 			  </form>
