@@ -237,7 +237,8 @@ $(document).ready(function(){
                 	$("#msg").text("추가 실패: " + errMsg);                
                 },
                 complete:function(){
-                	$("#resultModal").modal('show');                    
+                	alert("좌석 등록완료! 마지막단계로 이동합니다.");
+                	window.location.assign("/seller/perAdd3");                    
                 }
             });		
     	}else {
@@ -272,8 +273,8 @@ $(document).ready(function(){
                 <div class="col-lg-12" id="nav2">
                 	<button type="button" id="test" class="btn btn-sm btn-default">레이아웃생성</button>
                 	<span>    
-			                 가로:<input type="number" id="row" placeholder="row" >
-			                 세로:<input type="number" id="col" placeholder="col" >
+			                 가로:<input type="number" id="row" placeholder="row" readonly>
+			                 세로:<input type="number" id="col" placeholder="col" readonly>
                     </span>
                     <button type="button" id="check" class="btn btn-default btn-sm">입력</button>
                     <button type="button" id="resist" class="btn btn-danger btn-sm">좌석 등록</button>

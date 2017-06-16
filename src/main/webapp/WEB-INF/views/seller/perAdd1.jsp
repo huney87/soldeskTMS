@@ -104,8 +104,9 @@ $(document).ready(function(){
                 error:function(a, b, errMsg){
                 	$("#msg").text("등록 실패: " + errMsg);                
                 },
-                complete:function(){
-                	$("#resultModal").modal('show');                    
+                complete:function(){          	
+                	alert("등록완료! 다음단계로 이동합니다.");
+                	window.location.assign("/seller/perAdd2");
                 }
             });
     	}else {
