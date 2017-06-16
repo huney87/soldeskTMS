@@ -22,7 +22,15 @@ public class MypageDaoImpl implements MypageDao{
 	public int deleteReserve(int reserveId) {
 		return mapper.deleteReserve(reserveId);
 	}
-
+	
+	public User getUser(int userNo){
+		return mapper.getUser(userNo);
+	}
+	
+	public User udpUser(User user){
+		return mapper.udpUser(user);
+	}
+	
 	@Override
 	public int delUser(User user) {
 		return mapper.delUser(user);

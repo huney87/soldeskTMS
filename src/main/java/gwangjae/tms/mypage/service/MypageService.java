@@ -8,6 +8,7 @@ import java.util.List;
 public interface MypageService {
 	List<Reservation> getReserve();
 	int deleteReserve(int reserveId);
-	
+	public User getUser(int userNo);
+	public User udpUser(User user);
 	int delUser(User user);
 }

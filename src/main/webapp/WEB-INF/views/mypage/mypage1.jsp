@@ -14,7 +14,38 @@
 }
 </style>
 <script type="text/javascript">
-
+$(function(){
+	$("#udpUser").bind("click",function(){
+		var pw = $("#pw").val();
+		var name = $("#name").val();
+		var birthDay = $("#birthYear").val()+"-"+$("#birthMon").val()+"-"+$("#birthDate").val();
+		var postCode = $("[name='postCode']").val();
+		var address =  $("[name='address']").val();+" "+("#datailPost").val();
+		var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
+		
+		$.ajax({
+			url: "/mypage1/udpUser",
+			data:{
+				userPw : pw,
+				userName : name,
+				userBirthday : birthDay,
+				userPost : postCode,
+				userAddress : address,
+				userPhone : phone,
+			},
+			success:function(result){
+				if(result) msg.text("수정 완료");
+				else msg.text("수정 실패");
+			},
+			error:function(a,b,errMsg){
+				msg.text("수정 실패"+errMsg);
+			},
+			complete:function(){
+				alert("수정이 완료되었습니다.");
+			}
+		});
+	});
+});
 </script>
 </head>
 <body>
@@ -33,7 +64,7 @@
 			  		<h1>개인 정보 수정</h1>
 				</div>
 			
-				<form class="form-inline" action="#">
+				<form class="form-inline">
 					<table class="table table-striped">
 					    <tbody>
 					      <tr>
@@ -52,9 +83,9 @@
 					      </tr>
 					      <tr>
 					        <th><label for="birth">생년월일</label></th>
-					        <td><input type="number" min="1900" id="birth" name="#" class="form-control" required/>년
-					        <input type="number" min="1" max="12" name="#" class="form-control" required/>월
-					        <input type="number" min="1" max="31" name="#" class="form-control" required/>일</td>
+					        <td><input type="number" min="1900" id="birthYear" name="#" class="form-control" required/>년
+					        <input type="number" min="1" max="12" id="birthMon"name="#" class="form-control" required/>월
+					        <input type="number" min="1" max="31" id="birthDate"name="#" class="form-control" required/>일</td>
 					      </tr>
 					      <tr>
 					        <th>주소</th>
@@ -70,33 +101,19 @@
 					      </tr>
 					      <tr>
 					        <th><label for="phone">휴대폰 번호</label></th>
-					        <td><input type="number" id="phone" name="#" class="form-control" required/>-
-					        <input type="number" name="#" class="form-control" required/>-
-					        <input type="number" name="#" class="form-control" required/></td>
-					      </tr>
-					      <tr>
-					        <th><label for="email">이메일 주소</label></th>
-					        <td><input type="text" id="email" name="#" class="form-control" style="width:20%" required/>
-					<label>@</label>	 
-					<input type="text" name="#" class="form-control" value="" style="width:20%" required/>
-					<select id="selectEmail" class="form-control">
-		  				<option value="1" selected>직접입력</option>
-		    			<option value="naver.com">naver.com</option>
-		    			<option value="hanmail.net">hanmail.net</option>
-		    			<option value="nate.com">nate.com</option>
-		    			<option value="gmail.com">gmail.com</option>
-		 			</select>
-					        </td>
+					        <td><input type="number" id="phone1" name="#" class="form-control" required/>-
+					        <input type="number" name="#" id="phone2" class="form-control" required/>-
+					        <input type="number" name="#" id="phone3" class="form-control" required/></td>
 					      </tr>
 					  </tbody>
 				  </table>
 				  <div class="clearfix"></div>
 				  <div class="row">
 					  <div class="col-sm-3 col-sm-offset-3 text-center">
-						  <a href="#" class="btn btn-danger btn-block btn-lg" role="submit"> 취 소 </a>
+						  <a class="btn btn-danger btn-block btn-lg" id="cancel" role="submit"> 취 소 </a>
 					  </div>
 					  <div class="col-sm-3 text-center">
-						  <a href="#" class="btn btn-primary btn-block btn-lg" role="submit"> 수 정 </a>
+						  <a class="btn btn-primary btn-block btn-lg" id="updUser" role="submit"> 수 정 </a>
 					  </div>
 				  </div>
 			  </form>

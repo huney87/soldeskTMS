@@ -20,7 +20,15 @@ public class MypageServiceImpl implements MypageService{
 	public int deleteReserve(int reserveId) {
 		return dao.deleteReserve(reserveId);
 	}
+	
+	public User getUser(int userNo){
+		return dao.getUser(userNo);
+	}
 
+	public User udpUser(User user){
+		return dao.udpUser(user);
+	}
+	
 	@Override
 	public int delUser(User user) {
 		return dao.delUser(user);

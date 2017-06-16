@@ -25,7 +25,9 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/mypage1")
-	public String mypage1(){
+	public String mypage1(Model model, HttpSession session){
+		Object email = session.getAttribute("email");
+        model.addAttribute("email", email);
 		return "mypage/mypage1";
 	} 
 	
@@ -51,6 +53,18 @@ public class MypageController {
 	@ResponseBody
 	public int delReserve(int reserveId){
 		return mypageService.deleteReserve(reserveId);
+	}
+	
+	@RequestMapping("/getUser")
+	@ResponseBody
+	public User getUser(int userNo){
+		return mypageService.getUser(userNo);
+	}
+	
+	@RequestMapping("/udpUser")
+	@ResponseBody
+	public User updUser(User user){
+		return mypageService.udpUser(user);
 	}
 	
 	@RequestMapping("/delUser")
