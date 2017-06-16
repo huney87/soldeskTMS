@@ -268,7 +268,7 @@ $(document).ready(function() {
 					<div class="form-group">
                         <label class="control-label col-sm-2">생일:</label>
                         <div class="col-sm-8"> 
-                             <input type="date" class="form-control" required>
+                             <input type="date" class="form-control" id="user_birthday" required>
                         </div>					 					
 		  			</div>
 		  			
