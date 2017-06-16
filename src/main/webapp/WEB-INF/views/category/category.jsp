@@ -434,9 +434,9 @@ function ImgError(source){
 
 					<div class="col-sm-9">
 						<div class="btn-group btn-group-justified" id="nav">
-							<a class="btn btn-default btn-lg" id="musical">뮤지컬</a> 
-							<a class="btn btn-default btn-lg" id="concert">콘서트</a> 
-							<a class="btn btn-default btn-lg" id="shows">연극</a>
+							<a class="btn btn-default btn-lg" id="musical" name="cate">뮤지컬</a> 
+							<a class="btn btn-default btn-lg" id="concert" name="cate">콘서트</a> 
+							<a class="btn btn-default btn-lg" id="shows" name="cate">연극</a>
 							<div class="btn-group">
 								<a href="./01.html" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>
 								<!-- 로그인 드롭다운창 -->
@@ -512,12 +512,22 @@ function ImgError(source){
 		</div> -->
 <script>
 $(document).ready(function(){
+	regBtns();
+});
 	
-	var regBtns=function(){
+	var regBtns= $(".cate").click(function(){
+		
 		var musical=$("#musical");
 		var concert=$("#concert");
 		var shows=$("#shows");
 		var cateList = $("#cate");
+		var gre;
+		
+		switch((".cate")){
+			case musical : gre = 1; break;
+			case concert : gre = 2; break;
+			case shows : gre = 3;
+		}
 		
 		var perId;
 		
@@ -525,7 +535,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			url:"/category",
-			data: performance,
+			data:{genre : gre},
 			success:function(select){
 				$(select).each(function(idx, data){
 					var category = '<div class="frame1">'
@@ -565,7 +575,6 @@ $(document).ready(function(){
 				alert("검색 실패:" +errMsg);
 			}
 		});
-	};
 });			
 			
 			/* var div1=$("<div class='frame1'></div>");

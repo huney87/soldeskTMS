@@ -30,7 +30,7 @@
 		<result property="centerId" column="ctr_id"/>	
 	</resultMap>
 	
-	<select id="getSearchResult" resultMap="perMap">
+	<select id="getSearchResult" parameterType="int">
 		select p.*, h.h_name, g.gen_id
 		from performances p, halls h, categories g
 		<!-- 장르별 검색 1: 뮤지컬, 2: 콘서트, 3: 연극 -->
