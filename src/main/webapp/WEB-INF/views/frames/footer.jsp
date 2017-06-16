@@ -24,7 +24,7 @@
         <div class="row">
             <div class="container">
                 <div class="col-sm-4">
-					<a href="#" class="btn">
+					<a href="/" class="btn">
 						<span class="topLogo">T</span>
 						<span class="topLogo">I</span>
 						<span class="topLogo">C</span>
