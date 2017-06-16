@@ -24,14 +24,14 @@ public class LocationService {
 	}
 	
 	public void addLocation(Location param){
-		locationMapper.insertLocation(param);;
+		locationMapper.insertLocation(param);
 	}
 	
 	public void modifyLocation(Location param){
-		locationMapper.updateLocation(param);;
+		locationMapper.updateLocation(param);
 	}
 	
 	public void removeLocation(Location param){
-		locationMapper.delectLocation(param);;
+		locationMapper.delectLocation(param);
 	}
 }

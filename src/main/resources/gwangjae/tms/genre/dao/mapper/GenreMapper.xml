@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="gwangjae.tms.location.dao.mapper.GenreMapper">
+	<resultMap id="GenreMap" type="gwangjae.tms.genre.domain.Genre">
+		<id		property="genreID"	   	column="genre_ID"/>
+		<result	property="code1"		column="CODE1"/>
+		<result	property="code2"		column="CODE2"/>
+		<result	property="genreName"    column="genre_NAME"/>
+	</resultMap>
+	<!-- 카테고리 전체 리스트 -->
+	<select id="selectGenreList" resultMap="GenreMap">
+		SELECT * FROM genre ORDER BY 2,3
+	</select>
+    <!-- 카테고리 대분류 리스트 -->
+    <select id="selectGenreCode1List" resultMap="GenreMap">
+        SELECT * FROM genre WHERE code2 = 0 ORDER BY 2,3
+    </select>
+    <!-- 카테고리 2차분류 리스트 -->
+    <select id="selectGenreCode2List" resultMap="GenreMap">
+        SELECT * FROM genre WHERE code2 > 0 ORDER BY 2,3
+    </select>
+	<!-- 카테고리 아이디로 카테고리 정보 조회 -->
+	<select id="selectGenre" parameterType="int" resultMap="GenreMap">
+		SELECT * FROM genre WHERE genre_id = #{genreID}
+	</select>
+	<!-- 대분류 번호로 카테고리 정보 조회 -->
+	<select id="selectCode1" parameterType="int" resultMap="GenreMap">
+		SELECT * FROM genre WHERE code1 = #{code1} AND code2 = 0
+	</select>
+	<!-- 대분류에 속한 하위분류 조회 -->
+	<select id="selectRegionGenreList" parameterType="int" resultMap="GenreMap">
+		SELECT * FROM genre WHERE code1 = #{code1}
+	</select>
+	<!-- 카테고리 수정 -->
+	<update id="updateGenre" parameterType="gwangjae.tms.genre.domain.Genre">
+	    update genre 
+	    set genre_name=#{genreName}, genre_subject = #{genreSubject}, genre_use= #{genreUse}
+	    where genre_id=#{genreID}
+    </update>
+</mapper>
