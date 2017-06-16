@@ -150,7 +150,7 @@ $(document).ready(function(){
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
 								<c:when test="${user_type >= 1}">
-									<a href="/login/logout" class="btn btn-default btn-lg">${email}로그아웃</a>
+									<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>
 								</c:when>
 								<c:otherwise>
 									<a class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>
@@ -196,9 +196,11 @@ $(document).ready(function(){
 				
 				<div class="col-sm-6">
 					<div class="btn_theater">
-					<!-- <span class="membership_link">
-					        <a class="membership_txt" title="관리자 바로가기" href="/admin">관리자</a>
-					    </span> -->
+					<c:if test="${user_type >= 2}">
+						<span class="membership_link">
+					        <a class="membership_txt" title="마이페이지 바로가기" href="/mypage">${email}</a>
+					    </span>
+					</c:if>
 					<c:choose>
 						<c:when test="${user_type == 1}">
 					    <button type="button" class="btn btn-info btn-xs" id="btnSign">관리자</button>
