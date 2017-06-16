@@ -8,7 +8,6 @@
 
 <link href="/css/menu.css" media="all" rel="stylesheet" type="text/css" />
 <link href="/css/mypage.css" media="all" rel="stylesheet" type="text/css" />
-
 <style>
 #middle-menu {
 	display: none;
@@ -16,11 +15,6 @@
 </style>
 
 <script type="text/javascript">
-function ImgError(source){
-    source.src = "../img/noImg.png";
-    source.onerror = "";
-    return true;
-}
 $(function() { 
 	var reserveList=$("#reserveList");
 	reserveList.empty();
@@ -43,7 +37,7 @@ $(function() {
 	});
 });
 
-var deleteReserve = function(reserve){
+var delReserve = function(reserve){
    	var reservationId=$(reserve).data("reservationId");
    	var reserve=$(reserve);
 		swal({

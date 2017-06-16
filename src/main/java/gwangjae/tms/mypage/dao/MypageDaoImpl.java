@@ -2,6 +2,7 @@ package gwangjae.tms.mypage.dao;
 
 import gwangjae.tms.mypage.dao.mapper.MypageMapper;
 import gwangjae.tms.mypage.domain.Reservation;
+import gwangjae.tms.user.domain.User;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class MypageDaoImpl implements MypageDao{
 	@Override
 	public int deleteReserve(int reserveId) {
 		return mapper.deleteReserve(reserveId);
+	}
+
+	@Override
+	public int delUser(User user) {
+		return mapper.delUser(user);
 	}
 	
 }

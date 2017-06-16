@@ -5,17 +5,20 @@
 <head>
 <meta charset="utf-8">
 <title>마이페이지</title>
-<jsp:include page="/WEB-INF/views/frames/mypageHeader.jsp" flush="false"/>
-<script type="text/javascript">
-function ImgError(source){
-    source.src = "../img/noImg.png";
-    source.onerror = "";
-    return true;
+<jsp:include page="/WEB-INF/views/frames/header.jsp" flush="false"/>
+<link href="/css/menu.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/css/mypage.css" media="all" rel="stylesheet" type="text/css" />
+<style>
+#middle-menu {
+	display: none;
 }
+</style>
+<script type="text/javascript">
+
 </script>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/frames/mypageMenu.jsp" flush="false"/>
+	<jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
 	<div class="container" style="padding:2rem 0;">
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">

@@ -2,6 +2,7 @@ package gwangjae.tms.mypage.service;
 
 import gwangjae.tms.mypage.dao.MypageDao;
 import gwangjae.tms.mypage.domain.Reservation;
+import gwangjae.tms.user.domain.User;
 
 import java.util.List;
 
@@ -18,5 +19,10 @@ public class MypageServiceImpl implements MypageService{
 
 	public int deleteReserve(int reserveId) {
 		return dao.deleteReserve(reserveId);
+	}
+
+	@Override
+	public int delUser(User user) {
+		return dao.delUser(user);
 	}
 }

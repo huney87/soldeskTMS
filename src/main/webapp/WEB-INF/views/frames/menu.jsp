@@ -52,7 +52,7 @@ function ImgError(source){
     source.onerror = "";
     return true;
 }
-
+	
 $(document).ready(function(){
 	$("[name='booking_popup'").click(function(){                
 		booking_popup();

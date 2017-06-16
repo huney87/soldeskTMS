@@ -2,12 +2,15 @@ package gwangjae.tms.mypage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import gwangjae.tms.mypage.domain.Reservation;
 import gwangjae.tms.mypage.service.MypageService;
 import gwangjae.tms.user.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +35,9 @@ public class MypageController {
 	} 
 	
 	@RequestMapping("/mypage4")
-	public String mypage4(){
+	public String mypage4(Model model,HttpSession session){
+		Object email = session.getAttribute("email");
+        model.addAttribute("email", email);
 		return "mypage/mypage4";
 	} 
 	
@@ -44,7 +49,13 @@ public class MypageController {
 	
 	@RequestMapping("/reserveDelete")
 	@ResponseBody
-	public int deleteReserve(int reserveId){
+	public int delReserve(int reserveId){
 		return mypageService.deleteReserve(reserveId);
+	}
+	
+	@RequestMapping("/delUser")
+	@ResponseBody
+	public int delUser(User user){
+		return mypageService.delUser(user);
 	}
 }
