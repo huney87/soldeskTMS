@@ -5,7 +5,7 @@ public class Seat {
 	private int seatRow;
 	private int seatCol;
 	private int seatType;
-	private int hallId;
+	private int per_id;
 	private int seatNumber;
 	
 	public Seat(){}
@@ -42,12 +42,12 @@ public class Seat {
 		this.seatType = seatType;
 	}
 
-	public int getHallId() {
-		return hallId;
+	public int getPer_id() {
+		return per_id;
 	}
 
-	public void setHallId(int hallId) {
-		this.hallId = hallId;
+	public void setPer_id(int per_id) {
+		this.per_id = per_id;
 	}
 
 	public int getSeatNumber() {

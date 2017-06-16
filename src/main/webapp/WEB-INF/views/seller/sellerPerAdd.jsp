@@ -295,7 +295,7 @@ $(document).ready(function(){
 	margin:1px;
 	padding:1px;
 }
-#gradeResult1{ background-color:black;
+#gradeResult1{ background-color:gray;
 }
 #gradeResult2{ background-color:blue;
 }
