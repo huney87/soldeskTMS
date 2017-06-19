@@ -1,5 +1,6 @@
 package gwangjae.tms.ticketing.controller;
 
+import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 import gwangjae.tms.ticketing.service.TicketingService;
 
@@ -62,5 +63,12 @@ public class TicketingController {
 	public TicketSeatInfo[][] getSeatInfo(
 			@RequestParam("performance_id") int perfId){
 		return service.getSquareSeatLayout(perfId);
+	}
+	
+	//
+	@RequestMapping("/getPerformanceDate")
+	@ResponseBody
+	public Performance getPerfDate(int perfId){
+		return service.getPerfDate(perfId);
 	}
 }

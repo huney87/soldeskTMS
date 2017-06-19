@@ -87,6 +87,89 @@
         }
     </style>
     <script type="text/javascript">
+    	$(document).ready(function () {                        
+                       	
+           	$("#beforeBtn").click(function () {
+				forwardForm(3);
+				return true;
+			});
+            
+           	var reserver_name = $("#reserverName").val();
+			var reserver_birthday = $("#reserverBirthday").val();
+			var phoneNumber1 = $("#phoneNumber1").val();
+			var phoneNumber2 = $("#phoneNumber2").val();
+			var phoneNumber3 = $("#phoneNumber3").val();
+			var reserver_phoneNumber = phoneNumber1 + phoneNumbe2 + phoneNumber3;
+			var Email01 = $("#str_email01").val();	// 이메일 아이디
+			var Email02 = $("#str_email02").val();	// 이메일 사이트
+			var reserver_Email = Email01 + "@" + Email02;
+			
+			$("#nextBtn").on("click", function(){
+			/* $("#btn-next").click(function () { */
+				console.log(reserver_name);
+				if(!reserver_name){	//예매자 이름 미기입시 경고창
+					swal({
+					title: "예매자 이름을 입력하세요.",
+					type: "warning",
+					showCancelButton: false,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "확인",				  
+					});			
+					return false;
+				}
+				if(!reserver_birthday){	//예매자 생년월입 미기입시 경고
+					swal({
+					title: "예매자 생년월일을 입력하세요.",
+					type: "warning",
+					showCancelButton: false,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "확인",				  
+					});			
+					return false;
+				}
+				if(!reserver_phoneNumber){	//예매자 연락처 미기입시 경고
+					swal({
+					title: "예매자 연락처를 입력하세요.",
+					type: "warning",
+					showCancelButton: false,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "확인",				  
+					});			
+					return false;
+				}
+				if(!reserver_Email){	//예매자 이메일 미기입시 경고
+					swal({
+					title: "예매자 이메일를 입력하세요.",
+					type: "warning",
+					showCancelButton: false,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "확인",				  
+					});			
+					return false;
+				}                
+				});
+			
+				//이메일 입력방식 선택
+	            $('#selectEmail').change(function () {
+	                $("#selectEmail option:selected").each(function () {
+	                    if ($(this).val() == '1') { //직접입력일 경우
+	                        $("#str_email02").val(''); //값 초기화
+	                        $("#str_email02").attr("readonly", false); //활성화
+	                    } else { //직접입력이 아닐경우
+	                        $("#str_email02").val($(this).text()); //선택값 입력
+	                        $("#str_email02").attr("readonly", true); //비활성화
+	                    }
+	                });
+	            });
+	            
+	            /* function ImgError(source) {
+	                source.src = "/img/noImg.png";
+	                source.onerror = "";
+	                return true;
+	            }	 */ 
+    		});
+
+    	/* 
         function ImgError(source) {
             source.src = "/img/noImg.png";
             source.onerror = "";
@@ -94,18 +177,61 @@
         }
 
         var initBtn = function () {
+        	var reserver_name = $("#reserverName").val();
+        	var reserver_birthday = $("#reserverBirthday").val();
+        	var phoneNumber1 = $("#phoneNumber1").val();
+        	var phoneNumber2 = $("#phoneNumber2").val();
+        	var phoneNumber3 = $("#phoneNumber3").val();
+        	var reserver_phoneNumber = phoneNumber1 + phoneNumbe2 + phoneNumber3;
+        	var Email01 = $("#str_email01").val();	// 이메일 아이디
+    		var Email02 = $("#str_email02").val();	// 이메일 사이트
+    		var reserver_Email = Email01 + "@" + Email02;
+        	
             $('.btn-before').click(function () {
                 forwardForm(3);
                 return true;
             });
-            $('.btn-next').click(function () {
-                /*if (!sessionStorage.getItem('ticketCnt')) {
-                    alert("좌석을 선택해주세요.");
-                    return false;
-                } else {
-                    forwardForm(3);
-                    return true;
-                }*/
+            $('#btn-next').click(function () {
+            	if(!reserver_name){	//예매자 이름 미기입시 경고창
+        			swal({
+        				  title: "예매자 이름을 입력하세요.",
+        				  type: "warning",
+        				  showCancelButton: false,
+        				  confirmButtonColor: "#DD6B55",
+        				  confirmButtonText: "확인",				  
+        			});			
+        			return false;
+        		}
+            	if(!reserver_birthday){	//예매자 생년월입 미기입시 경고
+        			swal({
+        				  title: "예매자 생년월일을 입력하세요.",
+        				  type: "warning",
+        				  showCancelButton: false,
+        				  confirmButtonColor: "#DD6B55",
+        				  confirmButtonText: "확인",				  
+        			});			
+        			return false;
+        		}
+            	if(!reserver_phoneNumber){	//예매자 연락처 미기입시 경고
+        			swal({
+        				  title: "예매자 연락처를 입력하세요.",
+        				  type: "warning",
+        				  showCancelButton: false,
+        				  confirmButtonColor: "#DD6B55",
+        				  confirmButtonText: "확인",				  
+        			});			
+        			return false;
+        		}
+            	if(!reserver_Email){	//예매자 이메일 미기입시 경고
+        			swal({
+        				  title: "예매자 이메일를 입력하세요.",
+        				  type: "warning",
+        				  showCancelButton: false,
+        				  confirmButtonColor: "#DD6B55",
+        				  confirmButtonText: "확인",				  
+        			});			
+        			return false;
+        		}                
             });
         }
 
@@ -124,6 +250,7 @@
                 });
             });
         })
+         */
     </script>
 </head>
 
@@ -152,12 +279,16 @@
                             <tbody>
                                 <tr>
                                     <th>이름</th>
-                                    <td><input type="text" class="form-control" /></td>
+                                    <td><input type="text" class="form-control" id="reserverName"/></td>
                                 </tr>
                                 <tr>
                                     <th>생년월일</th>
                                     <td>
                                         <div class="form-group">
+                                        	<div>
+                                        		<input type="date" class="form-control" id="reserverBirthday" required>
+											</div>
+                                        	<!-- 
                                             <div class="col-sm-2">
                                                 <input type="number" class="form-control" id="" placeholder="년">
                                             </div>
@@ -167,6 +298,7 @@
                                             <div class="col-sm-2">
                                                 <input type="number" class="form-control" id="" placeholder="일">
                                             </div>
+                                             -->
                                         </div>
                                     </td>
                                 </tr>
@@ -180,9 +312,9 @@
                                     <th>연락처</th>
                                     <td>
                                         <div class="form-inline">
-                                            <input type="number" class="form-control" style="width:10%" />&nbsp;-
-                                            <input type="number" class="form-control" style="width:15%" />&nbsp;-
-                                            <input type="number" class="form-control" style="width:15%" />
+                                            <input type="number" class="form-control" style="width:10%" id="phoneNumber1"/>&nbsp;-
+                                            <input type="number" class="form-control" style="width:15%" id="phoneNumber2"/>&nbsp;-
+                                            <input type="number" class="form-control" style="width:15%" id="phoneNumber3"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -195,12 +327,12 @@
                                             <input type="text" id="str_email02" name="str_email02" class="form-control" value="" style="margin-left:20px; width:23%"
                                                 required/>
                                             <select id="selectEmail" class="form-control">
-	  								<option value="1" selected>직접입력</option>
-	    							<option value="naver.com">naver.com</option>
-	    							<option value="hanmail.net">hanmail.net</option>
-	    							<option value="nate.com">nate.com</option>
-	    							<option value="gmail.com">gmail.com</option>
-	 							</select>
+				  								<option value="1" selected>직접입력</option>
+				    							<option value="naver.com">naver.com</option>
+				    							<option value="hanmail.net">hanmail.net</option>
+				    							<option value="nate.com">nate.com</option>
+				    							<option value="gmail.com">gmail.com</option>
+				 							</select>
                                         </div>
                                     </td>
                                 </tr>
@@ -222,9 +354,13 @@
                     <iframe src="/ticket/panel" scrolling="no"></iframe>
                 </div>
                 <div class="btn-panel" style="margin-top:40px">
-                    <div class="btn-group btn-group-justified">
-                        <a class="btn btn-danger btn-before">< 이전으로</a>
-                        <a class="btn btn-info btn-next">다음 으로 ></a>
+                    <div class="btn-group btn-group-justified form-inline">
+                    	<div class="col-sm-offset-2 col-sm-6">
+                    		<button type="button" class="btn btn-danger btn-before" id="beforeBtn">< 이전으로</button>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-8 text-right">
+							<button type="button" class="btn btn-info btn-next" id="nextBtn">다음 으로 ></button>
+						</div>
                     </div>
                 </div>
             </div>

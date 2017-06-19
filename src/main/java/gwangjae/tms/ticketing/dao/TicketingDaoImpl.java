@@ -1,5 +1,6 @@
 package gwangjae.tms.ticketing.dao;
 
+import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.ticketing.dao.mapper.TicketingMapper;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
@@ -23,6 +24,11 @@ public class TicketingDaoImpl implements TicketingDao {
 	public List<Date> getPerfSkdList(int perfId) {
 		
 		return mapper.getPerfSkdList(perfId);
+	}
+	
+	@Override
+	public Performance getPerfDate(int perfId){
+		return mapper.getPerfDate(perfId);
 	}
 
 }

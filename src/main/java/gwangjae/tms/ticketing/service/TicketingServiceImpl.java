@@ -1,5 +1,6 @@
 package gwangjae.tms.ticketing.service;
 
+import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.ticketing.dao.TicketingDao;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
@@ -72,6 +73,14 @@ public class TicketingServiceImpl implements TicketingService {
 			squareSeats[itr.getsRow()-1][itr.getsCol()-1] = itr;
 		}
 		return squareSeats;
+	}
+	
+	/*
+		공연 일정을 불러오기 위해 Performance 정보 읽어들임.
+	 */
+	@Override
+	public Performance getPerfDate(int perfId){
+		return ticketDao.getPerfDate(perfId);
 	}
 
 }
