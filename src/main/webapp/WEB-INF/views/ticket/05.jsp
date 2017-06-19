@@ -78,20 +78,40 @@ iframe {
 	color:red;
 }
 </style>
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
 	$("#selectBankBox").change(function(){
 		$("#selectBankBox option:selected").each(function(){
 			if($(this).val()=='1'){
 				$("#selectBank").val('');
-				$("#selectBank").attr("disabled", false);
-				
+				$("#selectBank").attr("readonly", false);				
 			}else{
-				$("#selectBank")val($(this).text());
-				$("#selectBank").attr("disabled", true);
+				$("#selectBank").val($(this).text());
+				$("#selectBank").attr("readonly", true);
+				//$("#selectBank").attr("disabled", true);
 			}			
 		})		
 	});
+	
+	//입금액 세션에서 읽어들이기
+	var totalPrice = sessionStorage.getItem('totalPrice');
+	$('#ticketPrice').text(totalPrice + "원");
+	
+	$("#beforeBtn").click(function () {
+		forwardForm(4);
+		return true;
+	});  
+	
+	$("#nextBtn").on("click", function(){		
+		window.opener.top.location.href="/ticket/payment"
+		//window.opener.top.location.reload();//새로고침
+		window.close()
+		
+		
+	});	
+	
+	
+	
 });
 </script>
 </head>
@@ -100,15 +120,15 @@ $(document).ready(function(){
 
 <div class="container">
 	<div class="row info-wrapper">
-	<div class="col-sm-12" style="height:100%;">
-		<div class="info-panel">
-			<img class="img-step" src="img/step_01.gif">
-			<img class="img-step" src="img/step_02.gif">
-			<img class="img-step" src="img/step_03.gif">
-			<img class="img-step" src="img/step_04.gif">
-			<img class="img-step" src="img/step_05.gif">
+		<div class="col-sm-12" style="height:100%;">
+			<div class="info-panel">
+				<img class="img-step" src="img/ticket/step_01.gif">
+                <img class="img-step" src="img/ticket/step_02.gif">
+                <img class="img-step" src="img/ticket/step_03.gif">
+                <img class="img-step" src="img/ticket/step_04.gif">
+                <img class="img-step" src="img/ticket/step_05.gif">
+			</div>
 		</div>
-	</div>
 	</div>
 	<div class="row booking-wrapper">
 		<div class="col-sm-9 select-body">
@@ -119,7 +139,7 @@ $(document).ready(function(){
 				</tr>
 				<tr>
 					<th>입금액</th>
-					<td>20000원</td>
+					<td id="ticketPrice"></td>
 				</tr>
 				<tr>
 					<th>입금하실은행</th>
@@ -165,18 +185,16 @@ $(document).ready(function(){
 		</div>
 		<div class="col-sm-3 control-body">		
 			<div class="control-panel">
-				<iframe src="control-panel.html" scrolling="no"></iframe>
+				<iframe src="/ticket/panel" scrolling="no"></iframe>
 			</div>	
 			<div class="btn-panel" style="margin-top:40px">
 				<div class="btn-group btn-group-justified">
-				<a href="04.html" class="btn btn-danger">< 이전으로</a>
-				<a href="javascript:linkToOpener('06.html');" class="btn btn-info" target="_parent">결재확인</a>
+					<a type="button" class="btn btn-danger" id="beforeBtn">< 이전으로</a>
+					<a type="button" class="btn btn-info btn-next" id="nextBtn">결재확인</a>
 				</div>
 			</div>
-			</div>			
-		</div>
+		</div>			
 	</div>
-	
 </div>
 <script>
 

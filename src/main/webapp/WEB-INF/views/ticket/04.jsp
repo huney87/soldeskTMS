@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,157 +86,72 @@
         }
     </style>
     <script type="text/javascript">
-    	$(document).ready(function () {                        
-                       	
+    	$(document).ready(function () {
+    		function ImgError(source) {
+                source.src = "/img/noImg.png";
+                source.onerror = "";
+                return true;
+            }     		
+    		
            	$("#beforeBtn").click(function () {
 				forwardForm(3);
 				return true;
-			});
-            
-           	var reserver_name = $("#reserverName").val();
-			var reserver_birthday = $("#reserverBirthday").val();
-			var phoneNumber1 = $("#phoneNumber1").val();
-			var phoneNumber2 = $("#phoneNumber2").val();
-			var phoneNumber3 = $("#phoneNumber3").val();
-			var reserver_phoneNumber = phoneNumber1 + phoneNumbe2 + phoneNumber3;
-			var Email01 = $("#str_email01").val();	// 이메일 아이디
-			var Email02 = $("#str_email02").val();	// 이메일 사이트
-			var reserver_Email = Email01 + "@" + Email02;
+			});           	
 			
 			$("#nextBtn").on("click", function(){
-			/* $("#btn-next").click(function () { */
+				var reserver_name = $("#reserverName").val();
+				var reserver_birthday = $("#reserverBirthday").val();
+				var phoneNumber1 = $("#phoneNumber1").val();
+				var phoneNumber2 = $("#phoneNumber2").val();
+				var phoneNumber3 = $("#phoneNumber3").val();
+				var phoneNumber = phoneNumber1 + phoneNumber2 + phoneNumber3;
+				var Email01 = $("#str_email01").val();	// 이메일 아이디
+				var Email02 = $("#str_email02").val();	// 이메일 사이트
+				var reserver_Email = Email01 + "@" + Email02;
+				var totalData = reserver_name + reserver_birthday + phoneNumber + reserver_Email;
+				
 				console.log(reserver_name);
-				if(!reserver_name){	//예매자 이름 미기입시 경고창
-					swal({
-					title: "예매자 이름을 입력하세요.",
-					type: "warning",
-					showCancelButton: false,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "확인",				  
-					});			
+				console.log(reserver_birthday);
+				console.log(phoneNumber);
+				console.log(reserver_Email);				
+				
+				if(!reserver_name){	//예매자 이름 미기입시 경고창					
+					alert("예매자 이름을 입력하세요.");	
 					return false;
 				}
+				
 				if(!reserver_birthday){	//예매자 생년월입 미기입시 경고
-					swal({
-					title: "예매자 생년월일을 입력하세요.",
-					type: "warning",
-					showCancelButton: false,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "확인",				  
-					});			
+					alert("예매자 생년월일을 입력하세요.");	
 					return false;
 				}
-				if(!reserver_phoneNumber){	//예매자 연락처 미기입시 경고
-					swal({
-					title: "예매자 연락처를 입력하세요.",
-					type: "warning",
-					showCancelButton: false,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "확인",				  
-					});			
+				if(!phoneNumber1){	//예매자 연락처 미기입시 경고
+					alert("예매자 연락처를 입력하세요.");	
 					return false;
 				}
-				if(!reserver_Email){	//예매자 이메일 미기입시 경고
-					swal({
-					title: "예매자 이메일를 입력하세요.",
-					type: "warning",
-					showCancelButton: false,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "확인",				  
-					});			
+				if(!phoneNumber2){	//예매자 연락처 미기입시 경고
+					alert("예매자 연락처를 입력하세요.");	
 					return false;
-				}                
-				});
+				}
+				if(!phoneNumber3){	//예매자 연락처 미기입시 경고
+					alert("예매자 연락처를 입력하세요.");	
+					return false;
+				}
+				if(!Email01){	//예매자 이메일 미기입시 경고
+					alert("예매자 이메일 아이디를 입력하세요.");						
+					return false;
+				}
+				if(!Email02){	//예매자 이메일 미기입시 경고
+					alert("예매자 이메일 홈페이지를 입력하세요.");						
+					return false;
+				}  
+				
+				if(totalData != null){
+					forwardForm(5);
+					return true;
+				}
+			});			
 			
-				//이메일 입력방식 선택
-	            $('#selectEmail').change(function () {
-	                $("#selectEmail option:selected").each(function () {
-	                    if ($(this).val() == '1') { //직접입력일 경우
-	                        $("#str_email02").val(''); //값 초기화
-	                        $("#str_email02").attr("readonly", false); //활성화
-	                    } else { //직접입력이 아닐경우
-	                        $("#str_email02").val($(this).text()); //선택값 입력
-	                        $("#str_email02").attr("readonly", true); //비활성화
-	                    }
-	                });
-	            });
-	            
-	            /* function ImgError(source) {
-	                source.src = "/img/noImg.png";
-	                source.onerror = "";
-	                return true;
-	            }	 */ 
-    		});
-
-    	/* 
-        function ImgError(source) {
-            source.src = "/img/noImg.png";
-            source.onerror = "";
-            return true;
-        }
-
-        var initBtn = function () {
-        	var reserver_name = $("#reserverName").val();
-        	var reserver_birthday = $("#reserverBirthday").val();
-        	var phoneNumber1 = $("#phoneNumber1").val();
-        	var phoneNumber2 = $("#phoneNumber2").val();
-        	var phoneNumber3 = $("#phoneNumber3").val();
-        	var reserver_phoneNumber = phoneNumber1 + phoneNumbe2 + phoneNumber3;
-        	var Email01 = $("#str_email01").val();	// 이메일 아이디
-    		var Email02 = $("#str_email02").val();	// 이메일 사이트
-    		var reserver_Email = Email01 + "@" + Email02;
-        	
-            $('.btn-before').click(function () {
-                forwardForm(3);
-                return true;
-            });
-            $('#btn-next').click(function () {
-            	if(!reserver_name){	//예매자 이름 미기입시 경고창
-        			swal({
-        				  title: "예매자 이름을 입력하세요.",
-        				  type: "warning",
-        				  showCancelButton: false,
-        				  confirmButtonColor: "#DD6B55",
-        				  confirmButtonText: "확인",				  
-        			});			
-        			return false;
-        		}
-            	if(!reserver_birthday){	//예매자 생년월입 미기입시 경고
-        			swal({
-        				  title: "예매자 생년월일을 입력하세요.",
-        				  type: "warning",
-        				  showCancelButton: false,
-        				  confirmButtonColor: "#DD6B55",
-        				  confirmButtonText: "확인",				  
-        			});			
-        			return false;
-        		}
-            	if(!reserver_phoneNumber){	//예매자 연락처 미기입시 경고
-        			swal({
-        				  title: "예매자 연락처를 입력하세요.",
-        				  type: "warning",
-        				  showCancelButton: false,
-        				  confirmButtonColor: "#DD6B55",
-        				  confirmButtonText: "확인",				  
-        			});			
-        			return false;
-        		}
-            	if(!reserver_Email){	//예매자 이메일 미기입시 경고
-        			swal({
-        				  title: "예매자 이메일를 입력하세요.",
-        				  type: "warning",
-        				  showCancelButton: false,
-        				  confirmButtonColor: "#DD6B55",
-        				  confirmButtonText: "확인",				  
-        			});			
-        			return false;
-        		}                
-            });
-        }
-
-        $(document).ready(function () {
-            initBtn();
-            //이메일 입력방식 선택
+			//이메일 입력방식 선택
             $('#selectEmail').change(function () {
                 $("#selectEmail option:selected").each(function () {
                     if ($(this).val() == '1') { //직접입력일 경우
@@ -248,9 +162,8 @@
                         $("#str_email02").attr("readonly", true); //비활성화
                     }
                 });
-            });
-        })
-         */
+            });	            
+    	});    	
     </script>
 </head>
 
@@ -287,18 +200,7 @@
                                         <div class="form-group">
                                         	<div>
                                         		<input type="date" class="form-control" id="reserverBirthday" required>
-											</div>
-                                        	<!-- 
-                                            <div class="col-sm-2">
-                                                <input type="number" class="form-control" id="" placeholder="년">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="number" class="form-control" id="" placeholder="월">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="number" class="form-control" id="" placeholder="일">
-                                            </div>
-                                             -->
+											</div>                                        	
                                         </div>
                                     </td>
                                 </tr>
@@ -354,13 +256,9 @@
                     <iframe src="/ticket/panel" scrolling="no"></iframe>
                 </div>
                 <div class="btn-panel" style="margin-top:40px">
-                    <div class="btn-group btn-group-justified form-inline">
-                    	<div class="col-sm-offset-2 col-sm-6">
-                    		<button type="button" class="btn btn-danger btn-before" id="beforeBtn">< 이전으로</button>
-                        </div>
-                        <div class="col-sm-offset-2 col-sm-8 text-right">
-							<button type="button" class="btn btn-info btn-next" id="nextBtn">다음 으로 ></button>
-						</div>
+                    <div class="btn-group btn-group-justified">                    	
+                    		<a type="button" class="btn btn-danger btn-before" id="beforeBtn">< 이전으로</a>
+							<a type="button" class="btn btn-info btn-next" id="nextBtn">다음 으로 ></a>
                     </div>
                 </div>
             </div>

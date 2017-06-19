@@ -40,6 +40,11 @@ public class TicketingController {
 		return "/ticket/control-panel";
 	}
 	
+	@RequestMapping("/payment")
+	public String payment(){
+		return "/ticket/06";
+	}
+	
 	@RequestMapping("/layout")
 	public String layoutView(HttpSession session, Model model){		
 		return "/ticket/seat-select";
