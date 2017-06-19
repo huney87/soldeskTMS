@@ -2,14 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="gwangjae.tms.genre.dao.mapper.GenreMapper">
+	<!-- 기본 조회 파일 -->
+	<sql id="selectGenre1">
+		SELECT gen_id AS "genreID",
+			gen_major AS "code1",
+			gen_minor AS "code2",
+			gen_name AS "genreName"
+		FROM genre
+	</sql>
 	
 	<!-- 장르 전체 리스트 -->
 	<select id="selectGenreList" resultType="map">
-		SELECT gen_id AS genreID,
-			gen_major AS code1,
-			gen_minor AS code2,
-			gen_name AS genreName
-		FROM genre 
+		<include refid="selectGenre1"/> 
 		ORDER BY gen_major,gen_minor
 	</select>
 	
@@ -45,13 +49,16 @@
     	WHERE gen_id = #{genreID}
     </delete>
     
+    <!-- 장르 대분류 조회 -->
+    <select id="selectGenreMajorList" resultType="map">
+		<include refid="selectGenre1"/>
+		WHERE gen_minor = 0
+		ORDER BY gen_major,gen_minor
+	</select>
+	
 	<!-- 장르 아이디로 장르 정보 조회 -->
 	<select id="selectGenre" parameterType="map" resultType="gwangjae.tms.genre.domain.Genre">
-		SELECT gen_id AS genreID,
-			gen_major AS code1,
-			gen_minor AS code2,
-			gen_name AS genreName,
-		FROM genre 
+		<include refid="selectGenre1"/> 
 		WHERE gen_id = #{genreID}
 	</select>
     

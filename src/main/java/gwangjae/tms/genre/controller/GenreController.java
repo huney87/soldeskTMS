@@ -22,7 +22,13 @@ public class GenreController {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String moveToGenreMainPage(Model model){
 		List<Genre> genreList = genreService.getGenreList();
+		List<Genre> genreMajorList = genreService.getGenreMajorList();
+		int genreAllCnt = genreList.size();
+		int genreCode1Cnt = genreMajorList.size();
 		model.addAttribute("genreList",genreList);
+		model.addAttribute("genreMajorList",genreMajorList);
+		model.addAttribute("genreAllCnt",genreAllCnt);
+		model.addAttribute("genreCode1Cnt",genreCode1Cnt);
 		return "/admin/adminGenre";
 	}
 }

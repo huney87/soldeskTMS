@@ -19,6 +19,10 @@ public class GenreService{
 	public List<Genre> getGenreList(){
 		return genreMapper.selectGenreList();
 	}
+	//대분류 장르 리스트
+	public List<Genre> getGenreMajorList(){
+		return genreMapper.selectGenreMajorList();
+	}
 	//장르 아이디로 장르 정보 찾기
 	public Genre getGenre(Genre param){
 		return genreMapper.selectGenre(param);

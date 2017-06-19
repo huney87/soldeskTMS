@@ -103,11 +103,11 @@ $(document).ready(function () {
     
 					    <div class="well well-sm">    
 					      <h4><span class="label label-primary cate1">전체장르</span>
-					          <span class="badge">개</span> 
+					          <span class="badge">${genreAllCnt}개</span> 
 					          <span class="label label-info cate1">장르1</span>
-					          <span class="badge">개 </span>
+					          <span class="badge">${genreCode1Cnt}개 </span>
 					          <span class="label label-info cate1">장르2</span>
-					          <span class="badge">개</span></h4>
+					          <span class="badge">${genreAllCnt-genreCode1Cnt}개</span></h4>
 					    </div>    
 					    <div class="row">
 					        <div class="col-sm-12">
@@ -134,7 +134,7 @@ $(document).ready(function () {
 					            <th style="width:40%">장르명</th>					            
 					            <th style="width:20%">장르관리</th>
 					          </tr>
-					      </thead>
+					      	</thead>
 					      </table>
 					      </form>
 					      
@@ -152,8 +152,8 @@ $(document).ready(function () {
 					        <c:choose>
 						       	<c:when test="${empty genreList}"> 
 						       	<tr>
-						         	<td colspan="3">
-						           	회원정보가 없습니다.               
+						         	<td colspan="5">
+						           	장르 정보가 없습니다.               
 						         	</td>
 						       	</tr>
 						       	</c:when>
@@ -161,21 +161,21 @@ $(document).ready(function () {
 						       	<c:otherwise>
 									<c:forEach var="genre" items="${genreList}">      
 					          <tr>
-					            <td><input name="genreID" type="hidden" value="${genre.genreID}">${genre.GENREID}</td>
+					            <td><input name="genreID" type="hidden" value="${genre.genreID}">${genre.genreID}</td>
 					            <td colspan="2">
-					                <input name="code1" type="hidden" value="${genre.CODE1}">
-					                <input name="code2" type="hidden" value="${genre.CODE2}">
-					                <input class="form-control input-sm text-center" id="inputsm" type="text" value="${genre.CODE1*100+genre.CODE2}" readonly="readonly">
+					                <input name="code1" type="hidden" value="${genre.code1}">
+					                <input name="code2" type="hidden" value="${genre.code2}">
+					                <input class="form-control input-sm text-center" id="inputsm" type="text" value="${genre.code1*100+genre.code2}" readonly="readonly">
 					            </td>
 					            <td>
 					            <c:choose>
-					            	<c:when test="${genre.CODE2 eq 0}">
-					                <input name="genreName" class="form-control input-sm" id="inputsm" type="text" value="${genre.GENRENAME}">
+					            	<c:when test="${genre.code2 eq 0}">
+					                <input name="genreName" class="form-control input-sm" id="inputsm" type="text" value="${genre.genreName}">
 					                </c:when>
 					                <c:otherwise>
 					                <div class="input-group">
 					                    <span class="input-group-addon"><i class="fa fa-plus" style="font-size:15px"></i></span>
-					                    <input name="genreName" class="form-control input-sm" id="inputsm" type="text" value="${genre.GENRENAME}">
+					                    <input name="genreName" class="form-control input-sm" id="inputsm" type="text" value="${genre.genreName}">
 					                </div>
 					                </c:otherwise>
 					            </c:choose>              
@@ -222,8 +222,8 @@ $(document).ready(function () {
             '   <td colspan="3"><input name="code1" class="form-control input-sm text-center" id="inputsm" type="text" value="" placeholder="두자리 숫자입력" required></td>'+
             '   <td><input name="genreName" class="form-control input-sm" id="inputsm" type="text" value="" placeholder="장르1 이름입력" required></td>'+
             '   <td>'+
-            '       <button name="delGenre" class="btn btn-info btn-sm">삭제</button>'+
-            '       <input type="submit" class="btn btn-info btn-sm" value="적용">'+
+            '       <button type="button" name="delGenre" class="btn btn-info btn-sm">삭제</button>'+
+            '       <button type="button" name ="addGenre" class="btn btn-info btn-sm">적용</button>'+
             '   </td>'+
             '</tr>';
              
@@ -249,9 +249,9 @@ $(document).ready(function () {
         
     	var addGenreText2 =  '<tr name="trGenre2">'+            
             '   <td colspan="2">'+
-	        '      <select class="form-control input-sm" name="code1">'+
+	        '      <select class="form-control input-sm" name="selectcode1" id="selectcode1">'+
 		    '         <option value="default" required>-1차장르-</option>'+
-		    '         <c:forEach var="genre" items="${genrecode1}">'+
+		    '         <c:forEach var="genre" items="${genreMajorList}">'+
 		    '         <option value="${genre.code1}">${genre.genreName}</option>'+
 		    '         </c:forEach>'+
 	        '      </select>'+
@@ -264,8 +264,8 @@ $(document).ready(function () {
             '   </div>'+
             '   </td>'+
             '   <td>'+
-            '      <button name="delGenre2" class="btn btn-info btn-sm">삭제</button>'+
-            '      <input type="submit" class="btn btn-info btn-sm" value="적용">'+
+            '      <button type="button" name="delGenre2" class="btn btn-info btn-sm">삭제</button>'+
+            '      <button type="button" name ="addGenre" class="btn btn-info btn-sm">적용</button>'+
             '   </td>'+
             '</tr>';
              
@@ -280,15 +280,21 @@ $(document).ready(function () {
         var trGenre = $("tr[name=trGenre]");
         trHtml.remove(); //tr 테그 삭제
         if($("tr[name=trGenre2]").length == 0) $("#genreaddGenre").hide();
-    });    
+    });
+    
+    $(document).on("click","button[name=addGenre]",function(){
+		var code1 = $("#selectcode1").val();
+		console.log(code1);
+		return false;
+	});
 </script>
 <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
 
-	$("#addInfoClose").click(function(){
+	$("#addInfoClose").on("click",function(){
 		$("#genreAddInfo").hide();
-	});	
+	});
 });
 </script>
 
