@@ -17,6 +17,57 @@
 <script type="text/javascript">
 $(function(){
 	$("#postcodify_search_button").postcodifyPopUp();
+		
+	var userInfo=function(){
+		var user = '<tr>'
+				+'<th><label>아이디</label></th>'
+        		+'<td><p>'+user.userEmail+'</p></td>'
+      			+'</tr>'
+      			+'<tr>'
+        		+'<th><label for="pw">비밀번호</label></th>'
+        		+'<td><input type="password" id="pw" name="#" class="form-control" value="'+user.userPw+'" required/>'
+        		+'<button type="submit" class="btn btn-default">비밀번호 변경</button>'
+        		+'</td>'
+      			+'</tr>'
+      			+'<tr>'
+        		+'<th><label for="name">이름</label></th>'
+        		+'<td><input type="text" id="name" name="#" class="form-control" required/></td>'
+      			+'</tr>'
+      			+'<tr>'
+        		+'<th><label for="birth">생년월일</label></th>'
+        		+'<td><input type="number" min="1900" id="birthYear" name="#" class="form-control" required/>년'
+        		+'<input type="number" min="1" max="12" id="birthMon" name="#" class="form-control" required/>월'
+        		+'<input type="number" min="1" max="31" id="birthDate" name="#" class="form-control" required/>일</td>'
+      			+'</tr>'
+      			+'<tr>'
+        		+'<th>주소</th>'
+        		+'<td><input type="text" name="postCode" class="postcodify_postcode5 form-control" value="'+user.userPost+'" placeholder="우편번호 버튼을 누르세요." readonly/>'
+				+'<input type="text" name="address1" class="postcodify_address form-control" required readonly/>'
+				+'<button type="button" id="postcodify_search_button" class="btn btn-default">우편번호찾기</button></td>'
+		     	+'</tr>'
+      			+'<tr>'
+      			+'<th><label for="detailPost">상세주소</label></th>'
+				+'<td>'
+				+'<input type="text" id="detailPost" name="#" class="postcodify_details form-control" placeholder="상세주소를 입력하세요."style="width:80%;"required />'
+				+'</td>'
+      			+'</tr>'
+      			+'<tr>'
+        		+'<th><label for="phone">휴대폰 번호</label></th>'
+        		+'<td><input type="number" id="phone1" name="#" class="form-control" required/>-'
+        		+'<input type="number" name="#" id="phone2" class="form-control" required/>-'
+        		+'<input type="number" name="#" id="phone3" class="form-control" required/></td>'
+      			+'</tr>'		
+	};
+	
+	$("#updUser").bind("click",function(){
+		$.ajax({
+			url:"/mypage1/getUser",
+			data: {user:user},
+			success:function(result){
+				userInfo();
+			}
+		});
+	});
 	
 	$("#udpUser").bind("click",function(){
 		var pw = $("#pw").val();
@@ -37,11 +88,12 @@ $(function(){
 				userPhone : phone,
 			},
 			success:function(result){
-				if(result) msg.text("수정 완료");
-				else msg.text("수정 실패");
+				userInfo();
+				if(result) alert("수정 완료");
+				else alert("수정 실패");
 			},
 			error:function(a,b,errMsg){
-				msg.text("수정 실패"+errMsg);
+				alert("수정 실패"+errMsg);
 			},
 			complete:function(){
 				alert("수정이 완료되었습니다.");
@@ -61,7 +113,7 @@ $(function(){
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="btn-group btn-group-justified">
-			  		<a href="/mypage/mypage1" class="btn btn-primary mypageBtn"><span class="glyphicon glyphicon-user"></span><br>개인정보수정</a>
+			  		<a href="/mypage/mypage1" class="btn btn-primary mypageBtn" id="updUser"><span class="glyphicon glyphicon-user"></span><br>개인정보수정</a>
 			  		<a href="/mypage" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-check"></span><br>예매확인/취소</a>
 			  		<a href="/mypage/mypage3" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-erase"></span><br>관람내역</a>
 			  		<a href="/mypage/mypage4" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-remove-sign"></span><br>회원탈퇴</a>
@@ -73,46 +125,8 @@ $(function(){
 			
 				<form class="form-inline">
 					<table class="table table-striped">
-					    <tbody>
-					      <tr>
-					        <th><label>아이디</label></th>
-					        <td><p>soldesk</p></td>
-					      </tr>
-					      <tr>
-					        <th><label for="pw">비밀번호</label></th>
-					        <td><input type="password" id="pw" name="#" class="form-control" required/>
-					        <button type="submit" class="btn btn-default">비밀번호 변경</button>
-					        </td>
-					      </tr>
-					      <tr>
-					        <th><label for="name">이름</label></th>
-					        <td><input type="text" id="name" name="#" class="form-control" required/></td>
-					      </tr>
-					      <tr>
-					        <th><label for="birth">생년월일</label></th>
-					        <td><input type="number" min="1900" id="birthYear" name="#" class="form-control" required/>년
-					        <input type="number" min="1" max="12" id="birthMon"name="#" class="form-control" required/>월
-					        <input type="number" min="1" max="31" id="birthDate"name="#" class="form-control" required/>일</td>
-					      </tr>
-					      <tr>
-					        <th>주소</th>
-					        <td><input type="text" name="postCode" class="postcodify_postcode5 form-control" value="" placeholder="우편번호 버튼을 누르세요." readonly/>
-							<input type="text" name="address1" class="postcodify_address form-control" value="" required readonly/>
-							<button type="button" id="postcodify_search_button" class="btn btn-default">우편번호찾기</button></td>
-							
-					      </tr>
-					      <tr>
-					      	<th><label for="detailPost">상세주소</label></th>
-							<td>
-								<input type="text" id="detailPost" name="#" class="postcodify_details form-control" value="" placeholder="상세주소를 입력하세요." style="width:80%;"required />
-							</td>
-					      </tr>
-					      <tr>
-					        <th><label for="phone">휴대폰 번호</label></th>
-					        <td><input type="number" id="phone1" name="#" class="form-control" required/>-
-					        <input type="number" name="#" id="phone2" class="form-control" required/>-
-					        <input type="number" name="#" id="phone3" class="form-control" required/></td>
-					      </tr>
+					    <tbody id="userInfo">
+					      
 					  </tbody>
 				  </table>
 				  <div class="clearfix"></div>

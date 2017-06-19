@@ -29,7 +29,7 @@ public class MypageController {
 		Object email = session.getAttribute("email");
         model.addAttribute("email", email);
 		return "mypage/mypage1";
-	} 
+	}  
 	
 	@RequestMapping("/mypage3")
 	public String mypage3(){
