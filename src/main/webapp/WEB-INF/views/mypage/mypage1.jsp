@@ -57,6 +57,7 @@ $(function(){
         		+'<input type="number" name="#" id="phone2" class="form-control" required/>-'
         		+'<input type="number" name="#" id="phone3" class="form-control" required/></td>'
       			+'</tr>'		
+      		$("#userInfo").append(user);
 	};
 	
 	$("#updUser").bind("click",function(){
