@@ -13,8 +13,11 @@
 	display: none;
 }
 </style>
+<!-- "우편번호찾기" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
 <script type="text/javascript">
-$(document).ready(function(){
+$(function(){
+	$("#postcodify_search_button").postcodifyPopUp();
+	
 	$("#udpUser").bind("click",function(){
 		var pw = $("#pw").val();
 		var name = $("#name").val();
@@ -34,7 +37,8 @@ $(document).ready(function(){
 				userPhone : phone,
 			},
 			success:function(result){
-
+				if(result) msg.text("수정 완료");
+				else msg.text("수정 실패");
 			},
 			error:function(a,b,errMsg){
 				msg.text("수정 실패"+errMsg);
@@ -50,8 +54,6 @@ $(document).ready(function(){
 <!-- jQuery와 Postcodify를 로딩한다 -->
 <script src="http://d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
-<!-- "우편번호찾기" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
-<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
@@ -119,7 +121,7 @@ $(document).ready(function(){
 						  <a class="btn btn-danger btn-block btn-lg" id="cancel" role="submit"> 취 소 </a>
 					  </div>
 					  <div class="col-sm-3 text-center">
-						  <button type="button" class="btn btn-primary btn-block btn-lg" id="updUser"> 수 정 </button>
+						  <a class="btn btn-primary btn-block btn-lg" id="updUser" role="submit"> 수 정 </a>
 					  </div>
 				  </div>
 			  </form>
