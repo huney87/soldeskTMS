@@ -55,6 +55,7 @@
                 <value>classpath:gwangjae/tms/location/dao/mapper/**/*.xml</value>
                 <value>classpath:gwangjae/tms/mypage/dao/mapper/**/*.xml</value>
                 <value>classpath:gwangjae/tms/ticketing/dao/mapper/**/*.xml</value>
+                <value>classpath:gwangjae/tms/genre/dao/mapper/**/*.xml</value>
             </array>
         </property>
     </bean> 
@@ -67,6 +68,7 @@
     <mybatis:scan base-package="gwangjae.tms.location.dao.mapper" />
     <mybatis:scan base-package="gwangjae.tms.mypage.dao.mapper" />
     <mybatis:scan base-package="gwangjae.tms.ticketing.dao.mapper" />
+    <mybatis:scan base-package="gwangjae.tms.genre.dao.mapper" />
 
 	<!-- Spring 과 json과의  연동 설정 -->
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
