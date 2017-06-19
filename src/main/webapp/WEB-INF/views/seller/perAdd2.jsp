@@ -67,6 +67,21 @@ button, select{
 	margin:1px;
 	padding:1px;
 }
+.box2{
+	text-align:center;
+	width:3rem;
+	height:3rem;
+	margin:0.5rem;
+	display:inline-block;
+}
+#gradeResult1{ background-color:black; border:gray solid 0.1rem;
+}
+#gradeResult2{ background-color:blue;
+}
+#gradeResult3{ background-color:red;
+}
+#gradeResult4{ background-color:#BDFF12; color:black;
+}
 #row, #col{
 	width:10rem;
 	color:black;
@@ -78,10 +93,10 @@ $(document).ready(function(){
     var msg = $("#msg");            // 결과 메세지
 
 	$("#searchPer").on("click", function(){
-		$("#perOption").empty();
+		$("#perf").empty();
 		
 		var perName = $("#perName").val();
-		var select = $("<select id='perf' style='color:black;'></select>");
+		var select = $("#perf");
 		var optionBase = $("<option>공연 선택</option>");
 		select.append(optionBase);
 		
@@ -94,39 +109,18 @@ $(document).ready(function(){
 	                    option = $("<option value='"+per.per_id+"'>"+per.per_title+"</option>");
 	                    select.append(option);
 	                });
-	            	$("#perOption").append(select);
-	            	
+	            	 
+	            	layoutInit();
 	            	
 	            	$("#msg").text("공연 검색완료!");
 	    			$("#resultModal").modal('show');	
 		        }
-			});
-			
-			$("#test").on("click", function(){
-				var perId = $("#perf").val();
-				
-				if(perId) {	
-					$.ajax({
-			            url: "/seller/getLayout",
-			            data:{per_id:perId},
-			            success:function(hall){
-			            	$("#row").val(hall.hallRow);	
-			            	$("#col").val(hall.hallCol);	
-				        }
-					});
-				}else{
-					$("#msg").text("오류!");
-					$("#resultModal").modal('show');
-				}
-			});
+			});		
 			
 		}else{
 			$("#msg").text("오류! 공연 제목을 작성해주십시오.");
 			$("#resultModal").modal('show');
 		}
-		
-		
-		
 		
 	});	
     
@@ -228,8 +222,7 @@ $(document).ready(function(){
                 url: "/seller/addSeats",
                 data: seatInfo,
                 success:function(result){
-                	alert("좌석 등록완료! 마지막단계로 이동합니다.");
-                	window.location.assign("/seller/perAdd3");
+                	initSeatInfo();
                 },
                 error:function(a, b, errMsg){
                 	$("#msg").text("추가 실패: " + errMsg);
@@ -243,6 +236,54 @@ $(document).ready(function(){
    });
 
 });
+
+// 등록한 좌석 등급 초기화 시키기 (입력한 등급수에 따라서 자동 기본값으로 등록)
+var initSeatInfo = function() {
+	var perId=$("#perf").val();
+	
+	$.ajax({  		
+	    url: "/seller/maxGrade",
+	    data:{per_id:perId},
+	    success:function(grade){
+	    	console.log(perId);
+	    	for(i=1;i<=grade;i++){	
+	    		$.ajax({  		
+		   	 	    url: "/seller/seatInfoInit",
+		   	 	    data:{
+		   	 	    	perId:perId,
+		   	 	    	seatType:i
+		   	 	    	},
+		   	 	    success:function(result){
+			   	 	    alert("좌석 등록완료! 마지막단계로 이동합니다.");
+	                	window.location.assign("/seller/perAdd3");
+	   	 	    	} 	   	    
+	   	 		});	
+	    	}
+	    	
+	    }   	    
+	}); 
+}
+
+//공연 선택시 레이아웃값 자동으로 가져오기
+var layoutInit = function() {
+	$("#perf").on("change", function(){
+		var perId = $("#perf").val();
+		
+		if(perId) {	
+			$.ajax({
+	            url: "/seller/getLayout",
+	            data:{per_id:perId},
+	            success:function(hall){
+	            	$("#row").val(hall.hallRow);	
+	            	$("#col").val(hall.hallCol);	
+		        }
+			});
+		}else{
+			$("#msg").text("오류!");
+			$("#resultModal").modal('show');
+		}
+	});
+}
 </script>
 </head>
 <body>
@@ -262,16 +303,24 @@ $(document).ready(function(){
                     	<input type="text" id="perName">
                     	<button type="button" id="searchPer" class="btn btn-sm btn-default">검색</button>
                     </span>
-                    <span id="perOption"></span>
+                    <span>
+                    	<select id='perf' style='color:black;'></select>
+                    </span>
                 </div>
                 <div class="col-lg-12" id="nav2">
-                	<button type="button" id="test" class="btn btn-sm btn-default">레이아웃생성</button>
                 	<span>    
 			                 가로:<input type="number" id="row" placeholder="row" readonly>
 			                 세로:<input type="number" id="col" placeholder="col" readonly>
                     </span>
                     <button type="button" id="check" class="btn btn-default btn-sm">입력</button>
                     <button type="button" id="resist" class="btn btn-danger btn-sm">좌석 등록</button>
+                    <span style="margin-left:3rem; width:20rem;">     	
+	                    <span id="gradeResult1" class="box2">1</span>
+	                    <span id="gradeResult2" class="box2">2</span>
+	                    <span id="gradeResult3" class="box2">3</span>
+	                    <span id="gradeResult4" class="box2">4</span>
+						*등급은 최대 4개까지 등록 가능합니다.
+                    </span>
                 </div>
                 <div class="col-sm-12">
                     <div class="layout" id="shell"></div>

@@ -5,7 +5,7 @@
 	<resultMap id="SeatMap" type="seatInfo">
 		<id property="seatInfoId" column="sinfo_id"/>
 		<result property="perId" column="perf_id"/>
-		<result property="seatId" column="s_id"/>
+		<result property="seatType" column="s_id"/>
 		<result property="grade" column="sinfo_grade"/>
 		<result property="price" column="sinfo_price"/>	
 	</resultMap>
@@ -62,7 +62,18 @@
 	</select>
 	
 	<select id="maxGrade" parameterType="int" resultType ="int">
-		select MAX(s_type) from seats where perf_id = #{value}
+		select count(distinct s_type) from seats where perf_id = #{value}
 	</select>
+	
+	<insert id="seatInfoInit" parameterType="SeatInfo">
+		insert into seatInfo(sinfo_id,perf_id,sinfo_type,sinfo_grade,sinfo_price)
+		values(sinfo_id_seq.nextval,#{perId},#{seatType},'none',0)
+	</insert>
+	
+	<update id="updateSeatsInfo" parameterType="SeatInfo">
+		update seatInfo
+		set sinfo_grade= #{grade},sinfo_price= #{price}
+		where perf_id = #{perId} and sinfo_type = #{seatType}
+	</update>
 	
 </mapper>

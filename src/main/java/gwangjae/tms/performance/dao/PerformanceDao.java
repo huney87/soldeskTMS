@@ -16,4 +16,6 @@ public interface PerformanceDao {
 	public List<Performance> getHalls(int centerId);
 	public Hall getLayout(int per_id);
 	public int maxGrade(int per_id);
+	public int updateSeatsInfo(SeatInfo sinfo);
+	public int seatInfoInit(SeatInfo sinfo);
 }

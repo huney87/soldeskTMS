@@ -47,5 +47,13 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	public int maxGrade(int per_id){
 		return performanceMapper.maxGrade(per_id);
 	}
+	
+	public int updateSeatsInfo(SeatInfo sinfo){
+		return performanceMapper.updateSeatsInfo(sinfo);
+	}
+	
+	public int seatInfoInit(SeatInfo sinfo){
+		return performanceMapper.seatInfoInit(sinfo);
+	}
 }
 

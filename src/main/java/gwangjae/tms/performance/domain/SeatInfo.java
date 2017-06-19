@@ -3,10 +3,10 @@ package gwangjae.tms.performance.domain;
 public class SeatInfo {
 	private int seatInfoId;
 	private int perId;
-	private int seatId;
-	private int grade;
+	private int seatType;
+	private String grade;
 	private int price;
-	
+
 	public SeatInfo(){}
 
 	public int getSeatInfoId() {
@@ -25,19 +25,19 @@ public class SeatInfo {
 		this.perId = perId;
 	}
 
-	public int getSeatId() {
-		return seatId;
+	public int getSeatType() {
+		return seatType;
 	}
 
-	public void setSeatId(int seatId) {
-		this.seatId = seatId;
+	public void setSeatType(int seatType) {
+		this.seatType = seatType;
 	}
 
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 

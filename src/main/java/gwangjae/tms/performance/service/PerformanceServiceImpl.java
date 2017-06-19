@@ -56,4 +56,12 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public int maxGrade(int per_id){
 		return performanceDao.maxGrade(per_id);
 	}
+	
+	public int updateSeatsInfo(SeatInfo sinfo){
+		return performanceDao.updateSeatsInfo(sinfo);
+	}
+	
+	public int seatInfoInit(SeatInfo sinfo){
+		return performanceDao.seatInfoInit(sinfo);
+	}
 }

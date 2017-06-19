@@ -10,43 +10,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>
-var resistBtn = function() {
-	// 좌석값 입력후 등록시 오른쪽에 결과창 확인 및 데이터 저장.
+//좌석값 입력후 등록시 오른쪽에 결과창 확인 및 데이터 저장.
+var resistBtn = function() {	
     $("#creatGrade").on("click", function(){  	
     	$("#resultPrice").empty();
     	var gradeCnt = $(".gPrice").length/2;
-    	var result = $("<button type='button' id='creatGrade' class='btn btn-danger btn-sm'>등록</button>");
     	
     	for(var i=1;i<=gradeCnt;i++){
     		var div = $('<span id="gradeResult'+i+'" class="box">&nbsp;&nbsp;&nbsp;&nbsp;</span>');
     		var grade = '#'+'grade'+i;
     		var price = '#'+'price'+i;
     		var text = $('<span>&nbsp;&nbsp;'+$(grade).val()+'석&nbsp;&nbsp;'+$(price).val()+'원</span><br>');
-    		$("#resultPrice").append(div).append(text);
-    	}
-    	$("#resultPrice").append(result);
+    		$("#resultPrice").append(div).append(text);   		
+    		
+    		var seatInfo = {
+        			perId:$("#choice").val(),
+        			seatType:i,
+        			grade:$(grade).val(),
+        			price:$(price).val()
+        	}
+    		
+    		$.ajax({
+                url: "/seller/updateSeatsInfo",
+                data: seatInfo,
+                success:function(result){
+                },
+                error:function(a, b, errMsg){
+                	$("#msg").text("추가 실패: " + errMsg);
+                	$("#resultModal").modal('show');
+                }
+            });			
+    	}   	
+    	
+    	alert("좌석 등급정보 등록완료!");
     });
 }
 
-var choiceBtn = function() {
-	$("#sel").on("change", function(){
-		$("#grades").empty();
-		tmpCnt = $("#sel").val();
-		for(i=1;i<=tmpCnt;i++){
-	    	var sheetDiv = $("<div></div>");
-	 	    var gradeName = $("<label>"+i+".등급 이름: <input type='text' class='gPrice' id='grade"+i+"'></label>");
-	 	    var gradePrice = $("<label> 가격: <input type='number' min='0' class='gPrice' id='price"+i+"'>원</label>"); 
-	    	$("#grades").append(sheetDiv.append(gradeName).append(gradePrice));
-		}
-	});	
-}
-
-$(document).ready(function(){
-	var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
-    var msg = $("#msg");            // 결과 메세지
-	
-	//공연찾기 버튼
-    $("#searchPer").on("click", function() {
+//공연찾기 기능
+var searchBtn = function() {
+	$("#searchPer").on("click", function() {
     	var searchName = $("#perName").val();
     	var option = $("<option>공연 선택</option>");
     	$("#choice").empty();
@@ -68,14 +70,20 @@ $(document).ready(function(){
 			$("#resultModal").modal('show');
     	}	
     });
-    
+}
+
+$(document).ready(function(){
+	var modal = $("#resultModal");  // 추가, 수정, 삭제 결과 창
+    var msg = $("#msg");            // 결과 메세지
+	
+    searchBtn();
     
    	//좌석 등급 생성(등록된 좌석이 있을경우 등록된 수만큼 칸 생성, 없을경우 선택해서 신규생성)
    	$("#choice").on("change", function(){
    		var gradeCnt=0;
    		$("#grades").empty();  		
    		var perId=$("#choice").val();
-   	    var result = $("<button type='button' id='creatGrade' class='btn btn-danger btn-sm'>등록</button>");
+   	    var result = $("<button type='button' id='creatGrade' class='btn btn-danger btn-sm'>등록하기</button>");
    	    
 	   	 $.ajax({  		
 		         url: "/seller/maxGrade",
@@ -92,26 +100,10 @@ $(document).ready(function(){
 			   		 resistBtn();// 완료버튼 활성화 기능.   	  
 		         },
 		         error:function(a, b, errMsg){
-		        	 alert("좌석 등록 정보가 없습니다! 신규 등록을 시작합니다.");
-		        	 $("#gradeMenu").empty();
-					var span = $("<span></span>");
-	        		var select = $("<select id='sel'></select>");
-	                var baseOption = $("<option>좌석등급 선택</option>");
-	                select.append(baseOption);
-	                
-	                for(i=1;i<5;i++){
-	                	var option = $("<option value='"+i+"'>좌석등급 "+i+"개</option>");
-	                	select.append(option);
-	                }
-	                $("#gradeMenu").append(span.append(select));
-	                choiceBtn();// 메뉴선택시 좌석 생성 기능.
-	                resistBtn();// 완료버튼 활성화 기능. 
+		        	
 		         }  	   	    
 	  		}); 
    	});
-
-    
-   	
    	
 //////////////////////////////////////////////////////////////////////////////////////   	
 	//시간추가 선택시
@@ -228,11 +220,11 @@ label{
         			<button type="button" id="addTime" class="btn btn-default btn-sm">시간추가</button>
 					<button type="button" id="rstTime" class="btn btn-danger btn-sm">시간리셋</button>
 					<span id="timesNav"></span>
-					<button type="button" id="roundResist" class="btn btn-md btn-danger">회차 등록</button>
+					<button type="button" id="roundResist" class="btn btn-sm btn-danger">회차 등록</button>
 				</div>
 				<div class="col-sm-1"></div>
 				<div class="col-sm-5" id="step1">
-                    <h5>좌석 등급은 최대 4개까지 선택 가능합니다.</h5>
+                    <h5>좌석 등급은 공연등록시 저장한 좌석종류를 기준으로 입력 가능합니다.</h5>
                     <div id="gradeMenu"></div>
                     <hr style="border:0.1rem solid #4d4dff;">
                     <div>
@@ -243,9 +235,9 @@ label{
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-3" id="step2">
-                	<div style="text-align:center;">
-                        <h3>공연 좌석 등록 결과 확인</h3>
-                        <div id="resultPrice"></div>
+                	<div>
+                        <h3 style="text-align:center;">공연 좌석 등록 결과 확인</h3>
+                        <div id="resultPrice" style="text-align:left;"></div>
                     </div>
                 </div>
                 <div class="col-sm-1"></div>

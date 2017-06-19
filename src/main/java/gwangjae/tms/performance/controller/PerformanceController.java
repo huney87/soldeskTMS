@@ -107,4 +107,17 @@ public class PerformanceController {
 		return performanceService.maxGrade(per_id);
 	}
 	
+	//좌석 정보 등록하기(등급이름, 가격 등)
+	@RequestMapping("/updateSeatsInfo")
+    @ResponseBody
+    public int updateSeatsInfo(SeatInfo sinfo){
+		return performanceService.updateSeatsInfo(sinfo);
+	}
+	
+	//좌석 정보 등록초기화(좌석등록시 실행)
+	@RequestMapping("/seatInfoInit")
+	@ResponseBody
+	public int seatInfoInit(SeatInfo sinfo){
+		return performanceService.seatInfoInit(sinfo);
+	}
 }
