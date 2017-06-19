@@ -33,9 +33,9 @@
 		delete from reserves where r_id=#{r_id}
 	</delete>
 
-	<select id="getUser" resultMap="UserMap">
+	<select id="getUser" parameterType="String" resultMap="UserMap">
 		select * from users
-		where user_id = #{userId}	
+		where user_Email = #{userEmail}	
 	</select>
 	
 	<update id="udpUser" parameterType="User">

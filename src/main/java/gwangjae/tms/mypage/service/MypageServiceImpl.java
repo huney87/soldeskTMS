@@ -21,8 +21,8 @@ public class MypageServiceImpl implements MypageService{
 		return dao.deleteReserve(reserveId);
 	}
 	
-	public User getUser(int userNo){
-		return dao.getUser(userNo);
+	public User getUser(String userEmail){
+		return dao.getUser(userEmail);
 	}
 
 	public User udpUser(User user){

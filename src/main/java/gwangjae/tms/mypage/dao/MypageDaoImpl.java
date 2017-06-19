@@ -23,8 +23,8 @@ public class MypageDaoImpl implements MypageDao{
 		return mapper.deleteReserve(reserveId);
 	}
 	
-	public User getUser(int userNo){
-		return mapper.getUser(userNo);
+	public User getUser(String userEmail){
+		return mapper.getUser(userEmail);
 	}
 	
 	public User udpUser(User user){

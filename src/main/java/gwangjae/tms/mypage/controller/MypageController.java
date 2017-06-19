@@ -57,11 +57,11 @@ public class MypageController {
 	
 	@RequestMapping("/getUser")
 	@ResponseBody
-	public User getUser(int userNo){
+	public User getUser(String userNo){
 		return mypageService.getUser(userNo);
 	}
 	
-	@RequestMapping("/udpUser")
+	@RequestMapping("/updUser")
 	@ResponseBody
 	public User updUser(User user){
 		return mypageService.udpUser(user);

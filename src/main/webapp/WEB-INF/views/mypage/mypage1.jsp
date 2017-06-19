@@ -56,21 +56,25 @@ $(function(){
         		+'<td><input type="number" id="phone1" name="#" class="form-control" required/>-'
         		+'<input type="number" name="#" id="phone2" class="form-control" required/>-'
         		+'<input type="number" name="#" id="phone3" class="form-control" required/></td>'
-      			+'</tr>'		
+      			+'</tr>';
+      			
       		$("#userInfo").append(user);
 	};
 	
-	$("#updUser").bind("click",function(){
+	$("#getUser").bind("click",function(){
+		var email = '${email}';
+		console.log(email);
+		//return false;
 		$.ajax({
-			url:"/mypage1/getUser",
-			data: {user:user},
+			url:"/mypage/getUser",
+			data: {userEmail: email},
 			success:function(result){
 				userInfo();
 			}
 		});
 	});
 	
-	$("#udpUser").bind("click",function(){
+	$("#updUser").bind("click",function(){
 		var pw = $("#pw").val();
 		var name = $("#name").val();
 		var birthDay = $("#birthYear").val()+"-"+$("#birthMon").val()+"-"+$("#birthDate").val();
@@ -79,7 +83,7 @@ $(function(){
 		var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
 		
 		$.ajax({
-			url: "/mypage1/udpUser",
+			url: "/mypage1/updUser",
 			data:{
 				userPw : pw,
 				userName : name,
@@ -114,7 +118,7 @@ $(function(){
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="btn-group btn-group-justified">
-			  		<a href="/mypage/mypage1" class="btn btn-primary mypageBtn" id="updUser"><span class="glyphicon glyphicon-user"></span><br>개인정보수정</a>
+			  		<a href="/mypage/mypage1" class="btn btn-primary mypageBtn" id="getUser"><span class="glyphicon glyphicon-user"></span><br>개인정보수정</a>
 			  		<a href="/mypage" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-check"></span><br>예매확인/취소</a>
 			  		<a href="/mypage/mypage3" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-erase"></span><br>관람내역</a>
 			  		<a href="/mypage/mypage4" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-remove-sign"></span><br>회원탈퇴</a>
