@@ -5,22 +5,22 @@
 	
 	<!-- 장르 전체 리스트 -->
 	<select id="selectGenreList" resultType="map">
-		SELECT genre_ID AS genreID,
-			code1,
-			cord2,
-			genre_NAME AS genreName,
+		SELECT gen_id AS genreID,
+			gen_major AS code1,
+			gen_minor AS code2,
+			gen_name AS genreName
 		FROM genre 
-		ORDER BY code1,cord2
+		ORDER BY gen_major,gen_minor
 	</select>
 	
 	<!-- 장르 추가 -->
 	<insert id="insertGenre" parameterType="map">
 		INSERT INTO Genre 
 		(
-			Genre_id, 
-			code1, 
-			code2, 
-			Genre_name
+			gen_id, 
+			gen_major, 
+			gen_minor, 
+			gen_name
 		)
 		VALUES 
 		(
@@ -34,27 +34,25 @@
 	<!-- 장르 수정 -->
 	<update id="updateGenre" parameterType="map">
 	    UPDATE genre 
-	    SET genre_name=#{genreName}, 
-	    	genre_subject = #{genreSubject}, 
-	    	genre_use= #{genreUse}
-	    WHERE genre_id=#{genreID}
+	    SET gen_name=#{genreName},
+	    WHERE gen_id=#{genreID}
     </update>
     
     <!-- 장르 삭제 -->
     <delete id="deleteGenre" parameterType="map">
     	DELETE 
     	FROM Genre 
-    	WHERE Genre_id = #{genreID}
+    	WHERE gen_id = #{genreID}
     </delete>
     
 	<!-- 장르 아이디로 장르 정보 조회 -->
 	<select id="selectGenre" parameterType="map" resultType="gwangjae.tms.genre.domain.Genre">
-		SELECT genre_ID AS genreID,
-			code1,
-			cord2,
-			genre_NAME AS genreName,
+		SELECT gen_id AS genreID,
+			gen_major AS code1,
+			gen_minor AS code2,
+			gen_name AS genreName,
 		FROM genre 
-		WHERE genre_id = #{genreID}
+		WHERE gen_id = #{genreID}
 	</select>
     
 </mapper>

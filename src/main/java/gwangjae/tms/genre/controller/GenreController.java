@@ -23,6 +23,6 @@ public class GenreController {
 	public String moveToGenreMainPage(Model model){
 		List<Genre> genreList = genreService.getGenreList();
 		model.addAttribute("genreList",genreList);
-		return "/admin/genre";
+		return "/admin/adminGenre";
 	}
 }
