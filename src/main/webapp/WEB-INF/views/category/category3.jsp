@@ -6,11 +6,6 @@
 	
 <title>티켓박스 분류페이지</title>
 <link href="/css/menu.css" media="all" rel="stylesheet" type="text/css" />
-<style>
-#middle-menu {
-	display: none;
-}
-</style>
 
 <jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
 

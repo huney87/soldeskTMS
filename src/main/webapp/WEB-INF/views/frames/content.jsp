@@ -5,24 +5,25 @@
 	<!-- 공연들 -->
 	<div class="container-fluid" id="categoryContent">
 		<div class="container" id="container">
-			<c:forEach var="i" begin="1" end="20" step="5">
+			<%-- <c:forEach var="i" begin="1" end="20" step="5"> --%>
 			<div class="row">
 				<div class="col-md-12 frameDiv">
-				<c:forEach var="j" begin="0" end="4" step="1">
+				<c:forEach var="j" begin="1" end="5" step="1">
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="./img/에어리언.jpg" onerror="ImgError(this)" />
+								<img src="/img/noImg.png" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="../img/에어리언.jpg" onerror="ImgError(this)" />
+								<img class="backPost" src="/img/noImg.png" onerror="ImgError(this)" />
 								<article id="movieInfo">
 									<div class="moveInfoBtn">
 										<div class="moveInfoBtn1">
 											<a href="/detail"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>
 										</div>
 										<div class="moveInfoBtn2">
-											<a name="booking_popup"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>
+											<a name="booking_popup" data-perf_id="${j}"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>
+											<input type="hidden" id="perf_id${j}" value="2">
 										</div>
 									</div>
 								</article>
@@ -30,7 +31,7 @@
 						</div>
 						<div class="movieInfo3">
 							<p>
-								<span class="age">12</span> 공연 ${i+j}
+								<span class="age">12</span> 공연 ${j}
 							</p>
 							<div class="movieInfo3Txt">공연장</div>
 						</div>
@@ -38,6 +39,6 @@
 				</c:forEach>					
 				</div>
 			</div>
-			</c:forEach>
+			<%-- </c:forEach> --%>
 		</div>
 	</div>

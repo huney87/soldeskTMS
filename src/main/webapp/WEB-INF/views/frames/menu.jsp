@@ -5,8 +5,8 @@
 
 <script type="text/javascript">
 
-var booking_popup = function(){
-	var popup_url = "/ticket";
+var booking_popup = function(perf_id){
+	var popup_url = "/ticket?perf_id="+perf_id;
 	var popup_name = "예매하기";
 	cw=screen.availWidth;     //화면 넓이
 	ch=screen.availHeight;    //화면 높이
@@ -16,7 +16,7 @@ var booking_popup = function(){
 
 	ml=(cw-sw)/2;        //가운데 띄우기위한 창의 x위치
 	mt=(ch-sh)/2-100;         //가운데 띄우기위한 창의 y위치
-	window.open( popup_url , popup_name, 
+	openWin = window.open( popup_url , popup_name, 
 	'width='+sw+',height='+sh+',top='+mt+',left='+ml+'scrollbars=no, menubar=no, status=no, location=no, resizable=no');
 }
 
@@ -55,7 +55,8 @@ function ImgError(source){
 	
 $(document).ready(function(){
 	$("[name='booking_popup']").click(function(){                
-		booking_popup();
+		var perf_id = $("#perf_id"+$(this).attr('data-perf_id')).val();
+		booking_popup(perf_id);
 	});
 	
 	$("#topAdClose").click(function(){
@@ -142,9 +143,9 @@ $(document).ready(function(){
 					</div>
 					<div class="col-sm-9">
 						<div class="btn-group btn-group-justified" id="nav">
-							<a href="/category2" class="btn btn-default btn-lg">뮤지컬</a> 
-							<a href="/category2" class="btn btn-default btn-lg">콘서트</a> 
-							<a href="/category2" class="btn btn-default btn-lg">연극</a>
+							<a href="/category2?genid=1" class="btn btn-default btn-lg">뮤지컬</a> 
+							<a href="/category2?genid=2" class="btn btn-default btn-lg">콘서트</a> 
+							<a href="/category2?genid=3" class="btn btn-default btn-lg">연극</a>
 							<div class="btn-group">
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
@@ -187,9 +188,9 @@ $(document).ready(function(){
 				<div class="col-sm-6">
 					<button type="button" class="btn btn-info btn-xs btn_menu_all"><i class="glyphicon glyphicon-menu-hamburger"></i> 전체메뉴</button>
 					<div class="btn_social">
-					    <a class="film_society" href="./04.html" title="지역 바로가기">지역</a>
+					    <a class="film_society" href="/category2?locid=all" title="지역 바로가기">지역</a>
 					    <i class="split"></i>
-					    <a class="classic_society" href="./05.html" title="공연장 바로가기">공연장</a>
+					    <a class="classic_society" href="/category2?hid=all" title="공연장 바로가기">공연장</a>
 					</div>
 				</div>
 				
@@ -219,17 +220,17 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-    <div class="row middle-btn-wrap" id="middle-menu"> 
+ 	<div class="row middle-btn-wrap" id="middle-menu"> 
         <div class="container">
         	<div class="row">
 				<div class="col-sm-12">
 					<ul class="nav nav-pills nav-justified">
-						<li class="title">뮤지컬</li>
+						<li class="title">지역</li>
 						<li class="active"><a href="#">전체</a></li>
-						<li><a href="#">내한공연</a></li>
-						<li><a href="#">오리지널</a></li>
-						<li><a href="#">라이센스</a></li>
-						<li><a href="#">창작뮤지컬</a></li>
+						<li><a href="#">서울북부</a></li>
+						<li><a href="#">서울남부</a></li>
+						<li><a href="#">경기북부</a></li>
+						<li><a href="#">경기남부</a></li>
 					</ul>
 				</div>
 			</div>
