@@ -142,9 +142,9 @@ $(document).ready(function(){
 					</div>
 					<div class="col-sm-9">
 						<div class="btn-group btn-group-justified" id="nav">
-							<a href="./category2" class="btn btn-default btn-lg">뮤지컬</a> 
-							<a href="./category2" class="btn btn-default btn-lg">콘서트</a> 
-							<a href="./category2" class="btn btn-default btn-lg">연극</a>
+							<a href="/category2" class="btn btn-default btn-lg">뮤지컬</a> 
+							<a href="/category2" class="btn btn-default btn-lg">콘서트</a> 
+							<a href="/category2" class="btn btn-default btn-lg">연극</a>
 							<div class="btn-group">
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
