@@ -53,7 +53,7 @@
 	</update>
 	
 	<select id="getPer" resultMap ="PerMap">
-		select p.perf_id, p.perf_title,p.CAT_ID,c.CTR_NAME, h.H_NAME, p.PERF_STARTDATE, p.PERF_ENDDATE, p.PERF_IMAGE
+		select p.perf_id, p.perf_title,p.CAT_ID,c.loc_id,c.CTR_NAME, h.H_NAME, p.PERF_STARTDATE, p.PERF_ENDDATE, p.PERF_IMAGE
 		from performances p, CENTERS c, HALLS h
 		where p.h_id = h.H_ID and h.CTR_ID = c.CTR_ID 
 		and p.perf_id in(select perf_id from performances where perf_title Like '%'||#{value}||'%')	
