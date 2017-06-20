@@ -149,7 +149,7 @@ $(document).ready(function(){
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
 								<c:when test="${user_type >= 1}">
-									<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>
+									<a href="/login/logout" class="btn btn-default btn-lg">${user_type}로그아웃</a>
 								</c:when>
 								<c:otherwise>
 									<a class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>
@@ -201,13 +201,13 @@ $(document).ready(function(){
 					    </span>
 					</c:if>
 					<c:choose>
-						<c:when test="${user_type == 1}">
+						<c:when test="${user_type eq 1}">
 					    <button type="button" class="btn btn-info btn-xs" id="btnSign">관리자</button>
 					    </c:when>
-					    <c:when test="${user_type == 2}">
+					    <c:when test="${user_type eq 2}">
 				 		<button type="button" class="btn btn-info btn-xs" id="btnSign">판매자</button>
 					    </c:when>
-					    <c:when test="${user_type == 3}">
+					    <c:when test="${user_type eq 3}">
 					    <button type="button" class="btn btn-info btn-xs" id="btnSign">마이페이지</button>
 					    </c:when>
 						<c:otherwise>
