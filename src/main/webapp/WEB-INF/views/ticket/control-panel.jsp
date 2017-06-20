@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
         $(document).ready(function(){
             var ticketDate = sessionStorage.getItem('ticketDate');
             var ticketCnt = sessionStorage.getItem('ticketCnt');        
-            var totalPrice = sessionStorage.getItem('totalPrice');    
+            var totalPrice = sessionStorage.getItem('totalPrice');
             $('#ticketCnt').text(ticketCnt);
             $('#ticketDate').text(ticketDate);
             $('#totalPrice').text(totalPrice);
@@ -50,13 +51,13 @@
             <tr>
                 <td rowspan="4">
                     <div class="img-wrapper">
-                    <img src="http://lorempixel.com/g/100/150" style="width:100px; height:150px;" onerror="ImgError(this)">
+                    <img src="${Performance.per_image}" style="width:100px; height:150px;" onerror="ImgError(this)">
                     </div>
                 </td>
-                <td id="sub">20주년 특별공연<br> <라이어 스페셜></td>
+                <td id="sub">${Performance.per_title}</td>
             </tr>
             <tr>  
-                <td id="sub">2017.05.23~2017.07.30</td> 
+                <td id="sub">${Performace.per_startDate}~${Performance.per_endDate}</td> 
             </tr> 
             <tr>  
                 <td id="sub">동숭아트센터 동숭홀<br> 만 13세이상</td>

@@ -27,4 +27,9 @@
 		FROM round rnd, performances perf
 		WHERE rnd.PERF_ID = perf.PERF_ID AND perf.PERF_ID = #{value}
 	</select>
+	
+	<select id="getPerfInfo" parameterType="int" resultMap="sinfoMap">
+		select s.* ,p.* from seatinfo s, performances p
+		where perf_id = #{perfId}
+	</select>
 </mapper>

@@ -30,5 +30,9 @@ public class TicketingDaoImpl implements TicketingDao {
 	public Performance getPerfDate(int perfId){
 		return mapper.getPerfDate(perfId);
 	}
-
+	
+	@Override
+	public TicketSeatInfo getPerfInfo(int perfId){
+		return mapper.getPerfInfo(perfId);
+	}
 }

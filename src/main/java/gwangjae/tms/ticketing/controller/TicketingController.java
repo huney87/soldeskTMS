@@ -5,7 +5,6 @@ import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 import gwangjae.tms.ticketing.service.TicketingService;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -75,5 +74,12 @@ public class TicketingController {
 	@ResponseBody
 	public Performance getPerfDate(int perfId){
 		return service.getPerfDate(perfId);
+	}
+	
+	@RequestMapping("/getPerformanceInfo")
+	@ResponseBody
+	public TicketSeatInfo getPerfInfo(HttpSession session,
+			@RequestParam("performance_id") int perfId){
+		return service.getPerfInfo(perfId);
 	}
 }

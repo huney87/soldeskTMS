@@ -82,5 +82,10 @@ public class TicketingServiceImpl implements TicketingService {
 	public Performance getPerfDate(int perfId){
 		return ticketDao.getPerfDate(perfId);
 	}
+	
+	@Override
+	public TicketSeatInfo getPerfInfo(int perfId){
+		return ticketDao.getPerfInfo(perfId);
+	}
 
 }
