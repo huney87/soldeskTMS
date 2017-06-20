@@ -57,8 +57,8 @@ public class MypageController {
 	
 	@RequestMapping("/getUser")
 	@ResponseBody
-	public User getUser(String userNo){
-		return mypageService.getUser(userNo);
+	public User getUser(String userEmail){
+		return mypageService.getUser(userEmail);
 	}
 	
 	@RequestMapping("/updUser")

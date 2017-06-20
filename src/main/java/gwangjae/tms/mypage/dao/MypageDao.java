@@ -8,7 +8,7 @@ import java.util.List;
 public interface MypageDao {
 	List<Reservation> getReserve();
 	int deleteReserve(int reserveId);
-	public User getUser(String userEmail);
-	public User udpUser(User user);
+	User getUser(String userEmail);
+	User udpUser(User user);
 	int delUser(User user);
 }

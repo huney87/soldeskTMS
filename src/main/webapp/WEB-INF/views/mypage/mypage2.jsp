@@ -108,5 +108,3 @@ var delReserve = function(reserve){
 		</div>
 	</div>	
 	<jsp:include page="/WEB-INF/views/frames/footer.jsp" flush="false"/>
-</body>
-</html>
