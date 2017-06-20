@@ -23,14 +23,20 @@ $(function() {
 		url:"/mypage/reservelist",
 		success:function(reserves){
 			$(reserves).each(function(idx, reserve){
-				tr=$("<tr></tr>");
-				td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail'>"
-						+reserve.perfTitle+"</a></td><td>"
-						+reserve.hallName+"</td><td>"
-						+reserve.reserveDate+"</td><td>"
-						+"<button type='button' class='btn btn-danger' value='"+reserve.reservationId+"' onClick='deleteReserve(this)'>취소</button>");
-				reserveList.append(tr.append(td));
-				td.find("button").data("reservationId", reserve.reservationId);
+				if(reserve){
+					tr=$("<tr></tr>");
+					td=$("<td>조회된 결과가 없습니다</td>");
+					reserveList.append(tr.append(td));
+				}else{
+					tr=$("<tr></tr>");
+					td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail'>"
+							+reserve.perfTitle+"</a></td><td>"
+							+reserve.hallName+"</td><td>"
+							+reserve.reserveDate+"</td><td>"
+							+"<button type='button' class='btn btn-danger' value='"+reserve.reservationId+"' onClick='deleteReserve(this)'>취소</button>");
+					reserveList.append(tr.append(td));
+					td.find("button").data("reservationId", reserve.reservationId);
+				}
 			});
 		}
 	});
