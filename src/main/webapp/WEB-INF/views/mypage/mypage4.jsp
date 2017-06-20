@@ -21,22 +21,22 @@ $(function() {
 		
 		$.ajax({
 			url:"/mypage/delUser",
+			method:"post",
 			data:{userEmail:email,userPw:pw},
 			success:function(result){
 				if(result==1) {
 					swal({
-						title: "탈퇴 성공",
-						text: "탈퇴하였습니다!",
+						title: "회원 탈퇴",
+						text: "탈퇴하셨습니다.",
 						type: "success"
 					},
 					function(){
-						 location.replace("/login/logout");  
+						location.replace("/login/logout");
 					});
 				}
-				else swal("비밀번호가 틀렸습니다");
-			},
-			error:function(a,b,errMsg){
-				swal("탈퇴 실패: "+errMsg);
+				else swal("탈퇴 실패", "비밀번호를 정확하게 입력해 주세요", "error");
+			},error:function(a,b,errMsg){
+				swal("삭제 실패: "+errMsg);
 			}
 		});
 	});

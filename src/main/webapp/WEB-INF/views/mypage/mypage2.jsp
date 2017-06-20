@@ -24,8 +24,7 @@ $(function() {
 		success:function(reserves){
 			$(reserves).each(function(idx, reserve){
 				tr=$("<tr></tr>");
-				td=$("<td><input type='radio' name='reservationId' value='"+reserve.reservationId+"'/>"
-						+reserve.reservationId+"</td><td><a href='/detail'>"
+				td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail'>"
 						+reserve.perfTitle+"</a></td><td>"
 						+reserve.hallName+"</td><td>"
 						+reserve.reserveDate+"</td><td>"

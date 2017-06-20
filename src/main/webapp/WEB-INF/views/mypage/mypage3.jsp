@@ -15,6 +15,26 @@
 }
 </style>
 <script type="text/javascript">
+$(function() { 
+	var reserveList=$("#reserveList");
+	reserveList.empty();
+	
+	$.ajax({
+		url:"/mypage/reservelist",
+		success:function(reserves){
+			$(reserves).each(function(idx, reserve){
+				tr=$("<tr></tr>");
+				td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail'>"
+						+reserve.perfTitle+"</a></td><td>"
+						+reserve.hallName+"</td><td>"
+						+reserve.reserveDate+"</td><td>"
+						+"<button type='button' class='btn btn-primary' value='"+reserve.reservationId+"' data-toggle='modal' data-target='#myModal' onClick='deleteReserve(this)'>후기 작성</button>");
+				reserveList.append(tr.append(td));
+				td.find("button").data("reservationId", reserve.reservationId);
+			});
+		}
+	});
+});
 
 </script>
 </head>
@@ -38,30 +58,16 @@
 	<table class="table table-hover">
     <thead>
       <tr>
-        <th>NO</th>
         <th>예매번호</th>
         <th>공연명</th>
         <th>장소</th>
-        <th>날짜</th>
         <th>예매일시</th>
         <th>후기작성</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>A00001</td>
-        <td>
-        	<a href="../detail/01.html"><뮤지컬> 시카고</a>
-        </td>
-        <td>삼성전자 블루스퀘어 홀</td>
-        <td>17.05.31</td>
-        <td>17.05.15</td>
-        <td>
-        	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">작성</button>
-        </td>
-      </tr>
-    </tbody>
+    <tbody id="reserveList">
+
+	</tbody>
   </table>
   </form>
 	</div> <!-- row 끝 -->
