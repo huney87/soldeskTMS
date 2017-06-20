@@ -28,12 +28,6 @@
 								</article>
 							</div>
 						</div>
-						<div class="movieInfo2">
-							<div style="float:left;width:35%">평점 4.5</div> 
-							<div style="display:inline;width:65%">
-								<input id="input-2" name="input-name" type="number" class="rating rating-loading" min=0 max=5 step=0.1 value=4.5 data-size="xs" data-show-clear="false" data-show-caption="false" data-rtl="false" data-readonly="true">
-							</div>
-						</div>
 						<div class="movieInfo3">
 							<p>
 								<span class="age">12</span> 공연 ${i+j}

@@ -107,7 +107,6 @@ $(document).ready(function(){
          }
      });
      
-     $('#input-2').rating({'size':'xs'});
      $('#sideMenu').affix({offset: {top: 10} });
 });
 </script>

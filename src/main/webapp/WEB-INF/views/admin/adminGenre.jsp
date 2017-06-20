@@ -118,7 +118,7 @@ $(document).ready(function () {
 					        </div>
 					    </div>
 					    <div class="table-responsive">      
-					      <form id="genreAddBtn">
+					      <form id="frmGenreAdd">
 					      <table class="table table-striped table-hover" id="genreaddGenre" style="display:none">
 					        <thead>
 					          <tr class="warning">
@@ -219,7 +219,7 @@ $(document).ready(function () {
     	$("#genreaddGenre").show();
         
     	var addGenreText =  '<tr name="trGenre2">'+
-            '   <td colspan="3"><input name="code1" class="form-control input-sm text-center" id="inputsm" type="text" value="" placeholder="두자리 숫자입력" required></td>'+
+            '   <td colspan="3"><input name="code1" class="form-control input-sm text-center" id="inputsm" type="number" min="10" max="99" value="" placeholder="두자리 숫자입력" required></td>'+
             '   <td><input name="genreName" class="form-control input-sm" id="inputsm" type="text" value="" placeholder="장르1 이름입력" required></td>'+
             '   <td>'+
             '       <button type="button" name="delGenre" class="btn btn-info btn-sm">삭제</button>'+
@@ -256,7 +256,7 @@ $(document).ready(function () {
 		    '         </c:forEach>'+
 	        '      </select>'+
             '   </td>'+
-            '   <td><input name="code2" class="form-control input-sm text-center" id="inputsm" type="text" value="" placeholder="2자리숫자입력" required></td>'+
+            '   <td><input name="code2" class="form-control input-sm text-center" id="inputsm" type="number" min="10" max="99" value="" placeholder="2자리숫자입력" required></td>'+
             '   <td>'+
             '   <div class="input-group">'+
             '       <span class="input-group-addon"><i class="fa fa-plus" style="font-size:15px"></i></span>'+
@@ -265,7 +265,7 @@ $(document).ready(function () {
             '   </td>'+
             '   <td>'+
             '      <button type="button" name="delGenre2" class="btn btn-info btn-sm">삭제</button>'+
-            '      <button type="button" name ="addGenre" class="btn btn-info btn-sm">적용</button>'+
+            '      <input type="submit" name ="addGenre2" class="btn btn-info btn-sm" value="적용">'+
             '   </td>'+
             '</tr>';
              
@@ -281,10 +281,13 @@ $(document).ready(function () {
         trHtml.remove(); //tr 테그 삭제
         if($("tr[name=trGenre2]").length == 0) $("#genreaddGenre").hide();
     });
-    
-    $(document).on("click","button[name=addGenre]",function(){
+    //장르추가
+    $(document).on("click","input[name=addGenre2]",function(){
 		var code1 = $("#selectcode1").val();
-		console.log(code1);
+		var code2 = $("input[name=code2]").val();
+		var genreName = $("input[name=genreName]").val();
+		console.log(code2);
+		//frmGenreAdd
 		return false;
 	});
 </script>
