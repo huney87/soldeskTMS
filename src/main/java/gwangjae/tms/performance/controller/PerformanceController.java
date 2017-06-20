@@ -46,6 +46,11 @@ public class PerformanceController {
 	public String perAdd3(){
 		return "seller/perAdd3";
 	}
+	//공연 검색출력
+	@RequestMapping("/perSearch")
+	public String perSearch(){
+		return "seller/perSearch";
+	}
 	
 	///////////////////////////////////////////////
 	//좌석정보 가져오기

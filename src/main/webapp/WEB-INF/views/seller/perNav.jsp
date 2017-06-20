@@ -31,8 +31,7 @@ h4{
 			<a href="/seller/perAdd3" class="btn btn-sm btn-default mainBtn" id="resistHall">3.좌석 가격 등록</a>
 		</div>
 		<div class="col-sm-5">			
-			<input type="text" id="searchHall" placeholder="공연 이름">
-			<button type="button" class="btn btn-md btn-default mainBtn" id="search">공연 검색</button>
+			<a href="/seller/perSearch" class="btn btn-md btn-default mainBtn">공연 검색</a>
 		</div>			
 	</div>
 </div>

@@ -10,9 +10,16 @@
 		<result property="price" column="sinfo_price"/>	
 	</resultMap>
 	
-	<resultMap id="PerMap" type="performance">
+	<resultMap id="PerMap" type="PerfSearch">
 		<id property="per_id" column="perf_id"/>
 		<result property="per_title" column="perf_title"/>
+		<result property="ct_id" column="CAT_ID"/>
+		<result property="per_startDate" column="PERF_STARTDATE"/>
+		<result property="per_endDate" column="PERF_ENDDATE"/>
+		<result property="per_image" column="PERF_IMAGE"/>
+		<result property="loc" column="LOC_ID"/>
+		<result property="hName" column="H_NAME"/>
+		<result property="cName" column="CTR_NAME"/>
 	</resultMap>
 	
 	<resultMap id="HallMap" type="hall">
@@ -46,8 +53,10 @@
 	</update>
 	
 	<select id="getPer" resultMap ="PerMap">
-		select perf_id,perf_title from performances
-		where perf_title Like '%'||#{value}||'%'
+		select p.perf_id, p.perf_title,p.CAT_ID,c.CTR_NAME, h.H_NAME, p.PERF_STARTDATE, p.PERF_ENDDATE, p.PERF_IMAGE
+		from performances p, CENTERS c, HALLS h
+		where p.h_id = h.H_ID and h.CTR_ID = c.CTR_ID 
+		and p.perf_id in(select perf_id from performances where perf_title Like '%'||#{value}||'%')	
 	</select>
 	
 	<select id="getHalls" parameterType="int" resultMap ="HallMap">
