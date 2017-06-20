@@ -114,7 +114,7 @@ var regBtns=function(){
 				},
 				function(){
 					$.ajax({
-						url:"admin/delete",
+						url:"/admin/delete",
 						data:{userId:user.val()},
 						success:function(result){
 							if(result) return true;
