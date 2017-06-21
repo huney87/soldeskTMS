@@ -2,6 +2,7 @@ package gwangjae.tms.hall.dao;
 
 import gwangjae.tms.hall.domain.Center;
 import gwangjae.tms.hall.domain.Hall;
+import gwangjae.tms.hall.domain.HallTable;
 import gwangjae.tms.hall.domain.Seat;
 
 import java.util.List;
@@ -14,8 +15,8 @@ public interface HallDao {
 	public int delCenter(String Center_name);			//회관 삭제
 	public int modCenter(String Center_name);			//회관 수정
 	
-	public List<Hall> getHalls();      				//공연장 목록
-	public List<Hall> searchHalls(String hall_name);	//공연장 검색하기
+	public List<HallTable> getHalls();      				//공연장 목록
+	public List<HallTable> searchHalls(String hall_name);	//공연장 검색하기
 	public Hall getHall(String hall_name); 			//상영관 하나 찾기
 	public int addHall(Hall hall); 	 				//상영관 추가
 	public int delHall(String hall_name);				//상영관 삭제

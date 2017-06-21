@@ -62,9 +62,9 @@ var hallList = function() {
             url: "/hallManage/searchHalls",
             data:{hall_name:searchName},
             success:function(halls){
-            	console.log(halls);
+            	console.log(1);
             	$(halls).each(function(idx, hall){
-                    tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerId+"</td></tr>");
+                    tr = $("<tr><td><input type='radio' id="+hall.hallID+"' value='"+hall.hallID+"' name='halls'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerName+"</td></tr>");
                     $("#hallList").append(tr);
                 });	
 	        }
@@ -81,7 +81,7 @@ var hallList = function() {
             url: "/hallManage/getHalls",
             success:function(halls){
             	$(halls).each(function(idx, hall){
-                    tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerId+"</td></tr>");
+                    tr = $("<tr><td><input type='hidden' id="+hall.hallID+"' value='"+hall.hallID+"'>"+hall.hallName+"</td><td>"+hall.hallCol+"</td><td>"+hall.hallRow+"</td><td>"+hall.centerName+"</td></tr>");
                     $("#hallList").append(tr);
                 });	
 	        }

@@ -3,6 +3,7 @@ package gwangjae.tms.hall.dao;
 import gwangjae.tms.hall.dao.mapper.HallMapper;
 import gwangjae.tms.hall.domain.Center;
 import gwangjae.tms.hall.domain.Hall;
+import gwangjae.tms.hall.domain.HallTable;
 import gwangjae.tms.hall.domain.Seat;
 
 import java.util.List;
@@ -41,11 +42,11 @@ public class HallDaoImpl implements HallDao{
 //////////////////////////////////////////////////////////////////	
 	
 	//공연장 목록
-	public List<Hall> getHalls(){
+	public List<HallTable> getHalls(){
 		return hallMapper.getHalls();
 	}
 	//공연장 검색 하기
-	public List<Hall> searchHalls(String hall_name){
+	public List<HallTable> searchHalls(String hall_name){
 		return hallMapper.searchHalls(hall_name);	
 	}
 	//상영관 하나 찾기

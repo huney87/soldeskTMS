@@ -2,6 +2,7 @@ package gwangjae.tms.hall.controller;
 
 import gwangjae.tms.hall.domain.Center;
 import gwangjae.tms.hall.domain.Hall;
+import gwangjae.tms.hall.domain.HallTable;
 import gwangjae.tms.hall.domain.Seat;
 import gwangjae.tms.hall.service.HallService;
 
@@ -76,8 +77,8 @@ public class HallController {
 	//공연장 목록(완료)
 	@RequestMapping("/getHalls")
     @ResponseBody
-	public List<Hall> getHalls(){
-		List<Hall> result = hallService.getHalls();
+	public List<HallTable> getHalls(){
+		List<HallTable> result = hallService.getHalls();
 		return result;
 	}
 	//공연장 하나 찾기
@@ -89,8 +90,8 @@ public class HallController {
 	//공연장 검색하기(완료)
 	@RequestMapping("/searchHalls")
 	@ResponseBody
-	public List<Hall> searchHalls(String hall_name){
-		List<Hall> result = hallService.searchHalls(hall_name);
+	public List<HallTable> searchHalls(String hall_name){
+		List<HallTable> result = hallService.searchHalls(hall_name);
 		return result;
 	}
 	//공연장 추가(완료)

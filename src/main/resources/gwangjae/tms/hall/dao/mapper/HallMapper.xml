@@ -11,21 +11,25 @@
 		<result property="centerPhone" column="ctr_phone"/>	
 	</resultMap>
 	
-	<resultMap id="HallMap" type="Hall">
+	<resultMap id="HallMap" type="HallTable">
 		<id property="hallId" column="h_id"/>
 		<result property="hallName" column="h_name"/>
 		<result property="hallRow" column="h_row"/>
 		<result property="hallCol" column="h_col"/>
-		<result property="centerId" column="ctr_id"/>
+		<result property="centerName" column="CTR_NAME"/>
 	</resultMap>
 
 	<select id="getHalls" resultMap="HallMap">
-		select * from halls order by ctr_id
+		select  h.h_id,h.H_NAME,h.h_row,h.h_col, c.CTR_NAME
+		from CENTERS c, HALLS h
+		where h.CTR_ID = c.CTR_ID
+		order by c.ctr_id
 	</select>
 	
 	<select id="searchHalls" parameterType="String" resultMap="HallMap">
-		select * from halls
-		where h_name like '%'||#{value}||'%'
+		select  h.h_id,h.H_NAME,h.h_row,h.h_col, c.CTR_NAME
+		from CENTERS c, HALLS h
+		where h.CTR_ID = c.CTR_ID and h.h_name in(select h_name from HALLS where h_name Like '%'||#{value}||'%')
 	</select>
 	
 	<select id="getCenter" parameterType="String" resultMap="CenterMap">
