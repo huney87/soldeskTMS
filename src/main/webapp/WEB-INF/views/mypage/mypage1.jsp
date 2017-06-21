@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<title>마이페이지</title>
+
 <jsp:include page="/WEB-INF/views/frames/header.jsp" flush="false"/>
+
+<title>마이페이지-회원수정보수정</title>
 <link href="/css/menu.css" media="all" rel="stylesheet" type="text/css" />
 <link href="/css/mypage.css" media="all" rel="stylesheet" type="text/css" />
 <!-- jQuery와 Postcodify를 로딩한다 -->
@@ -29,6 +27,7 @@ $(function(){
 		data: {userEmail: email},
 		success:function(user){
 			userInfo(user);
+			$("#postcodify_search_button").postcodifyPopUp(); 
 		}
 	});
 
@@ -72,7 +71,7 @@ $(function(){
       			+'<tr>'
       			+'<th><label for="detailPost">상세주소</label></th>'
 				+'<td>'
-				+'<input type="text" name="address" class="postcodify_details form-control" placeholder="상세주소를 입력하세요." value="'+user.userAddress+'" style="width:80%;"required />'
+				+'<input type="text" name="address" class="postcodify_address form-control" placeholder="상세주소를 입력하세요." value="'+user.userAddress+'" style="width:80%;"required />'
 				+'</td>'
       			+'</tr>'
       			+'<tr>'
@@ -162,9 +161,4 @@ $(function(){
 		  </div>
 	  </div>
 	</div>	
-	<script> 
-	$(function() { 
-		$("#postcodify_search_button").postcodifyPopUp(); 
-	}); 
-	</script>
 	<jsp:include page="/WEB-INF/views/frames/footer.jsp" flush="false"/>
