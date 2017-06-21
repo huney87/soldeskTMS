@@ -60,7 +60,7 @@ $(document).ready(function() {
 		var userBirthday = $("#user_birthday").val();
 		var userPost = $("#postNumber").val();
 		var userAddressDt = $("#address2").val();	//회원 상세주소만
-		var userAddress = $("#address1").val() + $("#address2").val();	// 회원 주소 + 상세주소 더한것
+		var userAddress = $("#address1").val() +"/"+ $("#address2").val();	// 회원 주소 + 상세주소 더한것
 		var userPhone = $("#phone01").val() + $("#phone02").val() + $("#phone03").val();
 				
 		if(!userType){	//회원 가입 타입 미선택시 경고 창

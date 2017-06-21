@@ -37,6 +37,10 @@ $(function(){
 		var year=strArray[0];
 		var month=strArray[1];
 		var day=strArray[2];
+		//주소
+		var address =  user.userAddress.split("/");
+		var address1 = address[0];
+		var address2 = address[1];
 		
 		//전화번호
 		var phone=user.userPhone.toString();
@@ -71,7 +75,8 @@ $(function(){
       			+'<tr>'
       			+'<th><label for="detailPost">상세주소</label></th>'
 				+'<td>'
-				+'<input type="text" name="address" class="postcodify_address form-control" placeholder="상세주소를 입력하세요." value="'+user.userAddress+'" style="width:80%;"required />'
+				+'<input type="text" name="address1" class="postcodify_address form-control" value="'+address1+'" style="width:80%;"required readonly/>'
+				+'<input type="text" name="address2" class="postcodify_detail form-control" placeholder="상세주소를 입력하세요." value="'+address2+'" style="width:80%;"required/>'
 				+'</td>'
       			+'</tr>'
       			+'<tr>'
@@ -89,7 +94,7 @@ $(function(){
 		var name = $("#name").val();
 		var birthDay = $("#birthYear").val()+"-"+$("#birthMon").val()+"-"+$("#birthDate").val();
 		var postCode = $("[name='postCode']").val();
-		var address =  $("[name='address']").val();
+		var address =  $("[name='address1']").val()+"/"+$("[name='address2']").val();
 		var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
 		var id=$("#id").val();
 		
