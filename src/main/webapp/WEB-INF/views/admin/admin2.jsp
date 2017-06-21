@@ -53,7 +53,7 @@ var regBtns=function(){
 		url:"/admin/listPerform",
 		success:function(performs){
 			$(performs).each(function(idx, perform){
-				if(perform.perfDisplay==1) value="중지";
+				if(perform.perfDisplay===1) value="중지";
 				else value="게시";
 				printPerform(perform,value);
 			});
@@ -69,7 +69,7 @@ var regBtns=function(){
 				data:{perfTitle:name},
 				success:function(performs){
 					$(performs).each(function(idx, perform){
-						if(perform.perfDisplay==1) value="게시 취소";
+						if(perform.perfDisplay==1) value="중지";
 						else value="게시";
 						printPerform(perform,value);
 					});
@@ -96,16 +96,17 @@ var regBtns=function(){
 				+perform.perfCat+"</td><td>"
 				+perform.perfCntTicket+"</td><td>"+
 				"<button type='button' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
-				+"<input type='hidden' name='hidden' value='"+perform.perfDisplay+"'/>"
+				+"<input type='hidden' id='hidden"+perform.perfId+"' name='hidden' value='"+perform.perfDisplay+"'/>"
 				);
 		performanceList.append(tr.append(td));
 	}
 }
 
 var changeDisplay=function(id){
-	var swap=$(":input[name='hidden']").val();
+	var swap=$('#hidden'+id).val();
 	if(swap==1) swap=0;
 	else swap=1;
+	
 	 $.ajax({
          url:"/admin/changeDisplay",            
          data:{perfId:id, perfDisplay:swap},
@@ -138,6 +139,7 @@ var changeDisplay=function(id){
         	 }
          }
      });
+	
 }
 </script>
 </head>

@@ -44,6 +44,7 @@
 	<sql id="selectPerform2">
 		group by perf_title,perf_title,perf_startdate,cat_id,
 		perf_enddate,perf_image,perf_display,p.perf_id
+		order by p.perf_id
 	</sql>
 	
 	<select id="getPerform" resultMap="performMap">
