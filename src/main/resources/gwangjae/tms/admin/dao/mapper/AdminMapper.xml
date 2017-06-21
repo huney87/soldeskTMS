@@ -20,7 +20,7 @@
 		<result property="perfImage" column="perf_Image"/>
 		<result property="perfDisplay" column="perf_display"/>
 		<result property="perfCat" column="cat_id"/>
-		<result property="perfcountTicket" column="count"/>
+		<result property="perfCntTicket" column="count"/>
 	</resultMap>
 	
 	<select id="getUsers" resultMap="AdminMap">
@@ -40,12 +40,10 @@
 		perf_enddate,perf_image,perf_display,count(s.PERF_ID) count
 		from performances p join SEATINFO s
 		on p.PERF_ID=s.PERF_ID
-		join RESERVES r
-		on s.PERF_ID=r.PERF_ID 
 	</sql>
 	<sql id="selectPerform2">
 		group by perf_title,perf_title,perf_startdate,cat_id,
-		perf_enddate,perf_image,perf_display,s.PERF_ID,p.perf_id
+		perf_enddate,perf_image,perf_display,p.perf_id
 	</sql>
 	
 	<select id="getPerform" resultMap="performMap">
@@ -55,7 +53,7 @@
     
     <select id="searchPerform" parameterType="String" resultMap="performMap">
    	    <include refid="selectPerform"/>
-		where perf_title like '%'||#{perf_title}||'%'
+		where perf_title like '%'||#{perfTitle}||'%'
 		<include refid="selectPerform2"/>
 	</select>
 	

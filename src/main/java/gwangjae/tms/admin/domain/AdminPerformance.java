@@ -1,16 +1,14 @@
 package gwangjae.tms.admin.domain;
 
-import java.sql.Date;
-
 public class AdminPerformance {
 	private int perfId;
 	private String perfTitle;
-	private Date perfStartDate;
-	private Date perfEndDate;
+	private String perfStartDate;
+	private String perfEndDate;
 	private String perfImage;
 	private int perfCat;
 	private int perfDisplay;
-	private int perfcountTicket;
+	private int perfCntTicket;
 	
 	public int getPerfId() {
 		return perfId;
@@ -21,19 +19,19 @@ public class AdminPerformance {
 	public String getPerfTitle() {
 		return perfTitle;
 	}
-	public void setPerfTitle(String perfTitle) {
-		this.perfTitle = perfTitle;
+	public void setPerfCntTicket(int perfCountTicket) {
+		this.perfCntTicket = perfCountTicket;
 	}
-	public Date getPerfStartDate() {
+	public String getPerfStartDate() {
 		return perfStartDate;
 	}
-	public void setPerfStartDate(Date perfStartDate) {
+	public void setPerfStartDate(String perfStartDate) {
 		this.perfStartDate = perfStartDate;
 	}
-	public Date getPerfEndDate() {
+	public String getPerfEndDate() {
 		return perfEndDate;
 	}
-	public void setPerfEndDate(Date perfEndDate) {
+	public void setPerfEndDate(String perfEndDate) {
 		this.perfEndDate = perfEndDate;
 	}
 	public String getPerfImage() {
@@ -54,11 +52,7 @@ public class AdminPerformance {
 	public void setPerfDisplay(int perfDisplay) {
 		this.perfDisplay = perfDisplay;
 	}
-	public int getPerfcountTicket() {
-		return perfcountTicket;
+	public int getPerfCntTicket() {
+		return perfCntTicket;
 	}
-	public void setPerfcountTicket(int perfcountTicket) {
-		this.perfcountTicket = perfcountTicket;
-	}
-
 }

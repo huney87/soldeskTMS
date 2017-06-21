@@ -94,21 +94,21 @@ var regBtns=function(){
 				+perform.perfStartDate+"</td><td>"
 				+perform.perfEndDate+"</td><td>"
 				+perform.perfCat+"</td><td>"
-				+perform.perfcountTicket+"</td><td>"+
-				"<button type='button' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(this)'>"+value+"</button>"
+				+perform.perfCntTicket+"</td><td>"+
+				"<button type='button' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
 				+"<input type='hidden' name='hidden' value='"+perform.perfDisplay+"'/>"
 				);
 		performanceList.append(tr.append(td));
 	}
 }
 
-var changeDisplay=function(perform){
+var changeDisplay=function(id){
 	var swap=$(":input[name='hidden']").val();
 	if(swap==1) swap=0;
 	else swap=1;
 	 $.ajax({
          url:"/admin/changeDisplay",            
-         data:{perfId:perform.value, perfDisplay:swap},
+         data:{perfId:id, perfDisplay:swap},
          success:function(result){
              if(result) swal("공연 게시 성공");
              else swal("공연 게시 실패");
