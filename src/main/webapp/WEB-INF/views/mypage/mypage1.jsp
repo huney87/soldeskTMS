@@ -34,25 +34,24 @@ $(function(){
 
 	var userInfo=function(user){
 		//생일
-		var strArray=user.userBirthday.split('/');
+		var strArray=user.userBirthday.split('-');
 		var year=strArray[0];
 		var month=strArray[1];
 		var day=strArray[2];
 		
 		//전화번호
 		var phone=user.userPhone.toString();
-		var phone1=phone.substr(0,2);
+		var phone1="0"+phone.substr(0,2);
 		var phone2=phone.substr(2,4);
-		var phone3=phone.substr(4,6);
+		var phone3=phone.substr(6,8);
 		
-		var list = '<tr>'
+		var list = '<tr><input type="hidden" id="id" name="#" class="form-control" value="'+user.userId+'" required/>'
 				+'<th><label>아이디</label></th>'
         		+'<td><p>'+user.userEmail+'</p></td>'
       			+'</tr>'
       			+'<tr>'
         		+'<th><label for="pw">비밀번호</label></th>'
         		+'<td><input type="password" id="pw" name="#" class="form-control" value="'+user.userPw+'" required/>'
-        		+'<button type="submit" class="btn btn-default">비밀번호 변경</button>'
         		+'</td>'
       			+'</tr>'
       			+'<tr>'
@@ -66,15 +65,14 @@ $(function(){
         		+'<input type="number" min="1" max="31" id="birthDate" name="#" class="form-control" value="'+day+'" required/>일</td>'
       			+'</tr>'
       			+'<tr>'
-        		+'<th>주소</th>'
+        		+'<th>우편번호</th>'
         		+'<td><input type="text" name="postCode" class="postcodify_postcode5 form-control" value="'+user.userPost+'" placeholder="우편번호 버튼을 누르세요." readonly/>'
-				+'<input type="text" name="address1" class="postcodify_address form-control" required readonly/>'
 				+'<button type="button" id="postcodify_search_button" class="btn btn-default">우편번호찾기</button></td>'
 		     	+'</tr>'
       			+'<tr>'
       			+'<th><label for="detailPost">상세주소</label></th>'
 				+'<td>'
-				+'<input type="text" name="detailPost" class="postcodify_details form-control" placeholder="상세주소를 입력하세요." value="'+user.userAddress+'" style="width:80%;"required />'
+				+'<input type="text" name="address" class="postcodify_details form-control" placeholder="상세주소를 입력하세요." value="'+user.userAddress+'" style="width:80%;"required />'
 				+'</td>'
       			+'</tr>'
       			+'<tr>'
@@ -92,12 +90,14 @@ $(function(){
 		var name = $("#name").val();
 		var birthDay = $("#birthYear").val()+"-"+$("#birthMon").val()+"-"+$("#birthDate").val();
 		var postCode = $("[name='postCode']").val();
-		var address =  $("[name='address']").val();+" "+("#datailPost").val();
+		var address =  $("[name='address']").val();
 		var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
+		var id=$("#id").val();
 		
 		$.ajax({
-			url: "/mypage1/updUser",
+			url: "/mypage/updUser",
 			data:{
+				userId : id,
 				userPw : pw,
 				userName : name,
 				userBirthday : birthDay,
@@ -106,7 +106,6 @@ $(function(){
 				userPhone : phone,
 			},
 			success:function(result){
-				userInfo();
 				if(result) alert("수정 완료");
 				else alert("수정 실패");
 			},
@@ -114,7 +113,7 @@ $(function(){
 				alert("수정 실패"+errMsg);
 			},
 			complete:function(){
-				alert("수정이 완료되었습니다.");
+				window.location.reload();
 			}
 		});
 	});

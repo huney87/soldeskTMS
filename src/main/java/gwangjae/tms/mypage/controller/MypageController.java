@@ -63,7 +63,7 @@ public class MypageController {
 	
 	@RequestMapping("/updUser")
 	@ResponseBody
-	public User updUser(User user){
+	public int updUser(User user){
 		return mypageService.udpUser(user);
 	}
 	

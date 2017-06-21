@@ -7,6 +7,7 @@
 		<result property="userName" column="user_name"/>
 		<result property="userPw" column="user_pw"/>
 		<result property="userEmail" column="user_email"/>
+		<result property="userPost" column="user_post"/>
 		<result property="userAddress" column="user_address"/>
 		<result property="userPhone" column="user_phone"/>
 		<result property="userBirthday" column="user_birthday"/>
@@ -42,8 +43,7 @@
 		update users
 		set user_name = #{userName}, user_pw = #{userPw},
 			user_birthday = #{userBirthday}, user_post = #{userPost},
-			user_address = #{userAddress}, user_phone = #{userPhone},
-			user_phone = #{userPhone}
+			user_address = #{userAddress}, user_phone = #{userPhone}
 		where user_id = #{userId}			
 	</update>
 	

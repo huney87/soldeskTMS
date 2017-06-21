@@ -9,6 +9,6 @@ public interface MypageDao {
 	List<Reservation> getReserve();
 	int deleteReserve(int reserveId);
 	User getUser(String userEmail);
-	User udpUser(User user);
+	int udpUser(User user);
 	int delUser(User user);
 }

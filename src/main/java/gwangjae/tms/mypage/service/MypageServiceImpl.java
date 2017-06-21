@@ -25,7 +25,7 @@ public class MypageServiceImpl implements MypageService{
 		return dao.getUser(userEmail);
 	}
 
-	public User udpUser(User user){
+	public int udpUser(User user){
 		return dao.udpUser(user);
 	}
 	
