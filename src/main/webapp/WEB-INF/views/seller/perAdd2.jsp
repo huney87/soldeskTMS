@@ -254,12 +254,12 @@ var initSeatInfo = function() {
 		   	 	    	seatType:i
 		   	 	    	},
 		   	 	    success:function(result){
-			   	 	    alert("좌석 등록완료! 마지막단계로 이동합니다.");
-	                	window.location.assign("/seller/perAdd3");
+		   	 	    	
 	   	 	    	} 	   	    
 	   	 		});	
 	    	}
-	    	
+	    	alert("좌석 등록완료! 마지막단계로 이동합니다.");
+        	window.location.assign("/seller/perAdd3");    	
 	    }   	    
 	}); 
 }

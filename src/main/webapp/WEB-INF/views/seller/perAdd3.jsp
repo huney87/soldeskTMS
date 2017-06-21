@@ -43,7 +43,8 @@ var resistBtn = function() {
             });			
     	}   	
     	
-    	alert("좌석 등급정보 등록완료!");
+    	$("#msg").text("좌석 등급정보 등록완료!");
+    	$("#resultModal").modal('show');
     });
 }
 
@@ -108,10 +109,12 @@ var roundAdd = function() {
                 url: "/seller/addRound",
                 data:roundInfo,
                 success:function(result){
-                		alert("회차 정보 저장 성공");                  
+                	 $("#msg").text("회차 정보 저장에 성공했습니다.");
+                	 $("#resultModal").modal('show'); 
     	        },
 		         error:function(a, b, errMsg){
-		        	 alert("회차 정보 저장 실패"); 
+		        	 $("#msg").text("회차 정보 저장에 실패했습니다.");
+		 			 $("#resultModal").modal('show'); 
 		         }
     		});
 		});
