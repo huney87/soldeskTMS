@@ -1,10 +1,9 @@
 package gwangjae.tms.ticketing.controller;
 
 import gwangjae.tms.performance.domain.Performance;
+import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 import gwangjae.tms.ticketing.service.TicketingService;
-
-import java.sql.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -57,7 +56,7 @@ public class TicketingController {
 
 	@RequestMapping("/getskd")
 	@ResponseBody
-	public Date[] getSkd(HttpSession session,
+	public Round[] getSkd(HttpSession session,
 			@RequestParam("performance_id") int perfId){
 		return service.getPerfSkd(perfId);
 	}

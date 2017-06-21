@@ -1,10 +1,10 @@
 package gwangjae.tms.ticketing.service;
 
 import gwangjae.tms.performance.domain.Performance;
+import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.ticketing.dao.TicketingDao;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
-import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -54,9 +54,9 @@ public class TicketingServiceImpl implements TicketingService {
 	 * @see gwangjae.tms.ticketing.service.TicketingService#getPerfSkd()
 	 */
 	@Override
-	public Date[] getPerfSkd(int perf_id) {		
-		List<Date> listDate = ticketDao.getPerfSkdList(perf_id);
-		Date[] result = listDate.toArray(new Date[listDate.size()]);
+	public Round[] getPerfSkd(int perf_id) {		
+		List<Round> listDate = ticketDao.getPerfSkdList(perf_id);
+		Round[] result = listDate.toArray(new Round[listDate.size()]);
 		return result;
 	}
 

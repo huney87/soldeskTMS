@@ -15,6 +15,12 @@
 		<result property="sType" column="s_type"/>
 	</resultMap>
 	
+	<resultMap type="Round" id="RoundMap">
+		<id property="roundId" column="rnd_id"/>
+		<result property="roundDate" column="rnd_date"/>
+		<result property="roundTime" column="rnd_time"/>
+	</resultMap>
+	
 	<select id="getAllSeatInfo" parameterType="int" resultMap="sinfoMap">
 		SELECT * 
 		FROM SEATINFO si, SEATS s
@@ -22,12 +28,18 @@
 		ORDER BY si.SINFO_ID, s.S_ROW, s.S_COL
 	</select>
 	
-	<select id="getPerfSkdList" parameterType="int" resultType="date">
+	<select id="getPerfSkdList" parameterType="int" resultMap="RoundMap">
+		SELECT rnd.RND_DATE, rnd.RND_TIME, rnd.RND_ID
+		FROM round rnd, performances perf
+		WHERE rnd.PERF_ID = perf.PERF_ID AND perf.PERF_ID = #{value}
+	</select>
+	<!-- 
+	<select id="getPerfSkdList" parameterType="int" resultType="String">
 		SELECT rnd.RND_DATE
 		FROM round rnd, performances perf
 		WHERE rnd.PERF_ID = perf.PERF_ID AND perf.PERF_ID = #{value}
 	</select>
-	
+	 -->
 	<select id="getPerfInfo" parameterType="int" resultMap="sinfoMap">
 		select s.* ,p.* from seatinfo s, performances p
 		where perf_id = #{perfId}

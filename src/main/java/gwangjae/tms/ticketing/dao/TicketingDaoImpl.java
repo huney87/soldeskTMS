@@ -1,10 +1,10 @@
 package gwangjae.tms.ticketing.dao;
 
 import gwangjae.tms.performance.domain.Performance;
+import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.ticketing.dao.mapper.TicketingMapper;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class TicketingDaoImpl implements TicketingDao {
 	}
 
 	@Override
-	public List<Date> getPerfSkdList(int perfId) {
+	public List<Round> getPerfSkdList(int perfId) {
 		
 		return mapper.getPerfSkdList(perfId);
 	}
