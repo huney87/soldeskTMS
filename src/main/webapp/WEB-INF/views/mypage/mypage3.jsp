@@ -18,6 +18,24 @@
 $(function() { 
 	var reserveList=$("#reserveList");
 	reserveList.empty();
+	var reserveDate = '17/01/01';
+	//예매일 나누기
+	var reserves = reserve.reserveDate.split("/");
+	var reserveYear = '20'+reserveDate[0];
+	var reserveMonth = reserveDate[1];
+	var reserveDay = reserveDate[2];
+	
+	var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth();
+	var date = d.getDate();
+	
+	if(reserveYear<=year || reserveMonth<=month || reserveDay<=date){
+		var reservation = reserve.reserveDate;
+		console.log("허걱");
+	}else{
+		false;
+	}
 	
 	$.ajax({
 		url:"/mypage/reservelist",
@@ -27,7 +45,7 @@ $(function() {
 				td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail'>"
 						+reserve.perfTitle+"</a></td><td>"
 						+reserve.hallName+"</td><td>"
-						+reserve.reserveDate+"</td><td>"
+						+reservation+"</td><td>"
 						+"<button type='button' class='btn btn-primary' value='"+reserve.reservationId+"' data-toggle='modal' data-target='#myModal' onClick='deleteReserve(this)'>후기 작성</button>");
 				reserveList.append(tr.append(td));
 				td.find("button").data("reservationId", reserve.reservationId);
