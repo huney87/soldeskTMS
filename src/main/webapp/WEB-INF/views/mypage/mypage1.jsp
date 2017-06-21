@@ -19,6 +19,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#postcodify_search_button").postcodifyPopUp();
+	
 	var userlist=$("#userlist");
 	userlist.empty();
 	
@@ -106,11 +107,11 @@ $(function(){
 				userPhone : phone,
 			},
 			success:function(result){
-				if(result) alert("수정 완료");
-				else alert("수정 실패");
+				if(result) swal("수정 완료");
+				else swal("수정 실패");
 			},
 			error:function(a,b,errMsg){
-				alert("수정 실패"+errMsg);
+				swal("수정 실패");
 			},
 			complete:function(){
 				window.location.reload();
