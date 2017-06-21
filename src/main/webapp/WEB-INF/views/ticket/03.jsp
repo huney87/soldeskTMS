@@ -41,10 +41,16 @@
             border: 0px dotted black;
         }
 
-        .select-body {
+        /* .select-body {
             height: 100%;
             border: 0px dotted black;
             padding: 0px;
+        } */
+        
+        .select-body {
+            height: 100%;
+            border: 0px dotted black;
+            padding-left: 20px;
         }
 
         .control-body {
@@ -80,6 +86,16 @@
             top: 50%;
             transform: translateY(-50%);
             /*Vertical Center End*/
+            float: left;
+            width: 20%;
+            margin:0;
+            padding:0;
+        }
+        
+        .fir {
+        	position: absolute;
+        	z-index: 3;
+        	left: 403px;
         }
 
         th {
@@ -156,11 +172,12 @@
         <div class="row info-wrapper">
             <div class="col-sm-12" style="height:100%;">
                 <div class="info-panel">
-                    <img class="img-step" src="img/ticket/step_01.gif">
-                    <img class="img-step" src="img/ticket/step_02.gif">
-                    <img class="img-step" src="img/ticket/step_03.gif">
-                    <img class="img-step" src="img/ticket/step_04.gif">
-                    <img class="img-step" src="img/ticket/step_05.gif">
+                    <img class="img-step fir" src="img/ticket/step_03_on.gif">
+                    <img class="img-step" src="img/ticket/step_01_off.gif">
+                    <img class="img-step" src="img/ticket/step_02_off.gif">
+                    <img class="img-step" src="img/ticket/step_03_off.gif">
+                    <img class="img-step" src="img/ticket/step_04_off.gif">
+                    <img class="img-step" src="img/ticket/step_05_off.gif">
                 </div>
             </div>
         </div>
@@ -201,7 +218,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-12" style="background-color:#e6e6e6">
+                <div class="col-sm-12" style="margin-top:80px;background-color:#e6e6e6;">
                     <h5>유의 사항</h5>
                     <p>가격을 확인해주세요</p>
                     <p>관람일 전일까지만 취소 가능합니다. 또한, 당일 예매 하시는 경우 취소가 불가능 합니다.</p>
@@ -213,10 +230,10 @@
                 <div class="control-panel">
                     <iframe src="/ticket/panel" scrolling="no"></iframe>
                 </div>
-                <div class="btn-panel" style="margin-top:40px">
+                <div class="btn-panel" style="margin-top:30px">
                     <div class="btn-group btn-group-justified">
-                        <a class="btn btn-danger btn-before">< 이전으로</a>
-                        <a class="btn btn-info btn-next">다음 으로 ></a>
+                        <a class="btn btn-danger btn-before"><i class="glyphicon glyphicon-chevron-left"></i>이전으로</a>
+                        <a class="btn btn-info btn-next">다음으로<i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
             </div>

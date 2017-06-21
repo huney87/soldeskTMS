@@ -26,6 +26,7 @@
             width: 1000px;
             height: 600px;
             border: 0px dotted black;
+            background-color:white;
         }
         
         .info-wrapper {
@@ -42,12 +43,15 @@
         .booking-wrapper {
             height: 90%;
             border: 0px dotted black;
+            text-align: center;
         }
         
         .select-body {
             height: 100%;
             border: 0px dotted black;
-            padding: 0px;
+            padding: 20px 15px;
+            text-align: left;
+            background-color: #f1eeec;
         }
         
         .control-body {
@@ -57,6 +61,7 @@
         
         .control-panel {
             height: 85%;
+            width: 100%;
             border: 0px dotted black;
         }
         
@@ -83,6 +88,16 @@
             top: 50%;
             transform: translateY(-50%);
             /*Vertical Center End*/
+            float: left;
+            width: 20%;
+            margin:0;
+            padding:0;
+        }
+        
+        .fir {
+        	position: absolute;
+        	z-index: 3;
+        	left: 15px;
         }
         
         .text-center {
@@ -174,11 +189,12 @@
         <div class="row info-wrapper">
             <div class="col-sm-12" style="height:100%;">
                 <div class="info-panel">
-                    <img class="img-step" src="img/ticket/step_01.gif">
-                    <img class="img-step" src="img/ticket/step_02.gif">
-                    <img class="img-step" src="img/ticket/step_03.gif">
-                    <img class="img-step" src="img/ticket/step_04.gif">
-                    <img class="img-step" src="img/ticket/step_05.gif">
+                    <img class="img-step fir" src="img/ticket/step_01_on.gif">
+                    <img class="img-step" src="img/ticket/step_01_off.gif">
+                    <img class="img-step" src="img/ticket/step_02_off.gif">
+                    <img class="img-step" src="img/ticket/step_03_off.gif">
+                    <img class="img-step" src="img/ticket/step_04_off.gif">
+                    <img class="img-step" src="img/ticket/step_05_off.gif">
                 </div>
             </div>
         </div>
@@ -205,7 +221,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-12" style="background-color:#e6e6e6">
+                    <div class="col-sm-12" style="margin-top:30px;background-color:#e6e6e6;">
                         <h5>유의 사항</h5>
                         <p>해당되는 날짜에만 선택하세요</p>
                         <p>관람일 전일까지만 취소 가능합니다. 또한, 당일 예매 하시는 경우 취소가 불가능 합니다.</p>
@@ -218,8 +234,8 @@
                 <div class="control-panel">
                     <iframe src="/ticket/panel" scrolling="no"></iframe>
                 </div>
-                <div class="btn-panel" style="margin-top:40px">
-                    <button class="btn btn-info btn-block btn-next">다음으로 ></button>
+                <div class="btn-panel" style="margin-top:30px">
+                    <button class="btn btn-info btn-block btn-next">다음으로<i class="glyphicon glyphicon-chevron-right"></i></button>
                 </div>
             </div>
         </div>

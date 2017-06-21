@@ -14,8 +14,10 @@
         body{
         }
         .control-window{
-            width: 215px;
+            width: 210px;
             height: 452px;
+            text-align: center;
+            padding-left:10px;
         }
         #sub{
         	font-size: 0.7rem;

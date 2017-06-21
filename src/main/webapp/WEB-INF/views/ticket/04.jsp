@@ -37,7 +37,7 @@
         .booking-wrapper {
             height: 90%;
             border: 0px dotted black;
-            padding: 2rem;
+           /*  padding: 2rem; */
         }
 
         .select-body {
@@ -79,6 +79,16 @@
             top: 50%;
             transform: translateY(-50%);
             /*Vertical Center End*/
+            float: left;
+            width: 20%;
+            margin:0;
+            padding:0;
+        }
+        
+        .fir {
+        	position: absolute;
+        	z-index: 3;
+        	left: 597px;
         }
 
         .customerInfo {
@@ -172,11 +182,12 @@
         <div class="row info-wrapper">
             <div class="col-sm-12" style="height:100%;">
                 <div class="info-panel">
-                    <img class="img-step" src="img/ticket/step_01.gif">
-                    <img class="img-step" src="img/ticket/step_02.gif">
-                    <img class="img-step" src="img/ticket/step_03.gif">
-                    <img class="img-step" src="img/ticket/step_04.gif">
-                    <img class="img-step" src="img/ticket/step_05.gif">
+                    <img class="img-step fir" src="img/ticket/step_04_on.gif">
+                    <img class="img-step" src="img/ticket/step_01_off.gif">
+                    <img class="img-step" src="img/ticket/step_02_off.gif">
+                    <img class="img-step" src="img/ticket/step_03_off.gif">
+                    <img class="img-step" src="img/ticket/step_04_off.gif">
+                    <img class="img-step" src="img/ticket/step_05_off.gif">
                 </div>
             </div>
         </div>
@@ -197,11 +208,7 @@
                                 <tr>
                                     <th>생년월일</th>
                                     <td>
-                                        <div class="form-group">
-                                        	<div>
-                                        		<input type="date" class="form-control" id="reserverBirthday" required>
-											</div>                                        	
-                                        </div>
+                                       	<input type="date" class="form-control" id="reserverBirthday" required>
                                     </td>
                                 </tr>
                             </tbody>
@@ -255,10 +262,10 @@
                 <div class="control-panel">
                     <iframe src="/ticket/panel" scrolling="no"></iframe>
                 </div>
-                <div class="btn-panel" style="margin-top:40px">
+                <div class="btn-panel" style="margin-top:30px">
                     <div class="btn-group btn-group-justified">                    	
-                    		<a type="button" class="btn btn-danger btn-before" id="beforeBtn">< 이전으로</a>
-							<a type="button" class="btn btn-info btn-next" id="nextBtn">다음 으로 ></a>
+                    	<a class="btn btn-danger btn-before" id="beforeBtn"><i class="glyphicon glyphicon-chevron-left"></i>이전으로</a>
+                        <a class="btn btn-info btn-next" id="nextBtn">다음으로<i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
             </div>

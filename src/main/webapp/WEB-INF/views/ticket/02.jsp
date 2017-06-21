@@ -83,6 +83,16 @@
             top: 50%;
             transform: translateY(-50%);
             /*Vertical Center End*/
+            float: left;
+            width: 20%;
+            margin:0;
+            padding:0;
+        }
+        
+        .fir {
+        	position: absolute;
+        	z-index: 3;
+        	left: 209px;
         }
     </style>
     <script>
@@ -114,11 +124,12 @@
         <div class="row info-wrapper">
             <div class="col-sm-12" style="height:100%;">
                 <div class="info-panel">
-                    <img class="img-step" src="img/ticket/step_01.gif">
-                    <img class="img-step" src="img/ticket/step_02.gif">
-                    <img class="img-step" src="img/ticket/step_03.gif">
-                    <img class="img-step" src="img/ticket/step_04.gif">
-                    <img class="img-step" src="img/ticket/step_05.gif">
+                    <img class="img-step fir" src="img/ticket/step_02_on.gif">
+                    <img class="img-step" src="img/ticket/step_01_off.gif">
+                    <img class="img-step" src="img/ticket/step_02_off.gif">
+                    <img class="img-step" src="img/ticket/step_03_off.gif">
+                    <img class="img-step" src="img/ticket/step_04_off.gif">
+                    <img class="img-step" src="img/ticket/step_05_off.gif">
                 </div>
             </div>
         </div>
@@ -130,10 +141,10 @@
                 <div class="control-panel">
                     <iframe src="/ticket/panel" scrolling="no"></iframe>
                 </div>
-                <div class="btn-panel" style="margin-top:40px">
+                <div class="btn-panel" style="margin-top:30px">
                     <div class="btn-group btn-group-justified">
-                        <a class="btn btn-danger btn-before">< 이전으로</a>
-                        <a class="btn btn-info btn-next">다음 으로 ></a>
+                        <a class="btn btn-danger btn-before"><i class="glyphicon glyphicon-chevron-left"></i>이전으로</a>
+                        <a class="btn btn-info btn-next">다음으로<i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
             </div>

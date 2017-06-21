@@ -14,69 +14,79 @@
 
 <style>
 	html, body { overflow: hidden; }
-.container{
-	width : 1000px;
-	height : 600px;	
-	border : 0px dotted black;
-}
-.info-wrapper{
-	height : 10%;
-}
-.info-panel {
-	height : 100%;
-	width : 100%;
-	border : 0px dotted black;
-	text-align: center;
-}
-.booking-wrapper{
-	height : 90%;
-	border : 0px dotted black;
-	padding : 2rem;
-}
-.select-body{
-	height: 100%;
-	border : 0px dotted black;
-	padding: 0px;
-}
-.control-body{
-	height : 100%;
-	border : 0px dotted black;
-	
-}
-.control-panel{
-	height : 85%;
-	border : 0px dotted black;
-}
-.btn-panel{
-	height : 15%;
-	border : 0px dotted black;
-	text-align: center;
-}
-.btn-next{
-	/*Vertical Center Start*/
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	/*Vertical Center End*/
-}
-iframe {
-    background: #000;
-    border: none;         /* Reset default border */
-    height: 100%;        /* Viewport-relative units */
-    width: 100%;
-	overflow: hidden;
-}
-.img-step{
-	display: inline-block;
-	/*Vertical Center Start*/
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	/*Vertical Center End*/
-}
-.a{
-	color:red;
-}
+	.container{
+		width : 1000px;
+		height : 600px;	
+		border : 0px dotted black;
+	}
+	.info-wrapper{
+		height : 10%;
+	}
+	.info-panel {
+		height : 100%;
+		width : 100%;
+		border : 0px dotted black;
+		text-align: center;
+	}
+	.booking-wrapper{
+		height : 90%;
+		border : 0px dotted black;
+		padding : 2rem;
+	}
+	.select-body{
+		height: 100%;
+		border : 0px dotted black;
+		padding: 0px;
+	}
+	.control-body{
+		height : 100%;
+		border : 0px dotted black;
+		
+	}
+	.control-panel{
+		height : 85%;
+		border : 0px dotted black;
+	}
+	.btn-panel{
+		height : 15%;
+		border : 0px dotted black;
+		text-align: center;
+	}
+	.btn-next{
+		/*Vertical Center Start*/
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		/*Vertical Center End*/
+	}
+	iframe {
+	    background: #000;
+	    border: none;         /* Reset default border */
+	    height: 100%;        /* Viewport-relative units */
+	    width: 100%;
+		overflow: hidden;
+	}
+	.img-step {
+        display: inline-block;
+        /*Vertical Center Start*/
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        /*Vertical Center End*/
+        float: left;
+        width: 20%;
+        margin:0;
+        padding:0;
+    }
+    
+    .fir {
+    	position: absolute;
+    	z-index: 3;
+    	left: 791px;
+    }
+	.a{
+		color:red;
+	}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -122,11 +132,12 @@ $(document).ready(function(){
 	<div class="row info-wrapper">
 		<div class="col-sm-12" style="height:100%;">
 			<div class="info-panel">
-				<img class="img-step" src="img/ticket/step_01.gif">
-                <img class="img-step" src="img/ticket/step_02.gif">
-                <img class="img-step" src="img/ticket/step_03.gif">
-                <img class="img-step" src="img/ticket/step_04.gif">
-                <img class="img-step" src="img/ticket/step_05.gif">
+				<img class="img-step fir" src="img/ticket/step_05_on.gif">
+                    <img class="img-step" src="img/ticket/step_01_off.gif">
+                    <img class="img-step" src="img/ticket/step_02_off.gif">
+                    <img class="img-step" src="img/ticket/step_03_off.gif">
+                    <img class="img-step" src="img/ticket/step_04_off.gif">
+                    <img class="img-step" src="img/ticket/step_05_off.gif">
 			</div>
 		</div>
 	</div>
@@ -189,7 +200,7 @@ $(document).ready(function(){
 			</div>	
 			<div class="btn-panel" style="margin-top:40px">
 				<div class="btn-group btn-group-justified">
-					<a type="button" class="btn btn-danger" id="beforeBtn">< 이전으로</a>
+					<a type="button" class="btn btn-danger" id="beforeBtn"><i class="glyphicon glyphicon-chevron-left"></i>이전으로</a>
 					<a type="button" class="btn btn-info btn-next" id="nextBtn">결재확인</a>
 				</div>
 			</div>
