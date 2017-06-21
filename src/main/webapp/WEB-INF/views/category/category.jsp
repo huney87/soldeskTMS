@@ -514,8 +514,8 @@ function ImgError(source){
 $(document).ready(function(){
 	regBtns();
 });
-	
-	var regBtns= $(".cate").click(function(){
+	var categorySelect = $(".cate").val();
+	var regBtns= categorySelect.click(function(){
 		
 		var musical=$("#musical");
 		var concert=$("#concert");
@@ -523,7 +523,7 @@ $(document).ready(function(){
 		var cateList = $("#cate");
 		var gre;
 		
-		switch((".cate")){
+		switch(categorySelect){
 			case musical : gre = 1; break;
 			case concert : gre = 2; break;
 			case shows : gre = 3;
