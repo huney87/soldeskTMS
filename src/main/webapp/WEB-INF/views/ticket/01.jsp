@@ -176,8 +176,11 @@
                 success : function(data) {
                     initCalender(data);
                 }
-		    });           
-            
+		    });
+            if (sessionStorage.getItem('ticketDate')) {
+            	var date = sessionStorage.getItem('ticketDate');
+            	$(".selectDate").text(date);
+            }
             initBtn();
         });
        
