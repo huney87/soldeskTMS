@@ -9,7 +9,7 @@
 <link href="/css/menu.css" media="all" rel="stylesheet" type="text/css" />
 <link href="/css/mypage.css" media="all" rel="stylesheet" type="text/css" />
 <!-- jQuery와 Postcodify를 로딩한다 -->
-<script src="http://d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <style>
 #middle-menu {
 	display: none;
@@ -17,9 +17,8 @@
 </style>
 <!-- "우편번호찾기" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
 <script type="text/javascript">
+
 $(function(){
-	$("#postcodify_search_button").postcodifyPopUp();
-	
 	var userlist=$("#userlist");
 	userlist.empty();
 	
@@ -107,18 +106,26 @@ $(function(){
 				userPhone : phone,
 			},
 			success:function(result){
-				if(result) swal("수정 완료");
+				if(result) return true;
 				else swal("수정 실패");
 			},
 			error:function(a,b,errMsg){
-				swal("수정 실패");
+				swal("수정 실패",errMsg);
 			},
 			complete:function(){
-				window.location.reload();
+				swal({
+					title: "수정 성공",
+					text: "회원 정보를 수정했습니다",
+					type: "success"
+				},
+				function(){
+					window.location.reload();
+				});
 			}
 		});
 	});
 });
+
 </script>
 	<jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
 	<div class="container" style="padding:2rem 0;">
@@ -155,4 +162,9 @@ $(function(){
 		  </div>
 	  </div>
 	</div>	
+	<script> 
+	$(function() { 
+		$("#postcodify_search_button").postcodifyPopUp(); 
+	}); 
+	</script>
 	<jsp:include page="/WEB-INF/views/frames/footer.jsp" flush="false"/>
