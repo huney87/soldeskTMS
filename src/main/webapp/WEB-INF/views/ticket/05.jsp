@@ -52,13 +52,7 @@
 		border : 0px dotted black;
 		text-align: center;
 	}
-	.btn-next{
-		/*Vertical Center Start*/
-		position: relative;
-		top: 50%;
-		transform: translateY(-50%);
-		/*Vertical Center End*/
-	}
+	
 	iframe {
 	    background: #000;
 	    border: none;         /* Reset default border */
