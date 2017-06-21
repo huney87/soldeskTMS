@@ -3,7 +3,8 @@ package gwangjae.tms.performance.domain;
 public class Round {
 	private int roundId;
 	private String actInfo;
-	private int roundTime;
+	private String roundDate;
+	private String roundTime;
 	private int perId;
 	
 	public Round(){}
@@ -24,11 +25,19 @@ public class Round {
 		this.actInfo = actInfo;
 	}
 
-	public int getRoundTime() {
+	public String getRoundDate() {
+		return roundDate;
+	}
+
+	public void setRoundDate(String roundDate) {
+		this.roundDate = roundDate;
+	}
+
+	public String getRoundTime() {
 		return roundTime;
 	}
 
-	public void setRoundTime(int roundTime) {
+	public void setRoundTime(String roundTime) {
 		this.roundTime = roundTime;
 	}
 
@@ -39,4 +48,6 @@ public class Round {
 	public void setPerId(int perId) {
 		this.perId = perId;
 	}
+
+	
 }

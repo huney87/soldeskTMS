@@ -215,7 +215,7 @@ $(document).ready(function(){
     	});
     	
     	var perId=$("#perf").val();
-    	var seatInfo={ "seats":seatValue, "perId":perId}
+    	var seatInfo={ "seats":seatValue, "perId":perId};
 		
     	if($("#row").val()) {
     		$.ajax({

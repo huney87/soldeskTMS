@@ -17,4 +17,5 @@ public interface PerformanceService {
 	public int maxGrade(int per_id);
 	public int updateSeatsInfo(SeatInfo sinfo);
 	public int seatInfoInit(SeatInfo sinfo);
+	public int addRound(String[] dates, String[] time1,String[] time2, int perId);
 }

@@ -85,4 +85,9 @@
 		where perf_id = #{perId} and sinfo_type = #{seatType}
 	</update>
 	
+	<insert id="addRound" parameterType="Round">
+		insert into round(rnd_id,rnd_date,rnd_time,perf_id)
+		values(rnd_id_seq.nextval,#{roundDate},#{roundTime},#{perId})
+	</insert>
+	
 </mapper>

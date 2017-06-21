@@ -4,6 +4,7 @@ import gwangjae.tms.hall.domain.Hall;
 import gwangjae.tms.hall.domain.Seat;
 import gwangjae.tms.performance.dao.mapper.PerformanceMapper;
 import gwangjae.tms.performance.domain.Performance;
+import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.performance.domain.SeatInfo;
 
 import java.util.List;
@@ -54,6 +55,10 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	
 	public int seatInfoInit(SeatInfo sinfo){
 		return performanceMapper.seatInfoInit(sinfo);
+	}
+	
+	public int addRound(Round round){
+		return performanceMapper.addRound(round);
 	}
 }
 

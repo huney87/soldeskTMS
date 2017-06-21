@@ -125,4 +125,17 @@ public class PerformanceController {
 	public int seatInfoInit(SeatInfo sinfo){
 		return performanceService.seatInfoInit(sinfo);
 	}
+	
+	//회차 정보 저장하기 : 3개의 배열값을 가져옴(날짜, 시간1, 시간2)
+	@RequestMapping("/addRound")
+    @ResponseBody
+    public int addRound(@RequestParam(value="dates[]") List<String> dates,
+    		@RequestParam(value="time1[]") List<String> time1,
+    		@RequestParam(value="time2[]") List<String> time2,
+    		@RequestParam(value="perId") int perId){
+		return performanceService.addRound(dates.toArray(new String[dates.size()]),
+				time1.toArray(new String[time1.size()]),
+				time2.toArray(new String[time2.size()]),
+				perId);
+	}
 }

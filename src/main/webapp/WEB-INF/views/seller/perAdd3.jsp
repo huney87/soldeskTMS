@@ -34,6 +34,7 @@ var resistBtn = function() {
                 url: "/seller/updateSeatsInfo",
                 data: seatInfo,
                 success:function(result){
+                	roundAdd();// 회차정보 입력창 불러오기
                 },
                 error:function(a, b, errMsg){
                 	$("#msg").text("추가 실패: " + errMsg);
@@ -44,6 +45,83 @@ var resistBtn = function() {
     	
     	alert("좌석 등급정보 등록완료!");
     });
+}
+
+//회차정보 입력창.
+var roundAdd = function() {
+	$("#step3").empty();
+	$("#step3").css({
+						"background-color": "#1a1a1a",
+						"color":"white",
+						"height":"55rem",
+						"border":"0.1rem solid #4d4dff"
+				});
+	
+	var addDateBtn = $("<button type='button' id='addDate' class='btn btn-sm btn-default'>공연 날짜 추가</button>");
+	var rstDateBtn = $("<button type='button' id='rstDate' class='btn btn-sm btn-default'>날짜 리셋</button>");
+	var resistDateBtn = $("<button type='button' id='resistDate' class='btn btn-sm btn-danger'>등록</button>");
+	var div = $("<div></div>");
+	var roundTitle = $("<h3>회차 정보 입력</h3><p>회차정보는 최대 10회까지 각 회당 2차까지 등록가능합니다.</p>");
+	var timeSlot = $("<div id='timeSlots'></div>");
+	div.append(addDateBtn).append(rstDateBtn).append(resistDateBtn);
+	$("#step3").append(roundTitle).append(div).append(timeSlot);
+	
+	var cnt = 1;
+	//공연날짜추가 선택시 10회차까지 회차 증가.
+	$("#addDate").on("click",function(){			
+		if(cnt>10){
+			cnt = 1;
+			alert('최대 10회 까지 등록 가능합니다.');
+			$("#timeSlots").empty();
+		}else{
+			console.log(cnt);
+			var dateInput = $("<label>"+cnt+"회<input type='date' class='di'/></label>");
+			var timeInput1 = $("<label>1차:<input type='time' class='timeSlot1' id='timeSlot1'"+cnt+"'></label>");
+			var timeInput2 = $("<label>2차:<input type='time' class='timeSlot2' id='timeSlot2'"+cnt+"'></label>");
+			$("#timeSlots").append(dateInput).append(timeInput1).append(timeInput2);
+			cnt=cnt+1;
+		}
+		
+		//회차정보 DB 저장. (등록)
+		$("#resistDate").on("click",function(){
+			var dates = [];
+			var time1 = [];
+			var time2 = [];
+			var perId = $("#choice").val();
+
+			//회차 정보
+			$(".di").each(function(){
+				dates.push( $( this ).val());        	     	
+	    	}); 
+			//회당 1차 시간
+			$(".timeSlot1").each(function(){
+				time1.push( $( this ).val());        	     	
+	    	}); 
+			//회당 2차 시간
+			$(".timeSlot2").each(function(){
+				time2.push( $( this ).val());        	     	
+	    	}); 
+			
+			var roundInfo={"dates":dates, "time1":time1, "time2":time2, "perId":perId};
+			
+			$.ajax({
+                url: "/seller/addRound",
+                data:roundInfo,
+                success:function(result){
+                		alert("회차 정보 저장 성공");                  
+    	        },
+		         error:function(a, b, errMsg){
+		        	 alert("회차 정보 저장 실패"); 
+		         }
+    		});
+		});
+		
+		//시간리셋 선택시
+		$("#rstDate").on("click", function(){
+			$("#timeSlots").empty();
+			cnt=1;
+		});	
+	});	
 }
 
 //공연찾기 기능
@@ -62,6 +140,7 @@ var searchBtn = function() {
                 	$(perfomance).each(function(idx, per){        
                         option2 = $("<option value='"+per.per_id+"'>"+per.per_title+"</option>");
                         $("#choice").append(option2);
+                        
                     });                  
     	        }
     		});
@@ -103,39 +182,7 @@ $(document).ready(function(){
 		        	
 		         }  	   	    
 	  		}); 
-   	});
-   	
-//////////////////////////////////////////////////////////////////////////////////////   	
-	//시간추가 선택시
-	var cnt = 1;
-	$("#addTime").on("click", function(){				
-		if(cnt>5){
-			cnt = 1;
-			alert('최대 5회차 까지 입니다.');
-			$("#timesNav").empty();
-		}else{
-			var times = $('<label>'+cnt+'차:<input type="time" class="timeSlot" id="timeSlot'+cnt+'">&nbsp;&nbsp;</label>');
-			$("#timesNav").append(times);
-			cnt=cnt+1;
-		}
-	});
-	
-	//시간리셋 선택시
-	$("#rstTime").on("click", function(){
-		$("#timesNav").empty();
-		cnt=1;
-	});
-	
-	//최종완료버튼( DB 등록) 현재 기간만 등록되고, 회차에 대한 정보는 저장되지 않음.
-	$("#roundResist").on("click", function(){
-		var choice = $("#choice").val();
-		var timeSlot1 = $("#timeSlot1").val();
-		var timeSlot2 = $("#timeSlot1").val();
-		var timeSlot3 = $("#timeSlot1").val();
-		var timeSlot4 = $("#timeSlot1").val();
-		var timeSlot5 = $("#timeSlot1").val();		
-	});	
-		
+   	});		
 });
 </script>
 <style>
@@ -161,13 +208,13 @@ color:black;
 input{
 color:black;
 }
-.timeSlot{
+.timeSlot1, .timeSlot2{
 	color:black;
 }
 /* 하단 정보입력창 속성 */
 #step1, #step2{
 	background-color:#1a1a1a;
-	height:45rem;
+	height:55rem;
 	border:0.1rem solid #4d4dff;
 	color:white;
 }
@@ -197,6 +244,9 @@ label{
 }
 #gradeResult4{ background-color:#BDFF12;
 }
+.di{
+	width:12rem;
+}
 </style>
 </head>
 <body>
@@ -212,17 +262,10 @@ label{
         		<div class="col-sm-12" id="roundNav">
         			<span>
         				공연 찾기:<input type="text" id="perName">
-        						<button type="button" class="btn btn-sm btn-default" id="searchPer">검색</button>	
+        						<button type="button" class="btn btn-sm btn-info" id="searchPer">검색</button>	
         				검색 결과 선택: <select id="choice"></select>
         			</span>
         		</div>
-        		<div class="col-sm-12" id="roundNav">
-        			<button type="button" id="addTime" class="btn btn-default btn-sm">시간추가</button>
-					<button type="button" id="rstTime" class="btn btn-danger btn-sm">시간리셋</button>
-					<span id="timesNav"></span>
-					<button type="button" id="roundResist" class="btn btn-sm btn-danger">회차 등록</button>
-				</div>
-				<div class="col-sm-1"></div>
 				<div class="col-sm-5" id="step1">
                     <h5>좌석 등급은 공연등록시 저장한 좌석종류를 기준으로 입력 가능합니다.</h5>
                     <div id="gradeMenu"></div>
@@ -233,14 +276,13 @@ label{
                         <div id="grades"></div>
                     </div>                                      
                 </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-3" id="step2">
+                <div class="col-sm-2" id="step2">
                 	<div>
-                        <h3 style="text-align:center;">공연 좌석 등록 결과 확인</h3>
+                        <h3 style="text-align:center;">등록 결과</h3>
                         <div id="resultPrice" style="text-align:left;"></div>
                     </div>
                 </div>
-                <div class="col-sm-1"></div>
+                <div class="col-sm-5" id="step3"></div>
         	</div>
         </div>
 	</div>

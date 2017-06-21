@@ -4,6 +4,7 @@ import gwangjae.tms.hall.domain.Hall;
 import gwangjae.tms.hall.domain.Seat;
 import gwangjae.tms.performance.dao.PerformanceDao;
 import gwangjae.tms.performance.domain.Performance;
+import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.performance.domain.SeatInfo;
 
 import java.util.List;
@@ -63,5 +64,21 @@ public class PerformanceServiceImpl implements PerformanceService {
 	
 	public int seatInfoInit(SeatInfo sinfo){
 		return performanceDao.seatInfoInit(sinfo);
+	}
+	
+	public int addRound(String[] dates, String[] time1,String[] time2, int perId){
+		Round round = new Round();
+		
+		for(int i=0;i< dates.length ;i++){
+			round.setPerId(perId);
+			round.setRoundDate(dates[i]);
+			round.setRoundTime(time1[i]);
+			performanceDao.addRound(round);// 회당 1차시간 저장
+			
+			round.setRoundTime(time2[i]);
+			performanceDao.addRound(round);// 회당 2차시간 저장
+		}
+		
+		return 1;
 	}
 }
