@@ -18,17 +18,15 @@
 $(function() { 
 	var reserveList=$("#reserveList");
 	reserveList.empty();
-	var reserveDate = '17/01/01';
+	var test = '17/01/01';
 	//예매일 나누기
 	var reserves = reserve.reserveDate.split("/");
-	var reserveYear = '20'+reserveDate[0];
-	var reserveMonth = reserveDate[1];
-	var reserveDay = reserveDate[2];
-	
 	var d = new Date();
+	
+	var reserveDate = d.setFullYear(2000+test[0], test[1], test[2]);
 	var year = d.getFullYear();
-	var month = d.getMonth();
-	var date = d.getDate();
+	var month = d.getMonth()+1;
+	var date = d.getDate()-1;
 	
 	if(reserveYear<=year || reserveMonth<=month || reserveDay<=date){
 		var reservation = reserve.reserveDate;
