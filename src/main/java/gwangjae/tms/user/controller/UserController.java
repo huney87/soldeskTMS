@@ -56,4 +56,10 @@ public class UserController {
 	public String findUserId(User user){
 		return userService.findUserId(user);
 	}
+	
+	@RequestMapping("/findPw")
+	@ResponseBody
+	public String findUserPw(User user){
+		return userService.findUserPw(user);
+	}
 }

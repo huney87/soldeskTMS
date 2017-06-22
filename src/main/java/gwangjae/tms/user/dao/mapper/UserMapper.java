@@ -7,4 +7,5 @@ public interface UserMapper {
 	public User checkUserEmail(User userEmail);
 	
 	public String findUserId(User user);
+	public String findUserPw(User user);
 }

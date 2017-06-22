@@ -7,4 +7,5 @@ public interface UserDao {
 	public User checkUserEmail(User userEmail);
 	
 	String findUserId(User user);
+	String findUserPw(User user);
 }

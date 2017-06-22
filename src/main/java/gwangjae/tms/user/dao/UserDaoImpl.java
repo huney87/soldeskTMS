@@ -20,5 +20,10 @@ public class UserDaoImpl implements UserDao {
 
 	public String findUserId(User user) {
 		return userMapper.findUserId(user);
+	}
+
+	@Override
+	public String findUserPw(User user) {
+		return userMapper.findUserPw(user);
 	};
 }

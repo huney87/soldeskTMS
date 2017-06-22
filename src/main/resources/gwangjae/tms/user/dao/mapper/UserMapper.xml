@@ -38,4 +38,8 @@
 	<select id="findUserId" parameterType="User" resultType="String">
 		select user_email from users where user_name=#{userName} and user_phone=#{userPhone}
 	</select>
+	
+	<select id="findUserPw" parameterType="User" resultType="String">
+		select user_pw from users where user_email=#{userEmail} and user_name=#{userName} and user_phone=#{userPhone}
+	</select>
 </mapper>
