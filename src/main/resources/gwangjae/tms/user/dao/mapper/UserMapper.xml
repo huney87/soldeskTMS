@@ -35,5 +35,7 @@
 		values (user_id_seq.nextval, #{userName}, #{userEmail}, #{userPw} , #{userPost}, #{userAddress}, #{userPhone}, #{userBirthday}, #{userType})		
 	</insert>
 	
-	
+	<select id="findUserId" parameterType="User" resultType="String">
+		select user_email from users where user_name=#{userName} and user_phone=#{userPhone}
+	</select>
 </mapper>

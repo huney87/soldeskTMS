@@ -16,5 +16,9 @@ public class UserDaoImpl implements UserDao {
 	
 	public User checkUserEmail(User userEmail){
 		return userMapper.checkUserEmail(userEmail);
+	}
+
+	public String findUserId(User user) {
+		return userMapper.findUserId(user);
 	};
 }

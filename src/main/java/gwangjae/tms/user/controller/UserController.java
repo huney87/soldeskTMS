@@ -22,6 +22,11 @@ public class UserController {
 		return "sign/main";
 	}
 	
+	@RequestMapping("/find")
+	public String find(){
+		return "sign/find";
+	}
+	
 	@RequestMapping(value="/addUser",method=RequestMethod.POST)
 	@ResponseBody
 	public int addUser(User user){
@@ -46,7 +51,9 @@ public class UserController {
 		return userService.checkUserEmail(userEmail);
 	}
 	
-	
-	
-
+	@RequestMapping("/findId")
+	@ResponseBody
+	public String findUserId(User user){
+		return userService.findUserId(user);
+	}
 }
