@@ -18,23 +18,29 @@
 $(function() { 
 	var reserveList=$("#reserveList");
 	reserveList.empty();
-	var test = '17/01/01';
-	//예매일 나누기
-	var reserves = reserve.reserveDate.split("/");
-	var d = new Date();
+	/* var test = '17/01/01';
+	예매일 나누기
+	var reserves =test.split("/");
+	var now = new Date();
+	reserve.reserveDate
+	var reserveDate = Date().setFullYear(2000+test[0], test[1], test[2]);
+	var year = now.getFullYear();
+	var month = now.getMonth()+1;
+	var date = now.getDate()-1;
 	
-	var reserveDate = d.setFullYear(2000+test[0], test[1], test[2]);
-	var year = d.getFullYear();
-	var month = d.getMonth()+1;
-	var date = d.getDate()-1;
 	
-	if(reserveYear<=year || reserveMonth<=month || reserveDay<=date){
+	if(Date().setFullYear('20'+test[0], test[1], test[2])<=Date().getFullYear()){
 		var reservation = reserve.reserveDate;
-		console.log("허걱");
+		console.log(reservation);
 	}else{
-		false;
+		console.log("못불러왔음");
+		console.log(now);
+		console.log(year);
+		console.log(month);
+		console.log(date);
+		console.log(new Date());
 	}
-	
+	 */
 	$.ajax({
 		url:"/mypage/reservelist",
 		success:function(reserves){
@@ -43,8 +49,7 @@ $(function() {
 				td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail'>"
 						+reserve.perfTitle+"</a></td><td>"
 						+reserve.hallName+"</td><td>"
-						+reservation+"</td><td>"
-						+"<button type='button' class='btn btn-primary' value='"+reserve.reservationId+"' data-toggle='modal' data-target='#myModal' onClick='deleteReserve(this)'>후기 작성</button>");
+						+reserve.reserveDate+"</td><td>");
 				reserveList.append(tr.append(td));
 				td.find("button").data("reservationId", reserve.reservationId);
 			});
@@ -78,7 +83,6 @@ $(function() {
         <th>공연명</th>
         <th>장소</th>
         <th>예매일시</th>
-        <th>후기작성</th>
       </tr>
     </thead>
     <tbody id="reserveList">
