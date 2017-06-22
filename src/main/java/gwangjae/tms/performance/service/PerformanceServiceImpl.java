@@ -37,6 +37,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return 1;
 	}
 	 
+	 public List<Seat> getPerLayout(int perId){	 
+		 return performanceDao.getPerLayout(perId);
+	 }
+	 
 	 public List<Performance> getPer(String per_name){
 		 return performanceDao.getPer(per_name);
 	 }

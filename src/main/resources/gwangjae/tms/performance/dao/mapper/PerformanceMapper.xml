@@ -10,6 +10,15 @@
 		<result property="price" column="sinfo_price"/>	
 	</resultMap>
 	
+	<resultMap id="PerSeatMap" type="seat">
+		<id property="seatId" column="s_id"/>
+		<result property="seatRow" column="s_row"/>
+		<result property="seatCol" column="s_col"/>
+		<result property="seatType" column="s_type"/>
+		<result property="per_id" column="perf_id"/>
+		<result property="seatNumber" column="s_number"/>
+	</resultMap>
+	
 	<resultMap id="PerMap" type="PerfSearch">
 		<id property="per_id" column="perf_id"/>
 		<result property="per_title" column="perf_title"/>
@@ -34,6 +43,11 @@
 
 	<select id="getSeats" resultMap="SeatMap">
 		select * from seatinfo
+	</select>
+	
+	<select id="getPerLayout"  parameterType="int" resultMap="PerSeatMap">
+		select * from seats
+		where perf_id = #{value}
 	</select>
 
 	<insert id="addSeat" parameterType="Seat">

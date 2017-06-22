@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface PerformanceDao {
 	public List<SeatInfo> getSeats(String title);
+	public List<Seat> getPerLayout(int perId);
 	public int addSeat(Seat seat);
 	public List<Performance> getPer(String per_name);
 	public int addPerInfo(Performance performance);

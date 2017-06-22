@@ -1,6 +1,7 @@
 package gwangjae.tms.performance.controller;
 
 import gwangjae.tms.hall.domain.Hall;
+import gwangjae.tms.hall.domain.Seat;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.performance.service.PerformanceService;
@@ -58,6 +59,13 @@ public class PerformanceController {
     @ResponseBody
 	public List<SeatInfo> getSeats(String title){
 		return performanceService.getSeats(title);
+	}
+	
+	// 값이 저장된 공연의 좌석 레이아웃 정보 가져오기.
+	@RequestMapping("/getPerLayout")
+    @ResponseBody
+	public List<Seat> getPerLayout(int perId){
+		return performanceService.getPerLayout(perId);
 	}
 	
 	//좌석 추가하기
