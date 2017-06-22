@@ -109,62 +109,79 @@
             height: 1.5rem;
             line-height: 1rem;
         }
+        .btn1{
+        	border : #888 1px solid ;
+        	background: #fefefe;
+        	margin:0.3rem;
+        	padding:0.3rem;
+        }
     </style>
   
     <script type="application/javascript">        
 
         var initCalender = function( data ) {       
-        	
-        	var eventData = [{
-                "date": "2017-06-17",
-                "badge": false
-            }, {
-                "date": "2017-06-18",
-                "badge": false
-            }, {
-                "date": "2017-06-19",
-                "badge": false
-            }, {
-                "date": "2017-06-20",
-                "badge": false
-            }];
-        	
-            //var eventData = [];         
-            for( i = 0 ; i < data.length ; i++ ){
-            	var skddate = {"date": data[i]};
-                eventData.push(skddate);
-            }
-            console.log(eventData);
+            var eventData = [];
+            for( i = 0 ; i < data.length ;){   
+            	var skddate = {
+            			"date": data[i].roundDate,
+            			"time1": data[i].roundTime,
+            			"time2": data[i+1].roundTime
+            			};            	
+                eventData.push(skddate);   
+                i = i+2;
+            }            
         	
             $('#show-calender').zabuto_calendar({
                 language: "kr",
                 data: eventData,
                 action: function() {
-                    clickCalender(this.id);
+                	clickCalender(this.id, eventData);
                 },
             });
         }
 
-        var clickCalender = function(id) {
+        var clickCalender = function(id, eventData) {
             var date = $("#" + id).data("date");
+            var time2 = eventData;
             var hasEvent = $("#" + id).data("hasEvent");
             if (hasEvent) {
                 $(".selectDate").text(date);
                 sessionStorage.setItem('ticketDate', date);
             }
+            
+            for(var i=0 ; i<time2.length ; i++){
+            	if(time2[i].date == date){
+            		$("#roundTime1").val(time2[i].time1);
+            		$("#roundTime11").text(time2[i].time1);
+            		$("#roundTime2").val(time2[i].time2);
+            		$("#roundTime22").text(time2[i].time2);
+            		
+            	}
+            }
         }
 
         var initBtn = function() {
-            $('.btn-next').click(function() {
+			$('[name="roundTimeBtn"]').on('click',function(){
+				var time = $(this).val();
+				
+				sessionStorage.setItem('ticketTime', time);
+			});
+        	
+        	$('.btn-next').click(function() {
                 if (!sessionStorage.getItem('ticketDate')) {
                     alert("날짜를 선택해주세요.");
+                    return false;
+                } 
+                if(!sessionStorage.getItem('ticketTime')) {
+                    alert("시간을 선택해주세요.");
                     return false;
                 } else {
                     forwardForm(2);
                     return true;
-                }                               
-            });            
-        }
+                }
+            });
+        }        
+        
 
         $(document).ready(function() {
             $.ajax({
@@ -176,7 +193,8 @@
                 success : function(data) {
                     initCalender(data);
                 }
-		    });
+		    });           
+            
             if (sessionStorage.getItem('ticketDate')) {
             	var date = sessionStorage.getItem('ticketDate');
             	$(".selectDate").text(date);
@@ -185,6 +203,11 @@
         });
        
     </script>
+    
+    
+    
+    
+    
 </head>
 
 <body>
@@ -213,8 +236,12 @@
                             <div class='selectDate'><span>&nbsp; &nbsp;  -&nbsp; &nbsp; - &nbsp; &nbsp; </span></div>
 
                             <h4>시간 선택</h4>
-                            <button type="button" class="btn btn-default btn-sm">15시 00분</button>
-                            <button type="button" class="btn btn-default btn-sm">17시 00분</button>
+                            <div class="btn1">
+	                            <input type="radio" class="btn btn-default btn-sm" name="roundTimeBtn" id="roundTime1"/>&nbsp; &nbsp;<span id="roundTime11"></span><br>
+	                        </div>
+	                        <div class="btn1">
+	                            <input type="radio" class="btn btn-default btn-sm" name="roundTimeBtn" id="roundTime2"/>&nbsp; &nbsp;<span id="roundTime22"></span>
+	                        </div>
                         </div>
                         <div class="col-sm-4">
                             <h5>좌석등급/ 잔여석</h5>
