@@ -94,87 +94,48 @@
         .customerInfo {
             padding-left: 2rem;
         }
-    </style>
+    </style> 
     <script type="text/javascript">
-    	$(document).ready(function () {
-    		function ImgError(source) {
-                source.src = "/img/noImg.png";
-                source.onerror = "";
-                return true;
-            }     		
-    		
-           	$("#beforeBtn").click(function () {
-				forwardForm(3);
-				return true;
-			});           	
+
+    $(document).ready(function () {
+		var email=$("#reserverEmail").val();
+		
+		$.ajax({
+			url:"/mypage/getUser",
+			data: {userEmail: email},
+			success:function(user){
+				userInfo(user);
+			}
+		});
+	
+		var userInfo=function(user){
+			//이름
+			var userName=user.userName;
 			
-			$("#nextBtn").on("click", function(){
-				var reserver_name = $("#reserverName").val();
-				var reserver_birthday = $("#reserverBirthday").val();
-				var phoneNumber1 = $("#phoneNumber1").val();
-				var phoneNumber2 = $("#phoneNumber2").val();
-				var phoneNumber3 = $("#phoneNumber3").val();
-				var phoneNumber = phoneNumber1 + phoneNumber2 + phoneNumber3;
-				var Email01 = $("#str_email01").val();	// 이메일 아이디
-				var Email02 = $("#str_email02").val();	// 이메일 사이트
-				var reserver_Email = Email01 + "@" + Email02;
-				var totalData = reserver_name + reserver_birthday + phoneNumber + reserver_Email;
-				
-				console.log(reserver_name);
-				console.log(reserver_birthday);
-				console.log(phoneNumber);
-				console.log(reserver_Email);				
-				
-				if(!reserver_name){	//예매자 이름 미기입시 경고창					
-					alert("예매자 이름을 입력하세요.");	
-					return false;
-				}
-				
-				if(!reserver_birthday){	//예매자 생년월입 미기입시 경고
-					alert("예매자 생년월일을 입력하세요.");	
-					return false;
-				}
-				if(!phoneNumber1){	//예매자 연락처 미기입시 경고
-					alert("예매자 연락처를 입력하세요.");	
-					return false;
-				}
-				if(!phoneNumber2){	//예매자 연락처 미기입시 경고
-					alert("예매자 연락처를 입력하세요.");	
-					return false;
-				}
-				if(!phoneNumber3){	//예매자 연락처 미기입시 경고
-					alert("예매자 연락처를 입력하세요.");	
-					return false;
-				}
-				if(!Email01){	//예매자 이메일 미기입시 경고
-					alert("예매자 이메일 아이디를 입력하세요.");						
-					return false;
-				}
-				if(!Email02){	//예매자 이메일 미기입시 경고
-					alert("예매자 이메일 홈페이지를 입력하세요.");						
-					return false;
-				}  
-				
-				if(totalData != null){
-					forwardForm(5);
-					return true;
-				}
-			});			
+			//생일
+			var userBirthday=user.userBirthday;			
 			
-			//이메일 입력방식 선택
-            $('#selectEmail').change(function () {
-                $("#selectEmail option:selected").each(function () {
-                    if ($(this).val() == '1') { //직접입력일 경우
-                        $("#str_email02").val(''); //값 초기화
-                        $("#str_email02").attr("readonly", false); //활성화
-                    } else { //직접입력이 아닐경우
-                        $("#str_email02").val($(this).text()); //선택값 입력
-                        $("#str_email02").attr("readonly", true); //비활성화
-                    }
-                });
-            });	            
-    	});    	
-    </script>
+			//전화번호
+			var phone=user.userPhone.toString();
+			var phone1="0"+phone.substr(0,2);
+			var phone2=phone.substr(2,4);
+			var phone3=phone.substr(6,8);
+			var phoneNumber = phone1+"-"+phone2+"-"+phone3;		
+						
+			$("#reserverName").val(userName);
+			$("#reserverBirth").val(userBirthday);
+			$("#reserverPhone").val(phoneNumber);
+		};	
+		
+		$("#nextBtn").on("click", function(){
+			forwardForm(5);
+			return true;
+		});	
+		
+	});
+
+</script>
+    
 </head>
 
 <body>
@@ -195,60 +156,39 @@
             <div class="col-sm-9 select-body">
                 <div class="customerInfo">
                     <div class="seat-layout-wrapper">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <h4>예매자 확인</h4>
+                    
+                    	<table class="table table-bordered">
+                    		<thead>
+                                <h4>예매자 확인</h4>                                
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>이름</th>
-                                    <td><input type="text" class="form-control" id="reserverName"/></td>
-                                </tr>
-                                <tr>
-                                    <th>생년월일</th>
-                                    <td>
-                                       	<input type="date" class="form-control" id="reserverBirthday" required>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p style="color:red">생년월일을 정확히 입력해주세요. <br> 가입 시 입력하신 정보와 다를 경우, <br> 본인 확인이 되지 않아 예매가 불가합니다.
-                        </p>
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th>연락처</th>
-                                    <td>
-                                        <div class="form-inline">
-                                            <input type="number" class="form-control" style="width:10%" id="phoneNumber1"/>&nbsp;-
-                                            <input type="number" class="form-control" style="width:15%" id="phoneNumber2"/>&nbsp;-
-                                            <input type="number" class="form-control" style="width:15%" id="phoneNumber3"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>이메일</th>
-                                    <td>
-                                        <div class="form-inline" id="inline">
-                                            <input type="text" id="str_email01" name="str_email01" class="form-control" style="width:23%" required/>
-                                            <label style="margin-left:15px">@</label>
-                                            <input type="text" id="str_email02" name="str_email02" class="form-control" value="" style="margin-left:20px; width:23%"
-                                                required/>
-                                            <select id="selectEmail" class="form-control">
-				  								<option value="1" selected>직접입력</option>
-				    							<option value="naver.com">naver.com</option>
-				    							<option value="hanmail.net">hanmail.net</option>
-				    							<option value="nate.com">nate.com</option>
-				    							<option value="gmail.com">gmail.com</option>
-				 							</select>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            	<tr>
+                            		<th>이름</th>
+                            			<td>
+                            				<input type="text" class="form-control" id="reserverName" readonly="readonly"></input>
+                            			</td>                            		
+                            	</tr>     
+                            	<tr>
+                            		<th>이메일</th>
+                            			<td>
+                            				<input type="text" class="form-control" id="reserverEmail" value="${email }" readonly="readonly"/>
+                            			</td>
+                            	</tr>
+                            	<tr>
+                            		<th>생년월일</th>
+                            			<td>
+                            				<input type="text" class="form-control" id="reserverBirth" readonly="readonly"></input>
+                            			</td>
+                            	</tr>   
+                            	<tr>
+                            		<th>연락처</th>
+                            			<td>
+                            				<input type="text" class="form-control" id="reserverPhone" readonly="readonly"></input>
+                            			</td>
+                            	</tr>                     	
+                            </tbody>                    	
+                    	</table>
                         <p>SMS 문자와 이메일로 예매정보를 보내드립니다.</p>
-
                     </div>
                     <div class="col-sm-12" style="background-color:#e6e6e6">
                         <h5>유의 사항</h5>
