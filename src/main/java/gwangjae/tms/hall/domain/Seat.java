@@ -7,6 +7,7 @@ public class Seat {
 	private int seatType;
 	private int per_id;
 	private int seatNumber;
+	private int state;
 	
 	public Seat(){}
 
@@ -57,4 +58,14 @@ public class Seat {
 	public void setSeatNumber(int seatNumber) {
 		this.seatNumber = seatNumber;
 	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	
 }

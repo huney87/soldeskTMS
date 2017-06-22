@@ -17,6 +17,7 @@
 		<result property="seatType" column="s_type"/>
 		<result property="per_id" column="perf_id"/>
 		<result property="seatNumber" column="s_number"/>
+		<result property="state" column="state"/>
 	</resultMap>
 	
 	<resultMap id="PerMap" type="PerfSearch">
@@ -51,8 +52,8 @@
 	</select>
 
 	<insert id="addSeat" parameterType="Seat">
-		insert into seats(s_id, s_row, s_col,s_type,perf_id,s_number)
-		values(s_id_seq.nextval, #{seatRow},#{seatCol},#{seatType},#{per_id},#{seatNumber})
+		insert into seats(s_id, s_row, s_col,s_type,perf_id,s_number,state)
+		values(s_id_seq.nextval, #{seatRow},#{seatCol},#{seatType},#{per_id},#{seatNumber},0)
 	</insert>
 	
 	<insert id="addPerInfo" parameterType="performance">

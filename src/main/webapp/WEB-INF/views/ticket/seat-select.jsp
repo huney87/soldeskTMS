@@ -94,9 +94,9 @@
 			line-height: 2.1rem;
 		}
 
-		.left-seat:hover {
+		/* .left-seat:hover {
 			background-color: gray;
-		}
+		} */
 
 		.left-seat {
 			border: 2px solid blue;
@@ -115,141 +115,187 @@
 			background-color: white;
 			color: white;
 		}
+		.type1{ background-color:black; 
+		}
+		.type2{ background-color:blue;
+		}
+		.type3{ background-color:red;
+		}
+		.type4{ background-color:#BDFF12; color:black;
+		}
+		.type0{ background-color:gray;
+		}
 		/*시트 레이아웃 끝*/
 	</style>
 </head>
 
 <body>
-	<script>
-		/*	시트 CODE 정보
-		 *	       0         1            2          3
-		 *	" [seat_id]-[seat_number]-[seat_type]-[state] "
-		 *	구분자 : '-'
-		 *	seat_type : 0-복도 1-일반석
-		 *	state : 0-빈자리 1-예매된자리
-		 */
-
-		var seatInit = function (layout) {
-			console.log(layout);
-			var seatLayout = layout;
-			var selectCnt = function () {
-				var selectNum = 0;
-				$(".seat").each(function () {
-					if ($(this).hasClass("selected-seat")) {
-						selectNum++;
-					}
-				});
-				return selectNum;
-			}
-			var maxCheck = function (max) {
-				if (selectCnt() >= max) {
-					return true;
-				} else return false;
-
-			}
-
-
-			var row = '<div class="seat-row">	</div>';
-			for (i = 0; i < seatLayout.length; i++) {
-				$(".seat-layout-wrapper").append(row);
-				for (j = 0; j < seatLayout[i].length; j++) {
-					var seatId = seatLayout[i][j].split('-')[0];
-					var seatNum = seatLayout[i][j].split('-')[1];
-					var col = '<div class="seat" id="' + seatId + '"><span class="seat-number">' + seatNum + '</span></div>';
-					$(".seat-row:last").append(col);
-
-					var seatType = seatLayout[i][j].split('-')[2];
-					var state = seatLayout[i][j].split('-')[3];
-
-					if (seatType == 0) {
-						$("#" + seatId).addClass("runway");
-					} else if (seatType == 1) {
-						$("#" + seatId).addClass("left-seat");
-					}
-
-					if (state == 1) {
-						$("#" + seatId).removeClass("left-seat").addClass("reserved-seat");
-					}
-
+<script>
+ //좌석 만들어지고 나서 옵션
+ var seatChoice = function(){
+		/* 좌석 선택 */
+		$(".seat").click(function () {
+			var id = $(this).attr('id');
+	
+			// 남은 좌석이라면
+			if ($(this).hasClass('left-seat')) {
+				/* 예매 인원을 저장하는 변수 */
+				var personNumber = parseInt($("#tickets option:selected").text());
+				if (maxCheck(personNumber)) {
+					swal({
+						type: "error",
+						text: '예매 인원수 ' + personNumber + '명을 넘게 선택하셨습니다.'
+					});
+					return false;
 				}
-			};
-
-			/* 좌석 선택 */
-			$(".seat").click(function () {
-				var id = $(this).attr('id');
-
-				// 남은 좌석이라면
-				if ($(this).hasClass('left-seat')) {
-					/* 예매 인원을 저장하는 변수 */
-					var personNumber = parseInt($("#tickets option:selected").text());
-					if (maxCheck(personNumber)) {
-						swal({
-							type: "error",
-							text: '예매 인원수 ' + personNumber + '명을 넘게 선택하셨습니다.'
-						});
-						return false;
-					}
-
-					$(this).removeClass("left-seat").addClass("selected-seat");
-
-					// 선택 좌석 갯수를 session에 저장
-					sessionStorage.setItem('ticketCnt', selectCnt());
-					// 선택한 seat_id 를 session에 저장
-					if (sessionStorage.getItem('selectSeatId')) {
-						var selectSeatIds = sessionStorage.getItem('selectSeatId').split(',');
-						selectSeatIds.push(id);
-						sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
-						console.log(sessionStorage.getItem('selectSeatId'));
-					} else {
-						sessionStorage.setItem('selectSeatId', id);
-						console.log(sessionStorage.getItem('selectSeatId'));
-					}
-
-					// 선택된 좌석이라면
-				} else if ($(this).hasClass('selected-seat')) {
-					$(this).removeClass("selected-seat").addClass("left-seat");
-					if (sessionStorage.getItem('selectSeatId')) {
-						var selectSeatIds = sessionStorage.getItem('selectSeatId').split(',');
-						selectSeatIds.splice(selectSeatIds.indexOf(id), 1);
-						sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
-						console.log(sessionStorage.getItem('selectSeatId'));
-					}
+	
+				$(this).removeClass("left-seat").addClass("selected-seat");
+	
+				// 선택 좌석 갯수를 session에 저장(완료)
+				sessionStorage.setItem('ticketCnt', selectCnt());
+				// 선택한 seat_id 를 session에 저장(seat_id를 이용해서 좌석의 등급과 가격을 가져와야함.)
+				// 바로아랫줄에 selectSeatId를 어디서 가져오는지 모르겠음.
+				if (sessionStorage.getItem('selectSeatId')) {
+					var selectSeatIds = sessionStorage.getItem('selectSeatId').split(',');
+					selectSeatIds.push(id);
+					sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
+					console.log(sessionStorage.getItem('selectSeatId'));
+				} else {
+					sessionStorage.setItem('selectSeatId', id);
+					console.log(sessionStorage.getItem('selectSeatId'));
 				}
-
-			});
-
-			// 예매 인원 변경시
-			$("#tickets").change(function () {
-				$(".seat").each(function () {
-					if ($(this).hasClass("selected-seat")) {
-						$(this).removeClass("selected-seat").addClass("left-seat");
-					}
-				});
-
-			});
-
-		}
-
-		var ticketsInit = function () {
-			var inputNum = 20;
-			for (var i = 1; i <= inputNum; i++) {
-				$("#tickets").append("<option>" + i + "</option>");
+	
+				// 선택된 좌석이라면( 미완성, 위에꺼와 연동)
+			} else if ($(this).hasClass('selected-seat')) {
+				$(this).removeClass("selected-seat").addClass("left-seat");
+				if (sessionStorage.getItem('selectSeatId')) {
+					var selectSeatIds = sessionStorage.getItem('selectSeatId').split(',');
+					selectSeatIds.splice(selectSeatIds.indexOf(id), 1);
+					sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
+					console.log(sessionStorage.getItem('selectSeatId'));
+				}
 			}
-		}
-
-		// 도큐먼트 래디
-		$(document).ready(function () {
-			$.ajax({
-				url: '/ticket/getlayout',
-				dataType: 'json',
-				success: function (data) {
-					seatInit(data);
-				}
-			});
-
-			ticketsInit();
+	
 		});
-	</script>
+	
+		// 예매 인원 변경시(완료)
+		$("#tickets").change(function () {
+			$(".seat").each(function () {
+				if ($(this).hasClass("selected-seat")) {
+					$(this).removeClass("selected-seat").addClass("left-seat");
+				}
+			});
+	
+		});
+				
+}
+
+//좌석선택시 숫자 세주기(완료)
+var selectCnt = function () {
+	var selectNum = 0;
+	$(".seat").each(function () {
+		if ($(this).hasClass("selected-seat")) {
+			selectNum++;
+		}
+	});
+	return selectNum;
+}
+
+//예매인원수 체크해주는 기능.(완료)
+var maxCheck = function (max) {
+	if (selectCnt() >= max) {
+		return true;
+	} else return false;
+}
+
+//좌석 초기셋팅.(세션에서 저장된 공연아이디를 가져오는것만 연동하면됨. 아래 perId에 값을 저장해야함.)
+var seatInit = function () {	
+	var perId = 1;//$("input:radio[name=radios]:checked").val();//가져올 공연아이디값(수정필요)
+	var row=0;
+	var col=0;
+	var tmp=1;
+	// 전체 레이아웃 크기 불러오기
+	$.ajax({
+           url: "/seller/getLayout",
+           data:{per_id:perId},
+           success:function(hall){
+           	row=hall.hallRow;	
+           	col=hall.hallCol;	
+        }
+	});				
+	
+	var seatRow = '<div class="seat-row">	</div>';
+	//공연 레이아웃 가져오기
+	$.ajax({
+        url: "/seller/getPerLayout",
+        data:{perId:perId},
+        success:function(seats){
+        	$(".seat-layout-wrapper").append(seatRow);
+        	$(seats).each(function(idx, seat){	        		
+
+        		//좌석이 팔렸는지 확인하여 클래스 추가.
+        		var type = "type"+seat.seatType;
+        		console.log(type);
+        		if (seat.state == 1) {
+        			seat = '<div class="seat reserved-seat '+type+'" id="'+seat.seatId+'"><span class="seat-number">' + seat.seatNumber + '</span></div>';
+				} else if (seat.state == 0) {
+					seat = '<div class="seat left-seat" id="'+seat.seatId+'"><span class="seat-number">' + seat.seatNumber + '</span></div>';
+				}		        		
+        		
+        		// 좌석을 하나씩 출력, 줄이 바뀔경우 esle 내용.
+        		if(tmp<=col){
+   					$(".seat-row:last").append( seat );  					
+        			tmp++;
+        		}else{
+        			tmp=2;
+        			$(".seat-layout-wrapper").append(seatRow);
+   					$(".seat-row:last").append( seat );		        			
+        		}        		
+        	});
+        	
+        	seatChoice();
+        }
+	});
+
+	/* for (i = 0; i < row.length; i++) {
+		$(".seat-layout-wrapper").append(row);
+		for (j = 0; j < col.length; j++) {
+			var seatId = seatLayout[i][j].split('-')[0];
+			var seatNum = seatLayout[i][j].split('-')[1];
+			var col = '<div class="seat" id="' + seatId + '"><span class="seat-number">' + seatNum + '</span></div>';
+			$(".seat-row:last").append(col);
+
+			var seatType = seatLayout[i][j].split('-')[2];
+			var state = seatLayout[i][j].split('-')[3];
+
+			if (seatType == 0) {
+				$("#" + seatId).addClass("runway");
+			} else if (seatType == 1) {
+				$("#" + seatId).addClass("left-seat");
+			}
+
+			if (state == 1) {
+				$("#" + seatId).removeClass("left-seat").addClass("reserved-seat");
+			}
+
+		}
+	}; */
+}
+
+//예매인원 드롭박스(완료, 현재 최대인원 10명으로 수정.)
+var ticketsInit = function () {
+	var inputNum = 10;
+	for (var i = 1; i <= inputNum; i++) {
+		$("#tickets").append("<option>" + i + "</option>");
+	}
+}
+
+// 도큐먼트 래디(화면 켜질때 시작.)
+$(document).ready(function () {
+	seatInit();
+	ticketsInit();
+});
+</script>
 
 	<div id="seat-window">
 		<div class="legend">
