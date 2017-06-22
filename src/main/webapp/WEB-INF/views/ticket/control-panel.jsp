@@ -32,10 +32,12 @@
     <script>
         $(document).ready(function(){
             var ticketDate = sessionStorage.getItem('ticketDate');
+            var ticketTime = sessionStorage.getItem('ticketTime');
             var ticketCnt = sessionStorage.getItem('ticketCnt');        
             var ticketPrice = sessionStorage.getItem('totalPrice');
             $("#ticketCnt").text(ticketCnt);
             $("#ticketDate").text(ticketDate);
+            $("#ticketTime").text(ticketTime);
             $("#totalPrice").text(ticketPrice);
             console.log(ticketDate);
             var perId = $("#perfId").val();
@@ -90,11 +92,12 @@
             </thead>
             <tbody>
                 <tr>
-                    <th rowspan="2">일시</th>
+                    <th>선택일</th>
                     <td id="ticketDate"></td>
                 </tr>
                 <tr>
-                    <td id="ticketDate"></td>
+                	<th>선택시간</th>
+                    <td id="ticketTime"></td>
                 </tr>
                 <tr>
                     <th>선택좌석</th>
