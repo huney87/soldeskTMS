@@ -72,8 +72,13 @@ var regBtns=function(){
 				+user.userAddress+"</td><td>"
 				+date+"</td><td>"
 				+type+"</td>");
-		userList.append(tr.append(td));
-		td.find("input").data("userName",user.userName);
+		userList.append(tr.append(td));	
+		
+		$('tr').has('td').css('cursor', 'pointer');
+		
+		$('#userList tr').click(function() {
+		    $(this).find('td input:radio').prop('checked', true);
+		})
 	}
 	
 	$("#searchBtn").bind("click",function(){

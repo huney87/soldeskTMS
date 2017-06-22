@@ -46,6 +46,8 @@ var regBtns=function(){
 	var performanceList=$("#performanceList");
 	var display;
 	var value;
+	var img;
+	var per;
 	
 	performanceList.empty();
 	
@@ -88,17 +90,16 @@ var regBtns=function(){
 	});
 	
 	var printPerform=function(perform,value){
-		tr=$("<tr></tr>");
-		td=$("<td>"+perform.perfImage+"</td><td>"
-				+perform.perfTitle+"</td><td>"
-				+perform.perfStartDate+"</td><td>"
-				+perform.perfEndDate+"</td><td>"
-				+perform.perfCat+"</td><td>"
-				+perform.perfCntTicket+"</td><td>"+
-				"<button type='button' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
-				+"<input type='hidden' id='hidden"+perform.perfId+"' name='hidden' value='"+perform.perfDisplay+"'/>"
-				);
-		performanceList.append(tr.append(td));
+		list=$("<div class='col-sm-3'><img src='./"+perform.perfImage+"' onerror='ImgError(this)'/></div>"
+				+"<div class='col-sm-7'><div class='col-sm-10'>"
+				+"<h2>"+perform.perfTitle+"</h2>"
+				+"<p>시작일:"+perform.perfStartDate+"		종료일:"+perform.perfEndDate+"</p>"
+				+"<p>총 티켓 판매 수: "+perform.perfCntTicket+"</p>"
+				+"<div class='col-sm-2'>"
+				+"<button type='button' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
+				+"</div></div></div>"
+				+"<input type='hidden' id='hidden"+perform.perfId+"' name='hidden' value='"+perform.perfDisplay+"'/>");
+		performanceList.append(list);
 	}
 }
 
@@ -182,23 +183,13 @@ var changeDisplay=function(id){
 					<button type="button" class="btn btn-info" id="searchBtn">검색</button>
 					<button type="button" class="btn btn-default" id="allBtn">전체 조회</button>
 				</div>
-		<table class="table table-hover"style="margin-top:100px">
-			<thead>
-          		<tr>
-          			<th>포스터 이미지</th>
-            		<th>공연명</th>
-            		<th>시작일</th>
-            		<th>마감일</th>
-            		<th>분류</th>
-            		<th>총 티켓 판매수</th>
-            		<th>게시</th>
-          		</tr>
-        	</thead>
-			<tbody id="performanceList">
 				
-			</tbody>
-		</table>
-	</div>
+				<div class="list-group">
+				<div class="row col-sm-12" style="margin-top:10px" id="performanceList">
+
+				</div>
+				</div>
+		</div>
    </div>
 </div>
 </div>

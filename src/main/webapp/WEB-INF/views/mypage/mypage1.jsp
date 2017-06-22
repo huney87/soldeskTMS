@@ -3,7 +3,7 @@
 
 <jsp:include page="/WEB-INF/views/frames/header.jsp" flush="false"/>
 
-<title>마이페이지-회원수정보수정</title>
+<title>마이페이지</title>
 <link href="/css/menu.css" media="all" rel="stylesheet" type="text/css" />
 <link href="/css/mypage.css" media="all" rel="stylesheet" type="text/css" />
 <!-- jQuery와 Postcodify를 로딩한다 -->
