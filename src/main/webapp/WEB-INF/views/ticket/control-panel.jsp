@@ -90,7 +90,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <th>일시</th>
+                    <th rowspan="2">일시</th>
+                    <td id="ticketDate"></td>
+                </tr>
+                <tr>
                     <td id="ticketDate"></td>
                 </tr>
                 <tr>
