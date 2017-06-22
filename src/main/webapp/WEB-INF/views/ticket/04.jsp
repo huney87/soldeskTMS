@@ -98,7 +98,7 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
-		var email=$("#reserverEmail").val();
+    	var email=$("#email").val();
 		
 		$.ajax({
 			url:"/mypage/getUser",
@@ -112,6 +112,9 @@
 			//이름
 			var userName=user.userName;
 			
+			//이름
+			var userEmail=user.userEmail;
+			
 			//생일
 			var userBirthday=user.userBirthday;			
 			
@@ -123,15 +126,23 @@
 			var phoneNumber = phone1+"-"+phone2+"-"+phone3;		
 						
 			$("#reserverName").val(userName);
+			$("#reserverEmail").val(userEmail);
 			$("#reserverBirth").val(userBirthday);
 			$("#reserverPhone").val(phoneNumber);
 		};	
-		
+		$('.btn-before').click(function(){
+            forwardForm(3);
+            return true;
+        });	
 		$("#nextBtn").on("click", function(){
-			forwardForm(5);
-			return true;
-		});	
-		
+			if(email == ""){				
+				alert("로그인 하세요.");
+				return false;
+			}else{
+				forwardForm(5);
+				return true;
+			}
+		});			
 	});
 
 </script>
@@ -159,7 +170,8 @@
                     
                     	<table class="table table-bordered">
                     		<thead>
-                                <h4>예매자 확인</h4>                                
+                                <h4>예매자 확인</h4> 
+                                <input type="hidden" id="email" value="${email}"/>                               
                             </thead>
                             <tbody>
                             	<tr>
@@ -169,9 +181,9 @@
                             			</td>                            		
                             	</tr>     
                             	<tr>
-                            		<th>이메일</th>
+                            		<th>이메일</th>                            		
                             			<td>
-                            				<input type="text" class="form-control" id="reserverEmail" value="${email }" readonly="readonly"/>
+                            				<input type="text" class="form-control" id="reserverEmail" readonly="readonly"/>
                             			</td>
                             	</tr>
                             	<tr>
