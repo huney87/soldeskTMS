@@ -30,10 +30,19 @@
 		<result property="centerId" column="ctr_id"/>	
 	</resultMap>
 	
-	<select id="getSearchResult" parameterType="int">
-		select p.*, h.h_name, g.gen_id
-		from performances p, halls h, categories g
+	<select id="getSearchResult" parameterType="int" resultType="map">
+		SELECT p.perf_id AS "per_id",
+		 	p.h_id AS "hallId",
+		 	p.cat_id AS "cat_id",
+		 	p.perf_title AS "per_title",
+		 	p.perf_startdate AS "per_startDate",
+		 	p.perf_enddate AS "per_endDate",
+		 	p.perf_image AS "per_image",
+			h.h_name AS "hallName"
+		FROM performances p
+		LEFT OUTER JOIN halls h
+		ON p.H_ID = h.H_ID
+		WHERE p.PERF_DISPLAY = 0 AND p.CAT_ID = #{gen_id}
 		<!-- 장르별 검색 1: 뮤지컬, 2: 콘서트, 3: 연극 -->
-		where g.gen_id = #{gen_id}
 	</select>
 </mapper>

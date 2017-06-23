@@ -109,6 +109,17 @@ $(document).ready(function(){
      });
      
      $('#sideMenu').affix({offset: {top: 10} });
+     
+     function buttonClicked(e) {
+    	 var v = e.data.genid;
+    	 console.log(v);
+    	 location.href='/category?genid='+v;
+     }
+     
+     $('#genBtn1').on('click', {genid:1}, buttonClicked);
+     $('#genBtn2').on('click', {genid:2}, buttonClicked);
+     $('#genBtn3').on('click', {genid:3}, buttonClicked);
+    
 });
 </script>
 </head>
@@ -143,9 +154,15 @@ $(document).ready(function(){
 					</div>
 					<div class="col-sm-9">
 						<div class="btn-group btn-group-justified" id="nav">
-							<a href="/category2?genid=1" class="btn btn-default btn-lg">뮤지컬</a> 
-							<a href="/category2?genid=2" class="btn btn-default btn-lg">콘서트</a> 
-							<a href="/category2?genid=3" class="btn btn-default btn-lg">연극</a>
+							<div class="btn-group">
+								<button type="button" class="btn btn-default btn-lg" id="genBtn1">뮤지컬</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-default btn-lg" id="genBtn2">콘서트</button>
+							</div>
+							<div class="btn-group"> 
+								<button type="button" class="btn btn-default btn-lg" id="genBtn3">연극</button>
+							</div>
 							<div class="btn-group">
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
@@ -166,7 +183,7 @@ $(document).ready(function(){
 													<input type="submit" class="login loginmodal-submit" value="로그인">
 												</form>												
 												<div class="login-help">
-													<a href="/user">회원가입</a> - <a href="/user/find">비밀번호를 잊어버리셨나요?</a>
+													<a href="/user">회원가입</a> - <a href="./finidpw/01.html">비밀번호를 잊어버리셨나요?</a>
 												</div>
 											</div>
 										</li>

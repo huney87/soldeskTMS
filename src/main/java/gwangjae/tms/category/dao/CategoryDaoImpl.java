@@ -1,6 +1,7 @@
 package gwangjae.tms.category.dao;
 
 import gwangjae.tms.category.dao.mapper.CategoryMapper;
+import gwangjae.tms.category.domain.Category;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	@Autowired private CategoryMapper category;
 	
 	@Override
-	public List<String> getSearchResult(int genre){
+	public List<Category> getSearchResult(int genre){
 		return category.getSearchResult(genre);
 	}
 }

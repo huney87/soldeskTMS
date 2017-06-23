@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class MainController {
-	
+		
 	@RequestMapping("test")
 	public String testView(){
 		return "/test";
@@ -31,17 +31,13 @@ public class MainController {
 		}
 		return "/main";
 	}
-	
-	@RequestMapping("category2")
-	public String category2View(Model model, HttpSession session){
-		/*널이 아니며 빈 문자열이 아니면 로그인 되어있는것*/  
-		if(session.getAttribute("email") != null && !session.getAttribute("email").equals("")){
-			model.addAttribute("login", true);
-		}else{
-			model.addAttribute("login", false);
-		}
-		return "/category/category2";
-	}
+
+	/*@RequestMapping(value="",method=RequestMethod.GET)
+    public String moveToCrudMainPage(Model model) {
+        List<> crudItemList = studyCrudService.getCrudItemList();
+        model.addAttribute("crudItemList", crudItemList);
+        return "views/study/crud/crudMain";
+    }*/
 	
 	@RequestMapping("detail")
 	public String detailView(Model model, HttpSession session){
