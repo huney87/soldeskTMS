@@ -43,6 +43,7 @@
 		LEFT OUTER JOIN halls h
 		ON p.H_ID = h.H_ID
 		WHERE p.PERF_DISPLAY = 0 AND p.CAT_ID = #{gen_id}
+		ORDER BY p.PERF_ID DESC
 		<!-- 장르별 검색 1: 뮤지컬, 2: 콘서트, 3: 연극 -->
 	</select>
 </mapper>

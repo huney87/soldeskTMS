@@ -41,6 +41,7 @@
     								</c:otherwise>
     							</c:choose>
 							</p>
+							<div class="movieInfo3Txt">${genre.per_startDate}~${genre.per_endDate}</div>
 							<div class="movieInfo3Txt">${genre.hallName}</div>
 						</div>
 					</div>

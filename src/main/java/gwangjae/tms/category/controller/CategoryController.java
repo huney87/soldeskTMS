@@ -41,7 +41,14 @@ public class CategoryController<Genre> {
 			model.addAttribute("login", false);
 		}
 		List<Category> genreList = service.getSearchResult(genre);
+		model.addAttribute("genpid", genre);
         model.addAttribute("genreList", genreList);
 		return "/category/category2";
+	}
+	
+	@RequestMapping("/mainGenre")
+	@ResponseBody
+	public List<Category> mainGenreList(int genre){
+		return service.getSearchResult(genre);
 	}
 }
