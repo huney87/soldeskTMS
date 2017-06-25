@@ -77,8 +77,8 @@ public class TicketingController {
 	
 	@RequestMapping("/getPerformanceInfo")
 	@ResponseBody
-	public TicketSeatInfo getPerfInfo(HttpSession session,
-			@RequestParam("performance_id") int perfId){
+	public TicketSeatInfo getPerfInfo(//HttpSession session,
+			@RequestParam("performanceID") int perfId){
 		return service.getPerfInfo(perfId);
 	}
 }

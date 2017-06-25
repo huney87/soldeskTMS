@@ -65,6 +65,23 @@
 			width: 1rem;
 			height: 1rem;
 		}
+		.legend2 {
+			position: absolute;
+			left: 1rem;
+			top: 1rem;
+			border: 1px solid skyblue;
+			text-align: left;
+			padding: 1rem;
+			background-color: white;
+		}
+
+		.legend-seat2 {
+			display: inline-block;
+			cursor: default;
+			margin-right: 0.5rem;
+			width: 1rem;
+			height: 1rem;
+		}
 		/*시트 레이아웃 시작*/
 
 		.seat-layout-wrapper {
@@ -115,15 +132,15 @@
 			background-color: white;
 			color: white;
 		}
-		.type1{ background-color:black; 
+		.type1{ background-color:black; color:white; 
 		}
-		.type2{ background-color:blue;
+		.type2{ background-color:blue; color:white;
 		}
-		.type3{ background-color:red;
+		.type3{ background-color:red; color:white;
 		}
 		.type4{ background-color:#BDFF12; color:black;
 		}
-		.type0{ background-color:gray;
+		.type0{ background-color:gray; 
 		}
 		/*시트 레이아웃 끝*/
 	</style>
@@ -135,10 +152,10 @@
  var seatChoice = function(){
 		/* 좌석 선택 */
 		$(".seat").click(function () {
-			var id = $(this).attr('id');
+			var id = $(this).attr('id');	//실행하게 해준 태그의 id 값을 jquery 변수에 저장해주기 위해 사용 (지금은 좌석 클릭했을 경우)
 	
 			// 남은 좌석이라면
-			if ($(this).hasClass('left-seat')) {
+			if ($(this).hasClass('left-seat')) {	//hasClass는 class를 검색하는 전용.
 				/* 예매 인원을 저장하는 변수 */
 				var personNumber = parseInt($("#tickets option:selected").text());
 				if (maxCheck(personNumber)) {
@@ -155,10 +172,14 @@
 				sessionStorage.setItem('ticketCnt', selectCnt());
 				// 선택한 seat_id 를 session에 저장(seat_id를 이용해서 좌석의 등급과 가격을 가져와야함.)
 				// 바로아랫줄에 selectSeatId를 어디서 가져오는지 모르겠음.
+				
+				//	세션으로 넘겨야할 필요 데이터
+				//	예약 공연 좌석 번호, 예약 공연 좌석 등급, 가격, 인원, 공연아이디
+				
 				if (sessionStorage.getItem('selectSeatId')) {
 					var selectSeatIds = sessionStorage.getItem('selectSeatId').split(',');
 					selectSeatIds.push(id);
-					sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
+					//sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
 					console.log(sessionStorage.getItem('selectSeatId'));
 				} else {
 					sessionStorage.setItem('selectSeatId', id);
@@ -210,9 +231,9 @@ var maxCheck = function (max) {
 
 //좌석 초기셋팅.(세션에서 저장된 공연아이디를 가져오는것만 연동하면됨. 아래 perId에 값을 저장해야함.)
 var seatInit = function () {	
-	var perId = 1;//$("input:radio[name=radios]:checked").val();//가져올 공연아이디값(수정필요)
-	var row=0;
-	var col=0;
+	var perId = 23;//$("input:radio[name=radios]:checked").val();//가져올 공연아이디값(수정필요)
+	var row=0;	//레이아웃 row 전체 크기
+	var col=0;	//레이아웃 col 전체 크기
 	var tmp=1;
 	// 전체 레이아웃 크기 불러오기
 	$.ajax({
@@ -232,14 +253,12 @@ var seatInit = function () {
         success:function(seats){
         	$(".seat-layout-wrapper").append(seatRow);
         	$(seats).each(function(idx, seat){	        		
-
         		//좌석이 팔렸는지 확인하여 클래스 추가.
         		var type = "type"+seat.seatType;
-        		console.log(type);
         		if (seat.state == 1) {
-        			seat = '<div class="seat reserved-seat '+type+'" id="'+seat.seatId+'"><span class="seat-number">' + seat.seatNumber + '</span></div>';
+        			seat = '<div class="seat reserved-seat" id="'+seat.seatId+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
 				} else if (seat.state == 0) {
-					seat = '<div class="seat left-seat" id="'+seat.seatId+'"><span class="seat-number">' + seat.seatNumber + '</span></div>';
+					seat = '<div class="seat left-seat '+type+'" id="'+seat.seatId+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
 				}		        		
         		
         		// 좌석을 하나씩 출력, 줄이 바뀔경우 esle 내용.
@@ -248,12 +267,15 @@ var seatInit = function () {
         			tmp++;
         		}else{
         			tmp=2;
-        			$(".seat-layout-wrapper").append(seatRow);
-   					$(".seat-row:last").append( seat );		        			
-        		}        		
+        			$(".seat-layout-wrapper").append(seatRow);	//줄바꿈(줄추가)
+   					$(".seat-row:last").append( seat );		// 줄 바뀐것의 첫번째 기준이될 좌석 1개 추가        			
+        		}   
         	});
-        	
         	seatChoice();
+        	
+        	ticketGrade();
+        	
+        	
         }
 	});
 
@@ -290,13 +312,66 @@ var ticketsInit = function () {
 	}
 }
 
+//	티켓 등급 및 가격
+var ticketGrade = function(){
+	var perId = 23;
+   	$.ajax({
+            url: "/ticket/getPerformanceInfo",
+            data:{performanceID : perId},
+            success:function(e){
+            	console.loge(e.sType);
+           		if(e.sType == 1){
+           			$(".ticketGrade1").hide();
+        	    	console.loge(e.sType);
+        	    
+//        	    	$("#type01").text();
+	           		
+           } 	 
+       	}
+   	});
+}
+
 // 도큐먼트 래디(화면 켜질때 시작.)
 $(document).ready(function () {
-	seatInit();
-	ticketsInit();
+	seatInit();	//	시트 정보 DB에서 가져와서 시작하는 펑션
+	ticketsInit();	//	티켓 초기화 펑션
+	ticketGrade();	//	티켓 등급 가격
 });
 </script>
 
+	<div id="seat-window">
+		<div class="legend">
+			<div class="legend-item">
+				<div class="legend-seat left-seat"></div><span>남은 좌석</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-seat selected-seat"></div><span>선택한 좌석</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-seat reserved-seat"></div><span>예약된 좌석</span>
+			</div>
+			<div>
+				<div>-------------------</div>
+			</div>
+			<div class="ticketGrade1" >
+				<div class="legend-seat type1" id="ticketGrade1"></div><span></span>
+			</div>	
+		</div>
+		
+		<div class="stage">
+
+		</div>
+		<div class="pick-number form-group">
+			<label for="tickets">예매 인원</label>
+			<select class="form-control" id="tickets"></select>
+		</div>
+
+		<div class="seat-layout-wrapper">
+
+
+		</div>
+	</div>
+<!-- 
 	<div id="seat-window">
 		<div class="legend">
 			<div class="legend-item">
@@ -322,7 +397,7 @@ $(document).ready(function () {
 
 		</div>
 	</div>
-
+ -->
 </body>
 
 </html>

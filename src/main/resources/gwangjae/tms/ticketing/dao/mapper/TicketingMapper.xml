@@ -41,7 +41,24 @@
 	</select>
 	 -->
 	<select id="getPerfInfo" parameterType="int" resultMap="sinfoMap">
-		select s.* ,p.* from seatinfo s, performances p
-		where perf_id = #{perfId}
+		<!-- SELECT si.*
+		FROM SEATINFO si, PERFORMANCES p
+		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId}
+		ORDER BY si.SINFO_TYPE -->
+		<!-- 
+		SELECT si.SINFO_ID AS 'sinfoId',
+			si.PERF_ID AS 'perfId',
+			si.SINFO_GRADE AS 'sinfoGrade',
+			si.SINFO_PRICE AS 'sinfoPrice',
+			si.SINFO_TYPE AS 'sType'
+		FROM SEATINFO si, PERFORMANCES p
+		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId} AND si.SINFO_TYPE = 1
+		ORDER BY si.SINFO_TYPE
+		 -->
+		SELECT si.*
+		FROM SEATINFO si, PERFORMANCES p
+		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId} <!--  AND si.SINFO_TYPE = 1 -->
+		ORDER BY si.SINFO_TYPE
+		 
 	</select>
 </mapper>
