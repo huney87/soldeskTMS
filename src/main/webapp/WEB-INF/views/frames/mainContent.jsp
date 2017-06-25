@@ -8,69 +8,76 @@
 		$(function() {
 			mainButtonClicked();
 		});
-		
-		function mainButtonClicked(e) {
-			 
-			var genList=$("#genList");
-			genList.empty();
-			 
-	    	var genid = e.data.genid;
-	    	console.log(genid);
-	    	//location.href='/category?genid='+v;
-	    	 
-            $(".mainGenBtn button").removeClass("active");
-            $(this).addClass("active");
-	    	 
-	    	$.ajax({
-                url:"/category/mainGenre",
-                method:"post",
-                data:{
-                	gen_id:genid, 
-                },
-                success:function(genList){
-                	printGener(genList);
-                }
-        	});
-	    }
-		
-		$('#mainGenBtn1').on('click', {genid:1}, mainButtonClicked);
-	    $('#mainGenBtn2').on('click', {genid:2}, mainButtonClicked);
-	    $('#mainGenBtn3').on('click', {genid:3}, mainButtonClicked);
-	    
-	    var printGener=function(genre){
-			
-	    div=$("<div class='frame'>"
-			+"	<div class='frame1'>"
-			+"		<div class='card'>"
-			+"			<img src='/img/noImg.png' onerror='ImgError(this)' />"
-			+"		</div>"
-			+"		<div class='card back'>"
-			+"			<img class='backPost' src='/img/noImg.png' onerror='ImgError(this)' />"
-			+"			<article id='movieInfo'>"
-			+"				<div class='moveInfoBtn'>"
-			+"					<div class='moveInfoBtn1'>"
-			+"						<a href='/detail'><span class='glyphicon glyphicon-ok'></span><br>상세정보</a>"
-			+"					</div>"
-			+"					<div class='moveInfoBtn2'>"
-			+"						<a name='booking_popup' data-perf_id='"+genre.per_id+"'><span class='glyphicon glyphicon-heart'></span><br>예매하기</a>"
-			+"						<input type='hidden' id='perf_id"+genre.per_id+"' value='"+genre.per_id+"'>"
-			+"					</div>"
-			+"				</div>"
-			+"			</article>"
-			+"		</div>"
-			+"	</div>"
-			+"	<div class='movieInfo3'>"
-			+"		<p>"
-			+"			<span class='age'>12</span>"
-			+"				"+genre.per_title+"</p>"
-			+"		<div class='movieInfo3Txt'>"+genre.per_startDate+"~"+genre.per_endDate+"</div>"
-			+"		<div class='movieInfo3Txt'>"+genre.hallName+"</div>"
-			+"	</div>"
-			+"</div>");
-			
-			genList.append(div);	
-		}
 	});
+		
+	function mainButtonClicked(e) {
+		 
+		var genList=$("#genList");
+    	var genid = e.data.genid;
+    	console.log(genid);
+    	//location.href='/category?genid='+v;
+    	 
+       	$(".mainGenBtn button").removeClass("active");
+       	$(this).addClass("active");
+   	 
+		$.post({
+           	url:"/category/mainGenre",
+           	method:"post",
+           	dataType:'json',
+           	data:{
+           	gen_id:genid, 
+           	},
+			success:function(response){
+           	   	console.log(response);
+           	 	genList.empty();
+           		var genList = response.genList;
+ 				$.each(genList,function(){
+               		printGener(genList);
+ 				});
+			},
+			error:function(response){
+				console.log(response);
+			}
+		});
+    }
+		
+	$('#mainGenBtn1').on('click', {genid:1}, mainButtonClicked);
+    $('#mainGenBtn2').on('click', {genid:2}, mainButtonClicked);
+    $('#mainGenBtn3').on('click', {genid:3}, mainButtonClicked);
+	    
+	var printGener=function(genre){
+			
+	    var genDiv = '<div class="frame">'
+	    genDiv += '<div class="frame1">';
+	    genDiv += '<div class="card">';
+	    genDiv += '<img src="/img/noImg.png" onerror="ImgError(this)" />';
+	    genDiv += '</div>';
+    	genDiv += '<div class="card back">';
+    	genDiv += '<img class="backPost" src="/img/noImg.png" onerror="ImgError(this)" />';
+    	genDiv += '<article id="movieInfo">';
+    	genDiv += '<div class="moveInfoBtn">';
+    	genDiv += '<div class="moveInfoBtn1">';
+    	genDiv += '<a href="/detail'+this['genre.per_id']+'"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>';
+    	genDiv += '</div>';
+    	genDiv += '<div class="moveInfoBtn2">';
+    	genDiv += '<a name="booking_popup" data-perf_id="'+this['genre.per_id']+'"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>';
+    	genDiv += '<input type="hidden" id="perf_id"'+this['genre.per_id']+'" value="'+this['genre.per_id']+'">';
+    	genDiv += '</div>';
+    	genDiv += '</div>';
+    	genDiv += '</article>';
+    	genDiv += '</div>';
+    	genDiv += '</div>';
+    	genDiv += '<div class="movieInfo3">';
+    	genDiv += '<p>';
+    	genDiv += '<span class="age">12</span>';
+    	genDiv += this['genre.per_title']+'</p>';
+    	genDiv += '<div class="movieInfo3Txt">'+this['genre.per_startDate']+'~'+this['genre.per_endDate']+'</div>';
+    	genDiv += '<div class="movieInfo3Txt">'+this['genre.hallName']+'</div>';
+    	genDiv += '</div>';
+    	genDiv += '</div>';
+		
+		genList.append(genDiv);	
+	};
 	</script>
 	
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
