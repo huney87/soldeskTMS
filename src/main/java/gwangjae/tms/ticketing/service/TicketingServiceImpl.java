@@ -85,7 +85,7 @@ public class TicketingServiceImpl implements TicketingService {
 	}
 	
 	@Override
-	public TicketSeatInfo getPerfInfo(int perfId){
+	public Performance getPerfInfo(int perfId){
 		return ticketDao.getPerfInfo(perfId);
 	}
 	

@@ -11,6 +11,6 @@ public interface TicketingDao {
 	public List<TicketSeatInfo> getAllSeatInfo(int perfId);
 	public List<Round> getPerfSkdList(int perfId);
 	public Performance getPerfDate(int perfId);
-	public TicketSeatInfo getPerfInfo(int perfId);
+	public Performance getPerfInfo(int perfId);
 	public List<SeatInfo> getPerSeatInfo(int perfId);
 }

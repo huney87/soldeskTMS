@@ -30,7 +30,7 @@
 		<result property="centerId" column="ctr_id"/>	
 	</resultMap>
 	
-	<select id="getSearchResult" parameterType="int" resultType="map">
+	<select id="getSearchResult" parameterType="int" resultType="Map">
 		SELECT p.perf_id AS "per_id",
 		 	p.h_id AS "hallId",
 		 	p.cat_id AS "cat_id",
@@ -40,7 +40,7 @@
 		 	p.perf_image AS "per_image",
 			h.h_name AS "hallName"
 		FROM performances p
-		LEFT OUTER JOIN halls h
+			LEFT OUTER JOIN halls h
 		ON p.H_ID = h.H_ID
 		WHERE p.PERF_DISPLAY = 0 AND p.CAT_ID = #{gen_id}
 		ORDER BY p.PERF_ID DESC

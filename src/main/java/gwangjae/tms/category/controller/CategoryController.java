@@ -3,7 +3,9 @@ package gwangjae.tms.category.controller;
 import gwangjae.tms.category.domain.Category;
 import gwangjae.tms.category.service.CategoryService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -46,9 +48,12 @@ public class CategoryController<Genre> {
 		return "/category/category2";
 	}
 	
-	@RequestMapping("/mainGenre")
+	@RequestMapping(value="/mainGenre",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public List<Category> mainGenreList(int genre){
-		return service.getSearchResult(genre);
+	public Map<String,Object> mainGenreList(@RequestParam("gen_id") int genre){
+		Map<String,Object> resultMap = new HashMap<>();
+		List<Category> genreList = service.getSearchResult(genre);
+        resultMap.put("genreList", genreList);
+        return resultMap;
 	}
 }

@@ -40,20 +40,19 @@
 		WHERE rnd.PERF_ID = perf.PERF_ID AND perf.PERF_ID = #{value}
 	</select>
 	 -->
-	<select id="getPerfInfo" parameterType="int" resultMap="sinfoMap">
+	<select id="getPerfInfo" parameterType="int" resultMap="gwangjae.tms.performance.domain.performance">
 		<!-- SELECT si.*
 		FROM SEATINFO si, PERFORMANCES p
 		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId}
 		ORDER BY si.SINFO_TYPE -->
 		 
-		SELECT si.SINFO_ID AS "sinfoId",
-			si.PERF_ID AS "perfId",
-			si.SINFO_GRADE AS "sinfoGrade",
-			si.SINFO_PRICE AS "sinfoPrice",
-			si.SINFO_TYPE AS "sType"
-		FROM SEATINFO si, PERFORMANCES p
-		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId}
-		ORDER BY si.SINFO_TYPE
+		SELECT SINFO_ID AS "sinfoId",
+			PERF_ID AS "perfId",
+			SINFO_GRADE AS "sinfoGrade",
+			SINFO_PRICE AS "sinfoPrice",
+			SINFO_TYPE AS "sType"
+		FROM PERFORMANCES
+		WHERE PERF_ID = #{perfId}
 		
 		<!-- SELECT si.*
 		FROM SEATINFO si, PERFORMANCES p

@@ -6,7 +6,7 @@
 	$(document).ready(function(){
 		
 		$(function() {
-			mainButtonClicked();
+			$('#mainGenBtn1').trigger('click', {genid:1}, mainButtonClicked);
 		});
 		
 		$('#mainGenBtn1').on('click', {genid:1}, mainButtonClicked);
@@ -18,7 +18,6 @@
 		 
 		var genList=$("#genList");
     	var genid = e.data.genid;
-    	console.log(genid);
     	//location.href='/category?genid='+v;
     	 
        	$(".mainGenBtn button").removeClass("active");
@@ -26,17 +25,50 @@
    	 
 		$.post({
            	url:"/category/mainGenre",
-           	method:"post",
+           	method:"get",
            	dataType:'json',
            	data:{
-           	gen_id:genid, 
+           		gen_id:genid, 
            	},
 			success:function(response){
-           	   	console.log(response);
            	 	genList.empty();
-           		var genList = response.genList;
- 				$.each(genList,function(){
-               		printGener(genList);
+           		var genre = response.genreList;
+ 				$.each(genre,function(){
+               		//printGener(genreList);
+               		var title = this['per_title'];
+               		title = title.substr(0,10);
+               		var genDiv = '<div class="frame">'
+				    genDiv += '<div class="frame1">';
+				    genDiv += '<div class="card">';
+				    genDiv += '<img src="/img/noImg.png" onerror="ImgError(this)" />';
+				    genDiv += '</div>';
+			    	genDiv += '<div class="card back">';
+			    	genDiv += '<img class="backPost" src="/img/noImg.png" onerror="ImgError(this)" />';
+			    	genDiv += '<article id="movieInfo">';
+			    	genDiv += '<div class="moveInfoBtn">';
+			    	genDiv += '<div class="moveInfoBtn1">';
+			    	genDiv += '<a href="/detail"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>';
+			    	genDiv += '</div>';
+			    	genDiv += '<div class="moveInfoBtn2">';
+			    	genDiv += '<a name="booking_popup" data-perf_id="'+this['per_id']+'"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>';
+			    	genDiv += '<input type="hidden" id="perf_id'+this['per_id']+'" value="'+this['per_id']+'">';
+			    	genDiv += '</div>';
+			    	genDiv += '</div>';
+			    	genDiv += '</article>';
+			    	genDiv += '</div>';
+			    	genDiv += '</div>';
+			    	genDiv += '<div class="movieInfo3">';
+			    	genDiv += '<p><span class="age">12</span>'+title+'</p>';
+			    	genDiv += '<div class="movieInfo3Txt">'+this['per_startDate']+'~'+this['per_endDate']+'</div>';
+			    	genDiv += '<div class="movieInfo3Txt">'+this['hallName']+'</div>';
+			    	genDiv += '</div>';
+			    	genDiv += '</div>';
+               		genList.append(genDiv);
+ 				});
+ 				
+ 				$("[name='booking_popup']").click(function(){                
+ 					var perf_id = $("#perf_id"+$(this).attr('data-perf_id')).val();
+ 					booking_popup(perf_id);
  				});
 			},
 			error:function(response){
@@ -44,40 +76,6 @@
 			}
 		});
     }
-		
-	var printGener=function(genre){
-			
-	    var genDiv = '<div class="frame">'
-	    genDiv += '<div class="frame1">';
-	    genDiv += '<div class="card">';
-	    genDiv += '<img src="/img/noImg.png" onerror="ImgError(this)" />';
-	    genDiv += '</div>';
-    	genDiv += '<div class="card back">';
-    	genDiv += '<img class="backPost" src="/img/noImg.png" onerror="ImgError(this)" />';
-    	genDiv += '<article id="movieInfo">';
-    	genDiv += '<div class="moveInfoBtn">';
-    	genDiv += '<div class="moveInfoBtn1">';
-    	genDiv += '<a href="/detail'+this['genre.per_id']+'"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>';
-    	genDiv += '</div>';
-    	genDiv += '<div class="moveInfoBtn2">';
-    	genDiv += '<a name="booking_popup" data-perf_id="'+this['genre.per_id']+'"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>';
-    	genDiv += '<input type="hidden" id="perf_id"'+this['genre.per_id']+'" value="'+this['genre.per_id']+'">';
-    	genDiv += '</div>';
-    	genDiv += '</div>';
-    	genDiv += '</article>';
-    	genDiv += '</div>';
-    	genDiv += '</div>';
-    	genDiv += '<div class="movieInfo3">';
-    	genDiv += '<p>';
-    	genDiv += '<span class="age">12</span>';
-    	genDiv += this['genre.per_title']+'</p>';
-    	genDiv += '<div class="movieInfo3Txt">'+this['genre.per_startDate']+'~'+this['genre.per_endDate']+'</div>';
-    	genDiv += '<div class="movieInfo3Txt">'+this['genre.hallName']+'</div>';
-    	genDiv += '</div>';
-    	genDiv += '</div>';
-		
-		genList.append(genDiv);	
-	};
 	</script>
 	
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">

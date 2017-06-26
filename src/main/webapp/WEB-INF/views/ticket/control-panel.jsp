@@ -43,15 +43,15 @@
             $("#ticketCnt").text(ticketCnt);
             $("#ticketDate").text(ticketDate);
             $("#ticketTime").text(ticketTime);
-            $("#totalPrice").text(ticketPrice+"원");
-            console.log(ticketDate);
+            if(ticketPrice) $("#totalPrice").text(ticketPrice+"원");
             var perId = $("#perfId").val();
             
             $.ajax({
             	url:"/ticket/getPerformanceInfo",
             	data:{
-            		per_Id:perId,
-            		//hallName:h_name},
+            		per_Id:perId
+            		//hallName:h_name
+            	},
             	success:function(Performance, Hall){
             		var perInfo ='<tr>'
                       			+'<td rowspan="4">'

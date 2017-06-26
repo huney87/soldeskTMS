@@ -80,6 +80,12 @@ public class TicketingController {
 		return service.getPerfDate(perfId);
 	}
 	
+	@RequestMapping("/ggetPerformanceInfo")
+	@ResponseBody
+	public Performance getPerfInfo(int perfId){
+		return service.getPerfInfo(perfId);
+	}
+	
 	@RequestMapping(value="/getPerSeatInfo",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getPerfSeatInfo(@RequestParam("performanceID") int perfId){

@@ -33,7 +33,7 @@ public class TicketingDaoImpl implements TicketingDao {
 	}
 	
 	@Override
-	public TicketSeatInfo getPerfInfo(int perfId){
+	public Performance getPerfInfo(int perfId){
 		return mapper.getPerfInfo(perfId);
 	}
 	

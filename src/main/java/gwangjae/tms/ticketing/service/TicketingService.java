@@ -12,6 +12,6 @@ public interface TicketingService {
 	public String[][] drawLayout(int hall_id);
 	public Round[] getPerfSkd(int perf_id);
 	public Performance getPerfDate(int perfId);
-	public TicketSeatInfo getPerfInfo(int perfId);
+	public Performance getPerfInfo(int perfId);
 	public List<SeatInfo> getPerfSeatInfo(int perfId);
 }
