@@ -45,8 +45,8 @@ public class MypageController {
 	
 	@RequestMapping("/reservelist")
 	@ResponseBody
-	public List<Reservation> getReservations(){
-		return mypageService.getReserve();
+	public List<Reservation> getReservations(String userEmail){
+		return mypageService.getReserve(userEmail);
 	} 
 	
 	@RequestMapping("/reserveDelete")

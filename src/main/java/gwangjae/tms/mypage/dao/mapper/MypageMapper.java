@@ -6,7 +6,7 @@ import gwangjae.tms.user.domain.User;
 import java.util.List;
 
 public interface MypageMapper {
-	public List<Reservation> getReserve();
+	public List<Reservation> getReserve(String userEmail);
 	public int deleteReserve(int reserveId);
 	public User getUser(String userEmail);
 	public int udpUser(User user);

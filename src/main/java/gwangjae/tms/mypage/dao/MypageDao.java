@@ -6,7 +6,7 @@ import gwangjae.tms.user.domain.User;
 import java.util.List;
 
 public interface MypageDao {
-	List<Reservation> getReserve();
+	List<Reservation> getReserve(String userEmail);
 	int deleteReserve(int reserveId);
 	User getUser(String userEmail);
 	int udpUser(User user);

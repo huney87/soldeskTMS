@@ -34,7 +34,14 @@ $(function() {
 						location.replace("/login/logout");
 					});
 				}
-				else swal("탈퇴 실패", "비밀번호를 정확하게 입력해 주세요", "error");
+				else swal({
+					title: "탈퇴 실패", 
+					text: "비밀번호를 정확하게 입력해 주세요",
+					type: "error"
+					},
+					function(){
+						location.replace("/login/logout");
+					});
 			},error:function(a,b,errMsg){
 				swal("삭제 실패: "+errMsg);
 			}

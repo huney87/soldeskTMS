@@ -16,11 +16,13 @@
 
 <script type="text/javascript">
 $(function() { 
+	var email=$("#email").val();
 	var reserveList=$("#reserveList");
 	reserveList.empty();
 	
 	$.ajax({
 		url:"/mypage/reservelist",
+		data:{userEmail:email},
 		success:function(reserves){
 			$(reserves).each(function(idx, reserve){
 				if(reserve){
@@ -81,7 +83,7 @@ var delReserve = function(reserve){
 </script>
 
 <jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
-
+<input type="hidden" id="email" value="${email }" />
 	<div class="container" style="padding:2rem 0;">
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">

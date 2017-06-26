@@ -21,13 +21,14 @@
 		<result property="hallName" column="h_name"/>
 	</resultMap>
 	
-	<select id="getReserve" resultMap="ReservMap">
+	<select id="getReserve" parameterType="String" resultMap="ReservMap">
 		select r_id,r_date,perf_title,h_name from reserves r join users u 
 		on (r.user_id=u.user_id)
 		join PERFORMANCES p
 		on (r.perf_id=p.perf_id)
 		join halls h
 		on (r.H_ID=h.h_id)
+		where u.user_email = #{userEmail}
 	</select>
 	
 	<delete id="deleteReserve" parameterType="int">

@@ -14,8 +14,8 @@ public class MypageDaoImpl implements MypageDao{
 	@Autowired private MypageMapper mapper;
 
 	@Override
-	public List<Reservation> getReserve() {
-		return mapper.getReserve();
+	public List<Reservation> getReserve(String userEmail) {
+		return mapper.getReserve(userEmail);
 	}
 
 	@Override
