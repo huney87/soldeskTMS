@@ -31,7 +31,7 @@ $(function() {
 							+reserve.perfTitle+"</a></td><td>"
 							+reserve.hallName+"</td><td>"
 							+reserve.reserveDate+"</td><td>"
-							+"<button type='button' class='btn btn-danger' value='"+reserve.reservationId+"' onClick='deleteReserve(this)'>취소</button>");
+							+"<button type='button' class='btn btn-danger' value='"+reserve.reservationId+"' onClick='delReserve(this)'>취소</button>");
 					reserveList.append(tr.append(td));
 					td.find("button").data("reservationId", reserve.reservationId);
 				}else{
