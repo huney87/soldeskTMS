@@ -138,7 +138,6 @@ $(function(){
 				<div class="btn-group btn-group-justified">
 			  		<a href="/mypage/mypage1" class="btn btn-primary mypageBtn" id="getUser"><span class="glyphicon glyphicon-user"></span><br>개인정보수정</a>
 			  		<a href="/mypage" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-check"></span><br>예매확인/취소</a>
-			  		<a href="/mypage/mypage3" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-erase"></span><br>관람내역</a>
 			  		<a href="/mypage/mypage4" class="btn btn-default mypageBtn"><span class="glyphicon glyphicon-remove-sign"></span><br>회원탈퇴</a>
 				</div>
 				
