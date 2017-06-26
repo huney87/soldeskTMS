@@ -2,8 +2,13 @@ package gwangjae.tms.ticketing.controller;
 
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.Round;
+import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 import gwangjae.tms.ticketing.service.TicketingService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -75,10 +80,12 @@ public class TicketingController {
 		return service.getPerfDate(perfId);
 	}
 	
-	@RequestMapping("/getPerformanceInfo")
+	@RequestMapping(value="/getPerSeatInfo",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public TicketSeatInfo getPerfInfo(//HttpSession session,
-			@RequestParam("performanceID") int perfId){
-		return service.getPerfInfo(perfId);
+	public Map<String,Object> getPerfSeatInfo(@RequestParam("performanceID") int perfId){
+		Map<String,Object> resultMap = new HashMap<>();
+        List<SeatInfo> seatList = service.getPerfSeatInfo(perfId);
+        resultMap.put("seatList",seatList);
+        return resultMap;
 	}
 }

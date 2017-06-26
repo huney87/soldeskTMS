@@ -33,8 +33,8 @@
 							<p>
 								<span class="age">12</span>
 								<c:choose>
-    								<c:when test="${genre.per_title.length() >= 9}">
-    									${genre.per_title.substring(0,9)}
+    								<c:when test="${genre.per_title.length() >= 8}">
+    									${genre.per_title.substring(0,8)}
     								</c:when>
     								<c:otherwise>
     									${genre.per_title}

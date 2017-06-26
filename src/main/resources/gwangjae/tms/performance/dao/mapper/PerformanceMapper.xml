@@ -18,6 +18,7 @@
 		<result property="per_id" column="perf_id"/>
 		<result property="seatNumber" column="s_number"/>
 		<result property="state" column="state"/>
+		<result property="price" column="price"/>
 	</resultMap>
 	
 	<resultMap id="PerMap" type="PerfSearch">
@@ -47,8 +48,15 @@
 	</select>
 	
 	<select id="getPerLayout"  parameterType="int" resultMap="PerSeatMap">
-		select * from seats
-		where perf_id = #{value}
+		<!-- select * 
+		from seats
+		where perf_id = #{value} -->
+		select s.*,si.SINFO_PRICE AS "price"
+		from seats s
+		  LEFT OUTER JOIN SEATINFO si
+		ON s.S_TYPE = si.SINFO_TYPE AND s.PERF_ID = si.PERF_ID 
+		WHERE s.perf_id = #{value}
+		ORDER BY s.S_NUMBER
 	</select>
 
 	<insert id="addSeat" parameterType="Seat">

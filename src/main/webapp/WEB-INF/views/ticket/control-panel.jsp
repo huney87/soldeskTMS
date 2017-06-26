@@ -27,6 +27,11 @@
             border: 1px solid black;
             margin-right: 2px;
         }
+        th {
+            text-align: center;
+            color:#fff;
+			background-color:#337ab7;
+        }
     </style>
 
     <script>
@@ -38,7 +43,7 @@
             $("#ticketCnt").text(ticketCnt);
             $("#ticketDate").text(ticketDate);
             $("#ticketTime").text(ticketTime);
-            $("#totalPrice").text(ticketPrice);
+            $("#totalPrice").text(ticketPrice+"원");
             console.log(ticketDate);
             var perId = $("#perfId").val();
             

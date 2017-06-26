@@ -2,6 +2,7 @@ package gwangjae.tms.ticketing.service;
 
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.Round;
+import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.ticketing.dao.TicketingDao;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
@@ -86,6 +87,11 @@ public class TicketingServiceImpl implements TicketingService {
 	@Override
 	public TicketSeatInfo getPerfInfo(int perfId){
 		return ticketDao.getPerfInfo(perfId);
+	}
+	
+	@Override
+	public List<SeatInfo> getPerfSeatInfo(int perfId){
+		return ticketDao.getPerSeatInfo(perfId);
 	}
 
 }

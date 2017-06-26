@@ -258,7 +258,7 @@ var seatInit = function () {
         		if (seat.state == 1) {
         			seat = '<div class="seat reserved-seat" id="'+seat.seatId+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
 				} else if (seat.state == 0) {
-					seat = '<div class="seat left-seat '+type+'" id="'+seat.seatId+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
+					seat = '<div class="seat left-seat '+type+'" id="'+seat.seatId+'" value="'+seat.price+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
 				}		        		
         		
         		// 좌석을 하나씩 출력, 줄이 바뀔경우 esle 내용.
@@ -272,10 +272,6 @@ var seatInit = function () {
         		}   
         	});
         	seatChoice();
-        	
-        	ticketGrade();
-        	
-        	
         }
 	});
 
@@ -316,18 +312,19 @@ var ticketsInit = function () {
 var ticketGrade = function(){
 	var perId = 23;
    	$.ajax({
-            url: "/ticket/getPerformanceInfo",
-            data:{performanceID : perId},
-            success:function(e){
-            	console.loge(e.sType);
-           		if(e.sType == 1){
-           			$(".ticketGrade1").hide();
-        	    	console.loge(e.sType);
-        	    
-//        	    	$("#type01").text();
-	           		
-           } 	 
-       	}
+        url: "/ticket/getPerSeatInfo",
+        data:{
+        	performanceID : perId
+        },
+        dataType: 'json',
+        success:function(pif){
+        	var pifSeatList = pif.seatList;
+        	$.each(pifSeatList,function(){
+                var divHtml = '<div class="legend-seat type'+this['seatType']+'"></div>'
+                divHtml += '<span>'+this['grade']+'석:&nbsp;'+this['price']+'원</span><br>';
+                $('#ticketGrade').append(divHtml);
+            });
+   		}
    	});
 }
 
@@ -353,8 +350,8 @@ $(document).ready(function () {
 			<div>
 				<div>-------------------</div>
 			</div>
-			<div class="ticketGrade1" >
-				<div class="legend-seat type1" id="ticketGrade1"></div><span></span>
+			<div class="legend-item" id="ticketGrade">
+				<!-- <div class="legend-seat type1" id="ticketGrade1"></div><span></span> -->
 			</div>	
 		</div>
 		

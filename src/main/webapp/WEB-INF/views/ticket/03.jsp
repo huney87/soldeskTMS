@@ -100,7 +100,10 @@
 
         th {
             text-align: center;
+            color:#fff;
+			background-color:#337ab7;
         }
+}
     </style>
     <script type="text/javascript">
         function ImgError(source) {
@@ -192,7 +195,7 @@
                         <tbody>
                             <tr>
                                 <th>기본가</th>
-                                <td colspan="2">20000원</td>
+                                <td colspan="2" class="text-right">20000원</td>
                                 <td>
                                     <select class="form-control tickets" value="20000">
                             </select>
@@ -201,18 +204,18 @@
                             <tr>
                                 <th rowspan="4">조건 할인</th>
                                 <td>학생할인(중, 고, 대학생 10%)</td>
-                                <td>18000원</td>
+                                <td class="text-right">18000원</td>
                                 <td>
-                                    <select class="form-control tickets" value="18000">
-                            </select>
+                                    <select class="form-control tickets" value="18000" disabled="disabled">
+                            		</select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>유공자 할인(15%)</td>
-                                <td>15000원</td>
+                                <td class="text-right">15000원</td>
                                 <td>
-                                    <select class="form-control tickets" value="15000">
-                            </select>
+                                    <select class="form-control tickets" value="15000" disabled="disabled">
+                            		</select>
                                 </td>
                             </tr>
                         </tbody>

@@ -114,6 +114,7 @@
         	background: #fefefe;
         	margin:0.3rem;
         	padding:0.3rem;
+        	display:none;
         }
     </style>
   
@@ -155,9 +156,11 @@
             		$("#roundTime11").text(time2[i].time1);
             		$("#roundTime2").val(time2[i].time2);
             		$("#roundTime22").text(time2[i].time2);
-            		
+            		sessionStorage.setItem('ticketTime1', time2[i].time1);
+            		sessionStorage.setItem('ticketTime2', time2[i].time2);
             	}
             }
+            $('.btn1').show();
         }
 
         var initBtn = function() {
@@ -198,7 +201,23 @@
             if (sessionStorage.getItem('ticketDate')) {
             	var date = sessionStorage.getItem('ticketDate');
             	$(".selectDate").text(date);
-            }
+            	if (sessionStorage.getItem('ticketTime')) {
+            		var ticketTime = sessionStorage.getItem('ticketTime');
+            		var ticketTime1 = sessionStorage.getItem('ticketTime1');
+            		var ticketTime2 = sessionStorage.getItem('ticketTime2');
+            		$('.btn1').show();
+            		$("#roundTime1").val(ticketTime1);
+            		$("#roundTime11").text(ticketTime1);
+            		$("#roundTime2").val(ticketTime2);
+            		$("#roundTime22").text(ticketTime2);
+            		if(ticketTime == ticketTime1){
+            			$("#roundTime1").prop({checked: true});
+            		}else {
+            			$("#roundTime2").prop({checked: true});
+            		};
+                }
+            };
+            
             initBtn();
         });
        

@@ -8,6 +8,7 @@ public class Seat {
 	private int per_id;
 	private int seatNumber;
 	private int state;
+	private int price;
 	
 	public Seat(){}
 
@@ -67,5 +68,11 @@ public class Seat {
 		this.state = state;
 	}
 
-	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 }

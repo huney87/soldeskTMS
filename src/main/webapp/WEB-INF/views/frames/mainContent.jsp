@@ -8,6 +8,10 @@
 		$(function() {
 			mainButtonClicked();
 		});
+		
+		$('#mainGenBtn1').on('click', {genid:1}, mainButtonClicked);
+	    $('#mainGenBtn2').on('click', {genid:2}, mainButtonClicked);
+	    $('#mainGenBtn3').on('click', {genid:3}, mainButtonClicked);
 	});
 		
 	function mainButtonClicked(e) {
@@ -41,10 +45,6 @@
 		});
     }
 		
-	$('#mainGenBtn1').on('click', {genid:1}, mainButtonClicked);
-    $('#mainGenBtn2').on('click', {genid:2}, mainButtonClicked);
-    $('#mainGenBtn3').on('click', {genid:3}, mainButtonClicked);
-	    
 	var printGener=function(genre){
 			
 	    var genDiv = '<div class="frame">'
