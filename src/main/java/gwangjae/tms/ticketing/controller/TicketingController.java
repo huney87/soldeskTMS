@@ -91,7 +91,7 @@ public class TicketingController {
 	
 	@RequestMapping(value="/getPerSeatInfo",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public Map<String,Object> getPerfSeatInfo(HttpSession session,@RequestParam("perf_id") int perfId){
+	public Map<String,Object> getPerfSeatInfo(HttpSession session,@RequestParam("performanceID") int perfId){
 		Map<String,Object> resultMap = new HashMap<>();
         List<SeatInfo> seatList = service.getPerfSeatInfo(perfId);
         resultMap.put("seatList",seatList);
