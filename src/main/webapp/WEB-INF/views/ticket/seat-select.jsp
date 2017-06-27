@@ -148,17 +148,17 @@
 
 <body>
 <script>
- //좌석 만들어지고 나서 옵션
+ //좌석 만들어지고 나서 옵션 (자리선택하는것)
  var seatChoice = function(){
 		/* 좌석 선택 */
 		$(".seat").click(function () {
 			var id = $(this).attr('id');//실행하게 해준 태그의 id 값을 jquery 변수에 저장해주기 위해 사용 (지금은 좌석 클릭했을 경우)
-	
+			console.log(id);
 			// 남은 좌석이라면
 			if ($(this).hasClass('left-seat')) {	//hasClass는 class를 검색하는 전용.
 				/* 예매 인원을 저장하는 변수 */
-				var personNumber = parseInt($("#tickets option:selected").text());
-				if (maxCheck(personNumber)) {
+				var personNumber = parseInt($("#tickets option:selected").text()); //예매인원 선택값
+				if (maxCheck(personNumber)) { // 예매인원까지 선택할수 있게. (최대값)
 					swal({
 						type: "error",
 						text: '예매 인원수 ' + personNumber + '명을 넘게 선택하셨습니다.'
@@ -176,7 +176,7 @@
 				//	세션으로 넘겨야할 필요 데이터
 				//	예약 공연 좌석 번호, 예약 공연 좌석 등급, 가격, 인원, 공연아이디
 				
-				if (sessionStorage.getItem('selectSeatId')) {
+				/* if (sessionStorage.getItem('selectSeatId')) {
 					var selectSeatIds = sessionStorage.getItem('selectSeatId').split(',');
 					selectSeatIds.push(id);
 					//sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
@@ -184,17 +184,17 @@
 				} else {
 					sessionStorage.setItem('selectSeatId', id);
 					console.log(sessionStorage.getItem('selectSeatId'));
-				}
+				} */
 	
 				// 선택된 좌석이라면( 미완성, 위에꺼와 연동)
 			} else if ($(this).hasClass('selected-seat')) {
 				$(this).removeClass("selected-seat").addClass("left-seat");
-				if (sessionStorage.getItem('selectSeatId')) {
+				/* if (sessionStorage.getItem('selectSeatId')) {
 					var selectSeatIds = sessionStorage.getItem('selectSeatId').split(',');
 					selectSeatIds.splice(selectSeatIds.indexOf(id), 1);
 					sessionStorage.setItem('selectSeatId', selectSeatIds.join(','));
 					console.log(sessionStorage.getItem('selectSeatId'));
-				}
+				} */
 			}
 	
 		});
@@ -255,9 +255,9 @@ var seatInit = function () {
         	$(seats).each(function(idx, seat){	        		
         		//좌석이 팔렸는지 확인하여 클래스 추가.
         		var type = "type"+seat.seatType;
-        		if (seat.state == 1) {
+        		if (seat.state == 1) { // state 1 예약된 좌석
         			seat = '<div class="seat reserved-seat" id="'+seat.seatId+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
-				} else if (seat.state == 0) {
+				} else if (seat.state == 0) { //state 0이  빈좌석
 					seat = '<div class="seat left-seat '+type+'" id="'+seat.seatId+'" value="'+seat.price+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
 				}		        		
         		
@@ -274,30 +274,6 @@ var seatInit = function () {
         	seatChoice();
         }
 	});
-
-	/* for (i = 0; i < row.length; i++) {
-		$(".seat-layout-wrapper").append(row);
-		for (j = 0; j < col.length; j++) {
-			var seatId = seatLayout[i][j].split('-')[0];
-			var seatNum = seatLayout[i][j].split('-')[1];
-			var col = '<div class="seat" id="' + seatId + '"><span class="seat-number">' + seatNum + '</span></div>';
-			$(".seat-row:last").append(col);
-
-			var seatType = seatLayout[i][j].split('-')[2];
-			var state = seatLayout[i][j].split('-')[3];
-
-			if (seatType == 0) {
-				$("#" + seatId).addClass("runway");
-			} else if (seatType == 1) {
-				$("#" + seatId).addClass("left-seat");
-			}
-
-			if (state == 1) {
-				$("#" + seatId).removeClass("left-seat").addClass("reserved-seat");
-			}
-
-		}
-	}; */
 }
 
 //예매인원 드롭박스(완료, 현재 최대인원 10명으로 수정.)

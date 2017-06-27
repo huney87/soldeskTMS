@@ -14,8 +14,7 @@
 
     <title>공연 예매</title>
     <style>
-        html,
-        body {
+        html, body {
             overflow: hidden;
         }
 
@@ -38,7 +37,7 @@
 
         .booking-wrapper {
             height: 90%;
-            border: 0px dotted black;
+            border: 1px dotted black;
         }
 
         /* .select-body {
@@ -100,76 +99,130 @@
 
         th {
             text-align: center;
-            color:#fff;
 			background-color:#337ab7;
         }
-}
+        
+        .table{
+        	text-align:center;
+        	color:black;
+        }
+        input{
+        	border:none;
+        	text-align:center;
+        }
+
     </style>
     <script type="text/javascript">
-        function ImgError(source) {
-            source.src = "/img/noImg.png";
-            source.onerror = "";
+    var ticketCnt = sessionStorage.getItem('ticketCnt'); // 이전페이지의 티켓 총 수량 가져옴
+    
+    // 옵션선택시 할인가격 적용
+    var discount = function(){
+    	$(".seatGrades").on("click",function(){
+    		var price = $(this).closest('tr').find('td').eq(3).text();
+    		 
+    		 // 체크한 값에 따라서 원래 가격에서 변동.
+			if($(this).attr('id')=="kid"){
+				price = price * 0.9;
+			} 		
+    		 
+			$(this).closest('tr').find('td').eq(4).text(price);
+			
+			var totalPrice = 0;
+			$(".lastPrice").each(function(){
+				var tmp = $(this).text() *1;
+				totalPrice += tmp;
+				console.log(totalPrice);
+			});
+			$("#totalPrice2").val(totalPrice);	
+			
+    	});
+    	
+    }
+    
+    // 티켓 총 가격 계산
+    var sumTotalPrice = function(){
+    	var totalPrice = 0;
+		$(".eachPrice").each(function(){
+			var tmp = $(this).text() *1;
+			totalPrice += tmp;
+			console.log(totalPrice);
+		});
+		$("#totalPrice").val(totalPrice);	
+    }
+    
+    // s_id 값 가져와서 초기 화면 설정해주기.
+    var dataInit= function(){  	
+        var tmp; // 임시변수, 좌석이름 저장용   // 좌석 옵션 가격
+        var price = 10000; // 임시가격 강제 지정.
+        var totalPrice=0; // 총 가격이 될 변수
+
+        for(var i =0;i<=ticketCnt;i++){
+        	
+        	tmp = 'selectedSeat'+i;
+        	if(i>0){
+        		
+        		$.ajax({
+        	           url: "/seller/seatinfoForTicket",
+        	           data:{
+        	        	   per_id:sessionStorage.getItem("perId"),
+        	        	   seatId:sessionStorage.getItem(tmp)
+        	           },          
+        	           success:function(seatInfo){
+        	        	   console.log(seatInfo);
+			        		var tr1 = $("<tr></tr>");
+			        		var td1 =$("<td>"+seatInfo.seatInfoId+"</td>"); //좌석 아이디값
+			        		var td2 = $("<td><input type='text' id='seat"+i+"' style='border:none;' value='"+seatInfo.grade+"등급'></td>");
+			        		var td3 =$("<td><input type='radio' class='seatGrades' id='normal' name='ticket"+i+"'>일반&nbsp;&nbsp;&nbsp;"
+			        	    		+"<input type='radio' class='seatGrades' id='kid' name='ticket"+i+"'>청소년할인10%</td>");
+			        		var td4 =$("<td class='eachPrice'>"+seatInfo.price+"</td>"); // 좌석 가격 옵션
+			        		var td5 =$("<td class='lastPrice'>"+seatInfo.price+"</td>"); // 최종 적용 가격
+			        		
+			        		totalPrice += seatInfo.price;
+			        		 $("#totalPrice").val(totalPrice); // 총 가격 추가
+			        		 $("#totalPrice2").val(totalPrice); // 총 가격 추가2
+			        		
+			        		tr1.append(td1).append(td2).append(td3).append(td4).append(td5);
+							$("#selectTable").append(tr1);  // 테이블 바디 항목 추가
+
+        					discount();//할인 선택 기능
+        	           }
+        		});
+        		
+        	}
+        
+    	}
+       
+        
+    }
+    
+    // 이미지 없을때 고정이미지 보여주기
+	function ImgError(source) {
+	    source.src = "/img/noImg.png";
+	    source.onerror = "";
+	    return true;
+	}
+
+	var initBtn = function () {
+		// 이전 페이지로 이동
+	    $('.btn-before').click(function () {
+	        forwardForm(2);
+	        return true;
+	    });
+		// 다음 페이지로 이동
+	    $('.btn-next').click(function () {
+	        sessionStorage.setItem('totalPrice', $("#totalPrice2").val());// 세션에 값 저장
+            forwardForm(4);
             return true;
-        }
-        var ticketCnt = sessionStorage.getItem('ticketCnt');
-
-        var initTicketNum = function () {
-            $('select').each(function () {
-                for (var i = 0; i <= ticketCnt; i++) {
-                    $(this).append('<option>' + i + '</option>');
-                }
-            });
-        }
-
-        var initSelectEvent = function () {
-            $('select.tickets').change(function () {
-                var totalNumber = 0;
-                var totalPrice = 0;
-                $('select.tickets').each(function () {
-                    totalNumber += parseInt($(this).find('option:selected').text());
-                    if (totalNumber > ticketCnt) {
-                        $(this).find('option:selected').prop('selected', false);
-                        alert("예매 인원수를 초과하였습니다.");
-                        return false;
-                    }
-                    var number = parseInt($(this).find('option:selected').text());
-                    var price = parseInt($(this).attr('value'));
-                    var actualPrice = number * price;
-                    totalPrice += actualPrice;
-                });
-                sessionStorage.setItem('totalPrice', totalPrice);
-            });
-        }
-
-        var initBtn = function () {
-            $('.btn-before').click(function () {
-                forwardForm(2);
-                return true;
-            });
-            $('.btn-next').click(function () {
-                var totalNumber = 0;
-                $('select.tickets').each(function () {
-                    totalNumber += parseInt($(this).find('option:selected').text());
-                });
-                if (totalNumber == ticketCnt) {
-                    forwardForm(4);
-                    return true;
-                } else {
-                    alert('선택 좌석 갯수만큼 선택해주세요.');
-                    return false;
-                }
-            });
-        }
-
-        // 도큐먼트 레디
-        $(document).ready(function () {
-            initTicketNum();
-            initSelectEvent();
-            initBtn();
-        });
+	    });
+	}
+	
+	// 도큐먼트 레디
+	$(document).ready(function () {
+	    dataInit();
+	    initBtn();
+	});
     </script>
 </head>
-
 <body>
     <div class="container">
         <div class="row info-wrapper">
@@ -188,37 +241,18 @@
             <div class="col-sm-9 select-body">
                 <div class="seat-layout-wrapper">
                     <h4>가격</h4>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-condensed" id="tableTest">
                         <thead>
-                            <h4></h4>
+                            <tr>
+                            	<th>좌석 번호</th><th style="width:5rem;">좌석등급</th><th>옵션 선택</th><th style="width:5rem;">가격</th><th style="width:5rem;">최종가격</th>
+                            <tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th>기본가</th>
-                                <td colspan="2" class="text-right">20000원</td>
-                                <td>
-                                    <select class="form-control tickets" value="20000">
-                            </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th rowspan="4">조건 할인</th>
-                                <td>학생할인(중, 고, 대학생 10%)</td>
-                                <td class="text-right">18000원</td>
-                                <td>
-                                    <select class="form-control tickets" value="18000" disabled="disabled">
-                            		</select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>유공자 할인(15%)</td>
-                                <td class="text-right">15000원</td>
-                                <td>
-                                    <select class="form-control tickets" value="15000" disabled="disabled">
-                            		</select>
-                                </td>
-                            </tr>
-                        </tbody>
+                       <tbody id="selectTable"></tbody>
+                        <tfoot>
+                        	<tr>
+                        		<th colspan="3">total price</th><td><input type="text" id="totalPrice" readonly></td><td><input type="text" id="totalPrice2" readonly></td>
+                        	</tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="col-sm-12" style="margin-top:80px;background-color:#e6e6e6;">

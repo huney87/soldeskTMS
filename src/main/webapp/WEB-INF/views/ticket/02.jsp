@@ -97,15 +97,30 @@
     </style>
     <script>
         var initBtn = function() {
-            $('.btn-before').click(function(){
+        	var test =0;
+        	$(".selected-seat").each(function(){
+	    		console.log(test);
+	    	});	
+        	
+        	
+            $('.btn-before').click(function(){ // 이전페이지 버튼
                 forwardForm(1);
                 return true;
             });			
-			$('.btn-next').click(function() {
+			$('.btn-next').click(function() { //다음페이지 버튼
 			    if (!sessionStorage.getItem('ticketCnt')) {
 			        alert("좌석을 선택해주세요.");
 			        return false;
 			    } else {
+			    	// 다음 페이지 버튼을 누를시, 선택된 좌석값을 갯수에 맞춰 세션에 저장함. 
+			    	// 가져오는 세션값은 좌석 예매수를 for 구문에 돌려서 selectedSeat뒤에 숫자를 붙여서 값을 가져오면됨.
+			    	// 가져오는 값의 명칭은 1부터 예매한 숫자까지 임.
+			    	var i=0;   	
+			    	$(".selected-seat").each(function(){
+			    		var tmp = 'selectedSeat'+i;
+			    		sessionStorage.setItem(tmp,$(this).attr('id'));
+			    		i++;
+			    	});				    	
 			        forwardForm(3);
 			        return true;
 			    }
@@ -135,7 +150,8 @@
         </div>
         <div class="row booking-wrapper">
             <div class="col-sm-9 select-body">
-                <iframe src="/ticket/layout" scrolling="no"></iframe>
+                <!-- <iframe src="/ticket/layout" scrolling="no"></iframe> -->
+                <jsp:include page="/WEB-INF/views/ticket/seat-select.jsp"/>
             </div>
             <div class="col-sm-3 control-body">
                 <div class="control-panel">

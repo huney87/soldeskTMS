@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PerformanceService {
 	public List<SeatInfo> getSeats(String title);
+	public SeatInfo seatinfoForTicket(Seat seat);
 	public List<Seat> getPerLayout(int perId);
 	public int addSeats(String[] seats, int perId);
 	public List<Performance> getPer(String per_name);

@@ -21,6 +21,10 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return performanceMapper.getSeats(title);
 	}
 	
+	public SeatInfo seatinfoForTicket(Seat seat){
+		return performanceMapper.seatinfoForTicket(seat);
+	}
+	
 	public List<Seat> getPerLayout(int perId){	 
 		 return performanceMapper.getPerLayout(perId);
 	 }

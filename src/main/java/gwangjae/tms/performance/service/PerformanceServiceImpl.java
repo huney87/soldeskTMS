@@ -20,6 +20,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceDao.getSeats(title);
 	}
 	
+	public SeatInfo seatinfoForTicket(Seat seat){
+		return performanceDao.seatinfoForTicket(seat);
+	}
+	
 	 public int addSeats(String[] seats,int perId){
 		 Seat seat= new Seat();		 
 		 int cnt=1;// 좌석이 몇개 들어갔는지 확인을 위한 변수

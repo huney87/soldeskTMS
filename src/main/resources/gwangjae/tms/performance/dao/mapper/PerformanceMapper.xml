@@ -47,6 +47,12 @@
 		select * from seatinfo
 	</select>
 	
+	<select id="seatinfoForTicket" parameterType="Seat" resultMap="SeatMap">
+		select *
+		from SEATINFO
+		where PERF_ID=#{per_id} and sinfo_type in(select s_type from seats where s_id = #{seatId})
+	</select>
+	
 	<select id="getPerLayout"  parameterType="int" resultMap="PerSeatMap">
 		<!-- select * 
 		from seats

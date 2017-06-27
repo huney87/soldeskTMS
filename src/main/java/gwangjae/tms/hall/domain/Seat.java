@@ -75,4 +75,6 @@ public class Seat {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	
 }

@@ -61,6 +61,12 @@ public class PerformanceController {
 		return performanceService.getSeats(title);
 	}
 	
+	@RequestMapping("/seatinfoForTicket")
+	@ResponseBody
+	public SeatInfo seatinfoForTicket(Seat seat){
+		return performanceService.seatinfoForTicket(seat);
+	}
+	
 	// 값이 저장된 공연의 좌석 레이아웃 정보 가져오기.
 	@RequestMapping("/getPerLayout")
     @ResponseBody
