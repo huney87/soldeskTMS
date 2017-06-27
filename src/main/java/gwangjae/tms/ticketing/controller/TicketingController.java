@@ -80,15 +80,18 @@ public class TicketingController {
 		return service.getPerfDate(perfId);
 	}
 	
-	@RequestMapping("/ggetPerformanceInfo")
+	@RequestMapping(value="/getPerformanceInfo",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public Performance getPerfInfo(int perfId){
-		return service.getPerfInfo(perfId);
+	public Map<String,Object> getPerfInfo(@RequestParam("per_Id") int perfId){
+		Map<String,Object> resultMap = new HashMap<>();
+		Performance perfInfo = service.getPerfInfo(perfId);
+		resultMap.put("PerfInfo", perfInfo);
+		return resultMap;
 	}
 	
 	@RequestMapping(value="/getPerSeatInfo",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public Map<String,Object> getPerfSeatInfo(@RequestParam("performanceID") int perfId){
+	public Map<String,Object> getPerfSeatInfo(HttpSession session,@RequestParam("perf_id") int perfId){
 		Map<String,Object> resultMap = new HashMap<>();
         List<SeatInfo> seatList = service.getPerfSeatInfo(perfId);
         resultMap.put("seatList",seatList);

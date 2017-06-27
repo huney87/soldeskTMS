@@ -149,6 +149,7 @@
             var hasEvent = $("#" + id).data("hasEvent");
             if (hasEvent) {
                 $(".selectDate").text(date);
+                $("#ticketDate").text(date);
                 sessionStorage.setItem('ticketDate', date);
             }
             
@@ -170,6 +171,7 @@
 				var time = $(this).val();
 				
 				sessionStorage.setItem('ticketTime', time);
+		        $("#ticketTime").text(time);
 			});
         	
         	$('.btn-next').click(function() {
@@ -189,12 +191,16 @@
         
 
         $(document).ready(function() {
-        	sessionStorage.setItem("perId",$("#a").val()); //세션에 공연 아이디 저장.
         	
-            $.ajax({
+        	if (sessionStorage.getItem('perId')) ;
+        	else sessionStorage.setItem("perId",$("#a").val()); //세션에 공연 아이디 저장.
+        	
+        	var perfId = sessionStorage.getItem('perId');
+            
+        	$.ajax({
                 url: '/ticket/getskd',
                 data : {
-                	"performance_id" : $("#a").val()
+                	"performance_id" : perfId
                 },
                 dataType: 'json',
                 success : function(data) {
@@ -281,7 +287,8 @@
             </div>
             <div class="col-sm-3 control-body">
                 <div class="control-panel">
-                    <iframe src="/ticket/panel" scrolling="no"></iframe>
+                    <!-- <iframe src="/ticket/panel" scrolling="no"></iframe> -->
+                    <jsp:include page="/WEB-INF/views/ticket/control-panel2.jsp" flush="false"/>
                 </div>
                 <div class="btn-panel" style="margin-top:30px">
                     <button class="btn btn-info btn-block btn-next">다음으로<i class="glyphicon glyphicon-chevron-right"></i></button>

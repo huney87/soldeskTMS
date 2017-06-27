@@ -46,14 +46,19 @@
 		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId}
 		ORDER BY si.SINFO_TYPE -->
 		 
-		SELECT SINFO_ID AS "sinfoId",
-			PERF_ID AS "perfId",
-			SINFO_GRADE AS "sinfoGrade",
-			SINFO_PRICE AS "sinfoPrice",
-			SINFO_TYPE AS "sType"
-		FROM PERFORMANCES
-		WHERE PERF_ID = #{perfId}
-		
+		SELECT p.perf_id AS "per_id",
+		 	p.h_id AS "hallId",
+		 	p.cat_id AS "cat_id",
+		 	p.perf_title AS "per_title",
+		 	p.perf_startdate AS "per_startDate",
+		 	p.perf_enddate AS "per_endDate",
+		 	p.perf_image AS "per_image",
+			h.h_name AS "hallName"
+		FROM performances p
+			LEFT OUTER JOIN halls h
+		ON p.H_ID = h.H_ID
+		WHERE p.PERF_DISPLAY = 0 AND p.perf_id = #{perfId}
+
 		<!-- SELECT si.*
 		FROM SEATINFO si, PERFORMANCES p
 		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId}  AND si.SINFO_TYPE = 1

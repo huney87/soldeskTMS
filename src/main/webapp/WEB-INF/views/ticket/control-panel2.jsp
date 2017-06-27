@@ -1,0 +1,107 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <style>
+        .control-window{
+            width: 210px;
+            height: 452px;
+            text-align: center;
+            padding-left:10px;
+        }
+        #sub{
+        	font-size: 0.7rem;
+        }
+        .img-wrapper{
+            border: 1px solid black;
+            margin-right: 2px;
+        }
+        #conTb th {
+            text-align: center;
+            color:#fff;
+			background-color:#337ab7;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            var ticketDate = sessionStorage.getItem('ticketDate');
+            var ticketTime = sessionStorage.getItem('ticketTime');
+            var ticketCnt = sessionStorage.getItem('ticketCnt');        
+            var ticketPrice = sessionStorage.getItem('totalPrice');
+            $("#ticketCnt").text(ticketCnt);
+            $("#ticketDate").text(ticketDate);
+            $("#ticketTime").text(ticketTime);
+            if(ticketPrice) $("#totalPrice").text(ticketPrice+"원");
+            var perId = $("#a").val();
+            console.log(perId);
+            $.post({
+            	url:"/ticket/getPerformanceInfo",
+            	type:'get',
+            	data:{'perf_Id' : perId},
+            	dataType: 'json',
+            	success:function(response){
+            		console.log(response);
+            		var perInfo ='<tr>'
+            		perInfo += '<td rowspan="4">';
+            		perInfo += '<div class="img-wrapper">';
+            		perInfo += '<img src='+per_image+'style="width:100px; height:150px;" onerror="ImgError(this)">';
+            		perInfo += '</div>';
+            		perInfo += '</td>';
+            		perInfo += '<td id="sub">'+per_title+'</td>';
+            		perInfo += '</tr>';
+            		perInfo += '<tr>'  ;
+            		perInfo += '<td id="sub">'+per_startDate+"~"+per_endDate+'</td>';
+            		perInfo += '</tr>';
+            		perInfo += '<tr>'; 
+            		perInfo += '<td id="sub">'+hallName+' 만 13세이상</td>';
+            		perInfo += '</tr>';
+            		perInfo += '<tr>';
+            		perInfo += '<td id="sub">관람시간 110분</td>';
+            		perInfo += '</tr>';
+       				$("#ticketInfo").append(perInfo);
+            	},
+            	error:function(a, b, errMsg){
+                     alert('공연정보실패' + errMsg);
+                }
+        	});	
+        });
+
+        /* 이미지 없을 경우 */
+        function ImgError(source){
+            source.src = "/img/noImg.png";
+            source.onerror = "";
+            return true;
+        }
+    </script>
+
+    <div class="control-window">
+        <input type="hidden" id="perfId" value="${perId }" />
+        <table id="ticketInfo">
+          
+        </table>
+        <table class="table table-bordered" id="conTb">
+            <tbody>
+                <tr>
+                    <th>선택일</th>
+                    <td id="ticketDate"></td>
+                </tr>
+                <tr>
+                	<th>선택시간</th>
+                    <td id="ticketTime"></td>
+                </tr>
+                <tr>
+                    <th>선택좌석</th>
+                    <td id="ticketCnt"></td>
+                </tr>
+                <tr>
+                    <th>티켓금액</th>
+                    <td id="totalPrice"></td>
+                </tr>
+                <tr>
+                    <th>취소기한</th>
+                    <td>공연 하루 전까지</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>

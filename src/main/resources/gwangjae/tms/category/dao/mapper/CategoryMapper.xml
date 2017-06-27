@@ -31,6 +31,7 @@
 	</resultMap>
 	
 	<select id="getSearchResult" parameterType="int" resultType="Map">
+		<![CDATA[
 		SELECT p.perf_id AS "per_id",
 		 	p.h_id AS "hallId",
 		 	p.cat_id AS "cat_id",
@@ -42,8 +43,9 @@
 		FROM performances p
 			LEFT OUTER JOIN halls h
 		ON p.H_ID = h.H_ID
-		WHERE p.PERF_DISPLAY = 0 AND p.CAT_ID = #{gen_id}
+		WHERE ROWNUM <= 5 AND p.PERF_DISPLAY = 0 AND p.CAT_ID = #{gen_id}
 		ORDER BY p.PERF_ID DESC
-		<!-- 장르별 검색 1: 뮤지컬, 2: 콘서트, 3: 연극 -->
+		]]>
 	</select>
+	
 </mapper>
