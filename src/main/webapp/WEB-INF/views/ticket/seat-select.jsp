@@ -152,7 +152,7 @@
  var seatChoice = function(){
 		/* 좌석 선택 */
 		$(".seat").click(function () {
-			var id = $(this).attr('id');	//실행하게 해준 태그의 id 값을 jquery 변수에 저장해주기 위해 사용 (지금은 좌석 클릭했을 경우)
+			var id = $(this).attr('id');//실행하게 해준 태그의 id 값을 jquery 변수에 저장해주기 위해 사용 (지금은 좌석 클릭했을 경우)
 	
 			// 남은 좌석이라면
 			if ($(this).hasClass('left-seat')) {	//hasClass는 class를 검색하는 전용.
@@ -231,7 +231,7 @@ var maxCheck = function (max) {
 
 //좌석 초기셋팅.(세션에서 저장된 공연아이디를 가져오는것만 연동하면됨. 아래 perId에 값을 저장해야함.)
 var seatInit = function () {	
-	var perId = 23;//$("input:radio[name=radios]:checked").val();//가져올 공연아이디값(수정필요)
+	var perId = sessionStorage.getItem("perId"); // 세션에 저장된 공연아이디값 가져오기
 	var row=0;	//레이아웃 row 전체 크기
 	var col=0;	//레이아웃 col 전체 크기
 	var tmp=1;
