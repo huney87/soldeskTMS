@@ -190,7 +190,8 @@ $(document).ready(function(){
 		</div>
 		<div class="col-sm-3 control-body">		
 			<div class="control-panel">
-				<iframe src="/ticket/panel" scrolling="no"></iframe>
+				<!-- <iframe src="/ticket/panel" scrolling="no"></iframe> -->
+				<jsp:include page="/WEB-INF/views/ticket/control-panel2.jsp" flush="false"/>
 			</div>	
 			<div class="btn-panel" style="margin-top:40px">
 				<div class="btn-group btn-group-justified">

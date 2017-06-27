@@ -1,23 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html lang="ko">
 
-<head>
-
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.css">
-	<script src="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.js"></script>
 	<style>
-		body {
-			background-color: whitesmoke;
-		}
 
 		#seat-window {
 			width: 718px;
@@ -144,9 +129,7 @@
 		}
 		/*시트 레이아웃 끝*/
 	</style>
-</head>
 
-<body>
 <script>
  //좌석 만들어지고 나서 옵션 (자리선택하는것)
  var seatChoice = function(){
@@ -196,6 +179,9 @@
 					console.log(sessionStorage.getItem('selectSeatId'));
 				} */
 			}
+			
+			var cnt = $("#tickets option:selected").text();
+			$("#ticketCnt").text(selectCnt()+'/'+cnt);
 	
 		});
 	
@@ -206,7 +192,9 @@
 					$(this).removeClass("selected-seat").addClass("left-seat");
 				}
 			});
-	
+			
+			var cnt = $("#tickets option:selected").text();
+			$("#ticketCnt").text(cnt);
 		});
 				
 }
@@ -279,8 +267,12 @@ var seatInit = function () {
 //예매인원 드롭박스(완료, 현재 최대인원 10명으로 수정.)
 var ticketsInit = function () {
 	var inputNum = 10;
+	var ticketCnt = sessionStorage.getItem('ticketCnt');
 	for (var i = 1; i <= inputNum; i++) {
-		$("#tickets").append("<option>" + i + "</option>");
+		if(i == ticketCnt)
+			$("#tickets").append("<option selected>" + i + "</option>");
+		else
+			$("#tickets").append("<option>" + i + "</option>");
 	}
 }
 
@@ -371,6 +363,4 @@ $(document).ready(function () {
 		</div>
 	</div>
  -->
-</body>
 
-</html>

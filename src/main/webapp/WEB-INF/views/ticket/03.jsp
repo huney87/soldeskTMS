@@ -98,8 +98,10 @@
         }
 
         th {
+        	color:#fff;
             text-align: center;
 			background-color:#337ab7;
+			height:35px;
         }
         
         .table{
@@ -109,6 +111,11 @@
         input{
         	border:none;
         	text-align:center;
+        }
+        tfoot td,tfoot th{
+        	height:38px;
+        	font-size:1.7rem;
+        	vertical-align:baseline;
         }
 
     </style>
@@ -134,7 +141,7 @@
 				console.log(totalPrice);
 			});
 			$("#totalPrice2").val(totalPrice);	
-			
+			$("#ctotalPrice").text(totalPrice+"원");
     	});
     	
     }
@@ -244,18 +251,23 @@
                     <table class="table table-bordered table-condensed" id="tableTest">
                         <thead>
                             <tr>
-                            	<th>좌석 번호</th><th style="width:5rem;">좌석등급</th><th>옵션 선택</th><th style="width:5rem;">가격</th><th style="width:5rem;">최종가격</th>
+                            	<th style="width:12%;">좌석번호</th>
+                            	<th style="width:13%;">좌석등급</th>
+                            	<th style="width:35%;">옵션 선택</th>
+                            	<th style="width:20%;">가격</th>
+                            	<th style="width:20%;">최종가격</th>
                             <tr>
                         </thead>
                        <tbody id="selectTable"></tbody>
                         <tfoot>
                         	<tr>
-                        		<th colspan="3">total price</th><td><input type="text" id="totalPrice" readonly></td><td><input type="text" id="totalPrice2" readonly></td>
+                        		<th colspan="3">total price</th><!-- <td><input type="text" id="totalPrice" readonly></td> -->
+                        		<td colspan="2" class="info"><input type="text" id="totalPrice2" readonly></td>
                         	</tr>
                         </tfoot>
                     </table>
                 </div>
-                <div class="col-sm-12" style="margin-top:80px;background-color:#e6e6e6;">
+                <div class="col-sm-12" style="margin-top:30px;background-color:#e6e6e6;">
                     <h5>유의 사항</h5>
                     <p>가격을 확인해주세요</p>
                     <p>관람일 전일까지만 취소 가능합니다. 또한, 당일 예매 하시는 경우 취소가 불가능 합니다.</p>
@@ -265,7 +277,8 @@
             </div>
             <div class="col-sm-3 control-body">
                 <div class="control-panel">
-                    <iframe src="/ticket/panel" scrolling="no"></iframe>
+                    <!-- <iframe src="/ticket/panel" scrolling="no"></iframe> -->
+                    <jsp:include page="/WEB-INF/views/ticket/control-panel2.jsp" flush="false"/>
                 </div>
                 <div class="btn-panel" style="margin-top:30px">
                     <div class="btn-group btn-group-justified">

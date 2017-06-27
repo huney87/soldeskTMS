@@ -40,12 +40,7 @@
 		WHERE rnd.PERF_ID = perf.PERF_ID AND perf.PERF_ID = #{value}
 	</select>
 	 -->
-	<select id="getPerfInfo" parameterType="int" resultType="Map">
-		<!-- SELECT si.*
-		FROM SEATINFO si, PERFORMANCES p
-		WHERE si.PERF_ID = p.PERF_ID AND si.PERF_ID = #{perfId}
-		ORDER BY si.SINFO_TYPE -->
-		 
+	<select id="getPerfInfo" parameterType="int" resultType="gwangjae.tms.performance.domain.Performance">
 		SELECT p.perf_id AS "per_id",
 		 	p.perf_title AS "per_title",
 		 	p.perf_startdate AS "per_startDate",

@@ -43,7 +43,7 @@
             $("#ticketCnt").text(ticketCnt);
             $("#ticketDate").text(ticketDate);
             $("#ticketTime").text(ticketTime);
-            if(ticketPrice) $("#totalPrice").text(ticketPrice+"원");
+            if(ticketPrice) $("#ctotalPrice").text(ticketPrice+"원");
             var perId = $("#perfId").val();
             
             $.ajax({
@@ -110,7 +110,7 @@
                 </tr>
                 <tr>
                     <th>티켓금액</th>
-                    <td id="totalPrice"></td>
+                    <td id="ctotalPrice"></td>
                 </tr>
                 <tr>
                     <th>취소기한</th>

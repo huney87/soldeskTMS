@@ -7,6 +7,7 @@
             height: 452px;
             text-align: center;
             padding-left:10px;
+            background-color:#fff;
         }
         #sub{
         	font-size: 0.7rem;
@@ -15,10 +16,18 @@
             border: 1px solid black;
             margin-right: 2px;
         }
+        #conTb {
+        	margin-top: 3rem;
+        }
         #conTb th {
             text-align: center;
             color:#fff;
 			background-color:#337ab7;
+			font-size: 1.4rem;
+        }
+        #conTb td {
+            text-align: center;
+			font-size: 1.4rem;
         }
     </style>
 
@@ -31,29 +40,33 @@
             $("#ticketCnt").text(ticketCnt);
             $("#ticketDate").text(ticketDate);
             $("#ticketTime").text(ticketTime);
-            if(ticketPrice) $("#totalPrice").text(ticketPrice+"원");
-            var perId = $("#a").val();
+            if(ticketPrice) $("#ctotalPrice").text(ticketPrice+"원");
+            
+            if (sessionStorage.getItem('perId')) ;
+        	else sessionStorage.setItem("perId",$("#a").val()); //세션에 공연 아이디 저장.
+        	
+        	var perId = sessionStorage.getItem('perId');
             console.log(perId);
-            $.post({
-            	url:"/ticket/getPerformanceInfo",
+            
+            $.ajax({
+            	url:'/ticket/getPerformanceInfo',
             	type:'get',
             	data:{'perf_Id' : perId},
-            	dataType: 'json',
             	success:function(response){
             		console.log(response);
             		var perInfo ='<tr>'
             		perInfo += '<td rowspan="4">';
             		perInfo += '<div class="img-wrapper">';
-            		perInfo += '<img src='+per_image+'style="width:100px; height:150px;" onerror="ImgError(this)">';
+            		perInfo += '<img src="/img/perf/'+response.per_image+'" style="width:70px; height:100px;" onerror="ImgError(this)">';
             		perInfo += '</div>';
             		perInfo += '</td>';
-            		perInfo += '<td id="sub">'+per_title+'</td>';
+            		perInfo += '<td id="sub">'+response.per_title+'</td>';
             		perInfo += '</tr>';
             		perInfo += '<tr>'  ;
-            		perInfo += '<td id="sub">'+per_startDate+"~"+per_endDate+'</td>';
+            		perInfo += '<td id="sub">'+response.per_startDate+"~"+response.per_endDate+'</td>';
             		perInfo += '</tr>';
             		perInfo += '<tr>'; 
-            		perInfo += '<td id="sub">'+hallName+' 만 13세이상</td>';
+            		perInfo += '<td id="sub">'+response.hall_name+'/ 만 13세이상</td>';
             		perInfo += '</tr>';
             		perInfo += '<tr>';
             		perInfo += '<td id="sub">관람시간 110분</td>';
@@ -77,7 +90,9 @@
     <div class="control-window">
         <input type="hidden" id="perfId" value="${perId }" />
         <table id="ticketInfo">
-          
+			<thead>
+				<h4>My 예매정보</h4>
+			</thead>
         </table>
         <table class="table table-bordered" id="conTb">
             <tbody>
@@ -95,7 +110,7 @@
                 </tr>
                 <tr>
                     <th>티켓금액</th>
-                    <td id="totalPrice"></td>
+                    <td id="ctotalPrice"></td>
                 </tr>
                 <tr>
                     <th>취소기한</th>

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.js"></script>
     
     <script src="/js/ticket/ticket.js"></script>
     
@@ -20,12 +22,14 @@
         html,
         body {
             overflow: hidden;
+            background: #f1eeec;
         }
         
         .container {
             width: 1000px;
             height: 600px;
             border: 0px dotted black;
+            background-color:white;
         }
         
         .info-wrapper {
@@ -48,6 +52,7 @@
             height: 100%;
             border: 0px dotted black;
             padding: 0px;
+            background-color: whitesmoke;
         }
         
         .control-body {
@@ -155,7 +160,8 @@
             </div>
             <div class="col-sm-3 control-body">
                 <div class="control-panel">
-                    <iframe src="/ticket/panel" scrolling="no"></iframe>
+                    <!-- <iframe src="/ticket/panel" scrolling="no"></iframe> -->
+                    <jsp:include page="/WEB-INF/views/ticket/control-panel2.jsp" flush="false"/>
                 </div>
                 <div class="btn-panel" style="margin-top:30px">
                     <div class="btn-group btn-group-justified">
