@@ -40,10 +40,11 @@
                		var genDiv = '<div class="frame">'
 				    genDiv += '<div class="frame1">';
 				    genDiv += '<div class="card">';
-				    genDiv += '<img src="/img/noImg.png" onerror="ImgError(this)" />';
+				    //genDiv += '<img src="/img/noImg.png" onerror="ImgError(this)" />';
+				    genDiv += '<img src="/img/perf/'+this['per_image']+'" onerror="ImgError(this)" />';
 				    genDiv += '</div>';
 			    	genDiv += '<div class="card back">';
-			    	genDiv += '<img class="backPost" src="/img/noImg.png" onerror="ImgError(this)" />';
+			    	genDiv += '<img class="backPost" src="/img/perf/'+this['per_image']+'" onerror="ImgError(this)" />';
 			    	genDiv += '<article id="movieInfo">';
 			    	genDiv += '<div class="moveInfoBtn">';
 			    	genDiv += '<div class="moveInfoBtn1">';
