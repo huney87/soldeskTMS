@@ -310,7 +310,7 @@ var ticketsInit = function () {
 
 //	티켓 등급 및 가격
 var ticketGrade = function(){
-	var perId = 23;
+	var perId = sessionStorage.getItem("perId");
    	$.ajax({
         url: "/ticket/getPerSeatInfo",
         data:{

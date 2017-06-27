@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% String perId = request.getParameter("perf_id");
+		session.setAttribute("perId", perId);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,8 +121,7 @@
         }
     </style>
   
-    <script type="application/javascript">        
-
+    <script type="application/javascript"> 
         var initCalender = function( data ) {       
             var eventData = [];
             for( i = 0 ; i < data.length ;){   
@@ -187,10 +189,12 @@
         
 
         $(document).ready(function() {
+        	sessionStorage.setItem("perId",$("#a").val()); //세션에 공연 아이디 저장.
+        	
             $.ajax({
                 url: '/ticket/getskd',
                 data : {
-                	"performance_id" : 1,
+                	"performance_id" : $("#a").val()
                 },
                 dataType: 'json',
                 success : function(data) {
@@ -223,13 +227,9 @@
        
     </script>
     
-    
-    
-    
-    
 </head>
-
 <body>
+	<input type="hidden" id="a" value="<%=perId%>"></input>
     <div class="container">
         <div class="row info-wrapper">
             <div class="col-sm-12" style="height:100%;">
