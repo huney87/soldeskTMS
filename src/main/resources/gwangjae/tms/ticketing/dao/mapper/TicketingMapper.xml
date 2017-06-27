@@ -47,13 +47,11 @@
 		ORDER BY si.SINFO_TYPE -->
 		 
 		SELECT p.perf_id AS "per_id",
-		 	p.h_id AS "hallId",
-		 	p.cat_id AS "cat_id",
 		 	p.perf_title AS "per_title",
 		 	p.perf_startdate AS "per_startDate",
 		 	p.perf_enddate AS "per_endDate",
 		 	p.perf_image AS "per_image",
-			h.h_name AS "hallName"
+			h.h_name AS "hall_name"
 		FROM performances p
 			LEFT OUTER JOIN halls h
 		ON p.H_ID = h.H_ID

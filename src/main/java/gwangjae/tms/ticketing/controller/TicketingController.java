@@ -82,7 +82,7 @@ public class TicketingController {
 	
 	@RequestMapping(value="/getPerformanceInfo",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public Map<String,Object> getPerfInfo(@RequestParam("per_Id") int perfId){
+	public Map<String,Object> getPerfInfo(HttpSession session,@RequestParam("perf_Id") int perfId){
 		Map<String,Object> resultMap = new HashMap<>();
 		Performance perfInfo = service.getPerfInfo(perfId);
 		resultMap.put("PerfInfo", perfInfo);

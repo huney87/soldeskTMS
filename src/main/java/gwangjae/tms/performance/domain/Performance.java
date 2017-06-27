@@ -7,6 +7,7 @@ public class Performance {
 	private String per_startDate;
 	private String per_endDate;
 	private String per_image;
+	private String hall_name;
 	private int hall_id;
 	private int userId;
 	private int display; // 소비자에게 보이게 할지 안보이게 할지.
@@ -69,6 +70,14 @@ public class Performance {
 		this.hall_id = hall_id;
 	}
 
+	public String getHall_name() {
+		return hall_name;
+	}
+
+	public void setHall_name(String hall_name) {
+		this.hall_name = hall_name;
+	}
+	
 	public int getUserId() {
 		return userId;
 	}
