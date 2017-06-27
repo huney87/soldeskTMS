@@ -12,10 +12,10 @@
 					<div class="frame">
 						<div class="frame1">
 							<div class="card">
-								<img src="/img/noImg.png" onerror="ImgError(this)" />
+								<img src="/img/perf/${genre.per_image}" onerror="ImgError(this)" />
 							</div>
 							<div class="card back">
-								<img class="backPost" src="/img/noImg.png" onerror="ImgError(this)" />
+								<img class="backPost" src="/img/perf/${genre.per_image}" onerror="ImgError(this)" />
 								<article id="movieInfo">
 									<div class="moveInfoBtn">
 										<div class="moveInfoBtn1">
