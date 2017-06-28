@@ -20,6 +20,7 @@
         $("#date-popover-content").html('You clicked on date ' + date);
         $("#date-popover").show();
         return true;
+        console.log(${perfInfo});
     }
 </script>		
 	<!-- 공연들 -->
@@ -75,6 +76,7 @@
 					  		<div class="panel panel-default">
 					    		<div class="panel-heading">알립니다</div>
 					    		<div class="panel-body">
+					    		${perfInfo}
 					    			<img src="../img/item/17004371/17004371_01.jpg">
 					    		</div>
 					    		<div class="panel-heading">작품설명</div>

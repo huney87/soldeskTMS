@@ -34,7 +34,7 @@ $(function(){
 			}else{
 			$(reserves).each(function(idx, reserve){
 					tr=$("<tr></tr>");
-					td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail?'"+reserve.perfId+">"
+					td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail?perfId="+reserve.perfId+"'>"
 							+reserve.perfTitle+"</a></td><td>"
 							+reserve.hallName+"</td><td>"
 							+reserve.reserveDate+"</td><td>"
@@ -88,6 +88,7 @@ var delReserve = function(reserve){
 </script>
 
 <jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
+
 <input type="hidden" id="email" value="${email}" />
 	<div class="container" style="padding:2rem 0;">
 		<div class="row">
