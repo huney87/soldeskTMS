@@ -90,14 +90,14 @@ var regBtns=function(){
 	});
 	
 	var printPerform=function(perform,value){
-		list=$("<div class='col-sm-3'><img src='./"+perform.perfImage+"' onerror='ImgError(this)'/></div>"
-				+"<div class='col-sm-7'><div class='col-sm-10'>"
-				+"<h2>"+perform.perfTitle+"</h2>"
+		list=$("<div class='row' style='margin: 1rem'><div class='col-sm-4'><img src='/img/perf/"+perform.perfImage+"' style='height: 150px' onerror='ImgError(this)'/></div>"
+				+"<div class='col-sm-8'><div class='row'><div class='col-sm-10'>"
+				+"<h3>"+perform.perfTitle+"</h3>"
 				+"<p>시작일:"+perform.perfStartDate+"		종료일:"+perform.perfEndDate+"</p>"
-				+"<p>총 티켓 판매 수: "+perform.perfCntTicket+"</p>"
+				+"<p>총 티켓 판매 수: "+perform.perfCntTicket+"</p></div>"
 				+"<div class='col-sm-2'>"
-				+"<button type='button' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
-				+"</div></div></div>"
+				+"<button type='button' style='margin: 4rem' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
+				+"</div></div></div></div>"
 				+"<input type='hidden' id='hidden"+perform.perfId+"' name='hidden' value='"+perform.perfDisplay+"'/>");
 		performanceList.append(list);
 	}
@@ -142,6 +142,12 @@ var changeDisplay=function(id){
      });
 	
 }
+
+function ImgError(source){
+    source.src = "/img/noImg.png";
+    source.onerror = "";
+    return true;
+}
 </script>
 </head>
 <body>
@@ -185,7 +191,7 @@ var changeDisplay=function(id){
 				</div>
 				
 				<div class="list-group">
-				<div class="row col-sm-12" style="margin-top:10px" id="performanceList">
+				<div class="row col-sm-10" style="margin-top:10px" id="performanceList">
 
 				</div>
 				</div>
