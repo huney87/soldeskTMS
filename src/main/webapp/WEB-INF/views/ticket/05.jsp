@@ -152,7 +152,7 @@ $(document).ready(function(){
 	$("#nextBtn").on("click", function(){
 		var perId = sessionStorage.getItem('perId');
 		var email = $("#email").val();
-		var rndId = sessionStorage.getItem('ticketCnt');
+		var rndId = sessionStorage.getItem('ticketCnt'); // 세션에서 티켓값이 아니라 라운드 아이디를 불러와야함.
 		
 		// 예매해서 예매번호 가져오기
 		$.ajax({
