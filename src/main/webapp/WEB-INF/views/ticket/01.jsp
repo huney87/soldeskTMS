@@ -129,7 +129,7 @@
             			"date": data[i].roundDate,
             			"time1": data[i].roundTime,
             			"time2": data[i+1].roundTime,
-            			"roundId1": data[i].roundId
+            			"roundId1": data[i].roundId,
             			"roundId2": data[i+1].roundId
             			};            	
                 eventData.push(skddate);   
@@ -157,12 +157,16 @@
             
             for(var i=0 ; i<time2.length ; i++){
             	if(time2[i].date == date){
-            		$("#roundTime1").val(time2[i].time1);
-            		$("#roundTime11").text(time2[i].time1);
-            		$("#roundTime2").val(time2[i].time2);
-            		$("#roundTime22").text(time2[i].time2);
-            		sessionStorage.setItem('ticketTime1', time2[i].time1);
-            		sessionStorage.setItem('ticketTime2', time2[i].time2);
+           			$("#roundTime1").val(time2[i].time1);
+               		$("#roundTime11").text(time2[i].time1);
+               		$("#roundTime1").data("roundId",time2[i].roundId1);
+               		$("#roundTime2").val(time2[i].time2);
+               		$("#roundTime22").text(time2[i].time2);
+               		$("#roundTime2").data("roundId",time2[i].roundId2);
+               		sessionStorage.setItem('ticketTime1', time2[i].time1);
+               		sessionStorage.setItem('ticketTime2', time2[i].time2);
+               		sessionStorage.setItem('roundId1', time2[i].roundId1);
+               		sessionStorage.setItem('roundId2', time2[i].roundId2);            			
             	}
             }
             $('.btn1').show();
@@ -171,8 +175,10 @@
         var initBtn = function() {
 			$('[name="roundTimeBtn"]').on('click',function(){
 				var time = $(this).val();
-				
+				var roundId = $(this).data(roundId);
+				console.log(roundId);
 				sessionStorage.setItem('ticketTime', time);
+				sessionStorage.setItem('roundId', roundId);
 		        $("#ticketTime").text(time);
 			});
         	
@@ -217,11 +223,17 @@
             		var ticketTime = sessionStorage.getItem('ticketTime');
             		var ticketTime1 = sessionStorage.getItem('ticketTime1');
             		var ticketTime2 = sessionStorage.getItem('ticketTime2');
+            		var ticketRound1 = sessionStorage.getItem('roundId1');
+        			var ticketRound2 = sessionStorage.getItem('roundId2');
+        			
             		$('.btn1').show();
             		$("#roundTime1").val(ticketTime1);
             		$("#roundTime11").text(ticketTime1);
+            		$("#roundTime1").data("roundId",ticketRound1);
             		$("#roundTime2").val(ticketTime2);
             		$("#roundTime22").text(ticketTime2);
+            		$("#roundTime2").data("roundId",ticketRound2);
+            		
             		if(ticketTime == ticketTime1){
             			$("#roundTime1").prop({checked: true});
             		}else {

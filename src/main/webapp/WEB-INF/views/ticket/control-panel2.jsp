@@ -46,14 +46,12 @@
         	else sessionStorage.setItem("perId",$("#a").val()); //세션에 공연 아이디 저장.
         	
         	var perId = sessionStorage.getItem('perId');
-            console.log(perId);
             
             $.ajax({
             	url:'/ticket/getPerformanceInfo',
             	type:'get',
             	data:{'perf_Id' : perId},
             	success:function(response){
-            		console.log(response);
             		var perInfo ='<tr>'
             		perInfo += '<td rowspan="4">';
             		perInfo += '<div class="img-wrapper">';
