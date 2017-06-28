@@ -18,7 +18,7 @@ table th,table td{
 </style>
 
 <script type="text/javascript">
-$(function() { 
+$(function(){
 	var email=$("#email").val();
 	var reserveList=$("#reserveList");
 	reserveList.empty();
@@ -27,8 +27,12 @@ $(function() {
 		url:"/mypage/reservelist",
 		data:{userEmail:email},
 		success:function(reserves){
+			if(reserves==null||reserves.length==0){
+				tr=$("<tr></tr>");
+				td=$("<td colspan='5'><h3>예매 내역이 없습니다</h3></td>");
+				reserveList.append(tr.append(td));
+			}else{
 			$(reserves).each(function(idx, reserve){
-				if(reserve){ 
 					tr=$("<tr></tr>");
 					td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail?'"+reserve.perfId+">"
 							+reserve.perfTitle+"</a></td><td>"
@@ -37,12 +41,10 @@ $(function() {
 							+"<button type='button' class='btn btn-danger' value='"+reserve.reservationId+"' onClick='delReserve(this)'>취소</button>");
 					reserveList.append(tr.append(td));
 					td.find("button").data("reservationId", reserve.reservationId);
-				}else{
-					tr=$("<tr></tr>");
-					td=$("<td>조회된 결과가 없습니다</td>");
-					reserveList.append(tr.append(td));
-				}
-			});
+				});
+			}
+		},error:function(a,b,errMsg){
+			swal(errMsg);
 		}
 	});
 });

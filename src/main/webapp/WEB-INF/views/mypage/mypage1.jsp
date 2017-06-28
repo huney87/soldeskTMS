@@ -111,10 +111,10 @@ $(function(){
 			},
 			success:function(result){
 				if(result) return true;
-				else swal("수정 실패");
+				else swal("수정에 실패하였습니다");
 			},
 			error:function(a,b,errMsg){
-				swal("수정 실패",errMsg);
+				swal("수정 실패: ",errMsg);
 			},
 			complete:function(){
 				swal({
