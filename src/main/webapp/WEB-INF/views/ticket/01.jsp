@@ -175,7 +175,7 @@
         var initBtn = function() {
 			$('[name="roundTimeBtn"]').on('click',function(){
 				var time = $(this).val();
-				var roundId = $(this).data(roundId);
+				var roundId = $(this).data('roundId');
 				console.log(roundId);
 				sessionStorage.setItem('ticketTime', time);
 				sessionStorage.setItem('roundId', roundId);

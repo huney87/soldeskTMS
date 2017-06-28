@@ -48,6 +48,11 @@
 		values (rdet_id_seq.nextval,#{rId},#{sinfoId})
 	</insert>
 	
+	<insert id="seatState">
+		
+	
+	</insert>
+
 	<update id="updateSeatState" parameterType="int">
 		UPDATE SEATS 
 		SET state=1

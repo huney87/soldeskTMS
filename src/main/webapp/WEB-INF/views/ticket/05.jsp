@@ -98,7 +98,6 @@ var reservSeatDb = function(rId){
 	        	   sinfoId:sId
 	           },          
 	           success:function(result){
-	        	   console.log("좌석수만큼 디테일 저장완료");
 	        		
 	           }
 		});
@@ -152,6 +151,7 @@ $(document).ready(function(){
 		var perId = sessionStorage.getItem('perId');
 		var email = $("#email").val();
 		var rndId = sessionStorage.getItem('roundId');
+
 		
 		// 예매해서 예매번호 가져오기
 		$.ajax({
