@@ -7,7 +7,8 @@
 		<result property="perId" column="perf_id"/>
 		<result property="seatType" column="s_id"/>
 		<result property="grade" column="sinfo_grade"/>
-		<result property="price" column="sinfo_price"/>	
+		<result property="price" column="sinfo_price"/>
+		<result property="seatNumber" column="s_number"/>	
 	</resultMap>
 	
 	<resultMap id="PerSeatMap" type="seat">
@@ -18,7 +19,7 @@
 		<result property="per_id" column="perf_id"/>
 		<result property="seatNumber" column="s_number"/>
 		<result property="state" column="state"/>
-		<result property="price" column="price"/>
+		<result property="price" column="price"/>	
 	</resultMap>
 	
 	<resultMap id="PerMap" type="PerfSearch">
@@ -48,9 +49,9 @@
 	</select>
 	
 	<select id="seatinfoForTicket" parameterType="Seat" resultMap="SeatMap">
-		select *
-		from SEATINFO
-		where PERF_ID=#{per_id} and sinfo_type in(select s_type from seats where s_id = #{seatId})
+		select si.PERF_ID, si.SINFO_GRADE, si.SINFO_ID, si.SINFO_PRICE, si.SINFO_TYPE, s.S_NUMBER
+		from seatinfo si, SEATS s
+		where si.perf_id=#{per_id} and si.sinfo_type = s.S_TYPE and s.S_ID = #{seatId}
 	</select>
 	
 	<select id="getPerLayout"  parameterType="int" resultMap="PerSeatMap">

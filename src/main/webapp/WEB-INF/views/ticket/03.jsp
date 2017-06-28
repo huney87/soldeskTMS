@@ -175,9 +175,8 @@
         	        	   seatId:sessionStorage.getItem(tmp)
         	           },          
         	           success:function(seatInfo){
-        	        	   console.log(seatInfo);
 			        		var tr1 = $("<tr></tr>");
-			        		var td1 =$("<td>"+seatInfo.seatInfoId+"</td>"); //좌석 아이디값
+			        		var td1 =$("<td>"+seatInfo.seatNumber+"</td>"); //좌석 아이디값
 			        		var td2 = $("<td><input type='text' id='seat"+i+"' style='border:none;' value='"+seatInfo.grade+"등급'></td>");
 			        		var td3 =$("<td><input type='radio' class='seatGrades' id='normal' name='ticket"+i+"'>일반&nbsp;&nbsp;&nbsp;"
 			        	    		+"<input type='radio' class='seatGrades' id='kid' name='ticket"+i+"'>청소년할인10%</td>");

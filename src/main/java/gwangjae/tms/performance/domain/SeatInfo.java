@@ -6,6 +6,7 @@ public class SeatInfo {
 	private int seatType;
 	private String grade;
 	private int price;
+	private int seatNumber;
 
 	public SeatInfo(){}
 
@@ -48,6 +49,16 @@ public class SeatInfo {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	public int getSeatNumber() {
+		return seatNumber;
+	}
+
+	public void setSeatNumber(int seatNumber) {
+		this.seatNumber = seatNumber;
+	}
+
+	
 	
 	
 }
