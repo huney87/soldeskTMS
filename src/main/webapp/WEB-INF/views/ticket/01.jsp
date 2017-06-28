@@ -128,7 +128,9 @@
             	var skddate = {
             			"date": data[i].roundDate,
             			"time1": data[i].roundTime,
-            			"time2": data[i+1].roundTime
+            			"time2": data[i+1].roundTime,
+            			"roundId1": data[i].roundId
+            			"roundId2": data[i+1].roundId
             			};            	
                 eventData.push(skddate);   
                 i = i+2;
