@@ -108,6 +108,7 @@ public class TicketingServiceImpl implements TicketingService {
 	
 	@Override
 	public int setRevDetail(Reservations reservation){
+		ticketDao.updateSeatState(reservation.getSinfoId());
 		return ticketDao.setRevDetail(reservation);
 		}
 }

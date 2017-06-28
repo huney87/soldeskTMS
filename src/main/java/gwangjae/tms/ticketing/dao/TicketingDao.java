@@ -18,4 +18,5 @@ public interface TicketingDao {
 	public int getRid();
 	public int setRevDetail(Reservations reservation);
 	public Reservations getReservResult(Reservations reservation);
+	public int updateSeatState(int seatId);
 }

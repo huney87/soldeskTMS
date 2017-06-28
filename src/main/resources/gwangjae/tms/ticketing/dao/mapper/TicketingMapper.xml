@@ -46,8 +46,13 @@
 	<insert id="setRevDetail" parameterType="Reservations">
 		insert into reservedetail(rdet_id, r_id, sinfo_id)
 		values (rdet_id_seq.nextval,#{rId},#{sinfoId})
-	
 	</insert>
+	
+	<update id="updateSeatState" parameterType="int">
+		UPDATE SEATS 
+		SET state=1
+		where s_id=#{value}
+	</update>
 	
 	<select id="getReservResult" parameterType="Reservations" resultMap="reservResult">
 		select u.user_name, p.PERF_TITLE, c.CTR_NAME, h.H_NAME

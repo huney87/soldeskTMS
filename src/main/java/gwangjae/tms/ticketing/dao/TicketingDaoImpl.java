@@ -56,4 +56,9 @@ public class TicketingDaoImpl implements TicketingDao {
 	public List<SeatInfo> getPerSeatInfo(int perfId){
 		return mapper.getPerfSeatInfo(perfId);
 	}
+	
+	@Override
+	public int updateSeatState(int seatId){
+		return mapper.updateSeatState(seatId);
+	}
 }
