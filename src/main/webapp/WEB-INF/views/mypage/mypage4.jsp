@@ -21,7 +21,7 @@ $(function() {
 		
 		$.ajax({
 			url:"/mypage/delUser",
-			method:"post",
+			method:"get",
 			data:{userEmail:email,userPw:pw},
 			success:function(result){
 				if(result==1) {
@@ -33,16 +33,18 @@ $(function() {
 					function(){
 						location.replace("/login/logout");
 					});
-				}
-				else swal({
+				}else{
+					swal({
 					title: "탈퇴 실패", 
 					text: "비밀번호를 정확하게 입력해 주세요",
 					type: "error"
 					},
 					function(){
-						location.replace("/login/logout");
+						window.location.reload();
 					});
-			},error:function(a,b,errMsg){
+				}
+			},
+			error:function(a,b,errMsg){
 				swal("삭제 실패: "+errMsg);
 			}
 		});
@@ -50,7 +52,7 @@ $(function() {
 });
 </script>
 <jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
-<div class="container" style="padding:2rem 0;">
+<div class="container" style="padding:2rem 0">
 	<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 			<div class="btn-group btn-group-justified">
@@ -62,8 +64,7 @@ $(function() {
 	<div class="page-header">
   		<h1>회원탈퇴</h1>
 	</div>
-
-	<form action="#">
+	
 	<div class="list-group">
   		<li class="list-group-item active">개선사항</li>
   		<li class="list-group-item">
@@ -93,7 +94,6 @@ $(function() {
 	<div class="col-sm-4 col-sm-offset-4 text-center">
 		<button class="btn btn-danger btn-block btn-lg" id="delUser">탈 퇴</button>
 	</div>
-	</form>
 </div>
 </div>
 </div>

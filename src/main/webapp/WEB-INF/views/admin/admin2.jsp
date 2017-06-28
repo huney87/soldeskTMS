@@ -46,6 +46,8 @@ var regBtns=function(){
 	var performanceList=$("#performanceList");
 	var display;
 	var value;
+	var changeColor;
+	var changeButton;
 	var img;
 	var per;
 	
@@ -55,9 +57,17 @@ var regBtns=function(){
 		url:"/admin/listPerform",
 		success:function(performs){
 			$(performs).each(function(idx, perform){
-				if(perform.perfDisplay===1) value="중지";
-				else value="게시";
-				printPerform(perform,value);
+				if(perform.perfDisplay===1) { //게시된 상태
+					value="중지";
+					changeColor="blue";
+					changeButton="btn btn-danger";
+				}
+				else { //중단된 상태
+					value="게시";
+					changeColor="red";
+					changeButton="btn btn-default";
+				}
+				printPerform(perform,value,changeColor,changeButton);
 			});
 		}
 	});
@@ -89,14 +99,14 @@ var regBtns=function(){
 		window.location.reload();
 	});
 	
-	var printPerform=function(perform,value){
+	var printPerform=function(perform,value,changeColor,changeButton){
 		list=$("<div class='row' style='margin: 1rem'><div class='col-sm-4'><img src='/img/perf/"+perform.perfImage+"' style='height: 150px' onerror='ImgError(this)'/></div>"
 				+"<div class='col-sm-8'><div class='row'><div class='col-sm-10'>"
-				+"<h3>"+perform.perfTitle+"</h3>"
+				+"<h3 style='color: "+changeColor+"'>"+perform.perfTitle+"</h3>"
 				+"<p>시작일:"+perform.perfStartDate+"		종료일:"+perform.perfEndDate+"</p>"
 				+"<p>총 티켓 판매 수: "+perform.perfCntTicket+"</p></div>"
 				+"<div class='col-sm-2'>"
-				+"<button type='button' style='margin: 4rem' class='btn btn-danger' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
+				+"<button type='button' style='margin: 4rem' class='"+changeButton+"' value='"+perform.perfId+"' onClick='changeDisplay(value)'>"+value+"</button>"
 				+"</div></div></div></div>"
 				+"<input type='hidden' id='hidden"+perform.perfId+"' name='hidden' value='"+perform.perfDisplay+"'/>");
 		performanceList.append(list);
