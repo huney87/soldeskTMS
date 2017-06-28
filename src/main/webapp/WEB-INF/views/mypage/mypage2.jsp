@@ -28,9 +28,9 @@ $(function() {
 		data:{userEmail:email},
 		success:function(reserves){
 			$(reserves).each(function(idx, reserve){
-				if(reserve){
+				if(reserve){ 
 					tr=$("<tr></tr>");
-					td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail'>"
+					td=$("<td>"+reserve.reservationId+"</td><td><a href='/detail?'"+reserve.perfId+">"
 							+reserve.perfTitle+"</a></td><td>"
 							+reserve.hallName+"</td><td>"
 							+reserve.reserveDate+"</td><td>"

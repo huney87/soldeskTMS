@@ -19,10 +19,11 @@
 		<result property="reserveDate" column="r_date"/>
 		<result property="perfTitle" column="perf_title"/>
 		<result property="hallName" column="h_name"/>
+		<result property="perfId" column="perf_id"/>
 	</resultMap>
 	
 	<select id="getReserve" parameterType="String" resultMap="ReservMap">
-		select r_id,r_date,perf_title,h_name from reserves r join users u 
+		select r_id,r_date,perf_title,p.perf_id,h_name from reserves r join users u 
 		on (r.user_id=u.user_id)
 		join PERFORMANCES p
 		on (r.perf_id=p.perf_id)

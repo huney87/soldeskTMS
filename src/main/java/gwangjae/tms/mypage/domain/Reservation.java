@@ -1,12 +1,11 @@
 package gwangjae.tms.mypage.domain;
 
-import java.sql.Date;
-
 public class Reservation {
 	private int reservationId;
 	private String reserveDate;
 	private String perfTitle;
 	private String hallName;
+	private int perfId;
 	
 	public int getReservationId() {
 		return reservationId;
@@ -31,5 +30,11 @@ public class Reservation {
 	}
 	public void setHallName(String hallName) {
 		this.hallName = hallName;
+	}
+	public int getPerfId() {
+		return perfId;
+	}
+	public void setPerfId(int perfId) {
+		this.perfId = perfId;
 	}
 }
