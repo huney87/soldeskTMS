@@ -14,6 +14,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#findId").hide();
+	$("#findPw").hide();
 	$("#lostId").show();
 	$("#lostPw").show();
 	
@@ -42,7 +43,7 @@ $(function(){
 							window.location.reload();
 						});
 					}else{
-						$("#value").text(email);
+						$("#uid").text(name+" 회원님의 아이디는 "+email+" 입니다.");
 						$("#findId").toggle();
 						$("#lostId").toggle();
 						$("#lostPw").toggle();
@@ -80,14 +81,22 @@ $(function(){
 							window.location.reload();
 						});
 					}else{
-						$("#result").text(pw);
-						$("#findId").toggle();
+						$("#upw").text(name+" 회원님의 비밀번호는 "+pw+" 입니다.");
+						$("#findPw").toggle();
 						$("#lostId").toggle();
 						$("#lostPw").toggle();
 					}
 				}
 			});
 		}
+	});
+	
+	$("#back").bind("click",function(){
+		location.replace("/user/find");
+	});
+	
+	$(".login").bind("click",function(){
+		location.replace("/");
 	});
 });
 </script>
@@ -115,7 +124,14 @@ $(function(){
  			</div>
  			
  			<div id="findId">
-				<p id="value"></p>
+				<div class="panel panel-success">
+      			<div class="panel-heading"><h3>아이디</h3></div>
+      			<div class="panel-body"><p id="uid"></p></div>
+      			<div class="col-sm-4 col-sm-offset-4 text-center">
+      				<button class="btn btn-primary btn-lg login" style="margin: 1rem">로그인</button>
+      				<button class="btn btn-default btn-lg" id="back" style="margin: 1rem">비밀번호 찾기</button>
+      			</div>
+    			</div>
 			</div>
 	
  			<div class="col-sm-6 text-center" id="lostPw">
@@ -144,7 +160,13 @@ $(function(){
 		</div>
 		
 		<div id="findPw">
-			<p id="result"></p>
+			<div class="panel panel-success">
+      			<div class="panel-heading"><h3>비밀번호</h3></div>
+      			<div class="panel-body"><p id="upw"></p></div>
+      			<div class="col-sm-4 col-sm-offset-4 text-center">
+      				<button class="btn btn-primary btn-lg login" style="margin: 1rem">로그인</button>
+      			</div>
+    		</div>
 		</div>
 	</div>
 </div>
