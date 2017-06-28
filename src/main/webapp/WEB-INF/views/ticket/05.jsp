@@ -83,6 +83,48 @@
 	}
 </style>
 <script type="text/javascript">
+var reservSeatDb = function(rId){
+	var ticketCnt =	sessionStorage.getItem('ticketCnt');
+
+	// 예매된 번호에 맞춰 예매상세DB 생성, 좌석 숫자만큼 반복
+	for(var i=0;i<=ticketCnt;i++){
+		var tmp = 'selectedSeat'+i;
+		var sId = sessionStorage.getItem(tmp);
+		console.log(sId);
+		
+		$.ajax({
+	           url: "/ticket/setRevDetail",
+	           data:{
+	        	   rId:rId,
+	        	   sinfoId:sId
+	           },          
+	           success:function(result){
+	        	   console.log("좌석수만큼 디테일 저장완료");
+	        		
+	           }
+		});
+		
+	}
+}
+
+//저장하고 저장한 내용 보여주기.
+var reservResult = function(){
+	$.ajax({
+        url: "/ticket/getReservResult",
+        data:{
+     	   rId:rId,
+     	   seatId:sessionStorage.getItem(tmp)
+        },          
+        success:function(result){
+     	   
+     		
+        }
+	});
+	
+}
+
+
+
 $(document).ready(function(){
 	$("#selectBankBox").change(function(){
 		$("#selectBankBox option:selected").each(function(){
@@ -106,22 +148,34 @@ $(document).ready(function(){
 		return true;
 	});  
 	
-	$("#nextBtn").on("click", function(){		
-		window.opener.top.location.href="/ticket/payment"
+	//다음 버튼 누르면 실행.(예매 데이터 저장)
+	$("#nextBtn").on("click", function(){
+		var perId = sessionStorage.getItem('perId');
+		var email = $("#email").val();
+		var rndId = sessionStorage.getItem('ticketCnt');
+		
+		// 예매해서 예매번호 가져오기
+		$.ajax({
+ 	           url: "/ticket/setReserv",
+ 	           data:{
+ 	        	   perId:perId,
+ 	        	   rndId:rndId,
+ 	        	   userEmail:email
+ 	           },          
+ 	           success:function(rId){
+ 	        	  reservSeatDb(rId);
+ 	           }
+		});
+		//window.opener.top.location.href="/ticket/payment"
 		//window.opener.top.location.reload();//새로고침
-		window.close()
-		
-		
+		//window.close()	
 	});	
-	
-	
-	
 });
 </script>
 </head>
 
 <body>
-
+<input type="hidden" id="email" value="${email}"/> 
 <div class="container">
 	<div class="row info-wrapper">
 		<div class="col-sm-12" style="height:100%;">

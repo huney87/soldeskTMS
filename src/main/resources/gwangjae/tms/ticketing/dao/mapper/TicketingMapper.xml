@@ -15,11 +15,45 @@
 		<result property="sType" column="s_type"/>
 	</resultMap>
 	
+	<resultMap type="Reservations" id="reservResult">
+		<id property="rId" column="sinfo_id"/>
+		<result property="userId" column="s_id"/>
+		<result property="hId" column="perf_id"/>
+		<result property="perId" column="sinfo_grade"/>
+		<result property="rndId" column="sinfo_price"/>
+		<result property="rDate" column="h_id"/>
+		<result property="rState" column="s_row"/>
+	</resultMap>
+	
 	<resultMap type="Round" id="RoundMap">
 		<id property="roundId" column="rnd_id"/>
 		<result property="roundDate" column="rnd_date"/>
 		<result property="roundTime" column="rnd_time"/>
 	</resultMap>
+	
+	<insert id="setReserv" parameterType="Reservations">
+		insert into RESERVES(r_id, h_id, user_id, perf_id, rnd_id, r_date, r_state)
+		values(r_id_seq.nextval,(select h_id from PERFORMANCES where perf_id = #{perId} )
+		, (select user_id from users where user_email=#{userEmail}) , #{perId}, #{rndId}, sysdate, 1)
+	</insert>
+	
+	<select id="getRid" resultType="int">
+		select r_id from reserves
+		where rownum =1
+		order by r_id desc
+	</select>
+	
+	<insert id="setRevDetail" parameterType="Reservations">
+		insert into reservedetail(rdet_id, r_id, sinfo_id)
+		values (rdet_id_seq.nextval,#{rId},#{sinfoId})
+	
+	</insert>
+	
+	<select id="getReservResult" parameterType="Reservations" resultMap="reservResult">
+		select u.user_name, p.PERF_TITLE, c.CTR_NAME, h.H_NAME
+		from users u, PERFORMANCES p, CENTERS c, HALLS h
+		where u.USER_EMAIL=#{userEmail} and p.PERF_ID = #{perId} and p.H_ID = h.H_ID and h.CTR_ID = c.CTR_ID
+	</select>
 	
 	<select id="getAllSeatInfo" parameterType="int" resultMap="sinfoMap">
 		SELECT * 
@@ -50,7 +84,7 @@
 		FROM performances p
 			LEFT OUTER JOIN halls h
 		ON p.H_ID = h.H_ID
-		WHERE p.PERF_DISPLAY = 0 AND p.perf_id = #{perfId}
+		WHERE p.PERF_DISPLAY = 1 AND p.perf_id = #{perfId}
 
 		<!-- SELECT si.*
 		FROM SEATINFO si, PERFORMANCES p

@@ -3,6 +3,7 @@ package gwangjae.tms.ticketing.dao;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.performance.domain.SeatInfo;
+import gwangjae.tms.ticketing.domain.Reservations;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface TicketingDao {
 	public Performance getPerfDate(int perfId);
 	public Performance getPerfInfo(int perfId);
 	public List<SeatInfo> getPerSeatInfo(int perfId);
+	public int setReserv(Reservations reservation);
+	public int getRid();
+	public int setRevDetail(Reservations reservation);
+	public Reservations getReservResult(Reservations reservation);
 }

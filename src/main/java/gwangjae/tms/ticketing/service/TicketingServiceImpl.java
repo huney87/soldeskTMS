@@ -4,6 +4,7 @@ import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.ticketing.dao.TicketingDao;
+import gwangjae.tms.ticketing.domain.Reservations;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
 import java.util.LinkedList;
@@ -93,5 +94,20 @@ public class TicketingServiceImpl implements TicketingService {
 	public List<SeatInfo> getPerfSeatInfo(int perfId){
 		return ticketDao.getPerSeatInfo(perfId);
 	}
-
+	
+	@Override
+	public int setReserv(Reservations reservation){
+		ticketDao.setReserv(reservation);	
+		return ticketDao.getRid();
+	}
+	
+	@Override
+	public Reservations getReservResult(Reservations reservation){		
+		return ticketDao.getReservResult(reservation);
+	}	
+	
+	@Override
+	public int setRevDetail(Reservations reservation){
+		return ticketDao.setRevDetail(reservation);
+		}
 }

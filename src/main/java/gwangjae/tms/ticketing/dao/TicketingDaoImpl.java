@@ -4,6 +4,7 @@ import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.ticketing.dao.mapper.TicketingMapper;
+import gwangjae.tms.ticketing.domain.Reservations;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 
 import java.util.List;
@@ -15,6 +16,20 @@ import org.springframework.stereotype.Repository;
 public class TicketingDaoImpl implements TicketingDao {
 	@Autowired TicketingMapper mapper;
 
+	public int setReserv(Reservations reservation){
+		return mapper.setReserv(reservation);
+	}
+	public int getRid(){
+		return mapper.getRid();
+	}
+	public int setRevDetail(Reservations reservation){
+		return mapper.setRevDetail(reservation);
+	}
+	public Reservations getReservResult(Reservations reservation){
+		return mapper.getReservResult(reservation);
+	}
+
+	
 	@Override
 	public List<TicketSeatInfo> getAllSeatInfo(int perfId) {
 

@@ -3,6 +3,7 @@ package gwangjae.tms.ticketing.controller;
 import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.performance.domain.SeatInfo;
+import gwangjae.tms.ticketing.domain.Reservations;
 import gwangjae.tms.ticketing.domain.TicketSeatInfo;
 import gwangjae.tms.ticketing.service.TicketingService;
 
@@ -51,6 +52,26 @@ public class TicketingController {
 	@RequestMapping("/layout")
 	public String layoutView(HttpSession session, Model model){		
 		return "/ticket/seat-select";
+	}
+	
+	////////////// 기능
+	
+	@RequestMapping("/setReserv")// 예매하고 예매번호 가져오기
+	@ResponseBody
+	public int setReserv(Reservations reservation){
+		return service.setReserv(reservation);
+	}	
+	
+	@RequestMapping("/getReservResult")// 예매번호가 포함된 정보로 예매상세DB 저장.
+	@ResponseBody
+	public Reservations getReservResult(Reservations reservation){
+		return service.getReservResult(reservation);
+	}	
+	
+	@RequestMapping("/setRevDetail")// 예매번호가 포함된 정보로 예매상세DB 저장.
+	@ResponseBody
+	public int setRevDetail(Reservations reservation){
+	return service.setRevDetail(reservation);
 	}
 	
 	@RequestMapping("/getlayout")
