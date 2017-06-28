@@ -12,6 +12,9 @@
 #middle-menu {
 	display: none;
 }
+table th,table td{
+	text-align:center;
+}
 </style>
 
 <script type="text/javascript">
@@ -83,7 +86,7 @@ var delReserve = function(reserve){
 </script>
 
 <jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
-<input type="hidden" id="email" value="${email }" />
+<input type="hidden" id="email" value="${email}" />
 	<div class="container" style="padding:2rem 0;">
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
