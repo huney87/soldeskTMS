@@ -43,7 +43,7 @@
 		FROM performances p
 			LEFT OUTER JOIN halls h
 		ON p.H_ID = h.H_ID
-		WHERE ROWNUM <= 5 AND p.PERF_DISPLAY = 0 AND p.CAT_ID = #{gen_id}
+		WHERE ROWNUM <= 5 AND p.PERF_DISPLAY = 1 AND p.CAT_ID = #{gen_id}
 		ORDER BY p.PERF_ID DESC
 		]]>
 	</select>
