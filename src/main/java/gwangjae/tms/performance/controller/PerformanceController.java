@@ -6,18 +6,28 @@ import gwangjae.tms.performance.domain.Performance;
 import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.performance.service.PerformanceService;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/seller")
 public class PerformanceController {
 	@Autowired PerformanceService performanceService;
+	
+	@Value("${uploadDir}")
+    private String uploadDir;
 	
 	//메인화면
 	@RequestMapping
@@ -152,4 +162,24 @@ public class PerformanceController {
 				time2.toArray(new String[time2.size()]),
 				perId);
 	}
+	
+	//이미지 파일 업로드
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public boolean upload(MultipartFile uploadFile, HttpServletRequest request){
+        boolean isStored = true;
+        String dir = request.getServletContext().getRealPath(uploadDir);
+        System.out.println("dir: "+dir);
+        String fileName = uploadFile.getOriginalFilename(); 
+        try{
+            save(dir +"/"+ fileName, uploadFile);
+        }catch(IOException e){
+            isStored = false;
+        }
+        return isStored;
+    }
+    
+    private void save(String fileFullName, MultipartFile uploadFile) throws IOException{
+        uploadFile.transferTo(new File(fileFullName));
+    }
 }
