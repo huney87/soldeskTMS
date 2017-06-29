@@ -120,7 +120,7 @@ $(document).ready(function(){
      $('#genBtn2').on('click', {genid:2}, buttonClicked);
      $('#genBtn3').on('click', {genid:3}, buttonClicked);
     
-     <c:if test="${genpid >= 1}">
+     <c:if test='${genpid >= 1}'>
      	$('#genBtn'+<c:out value="${genpid}"/>).addClass('active');
      </c:if>
 });

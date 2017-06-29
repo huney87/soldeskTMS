@@ -1,26 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="application/javascript">
-	var eventData = [
-        {"date":"2017-06-17","badge":false,"title":"Example 1"},
-        {"date":"2017-06-29","badge":true,"title":"Example 2"}
-    ];
-	
-	function myDateFunction(id, fromModal) {
-        $("#date-popover").hide();
-        if (fromModal) {
-            $("#" + id + "_modal").modal("hide");
-        }
-        var date = $("#" + id).data("date");
-        var hasEvent = $("#" + id).data("hasEvent");
-        if (hasEvent && !fromModal) {
-            return false;
-        }
-        $("#date-popover-content").html('You clicked on date ' + date);
-        $("#date-popover").show();
-        return true;
+<script>
+    var initCalender = function( data ) {
+        var eventData = [];
+        for( i = 0 ; i < data.length ;){   
+        	var skddate = {
+        			"date": data[i].roundDate,
+        			"time1": data[i].roundTime,
+        			"time2": data[i+1].roundTime,
+        			"roundId1": data[i].roundId,
+        			"roundId2": data[i+1].roundId
+        			};            	
+            eventData.push(skddate);   
+            i = i+2;
+        }            
+    	
+        $('#show-calender').zabuto_calendar({
+            language: "kr",
+            data: eventData,
+            action: function() {
+            	clickCalender(this.id, eventData);
+            },
+        });
     }
+
+    var clickCalender = function(id, eventData) {
+        var date = $("#" + id).data("date");
+        var time2 = eventData;
+        var hasEvent = $("#" + id).data("hasEvent");
+        if (hasEvent) {
+            sessionStorage.setItem('ticketDate', date);
+        }
+        
+        for(var i=0 ; i<time2.length ; i++){
+        	if(time2[i].date == date){
+       			$("#roundTime1").val(time2[i].time1);
+           		$("#roundTime11").text(time2[i].time1);
+           		$("#roundTime1").data("roundId",time2[i].roundId1);
+           		$("#roundTime2").val(time2[i].time2);
+           		$("#roundTime22").text(time2[i].time2);
+           		$("#roundTime2").data("roundId",time2[i].roundId2);
+        	}
+        }
+        $('.btn1').show();
+        $('.btn2').hide();
+    }
+
+    var initBtn = function() {
+		$('[name="roundTimeBtn"]').on('click',function(){
+			var time = $(this).val();
+			var roundId = $(this).data('roundId');
+			sessionStorage.setItem('ticketTime', time);
+			sessionStorage.setItem('roundId', roundId);
+		});
+    }        
+
+    $(document).ready(function() {
+    	$('.btn1').hide();
+    	var perId = ${perfInfo.per_id};
+
+    	$.ajax({
+            url: '/ticket/getskd',
+            data : {
+            	"performance_id" : perId
+            },
+            dataType: 'json',
+            success : function(data) {
+                initCalender(data);
+            }
+	    });           
+        
+        initBtn();
+    });
 </script>		
 	<!-- 공연들 -->
 	<div class="container-fluid" id="categoryContent">
@@ -250,8 +302,8 @@
 				<div class="row" id="sideMenu" data-spy="affix" data-offset-top="50">
 					<div class="col-xs-12">
 						<h4>예매가능 공연날짜</h4>
-						<h5>2017.06.08 ~ 2017.06.18</h5>
-						<div id="my-calendar"></div> <!-- 캘린더 -->
+						<h5>${perfInfo.per_startDate} ~ ${perfInfo.per_endDate}</h5>
+						<div id="show-calender"></div> <!-- 캘린더 -->
 						<div class="btn-group btn-block"> <!-- 드롭다운 -->
 							<button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
 				      			<span class="col-xs-10">
@@ -262,9 +314,10 @@
 				        		</span>
 				    		</button>
 				    		<ul class="dropdown-menu btn-block" role="menu">
-				    			<li class="dropdown-header">회차를 선택해 주세요</li>
-				    			<li><a href="#">18시 00분</a></li>
-				    			<li><a href="#">21시 00분</a></li>
+				    			<li class="dropdown-header btn1">회차를 선택해 주세요</li>
+				    			<li class="dropdown-header btn2">먼저 날짜를 선택하세요</li>
+				    			<li name="roundTimeBtn" id="roundTime1"><a href="#">&nbsp; &nbsp;<span id="roundTime11"></span></a></li>
+				    			<li name="roundTimeBtn" id="roundTime2"><a href="#">&nbsp; &nbsp;<span id="roundTime22"></span></a></li>
 				    		</ul>
 				  		</div> <!-- 드롭다운 -->
 				  			

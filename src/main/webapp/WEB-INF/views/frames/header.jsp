@@ -14,8 +14,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <!-- 달력 -->
-<script src="/js/zabuto_calendar.min.js" type="text/javascript"></script>
-<link href="/css/zabuto_calendar.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/zabuto_calendar.min.css">
+<script src="/js/zabuto_calendar.min.js"></script>
 <!-- 로그인 창 -->
 <link rel="stylesheet" type="text/css" href="/css/login.css">
 <!-- 공통 -->

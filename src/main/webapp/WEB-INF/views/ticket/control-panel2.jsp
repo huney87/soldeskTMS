@@ -43,10 +43,10 @@
             if(ticketPrice) $("#ctotalPrice").text(ticketPrice+"원");
             
             if (sessionStorage.getItem('perId')) ;
-        	else sessionStorage.setItem("perId",$("#a").val()); //세션에 공연 아이디 저장.
+        	else sessionStorage.setItem('perId',$('#a').val()); //세션에 공연 아이디 저장.
         	
-        	var perId = sessionStorage.getItem('perId');
-            
+        	var perId = $('#a').val();
+            console.log(perId)
             $.ajax({
             	url:'/ticket/getPerformanceInfo',
             	type:'get',
