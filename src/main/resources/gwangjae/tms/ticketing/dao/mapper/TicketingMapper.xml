@@ -47,11 +47,6 @@
 		insert into reservedetail(rdet_id, r_id, sinfo_id)
 		values (rdet_id_seq.nextval,#{rId},#{sinfoId})
 	</insert>
-	
-	<insert id="seatState">
-		
-	
-	</insert>
 
 	<update id="updateSeatState" parameterType="int">
 		UPDATE SEATS 
