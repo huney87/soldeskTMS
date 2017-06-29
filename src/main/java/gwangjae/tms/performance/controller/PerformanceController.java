@@ -26,10 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/seller")
 public class PerformanceController {
 	@Autowired PerformanceService performanceService;
-	
-	@Value("${uploadDir}")
-    private String uploadDir;
-	
+
 	//메인화면
 	@RequestMapping
     public String main(){
@@ -164,8 +161,11 @@ public class PerformanceController {
 				perId);
 	}
 	
+	@Value("${uploadDir}")
+    private String uploadDir;
+	
 	//이미지 파일 업로드
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/img",method = RequestMethod.POST)
     @ResponseBody
     public boolean upload(MultipartFile uploadFile, HttpServletRequest request){
         boolean isStored = true;

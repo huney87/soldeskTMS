@@ -115,17 +115,17 @@ $(document).ready(function(){
         }
    }); 
 
-  //이미지 업로드 버튼
-    var regButtons = function() {    
-        $(":button#send").bind("click", function() {        
-            var formData = new FormData($("form")[0]);        
-            $.ajax({
-                method: "post",            
+  //이미지 업로드 버튼   
+       $(":button#send").bind("click", function() {        
+           var formData = new FormData($("form")[0]);        
+           $.ajax({
+                method: "post",
+                url: "/seller/img",
                 data: formData,
                 processData: false, //no serialize
                 contentType: false, // multipart/formdata
                 success: function(result){
-                    if(result)$("#msgModal #msg").text("업로드 성공");                
+                    if(result) $("#msgModal #msg").text("업로드 성공");                
                 },
                 error: function(a, b, errMsg){
                     $("#msgModal #msg").text("업로드 실패: " + errMsg);
@@ -135,7 +135,6 @@ $(document).ready(function(){
                 }
             });        
         });
-    };
 });/*document 종료*/
 
 var imgView = function(input) {
