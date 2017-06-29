@@ -159,6 +159,14 @@ var imgView = function(input) {
 	color:white;
 	border: 0.1rem solid #4d4dff;
 }
+#nav3{
+ 	background-color:#1a1a1a;
+	height:30rem; 
+	padding:1rem;
+	margin:0.5rem;
+	color:white;
+	border: 0.1rem solid #4d4dff;
+}
 select, input, option{
 	color:black;
     margin-right:2rem;
@@ -197,17 +205,19 @@ button, select{
                 <div class="col-lg-12" id="nav2">
                     <span>
 			                 제목:<input type="text" id="title" placeholder="제목" required>
-					 장르 :<select id="genre" style="color:black;">
+					 		장르 :<select id="genre" style="color:black;">
 							<option>장르 선택</option>
 							<option value="1">뮤지컬</option>
 							<option value="2">콘서트</option>
 							<option value="3">연극</option>
 						</select>   
                     </span>
+                </div>
+                <div class="col-lg-12" id="nav3">
                     <span id="imageUrl"></span>
     					<img class="previewImg" align="left" hspace="72"  width="200" height="250" > 
 					<form>    
-    					<input type="file" id="uploadFile" name="uploadFile" onChange="imgView(this)">        
+    					<input type="file" id="uploadFile" name="uploadFile" onChange="imgView(this)" style="color:white">        
 					</form>
 					<button type="button" id="send" class="button btn-default">업로드</button>
                     <button type="button" id="resist" class="btn btn-danger btn-sm">공연 등록</button>
