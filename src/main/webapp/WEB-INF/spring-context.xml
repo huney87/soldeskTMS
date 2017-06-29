@@ -98,6 +98,6 @@
     <!-- 파일 업로드 준비 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
     <context:property-placeholder location="classpath:gwangjae/tms/config/upload.properties"/>  
-    <mvc:resources mapping="/upload/**" location="/upload/" />  <!--업로드 폴더 지정 -->    
+    <mvc:resources mapping="/WEB-INF/resources/img/perf/**" location="/WEB-INF/resources/img/perf/" />  <!--업로드 폴더 지정 -->    
 
 </beans>
