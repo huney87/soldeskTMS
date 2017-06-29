@@ -99,10 +99,9 @@ var reservSeatDb = function(rId){
 	           success:function(result){       	   
 	           },
 	           error:function(a, b, errMsg){
-	 	         	alert("오류");
+	 	         	//alert("오류");
 	 	       }
 		});
-		
 	}
 }
 
@@ -115,8 +114,6 @@ var reservResult = function(){
      	   seatId:sessionStorage.getItem(tmp)
         },          
         success:function(result){
-     	   
-     		
         }
 	});
 	
@@ -165,10 +162,11 @@ $(document).ready(function(){
  	        	  reservSeatDb(rId);
  	           },
  	          	error:function(a, b, errMsg){
- 	         	alert("오류입니다.");
+ 	         	//alert("오류입니다.");
  	         }
 		});
-		sessionStorage.setItem("bank", $("#selectBank").val());
+		sessionStorage.setItem("bank", $("#selectBank").val());		
+		alert("예매 완료");		
 		forwardForm(6);
 		return true;
 	});	
