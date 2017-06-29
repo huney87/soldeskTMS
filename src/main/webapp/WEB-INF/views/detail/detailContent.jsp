@@ -36,11 +36,18 @@
         for(var i=0 ; i<time2.length ; i++){
         	if(time2[i].date == date){
        			$("#roundTime1").val(time2[i].time1);
+       			$("#roundTime1").data("roundId",time2[i].roundId1);
            		$("#roundTime11").text(time2[i].time1);
-           		$("#roundTime1").data("roundId",time2[i].roundId1);
+           		
            		$("#roundTime2").val(time2[i].time2);
-           		$("#roundTime22").text(time2[i].time2);
            		$("#roundTime2").data("roundId",time2[i].roundId2);
+           		$("#roundTime22").text(time2[i].time2);
+           		
+           		sessionStorage.setItem('ticketTime1', time2[i].time1);
+           		sessionStorage.setItem('ticketTime2', time2[i].time2);
+           		sessionStorage.setItem('roundId1', time2[i].roundId1);
+           		sessionStorage.setItem('roundId2', time2[i].roundId2);
+           		
         	}
         }
         $('.btn1').show();
@@ -316,8 +323,8 @@
 				    		<ul class="dropdown-menu btn-block" role="menu">
 				    			<li class="dropdown-header btn1">회차를 선택해 주세요</li>
 				    			<li class="dropdown-header btn2">먼저 날짜를 선택하세요</li>
-				    			<li name="roundTimeBtn" id="roundTime1"><a href="#">&nbsp; &nbsp;<span id="roundTime11"></span></a></li>
-				    			<li name="roundTimeBtn" id="roundTime2"><a href="#">&nbsp; &nbsp;<span id="roundTime22"></span></a></li>
+				    			<li><a name="roundTimeBtn" id="roundTime1">&nbsp; &nbsp;<span id="roundTime11"></span></a></li>
+				    			<li><a name="roundTimeBtn" id="roundTime2">&nbsp; &nbsp;<span id="roundTime22"></span></a></li>
 				    		</ul>
 				  		</div> <!-- 드롭다운 -->
 				  			

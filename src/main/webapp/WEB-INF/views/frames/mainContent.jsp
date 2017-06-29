@@ -4,6 +4,14 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
+		sessionStorage.setItem('perId','');
+		sessionStorage.setItem('title','');
+		sessionStorage.setItem('place','');
+		sessionStorage.setItem('ticketDate','');
+	    sessionStorage.setItem('ticketTime','');
+	    sessionStorage.setItem('ticketCnt','');
+	    sessionStorage.setItem('bank','');
+	    sessionStorage.setItem('totalPrice','');
 		
 		$(function() {
 			$('#mainGenBtn1').trigger('click', {genid:1}, mainButtonClicked);

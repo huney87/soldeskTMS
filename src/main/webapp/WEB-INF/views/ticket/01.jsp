@@ -201,10 +201,10 @@
         $(document).ready(function() {
         	
         	if (sessionStorage.getItem('perId')) ;
-        	else sessionStorage.setItem("perId",<%=perId%>); //세션에 공연 아이디 저장.
+        	else sessionStorage.setItem("perId",$("#a").val()); //세션에 공연 아이디 저장.
         	
         	var perfId = sessionStorage.getItem('perId');
-            console.log(<%=perId%>);
+            
         	$.ajax({
                 url: '/ticket/getskd',
                 data : {
