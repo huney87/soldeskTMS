@@ -22,4 +22,5 @@ public interface PerformanceDao {
 	public int updateSeatsInfo(SeatInfo sinfo);
 	public int seatInfoInit(SeatInfo sinfo);
 	public int addRound(Round round);
+	public List<Seat> getResSeat(Round round);
 }

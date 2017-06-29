@@ -89,4 +89,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		
 		return 1;
 	}
+	
+	public List<Seat> getResSeat(Round round){
+		return performanceDao.getResSeat(round);
+	}
+	
 }
+
+

@@ -68,5 +68,9 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	public int addRound(Round round){
 		return performanceMapper.addRound(round);
 	}
+	
+	public List<Seat> getResSeat(Round round){
+		return performanceMapper.getResSeat(round);
+	}
 }
 

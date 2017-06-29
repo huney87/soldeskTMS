@@ -217,6 +217,30 @@ var maxCheck = function (max) {
 	} else return false;
 }
 
+//예매된 좌석 표기 바꾸기
+var changeSeat = function(){
+	var perId = sessionStorage.getItem("perId");
+	var rndId = sessionStorage.getItem("roundId");
+	
+	$.ajax({
+        url: "/seller/getResSeat",
+        data:{
+        	perId:perId,
+        	roundId:rndId
+        },
+        success:function(results){
+        	$(results).each(function(idx, result){ 
+        		var seatId = result.seatId;
+        		$('#'+seatId).removeClass("left-seat").addClass("reserved-seat");
+        	});
+     	},
+        error:function(a, b, errMsg){
+        	alert("실패");
+        }
+	});
+	
+}
+
 //좌석 초기셋팅.(세션에서 저장된 공연아이디를 가져오는것만 연동하면됨. 아래 perId에 값을 저장해야함.)
 var seatInit = function () {	
 	var perId = sessionStorage.getItem("perId"); // 세션에 저장된 공연아이디값 가져오기
@@ -243,11 +267,11 @@ var seatInit = function () {
         	$(seats).each(function(idx, seat){	        		
         		//좌석이 팔렸는지 확인하여 클래스 추가.
         		var type = "type"+seat.seatType;
-        		if (seat.state == 1) { // state 1 예약된 좌석
+        		/* if (seat.state == 1) { // state 1 예약된 좌석
         			seat = '<div class="seat reserved-seat" id="'+seat.seatId+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
-				} else if (seat.state == 0) { //state 0이  빈좌석
+				} else if (seat.state == 0) { //state 0이  빈좌석 */
 					seat = '<div class="seat left-seat '+type+'" id="'+seat.seatId+'" value="'+seat.price+'"><span class="seat-number" id="num'+seat.seatNumber+'">' + seat.seatNumber + '</span></div>';
-				}		        		
+				//}		        		
         		
         		// 좌석을 하나씩 출력, 줄이 바뀔경우 esle 내용.
         		if(tmp<=col){
@@ -258,7 +282,8 @@ var seatInit = function () {
         			$(".seat-layout-wrapper").append(seatRow);	//줄바꿈(줄추가)
    					$(".seat-row:last").append( seat );		// 줄 바뀐것의 첫번째 기준이될 좌석 1개 추가        			
         		}   
-        	});
+        	});  	
+        	changeSeat();       	
         	seatChoice();
         }
 	});

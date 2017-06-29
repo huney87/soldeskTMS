@@ -22,6 +22,11 @@
 		<result property="price" column="price"/>	
 	</resultMap>
 	
+	<resultMap id="PerSeatMap2" type="seat">
+		<id property="seatId" column="SINFO_ID"/>
+		<result property="state" column="R_STATE"/>
+	</resultMap>
+	
 	<resultMap id="PerMap" type="PerfSearch">
 		<id property="per_id" column="perf_id"/>
 		<result property="per_title" column="perf_title"/>
@@ -64,6 +69,12 @@
 		ON s.S_TYPE = si.SINFO_TYPE AND s.PERF_ID = si.PERF_ID 
 		WHERE s.perf_id = #{value}
 		ORDER BY s.S_NUMBER
+	</select>
+	
+	<select id="getResSeat" parameterType="Round" resultMap="PerSeatMap2">
+		select r.R_STATE, rd.SINFO_ID
+		from reserves r, RESERVEDETAIL rd
+		where r.R_ID = rd.R_ID and r.PERF_ID = #{perId} and r.RND_ID=#{roundId}	
 	</select>
 
 	<insert id="addSeat" parameterType="Seat">

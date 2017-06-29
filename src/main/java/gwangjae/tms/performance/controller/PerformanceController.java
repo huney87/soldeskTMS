@@ -3,6 +3,7 @@ package gwangjae.tms.performance.controller;
 import gwangjae.tms.hall.domain.Hall;
 import gwangjae.tms.hall.domain.Seat;
 import gwangjae.tms.performance.domain.Performance;
+import gwangjae.tms.performance.domain.Round;
 import gwangjae.tms.performance.domain.SeatInfo;
 import gwangjae.tms.performance.service.PerformanceService;
 
@@ -182,4 +183,16 @@ public class PerformanceController {
     private void save(String fileFullName, MultipartFile uploadFile) throws IOException{
         uploadFile.transferTo(new File(fileFullName));
     }
+
+	//예매된 좌석정보 가져오기.
+	@RequestMapping("/getResSeat")
+	@ResponseBody
+	public List<Seat> getResSeat(Round round){
+		return performanceService.getResSeat(round);
+	}
+
 }
+
+
+
+
