@@ -10,6 +10,7 @@
 	    sessionStorage.setItem('ticketCnt','');
 	    sessionStorage.setItem('bank','');
 	    sessionStorage.setItem('totalPrice','');
+	    sessionStorage.setItem('seatVal','');
 	</script>
 	<!-- 공연들 -->
 	<div class="container-fluid" id="categoryContent">

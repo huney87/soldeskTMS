@@ -95,10 +95,11 @@ $(document).ready(function () {
     var ticketCnt = sessionStorage.getItem('ticketCnt');
     var bank = sessionStorage.getItem('bank');
     var ticketPrice = sessionStorage.getItem('totalPrice');
+    var ticketSeatVal = sessionStorage.getItem('seatVal')
     
     $("#title").text(ticketTitle);
     $("#place").text(ticketPlace);
-    $("#seats").text(ticketCnt);
+    $("#seats").text(ticketSeatVal);
     $("#date").text(ticketDate+" "+ticketTime);
     $("#ticketTime").text(ticketTime);
     if(ticketPrice) $("#price").text(ticketPrice+"원");

@@ -81,6 +81,7 @@
 	 -->
 	<select id="getPerfInfo" parameterType="int" resultType="gwangjae.tms.performance.domain.Performance">
 		SELECT p.perf_id AS "per_id",
+			p.cat_id AS "ct_id",
 		 	p.perf_title AS "per_title",
 		 	p.perf_startdate AS "per_startDate",
 		 	p.perf_enddate AS "per_endDate",

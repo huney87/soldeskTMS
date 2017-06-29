@@ -12,6 +12,7 @@
 	    sessionStorage.setItem('ticketCnt','');
 	    sessionStorage.setItem('bank','');
 	    sessionStorage.setItem('totalPrice','');
+	    sessionStorage.setItem('seatVal','');
 		
 		$(function() {
 			$('#mainGenBtn1').trigger('click', {genid:1}, mainButtonClicked);

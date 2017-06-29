@@ -87,8 +87,20 @@
 			<div class="row">
 				<div class="col-xs-8">
 					<div class="row">
-						<h3>뮤지컬 <${perfInfo.per_title}></h3>
-						<h5>뮤지컬 | 140분 (인터미션 : 20분) | 중학생이상 관람</h5>
+						<h3>
+						<c:choose>
+							<c:when test="${perfInfo.ct_id eq 1}">뮤지컬</c:when>
+							<c:when test="${perfInfo.ct_id eq 2}">콘서트</c:when>
+							<c:when test="${perfInfo.ct_id eq 3}">연극</c:when>
+						</c:choose> 
+						<${perfInfo.per_title}></h3>
+						<h5>
+						<c:choose>
+							<c:when test="${perfInfo.ct_id eq 1}">뮤지컬</c:when>
+							<c:when test="${perfInfo.ct_id eq 2}">콘서트</c:when>
+							<c:when test="${perfInfo.ct_id eq 3}">연극</c:when>
+						</c:choose> 
+						 | 140분 (인터미션 : 20분) | 중학생이상 관람</h5>
 					</div>
 			
 					<div class="row">
@@ -105,7 +117,13 @@
 								<p>가격정보</p>
 							</div>
 							<div class="col-xs-9">
-								<p>뮤지컬 > 라이센스</p>
+								<p>
+								<c:choose>
+									<c:when test="${perfInfo.ct_id eq 1}">뮤지컬</c:when>
+									<c:when test="${perfInfo.ct_id eq 2}">콘서트</c:when>
+									<c:when test="${perfInfo.ct_id eq 3}">연극</c:when>
+								</c:choose>
+								</p>
 								<p>${perfInfo.hall_name}</p>
 								<p>${perfInfo.per_startDate} ~ ${perfInfo.per_endDate}</p>
 								<p>만 13세이상</p>

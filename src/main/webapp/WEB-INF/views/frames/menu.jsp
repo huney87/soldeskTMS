@@ -170,7 +170,7 @@ $(document).ready(function(){
 							<!-- 로그인 / 로그아웃 표시 -->												
 							<c:choose>
 								<c:when test="${user_type >= 1}">
-									<a href="/login/logout" class="btn btn-default btn-lg">${user_type}로그아웃</a>
+									<a href="/login/logout" class="btn btn-default btn-lg">로그아웃</a>
 								</c:when>
 								<c:otherwise>
 									<a class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">로그인</a>

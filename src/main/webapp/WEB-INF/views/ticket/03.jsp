@@ -162,7 +162,7 @@
         var tmp; // 임시변수, 좌석이름 저장용   // 좌석 옵션 가격
         var price = 10000; // 임시가격 강제 지정.
         var totalPrice=0; // 총 가격이 될 변수
-
+        sessionStorage.setItem('seatVal','');
         for(var i =0;i<=ticketCnt;i++){
         	
         	tmp = 'selectedSeat'+i;
@@ -189,8 +189,16 @@
 			        		
 			        		tr1.append(td1).append(td2).append(td3).append(td4).append(td5);
 							$("#selectTable").append(tr1);  // 테이블 바디 항목 추가
-
+							
         					discount();//할인 선택 기능
+        					
+        					var ticketSeatVal = seatInfo.grade+'석 '+seatInfo.seatNumber+'번';
+        					
+        					if(sessionStorage.getItem('seatVal')){
+        						sessionStorage.setItem('seatVal', sessionStorage.getItem('seatVal')+', '+ticketSeatVal);
+        					}else{
+        						sessionStorage.setItem('seatVal', ticketSeatVal)
+        					}
         	           }
         		});
         		
