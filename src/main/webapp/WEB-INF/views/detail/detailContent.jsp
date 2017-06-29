@@ -61,12 +61,36 @@
 			sessionStorage.setItem('ticketTime', time);
 			sessionStorage.setItem('roundId', roundId);
 		});
-    }        
+    }
+    
+	//	티켓 등급 및 가격
+    var ticketGrade = function(){
+    	var perId = ${perfInfo.per_id};
+       	$.ajax({
+            url: "/ticket/getPerSeatInfo",
+            data:{
+            	performanceID : perId
+            },
+            dataType: 'json',
+            success:function(pif){
+            	var pifSeatList = pif.seatList;
+            	$.each(pifSeatList,function(){
+                    var divHtml = '<p>'+this['grade']+'석&nbsp;:&nbsp;&nbsp;'+this['price'].toLocaleString()+'원</p>';
+                    $('#ticketGrade').append(divHtml);
+                });
+       		}
+       	});
+    }
 
     $(document).ready(function() {
+    	
+    	//회차 선택 버튼 초기화 (날짜를 선택하세요.)
     	$('.btn1').hide();
+    	
+    	//공연 아이디
     	var perId = ${perfInfo.per_id};
-
+    	
+		//달력그리기
     	$.ajax({
             url: '/ticket/getskd',
             data : {
@@ -78,7 +102,8 @@
             }
 	    });           
         
-        initBtn();
+        initBtn(); //회차 버튼
+        ticketGrade();	//	티켓 등급 가격
     });
 </script>		
 	<!-- 공연들 -->
@@ -128,10 +153,8 @@
 								<p>${perfInfo.per_startDate} ~ ${perfInfo.per_endDate}</p>
 								<p>만 13세이상</p>
 								<p>140분 (인터미션 : 20분)</p>
-								<p>VIP석		120,000원</p>
-								<p>R석		100,000원</p>
-								<p>S석		80,000원</p>
-								<p>A석		50,000원</p>
+								<p><div id="ticketGrade"></div></p>
+								
 							</div>
 						</div>
 					</div>

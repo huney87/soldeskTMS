@@ -315,7 +315,7 @@ var ticketGrade = function(){
         	var pifSeatList = pif.seatList;
         	$.each(pifSeatList,function(){
                 var divHtml = '<div class="legend-seat type'+this['seatType']+'"></div>'
-                divHtml += '<span>'+this['grade']+'석:&nbsp;'+this['price']+'원</span><br>';
+                divHtml += '<span>'+this['grade']+'석:&nbsp;'+this['price'].toLocaleString()+'원</span><br>';
                 $('#ticketGrade').append(divHtml);
             });
    		}

@@ -125,7 +125,8 @@
     // 옵션선택시 할인가격 적용
     var discount = function(){
     	$(".seatGrades").on("click",function(){
-    		var price = $(this).closest('tr').find('td').eq(3).text();
+    		var price1 = $(this).closest('tr').find('td').eq(3).text();
+    		//price = price1.split(',');
     		 
     		 // 체크한 값에 따라서 원래 가격에서 변동.
 			if($(this).attr('id')=="kid"){
@@ -138,10 +139,9 @@
 			$(".lastPrice").each(function(){
 				var tmp = $(this).text() *1;
 				totalPrice += tmp;
-				console.log(totalPrice);
 			});
-			$("#totalPrice2").val(totalPrice);	
-			$("#ctotalPrice").text(totalPrice+"원");
+			$("#totalPrice2").val(totalPrice.toLocaleString());	
+			$("#ctotalPrice").text(totalPrice.toLocaleString()+"원");
     	});
     	
     }
@@ -266,7 +266,7 @@
                         <tfoot>
                         	<tr>
                         		<th colspan="3">total price</th><!-- <td><input type="text" id="totalPrice" readonly></td> -->
-                        		<td colspan="2" class="info"><input type="text" id="totalPrice2" readonly></td>
+                        		<td colspan="2" class="info"><input type="text" class="text-right" id="totalPrice2" readonly>원</td>
                         	</tr>
                         </tfoot>
                     </table>
