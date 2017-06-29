@@ -204,7 +204,7 @@ button, select{
                 </div>
                 <div class="col-lg-12" id="nav2">
                     <span>
-			                 제목:<input type="text" id="title" placeholder="제목" required>
+			                제목 :<input type="text" id="title" placeholder="제목" required>
 					 		장르 :<select id="genre" style="color:black;">
 							<option>장르 선택</option>
 							<option value="1">뮤지컬</option>
@@ -219,8 +219,10 @@ button, select{
 					<form>    
     					<input type="file" id="uploadFile" name="uploadFile" onChange="imgView(this)" style="color:white">        
 					</form>
-					<button type="button" id="send" class="button btn-default">업로드</button>
-                    <button type="button" id="resist" class="btn btn-danger btn-sm">공연 등록</button>
+					<div id="asd" style="margin-top:10px">
+					<button type="button" id="send" class="btn btn-default">업로드</button>
+                    <button type="button" id="resist" class="btn btn-danger">공연 등록</button>
+                	</div>
                 </div>
 			</div>
 		</div>
