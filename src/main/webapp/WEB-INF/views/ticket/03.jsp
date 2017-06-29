@@ -164,7 +164,7 @@
         var totalPrice=0; // 총 가격이 될 변수
         sessionStorage.setItem('seatVal','');
         for(var i =0;i<=ticketCnt;i++){
-        	
+        	var j = 1;
         	tmp = 'selectedSeat'+i;
         	if(i>0){
         		
@@ -177,9 +177,9 @@
         	           success:function(seatInfo){
 			        		var tr1 = $("<tr></tr>");
 			        		var td1 =$("<td>"+seatInfo.seatNumber+"</td>"); //좌석 아이디값
-			        		var td2 = $("<td><input type='text' id='seat"+i+"' style='border:none;' value='"+seatInfo.grade+"등급'></td>");
-			        		var td3 =$("<td><input type='radio' class='seatGrades' id='normal' name='ticket"+i+"'>일반&nbsp;&nbsp;&nbsp;"
-			        	    		+"<input type='radio' class='seatGrades' id='kid' name='ticket"+i+"'>청소년할인10%</td>");
+			        		var td2 = $("<td><input type='text' id='seat"+j+"' style='border:none;' value='"+seatInfo.grade+"등급'></td>");
+			        		var td3 =$("<td><input type='radio' class='seatGrades' id='normal' name='ticket"+j+"'>일반&nbsp;&nbsp;&nbsp;"
+			        	    		+"<input type='radio' class='seatGrades' id='kid' name='ticket"+j+"'>청소년할인10%</td>");
 			        		var td4 =$("<td class='eachPrice'>"+seatInfo.price+"</td>"); // 좌석 가격 옵션
 			        		var td5 =$("<td class='lastPrice'>"+seatInfo.price+"</td>"); // 최종 적용 가격
 			        		
@@ -199,14 +199,11 @@
         					}else{
         						sessionStorage.setItem('seatVal', ticketSeatVal)
         					}
+        					j++;
         	           }
         		});
-        		
         	}
-        
     	}
-       
-        
     }
     
     // 이미지 없을때 고정이미지 보여주기

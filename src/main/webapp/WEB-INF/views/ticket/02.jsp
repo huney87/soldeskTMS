@@ -133,6 +133,7 @@
         }
 
         $(document).ready(function() {
+        	sessionStorage.setItem('seatVal','');
             initBtn();
         });
     </script>
