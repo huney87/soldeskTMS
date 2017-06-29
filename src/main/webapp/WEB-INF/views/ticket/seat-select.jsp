@@ -229,13 +229,14 @@ var changeSeat = function(){
         	roundId:rndId
         },
         success:function(results){
-        	$(results).each(function(idx, result){ 
+        	$(results).each(function(idx, result){
         		var seatId = result.seatId;
+        		console.log(seatId);
         		$('#'+seatId).removeClass("left-seat").addClass("reserved-seat");
         	});
      	},
         error:function(a, b, errMsg){
-        	alert("실패");
+        alert("실패");
         }
 	});
 	

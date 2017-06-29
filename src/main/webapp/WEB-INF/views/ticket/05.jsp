@@ -87,19 +87,20 @@ var reservSeatDb = function(rId){
 	var ticketCnt =	sessionStorage.getItem('ticketCnt');
 
 	// 예매된 번호에 맞춰 예매상세DB 생성, 좌석 숫자만큼 반복
-	for(var i=0;i<=ticketCnt;i++){
+	for(var i=1;i<=ticketCnt;i++){
 		var tmp = 'selectedSeat'+i;
 		var sId = sessionStorage.getItem(tmp);
-		
 		$.ajax({
 	           url: "/ticket/setRevDetail",
 	           data:{
 	        	   rId:rId,
 	        	   sinfoId:sId
 	           },          
-	           success:function(result){
-	        		
-	           }
+	           success:function(result){       	   
+	           },
+	           error:function(a, b, errMsg){
+	 	         	alert("오류");
+	 	       }
 		});
 		
 	}
@@ -162,11 +163,11 @@ $(document).ready(function(){
  	           },          
  	           success:function(rId){
  	        	  reservSeatDb(rId);
- 	           }
+ 	           },
+ 	          	error:function(a, b, errMsg){
+ 	         	alert("오류입니다.");
+ 	         }
 		});
-		//window.opener.top.location.href="/ticket/payment"
-		//window.opener.top.location.reload();//새로고침
-		//window.close()
 		sessionStorage.setItem("bank", $("#selectBank").val());
 		forwardForm(6);
 		return true;
