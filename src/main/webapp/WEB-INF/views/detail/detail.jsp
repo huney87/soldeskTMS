@@ -18,6 +18,11 @@ $("#my-calendar").zabuto_calendar({
 	 });
 });
 </script>
+<style>
+#middle-menu {
+	display: none;
+}
+</style>
 
 <jsp:include page="/WEB-INF/views/frames/menu.jsp" flush="false"/>
 

@@ -48,7 +48,7 @@
 			    	genDiv += '<article id="movieInfo">';
 			    	genDiv += '<div class="moveInfoBtn">';
 			    	genDiv += '<div class="moveInfoBtn1">';
-			    	genDiv += '<a href="/detail"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>';
+			    	genDiv += '<a href="/detail?perfId='+this['per_id']+'"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>';
 			    	genDiv += '</div>';
 			    	genDiv += '<div class="moveInfoBtn2">';
 			    	genDiv += '<a name="booking_popup" data-perf_id="'+this['per_id']+'"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>';

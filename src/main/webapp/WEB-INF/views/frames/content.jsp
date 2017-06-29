@@ -19,7 +19,7 @@
 								<article id="movieInfo">
 									<div class="moveInfoBtn">
 										<div class="moveInfoBtn1">
-											<a href="/detail"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>
+											<a href="/detail?perfId=${genre.per_id}"><span class="glyphicon glyphicon-ok"></span><br>상세정보</a>
 										</div>
 										<div class="moveInfoBtn2">
 											<a name="booking_popup" data-perf_id="${genre.per_id}"><span class="glyphicon glyphicon-heart"></span><br>예매하기</a>

@@ -20,7 +20,6 @@
         $("#date-popover-content").html('You clicked on date ' + date);
         $("#date-popover").show();
         return true;
-        console.log(${perfInfo});
     }
 </script>		
 	<!-- 공연들 -->
@@ -29,13 +28,13 @@
 			<div class="row">
 				<div class="col-xs-8">
 					<div class="row">
-						<h3>뮤지컬 <매디슨 카운티의 다리></h3>
+						<h3>뮤지컬 <${perfInfo.per_title}></h3>
 						<h5>뮤지컬 | 140분 (인터미션 : 20분) | 중학생이상 관람</h5>
 					</div>
 			
 					<div class="row">
 						<div class="col-xs-4">
-							<img src="../img/item/17004371/매디슨카운티의다리.gif" onerror="ImgError(this)"/>
+							<img src="/img/perf/${perfInfo.per_image}" onerror="ImgError(this)"/>
 						</div>
 						<div class="col-xs-8">
 							<div class="col-xs-3 title">
@@ -48,10 +47,10 @@
 							</div>
 							<div class="col-xs-9">
 								<p>뮤지컬 > 라이센스</p>
-								<p>LG아트센터</p>
-								<p>2017.06.08 ~ 2017.06.18</p>
+								<p>${perfInfo.hall_name}</p>
+								<p>${perfInfo.per_startDate} ~ ${perfInfo.per_endDate}</p>
 								<p>만 13세이상</p>
-								<p>165분 (인터미션 : 20분)</p>
+								<p>140분 (인터미션 : 20분)</p>
 								<p>VIP석		120,000원</p>
 								<p>R석		100,000원</p>
 								<p>S석		80,000원</p>
@@ -64,8 +63,8 @@
 					 <!-- nav바 -->
 				  		<ul class="nav nav-tabs">
 				  			<li class="active"><a data-toggle="tab" href="#menu1">상세정보</a></li>
-				    		<li><a data-toggle="tab" href="#menu2">출연진</a></li>
-				    		<li><a data-toggle="tab" href="#menu3">관람후기</a></li>
+				    		<!-- <li><a data-toggle="tab" href="#menu2">출연진</a></li> -->
+				    		<!-- <li><a data-toggle="tab" href="#menu3">관람후기</a></li> -->
 				    		<li><a data-toggle="tab" href="#menu4">Q&A</a></li>
 				    		<li><a data-toggle="tab" href="#menu5">예매유의사항</a></li>
 				  		</ul>
@@ -76,7 +75,7 @@
 					  		<div class="panel panel-default">
 					    		<div class="panel-heading">알립니다</div>
 					    		<div class="panel-body">
-					    		${perfInfo}
+					    		<p><img src="/img/perf/${perfInfo.per_image}"></p>
 					    			<img src="../img/item/17004371/17004371_01.jpg">
 					    		</div>
 					    		<div class="panel-heading">작품설명</div>
@@ -85,12 +84,12 @@
 					    		</div>
 							</div>
 					  	</div>
-					  	<div id="menu2" class="tab-pane fade"> <!-- 메뉴2 -->
+					  	<!-- <div id="menu2" class="tab-pane fade"> 메뉴2
 					  		<div class = "well well-sm"><h3>출연진</h3>
 							  		<p style="margin-top:20px">옥주현, 박은태, 박선우, 이상현, 김민수, 김나윤(김희원), 유리아, 김현진, 송영미.</p>
 							</div>
-					  	</div>
-					  	<div id="menu3" class="tab-pane fade"> <!-- 메뉴3 -->
+					  	</div> -->
+					  	<!-- <div id="menu3" class="tab-pane fade"> 메뉴3
 					    	<div class="panel panel-default">
 					    		<div class="panel-heading">공연 관람후기</div>
 					    		<div class="panel-body">
@@ -111,11 +110,11 @@
 					  				</li>
 								</ul>
 								
-								<!-- Modal -->
+								Modal
 					  			<div class="modal fade mod-lg" id="myModal" role="dialog">
 					    			<div class="modal-dialog">
 					    
-					      		<!-- Modal content-->
+					      		Modal content
 					      		<div class="modal-content">
 					        		<div class="modal-header">
 					          		<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -131,12 +130,12 @@
 					        	<div class="modal-footer">
 					          		<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					        	</div>
-					      		</div> <!-- Modal content-->
+					      		</div> Modal content
 					      		
 					      			</div> 
-					  			</div> <!-- Modal -->
+					  			</div> Modal
 					    	</div>
-					  	</div>
+					  	</div> -->
 					  	<div id="menu4" class="tab-pane fade"> <!-- 메뉴4 -->
 					    	<table class="table table-hover">
 					    		<thead>
@@ -278,7 +277,8 @@
 				    			<option>A석 100석</option>
 				  			</select>
 						</div> <!-- 셀렉트 박스 -->
-							<button class="btn btn-primary btn-block btn-lg" name="booking_popup">예매하기</button>
+							<button class="btn btn-primary btn-block btn-lg" name="booking_popup" data-perf_id="${perfInfo.per_id}">예매하기</button>
+							<input type="hidden" id="perf_id${perfInfo.per_id}" value="${perfInfo.per_id}">
 						</div>
 					</div>
 				</div>
