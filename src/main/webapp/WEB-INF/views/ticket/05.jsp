@@ -151,7 +151,6 @@ $(document).ready(function(){
 		var perId = sessionStorage.getItem('perId');
 		var email = $("#email").val();
 		var rndId = sessionStorage.getItem('roundId');
-
 		
 		// 예매해서 예매번호 가져오기
 		$.ajax({
@@ -167,7 +166,10 @@ $(document).ready(function(){
 		});
 		//window.opener.top.location.href="/ticket/payment"
 		//window.opener.top.location.reload();//새로고침
-		//window.close()	
+		//window.close()
+		sessionStorage.setItem("bank", $("#selectBank").val());
+		forwardForm(6);
+		return true;
 	});	
 });
 </script>

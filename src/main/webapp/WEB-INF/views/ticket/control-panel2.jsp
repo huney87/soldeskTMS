@@ -70,6 +70,9 @@
             		perInfo += '<td id="sub">관람시간 110분</td>';
             		perInfo += '</tr>';
        				$("#ticketInfo").append(perInfo);
+       				
+       				sessionStorage.setItem("title",response.per_title);
+       				sessionStorage.setItem("place",response.hall_name);
             	},
             	error:function(a, b, errMsg){
                      alert('공연정보실패' + errMsg);
