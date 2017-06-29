@@ -190,7 +190,6 @@ public class PerformanceController {
 	public List<Seat> getResSeat(Round round){
 		return performanceService.getResSeat(round);
 	}
-
 }
 
 
