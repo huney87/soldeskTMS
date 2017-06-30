@@ -74,16 +74,6 @@
             text-align: center;
         }    
         
-        iframe {
-            background: white;
-            border: none;
-            /* Reset default border */
-            height: 100%;
-            /* Viewport-relative units */
-            width: 100%;
-            overflow: hidden;
-        }
-        
         .img-step {
             display: inline-block;
             /*Vertical Center Start*/
@@ -172,6 +162,66 @@
             $('.btn1').show();
         }
 
+		//티켓 등급
+        var ticketGrade = function(){
+        	var perId = sessionStorage.getItem("perId");
+           	$.ajax({
+                url: "/ticket/getPerSeatInfo",
+                data:{
+                	performanceID : perId
+                },
+                dataType: 'json',
+                success:function(pif){
+                	var pifSeatList = pif.seatList;
+                	$.each(pifSeatList,function(){
+                        var liHtml = '<li>'+this['grade']+'&nbsp;잔여좌석&nbsp;:&nbsp;&nbsp;<span id="seat'+this['seatType']+'"></span></li>'
+                        $('#ticketGrade').append(liHtml);
+                    });
+           		}
+           	});
+        }
+
+        //좌석 초기셋팅.(세션에서 저장된 공연아이디를 가져오는것만 연동하면됨. 아래 perId에 값을 저장해야함.)
+        var seatInit = function () {	
+        	var perId = sessionStorage.getItem("perId"); // 세션에 저장된 공연아이디값 가져오기
+        	
+        	//공연 레이아웃 가져오기
+        	$.ajax({
+                url: "/seller/getPerLayout",
+                data:{perId:perId},
+                success:function(seats){
+                	var s1 = 0;
+        			var s2 = 0;
+        			var s3 = 0;
+        			var s4 = 0;
+        			var s5 = 0;
+                	$(seats).each(function(idx, seat){
+                		
+                		//좌석이 팔렸는지 확인하여 클래스 추가.
+                		var type = seat.seatType;
+                		
+       					if(type == 1){
+       						s1++;
+       					}else if(type == 2){
+       						s2++;
+       					}else if(type == 3){
+       						s3++;
+       					}else if(type == 4){
+       						s4++;
+       					}else if(type == 5){
+       						s5++;
+       					}
+        					
+                		$('#seat1').text('/'+s1);
+                		$('#seat2').text('/'+s2);
+                		$('#seat3').text('/'+s3);
+                		$('#seat4').text('/'+s4);
+                		$('#seat5').text('/'+s5);
+                	});
+        		}
+        	});
+        }
+        
         var initBtn = function() {
 			$('[name="roundTimeBtn"]').on('click',function(){
 				var time = $(this).val();
@@ -180,6 +230,7 @@
 				sessionStorage.setItem('ticketTime', time);
 				sessionStorage.setItem('roundId', roundId);
 		        $("#ticketTime").text(time);
+		        seatInit();	//	시트 정보 DB에서 가져와서 시작하는 펑션
 			});
         	
         	$('.btn-next').click(function() {
@@ -242,7 +293,8 @@
                 }
             };
             
-            initBtn();
+            initBtn(); //다음 버튼 함수
+            ticketGrade();	//	티켓 등급
         });
        
     </script>
@@ -283,10 +335,8 @@
 	                        </div>
                         </div>
                         <div class="col-sm-4">
-                            <h5>좌석등급/ 잔여석</h5>
-                            <ul>
-                                <li> VIP 잔여좌석 30석</li>
-                                <li> R 잔여좌석 50석</li>
+                            <h4>좌석등급/ 잔여석</h4>
+                            <ul id="ticketGrade">
                             </ul>
                         </div>
                     </div>
