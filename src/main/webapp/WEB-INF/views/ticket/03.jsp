@@ -125,8 +125,7 @@
     // 옵션선택시 할인가격 적용
     var discount = function(){
     	$(".seatGrades").on("click",function(){
-    		var price1 = $(this).closest('tr').find('td').eq(3).text();
-    		//price = price1.split(',');
+    		var price = $(this).closest('tr').find('td').eq(3).text();
     		 
     		 // 체크한 값에 따라서 원래 가격에서 변동.
 			if($(this).attr('id')=="kid"){
@@ -154,7 +153,7 @@
 			totalPrice += tmp;
 			console.log(totalPrice);
 		});
-		$("#totalPrice").val(totalPrice);	
+		$("#totalPrice").val(totalPrice.toLocaleString());	
     }
     
     // s_id 값 가져와서 초기 화면 설정해주기.
@@ -212,6 +211,13 @@
 	    source.onerror = "";
 	    return true;
 	}
+    
+    //숫자 콤마 제거
+	function removeComma(str)
+	{
+		n = parseInt(str.replace(/,/g,""));
+		return n;
+	}
 
 	var initBtn = function () {
 		// 이전 페이지로 이동
@@ -221,8 +227,10 @@
 	    });
 		// 다음 페이지로 이동
 	    $('.btn-next').click(function () {
-	        sessionStorage.setItem('totalPrice', $("#totalPrice2").val());// 세션에 값 저장
+	    	var totalPrice = (removeComma($("#totalPrice2").val()));
+	        sessionStorage.setItem('totalPrice', totalPrice);// 세션에 값 저장
             forwardForm(4);
+	        //console.log(totalPrice)
             return true;
 	    });
 	}
